@@ -1,7 +1,6 @@
 package aSintactico;
 
 import aSintactico.tipos.Tipo;
-import java.util.LinkedList;
 
 /**
  * Representa una entrada en la tabla de simbolos
@@ -15,6 +14,7 @@ import java.util.LinkedList;
 public final class Entry {
     
     public static final int DEFAULT_ENTRY   = -1;
+    public static final int CONSTANTE = 0;
     public static final int PROGRAMA        = 1;
     public static final int VARIABLE        = 2;
     public static final int TIPO            = 3;
@@ -106,5 +106,13 @@ public final class Entry {
     public boolean esTipo(){
         return clase == TIPO;
     }
+    /**
+	 * * *
+	 * 
+	 * @return true si la entidad es una constante
+	 */
+	public boolean esConstante() {
+		return clase == CONSTANTE;
+	} 
 
 }

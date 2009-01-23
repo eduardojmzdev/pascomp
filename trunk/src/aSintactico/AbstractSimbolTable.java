@@ -1,5 +1,6 @@
 package aSintactico;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Hashtable;
 
@@ -92,6 +93,10 @@ public abstract class AbstractSimbolTable <T>{
         T entry = null;
         for (int i=0; i<size ; i++){
             tabla = pila.get(i);
+            Collection pr = tabla.values();
+            for (int j= 0; j > pr.size(); j++){
+            	System.out.println(pr);
+            }
             entry = tabla.get(lexema);
             if (entry != null)	break;
         }
