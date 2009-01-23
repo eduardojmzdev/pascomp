@@ -588,11 +588,11 @@ public final class AnalizadorSintactico implements Testeable{
                         throw new SemanticException(22,token.numLin);
                 genMepa("MULT",true);
             }
-            else  if(operador.equals("div")) {
+            else  if(operador.equals("/")) {
                 if(tfactor.esBoolean()) 
                         throw new SemanticException(22,token.numLin);
                 genMepa("DIVC",true);           
-                genMepa("DIVI",true);
+              //genMepa("DIVI",true);
             }
             else  if(operador.equals("and")) {
                 if(!tfactor.esBoolean()) 
