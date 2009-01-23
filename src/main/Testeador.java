@@ -103,7 +103,7 @@ public final class Testeador {
         System.out.println("Testing for "+file);
         
         if(!test.validaExtencion(file)){
-            System.out.println("El archivo no tiene la extencion adecuada");
+            System.out.println("El archivo no tiene la extension adecuada");
             return;
         }
         
