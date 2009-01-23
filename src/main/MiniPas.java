@@ -85,7 +85,7 @@ public final class MiniPas implements Testeable{
      * Verifica que el archivo tenga la extension correcta
      * @param strFile nombre de archivo a compilar
      * @return  true si el archivo soporta la extension correcta
-     * @see minipas.conf
+     * @see config.conf
      */
     public boolean validaExtencion(String strFile) {
         return as.validaExtencion(strFile);

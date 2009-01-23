@@ -100,7 +100,7 @@ public final class AnalizadorSintactico implements Testeable{
     public AnalizadorSintactico() {
         FileInputStream f;
         try {
-            f = new FileInputStream("minipas.conf");
+            f = new FileInputStream("config.conf");
             Properties p = System.getProperties();
             p.load(f);
             System.setProperties(p);
