@@ -1,6 +1,5 @@
 package aSintactico.tipos;
 
-import aSintactico.Entry;
 /**
  * Clase abstracta para representar los tipos del lenguaje
   * @see aSintactico.tipos.TipoFactory
@@ -73,6 +72,7 @@ public abstract class Tipo {
     /**
      * @return  la representacion del tipo como string
      */
-    public abstract String toString();
+    @Override
+	public abstract String toString();
     
 }

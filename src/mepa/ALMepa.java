@@ -2,10 +2,10 @@ package mepa;
 
 import Utils.BufferedFileReader;
 import Utils.Reader;
-import exceptions.MepaException;
+import excepciones.MepaException;
+
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.HashMap;
 import main.Testeable;
 
 /**
@@ -13,9 +13,9 @@ import main.Testeable;
  *
  * @see aLexico.TokenMepa
  * @see aLexico.BufferedFileReader
- * @see exceptions.MepaException
+ * @see excepciones.MepaException
  * @see main.Testeable
- * @since jdk 1.5
+ * @since jdk 1.6
  */
 public final class ALMepa implements Testeable{
     

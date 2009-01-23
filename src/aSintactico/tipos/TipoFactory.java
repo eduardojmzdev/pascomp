@@ -62,7 +62,7 @@ public final class TipoFactory {
      * @param tipoR tipo de las componentes
      * @return un tipo array
      */
-    public static TipoArreglo crearTipoArreglo(TipoSimple tipoD, TipoSimple tipoR){
-        return new TipoArreglo(tipoD,tipoR);
+    public static TipoArray crearTipoArreglo(TipoSimple tipoD, TipoSimple tipoR){
+        return new TipoArray(tipoD,tipoR);
     }
 }

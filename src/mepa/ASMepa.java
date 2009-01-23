@@ -1,6 +1,7 @@
 package mepa;
 
-import exceptions.MepaException;
+import excepciones.MepaException;
+
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import main.Testeable;
  * A la vez, realiza la carga de las instrucciones y resuelve las direcciones
  * para las etiquetas del programa
  *
- * @since jdk 1.5
+ * @since jdk 1.6
  * @see mepa.ALMepa
  * @see mepa.Instruccion
  */
@@ -155,7 +156,7 @@ public class ASMepa implements Testeable{
      */
     private void listaSentencias() throws Exception{
         nextToken();
-        if(token.codigo == token.ETIQ){
+        if(token.codigo == TokenMepa.ETIQ){
             ingresarEtiqueta();
             restoListaSentencia();
         } else if(token.esInstruccion() && token.codigo!=TokenMepa.PARA){

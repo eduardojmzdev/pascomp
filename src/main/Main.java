@@ -1,16 +1,13 @@
 
 package main;
 
-import aSintactico.AnalizadorSintactico;
-import java.io.IOException;
-import mepa.Mepa;
 
 /**
- * COMPILADOR MINIPASCAL
+ * COMPILADOR PLG 08/09
  * 
- * Compiladores e Interpretes - Universidad Nacional del Sur - Bahia Blanca
- *
- * @version 1.0  ("Compiladores e Interpretes"- Universidad Nacional del Sur) 	  
+ * PLG UCM
+ * GRUPO 8
+ * @version 1.0   	  
  */
 public class Main {
        

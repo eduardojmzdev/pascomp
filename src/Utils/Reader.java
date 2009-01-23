@@ -8,7 +8,7 @@ import java.io.IOException;
  * Un ejemplo de Reader es la clase <code>BufferedFileReader</code>
  * usada por el <code>AnalizadorLexico</code>
  * 
- * @version 1.0 30/08/2006 ("Compiladores e Interpretes"- Universidad Nacional del Sur)
+ * @version 1.0 
  * @see aLexico.BufferedFileReader 	  
  */
 public interface Reader {

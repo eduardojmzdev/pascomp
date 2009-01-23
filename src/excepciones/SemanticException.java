@@ -1,12 +1,19 @@
-package exceptions;
+package excepciones;
+
+import excepciones.BasicException;
 
 /**
  * Representa a un error en la semantica del lenguaje
  *
-  * @see exceptions.BasicException
+  * @see excepciones.BasicException
  */
 public class SemanticException extends BasicException{
-    static{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	static{
         errorMap.put(new Integer(0),"Identificador ya declarado");
         errorMap.put(new Integer(1),"Se espera un tipo simple");        
         errorMap.put(new Integer(2),"Identificador de constante no valido");

@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Permite bufferear la escritura en archivo
+ * Permite hacer un buffer la escritura en archivo
  *
  */
 public class BufferedFileWriter extends BufferedWriter {

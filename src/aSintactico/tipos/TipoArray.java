@@ -1,14 +1,11 @@
 package aSintactico.tipos;
 
-import aSintactico.Entry;
-import java.util.ArrayList;
-
 /**
  * Representa al tipo array
  *
   * @see aSintactico.tipos.TipoFactory
  */
-public final class TipoArreglo extends Tipo{
+public final class TipoArray extends Tipo{
     
     /** Tipo de la expresion de subindice */
     public TipoSimple tipoDominio = null;
@@ -24,7 +21,7 @@ public final class TipoArreglo extends Tipo{
      * @param tipoDom 
      * @param tipoRango 
      */
-    public TipoArreglo(TipoSimple tipoDom, TipoSimple tipoRango) {
+    public TipoArray(TipoSimple tipoDom, TipoSimple tipoRango) {
         super(Tipo.ARRAY);
         this.tipoDominio = tipoDom;
         this.tipoRango = tipoRango;
@@ -38,9 +35,10 @@ public final class TipoArreglo extends Tipo{
      * @return true si los tipos son compatibles
      * @param tipo 
      */
-    public boolean equivalenteCon(Tipo tipo) {  
+    @Override
+	public boolean equivalenteCon(Tipo tipo) {  
         if(tipo.esArreglo()){
-            TipoArreglo t = (TipoArreglo)tipo;
+            TipoArray t = (TipoArray)tipo;
             if(tipoRango.equivalenteCon(t.tipoRango)&& numComponents == t.numComponents){                
                 return tipoDominio.equivalenteCon(t.tipoDominio);
             }
@@ -52,7 +50,8 @@ public final class TipoArreglo extends Tipo{
      * Calcula el tamaño del arreglo
      * @return tamaño del arreglo
      */
-    public int getSize() {
+    @Override
+	public int getSize() {
         return numComponents * tipoRango.getSize();        
     }
     
@@ -67,7 +66,8 @@ public final class TipoArreglo extends Tipo{
      * 
      * @return 
      */
-    public String toString() {
+    @Override
+	public String toString() {
         return "arreglo";
     }
 
@@ -75,7 +75,8 @@ public final class TipoArreglo extends Tipo{
      * 
      * @return 
      */
-    public boolean esSimple() {
+    @Override
+	public boolean esSimple() {
         return false;
     }
 
@@ -83,7 +84,8 @@ public final class TipoArreglo extends Tipo{
      * 
      * @return 
      */
-    public boolean esEntero() {
+    @Override
+	public boolean esEntero() {
         return false;
     }
 
@@ -91,7 +93,8 @@ public final class TipoArreglo extends Tipo{
      * 
      * @return 
      */
-    public boolean esBoolean() {
+    @Override
+	public boolean esBoolean() {
         return false;
     }
 
@@ -99,7 +102,8 @@ public final class TipoArreglo extends Tipo{
      * 
      * @return 
      */
-    public boolean esSubrango() {
+    @Override
+	public boolean esSubrango() {
         return false;
     }
 
@@ -107,7 +111,8 @@ public final class TipoArreglo extends Tipo{
      * 
      * @return 
      */
-    public boolean esArreglo() {
+    @Override
+	public boolean esArreglo() {
         return true;
     }
 }

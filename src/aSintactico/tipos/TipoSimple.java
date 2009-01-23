@@ -20,7 +20,8 @@ public class TipoSimple extends Tipo{
      * @param t tipo a chequear
      * @return true si son equivalentes, false en caso contrario
      */
-    public boolean equivalenteCon(Tipo t) {
+    @Override
+	public boolean equivalenteCon(Tipo t) {
         if(clase == t.clase)
             return true;
         else if((clase == INTEGER && t.clase == SUBRANGO) || (clase == SUBRANGO && t.clase == INTEGER))
@@ -33,7 +34,8 @@ public class TipoSimple extends Tipo{
      * Obtiene el tamaño del tipo en locaciones de memoria
      * @return un tamaño de 1 posicion
      */
-    public int getSize() {
+    @Override
+	public int getSize() {
         return 1;
     }
 
@@ -41,7 +43,8 @@ public class TipoSimple extends Tipo{
      * Obtiene la representacion del tipo como string
      * @return el string que representa el tipo
      */
-    public String toString(){
+    @Override
+	public String toString(){
         if(clase == INTEGER) return "integer";
         if(clase == BOOLEAN) return "boolean";
         if(clase == SUBRANGO)return "subrango";        
@@ -52,7 +55,8 @@ public class TipoSimple extends Tipo{
      * 
      * @return 
      */
-    public boolean esSimple() {
+    @Override
+	public boolean esSimple() {
         return true;
     }
 
@@ -60,7 +64,8 @@ public class TipoSimple extends Tipo{
      * 
      * @return 
      */
-    public boolean esEntero() {
+    @Override
+	public boolean esEntero() {
         return clase == INTEGER;
     }
 
@@ -68,7 +73,8 @@ public class TipoSimple extends Tipo{
      * 
      * @return 
      */
-    public boolean esBoolean() {
+    @Override
+	public boolean esBoolean() {
         return clase == BOOLEAN;
     }
 
@@ -76,7 +82,8 @@ public class TipoSimple extends Tipo{
      * 
      * @return 
      */
-    public boolean esSubrango() {
+    @Override
+	public boolean esSubrango() {
         return clase == SUBRANGO;
     }
 
@@ -84,7 +91,8 @@ public class TipoSimple extends Tipo{
      * 
      * @return 
      */
-    public boolean esArreglo() {
+    @Override
+	public boolean esArreglo() {
         return false;
     }
 }

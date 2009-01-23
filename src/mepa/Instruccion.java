@@ -107,7 +107,8 @@ public final class Instruccion{
     }
     
     /** */
-    public String toString(){
+    @Override
+	public String toString(){
         String n = "000" + numLinea;
         n = n.substring(n.length()-3);
         String txt = "["+n+"]"+nombre;

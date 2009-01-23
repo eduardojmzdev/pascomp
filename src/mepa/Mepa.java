@@ -1,17 +1,17 @@
 
 package mepa;
 
-import exceptions.MepaException;
+import excepciones.MepaException;
+
 import java.io.IOException;
-import java.util.Hashtable;
 import java.util.ArrayList;
 import main.Testeable;
 
 /**
  * Mepa.java
- * Maquina Virtual del lenguaje MiniPascal 
+ * Maquina Virtual del lenguaje  
  * 
- * @since jdk1.5
+ * @since jdk1.6
  */
 
 public class Mepa implements Testeable{

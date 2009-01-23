@@ -1,4 +1,6 @@
-package exceptions;
+package excepciones;
+
+import excepciones.BasicException;
 
 /**
  * Representa a un error Lexico
@@ -7,6 +9,11 @@ package exceptions;
  */
 public final class LexicException extends BasicException {
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	static{
 		errorMap.put(new Integer(0),"identificador no valido");
 		errorMap.put(new Integer(1),"comentario (* no cerrado");
