@@ -7,10 +7,9 @@ import aLexico.Token;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-
-import excepciones.*;
-import exceptions.SintacticException;
+import exceptions.*;
 import aSintactico.tipos.*;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -19,8 +18,8 @@ import main.Testeable;
 
 /**
  *
- * <P>Analizador Sintactico para el lenguaje. Este lenguaje es un
- * subconjunto del lenguaje Pascal.
+ * <P>Analizador Sintactico para el lenguaje Mini-Pascal. Este lenguaje es un
+ * subconjunto del lenguaje Pascal Standar. (ver manual de usuario)
  *<pre>
  * <br><b>Modo uso:</b>
  *      AnalizadorSintactico as = new AnalizadorSintactico(new AnalizadorLexico("program.pas"));
@@ -39,10 +38,11 @@ import main.Testeable;
  *       t.start();
  *
  *</pre>
+  * @author Agustin Ramone
  *
  * @see aLexico.AnalizadorLexico
  * @see aSintactico.TablaSimbolos
- * @since jdk 1.6
+ * @since jdk 1.5
  */
 public final class AnalizadorSintactico implements Testeable{
     
@@ -65,7 +65,7 @@ public final class AnalizadorSintactico implements Testeable{
     /**
      * Tabla de Simbolos
      */
-    private TablaEntrada TS = null;
+    private EntryTable TS = null;
     
     /**
      * Cuando vale true permite saltearse la proxima lectura de un token.
@@ -201,7 +201,7 @@ public final class AnalizadorSintactico implements Testeable{
      * Invoca al analizador lexico para que nos devuelva
      * el siguiente token.
      * @throws java.io.IOException 
-     * @throws excepciones.LexicException 
+     * @throws exceptions.LexicException 
      */
     private void nextToken() throws Exception{
         if  (!restaurarToken)
@@ -269,7 +269,7 @@ public final class AnalizadorSintactico implements Testeable{
     public void run() throws Exception{        
         if(debug) System.out.println("Compilando...");
         try{
-            if(TS == null)   TS = new TablaEntrada();
+            if(TS == null)   TS = new EntryTable();
             
             TS.init();
             nextToken();
@@ -316,13 +316,10 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private void bloque(String etiqueta, boolean esProgram,int nivelLexico, int sizeParamFor)throws Exception{
         nextToken();
-        if(token.codigo ==Token.CONST || token.codigo==Token.TYPE || token.codigo==Token.VAR||
-                token.codigo==Token.PROCEDURE || token.codigo==Token.FUNCTION || token.codigo==Token.BEGIN){
+        if(token.codigo==Token.VAR|| token.codigo==Token.BEGIN){
             restaurarToken=true;
-            seccionDefinicionDeConstantes();
-            seccionDefinicionDeTipos();
+
             int tamVar = seccionDefinicionDeVariables();
-            seccionDeclaracionProcYFunciones();
             
             /* accion semantica*/
             if (esProgram) genMepa(etiqueta + "NADA",false);
@@ -342,185 +339,6 @@ public final class AnalizadorSintactico implements Testeable{
             throw new SintacticException(5,token.numLinea);
     }
     
-    /**
-     * @throws java.lang.Exception si ocurre error lexico (LexicException) o sintactico (SintacticException)
-     */
-    private void seccionDefinicionDeConstantes() throws Exception{
-        nextToken();
-        if(token.codigo!=Token.CONST){
-            restaurarToken=true;
-            return;
-        }
-        definicionDeConstante();
-        nextToken();
-        if(token.codigo !=Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
-        restoDefinicionDeConstante();
-        
-    }
-    
-    /**
-     * 
-     * @throws java.lang.Exception 
-     */
-    private void definicionDeConstante()throws Exception{
-        nextToken();
-        if(token.codigo!= Token.ID) throw new SintacticException(1,token.numLinea);
-         /* accion semantica*/
-        if (TS.estaDeclarado(token.lexema)) throw new SemanticException(0,token.numLinea,token.lexema);
-        String id = token.lexema;
-        
-        nextToken();
-        if(token.codigo!= Token.IGUAL) throw new SintacticException(4,token.numLinea);
-       
-        Entrada entry = constante();
-        entry.nombre = id;
-        TS.agregarConstante(entry);
-        
-    }
-    
-    /**
-     * 
-     * @throws java.lang.Exception 
-     */
-    private void restoDefinicionDeConstante()throws Exception{
-        nextToken();
-        
-        if(token.codigo == Token.ID){
-            restaurarToken = true;
-            definicionDeConstante();
-            nextToken();
-            if (token.codigo!=Token.PUNTO_Y_COMA)
-                throw new SintacticException(2,token.numLinea);
-            restoDefinicionDeConstante();
-        } else if(token.codigo==Token.TYPE || token.codigo==Token.VAR ||
-                token.codigo==Token.PROCEDURE || token.codigo==Token.FUNCTION
-                || token.codigo==Token.BEGIN){
-            restaurarToken = true;
-            return; //labmda
-        } else
-            throw new SintacticException(8,token.numLinea);
-    }
-    
-    /**
-     * 
-     * @throws java.lang.Exception 
-     */
-    private Entrada constante() throws Exception{
-         nextToken();
-        if(token.codigo == Token.OP_SUMA )  return idConstante("+");
-        else  if(token.codigo == Token.OP_RESTA) return idConstante("-");
-        else{
-            restaurarToken=true;
-            return idConstante("");
-        }
-        
-    }
-    
-    /**
-     * idConstante-> Numero| identificador
-     * @throws java.lang.Exception 
-     */
-    private Entrada idConstante( String signo)throws Exception{
-        nextToken();
-        //semantico: analizar si ID esta declarado
-        if(token.codigo==Token.ID){
-            Entrada e = TS.buscarConstante(token.lexema);
-            if (e == null)  
-                throw new SemanticException (2,token.numLinea,token.lexema);
-                                    
-            Entrada entry = new Entrada(e.nombre,Entrada.CONSTANTE);
-            entry.asignable = false;
-            String valStr = e.valorStr;
-            
-            if (signo.length()>0) {
-                if(!e.tipo.esEntero() && !e.tipo.esSubrango()) 
-                    throw new SemanticException(3,token.numLinea);                
-                if(signo.equals("-"))
-                   valStr = negar(valStr);                                                                        
-            }
-                
-            entry.valor = convertirAEntero(valStr,token.numLinea);            
-            entry.valorStr = valStr;                           
-            entry.tipo = e.tipo;            
-            return entry;
-        }            
-        else if (token.codigo ==Token.NUMERO) {
-            Entrada entry = new Entrada( Entrada.CONSTANTE);
-            entry.asignable = false;
-            entry.tipo = TipoFactory.crearTipoEntero();  
-            String valStr = token.lexema; 
-            
-            int val = convertirAEntero(valStr,token.numLinea).intValue();
-            
-            if (signo.length()>0) {                                                
-                if(signo.equals("-")){                   
-                   valStr = "-"+ valStr; 
-                   val = val * -1;                                      
-                }
-            }                
-                        
-            entry.valor = new Integer(val);            
-            entry.valorStr = valStr;                                                   
-            return entry;
-        }
-        else throw new SintacticException(7,token.numLinea);
-    }
-    
-    /**
-     * @throws java.lang.Exception si ocurre error lexico (LexicException) o sintactico (SintacticException)
-     */
-    private void seccionDefinicionDeTipos()  throws Exception{
-    
-        nextToken();
-        if(token.codigo!=Token.TYPE){
-            restaurarToken=true;
-            return;
-        }
-        definicionDeTipo();
-        nextToken();
-        if (token.codigo!=Token.PUNTO_Y_COMA)
-            throw new SintacticException(2,token.numLinea);
-        restoDefinicionDeTipo();
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private void definicionDeTipo()  throws Exception{
-        nextToken();
-        if(token.codigo!= Token.ID) throw new SintacticException(1,token.numLinea);
-        /*accion semantica*/
-        if ( TS.estaDeclarado(token.lexema)) 
-                throw new SemanticException(0,token.numLinea,token.lexema);              
-        String id=token.lexema;
-        nextToken();
-        if(token.codigo!= Token.IGUAL) throw new SintacticException(4,token.numLinea);
-        Tipo t = tipo();
-        /*accion semantica*/
-        
-        TS.agregarTipo(id,t);
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private void restoDefinicionDeTipo()  throws Exception{
-        nextToken();
-        if(token.codigo==Token.ID){
-            restaurarToken=true;
-            definicionDeTipo();
-            nextToken();
-            if (token.codigo!=Token.PUNTO_Y_COMA)   throw new SintacticException(2,token.numLinea);
-            restoDefinicionDeTipo();
-        } else if (token.codigo==Token.VAR || token.codigo==Token.BEGIN ||
-                token.codigo==Token.PROCEDURE || token.codigo==Token.FUNCTION){
-            restaurarToken=true;
-            return;
-        } else
-            throw new SintacticException(6,token.numLinea);
-    }
     
     /**
      *
@@ -528,28 +346,11 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private Tipo tipo()throws Exception{
         nextToken();
-        if(token.codigo==Token.ARRAY){
-            nextToken();
-            if(token.codigo!=Token.COR_ABRE) throw new SintacticException(11,token.numLinea);
-            TipoSimple ti = tipoSimple();
-            nextToken();
-            if(token.codigo!=Token.COR_CIERRA) throw new SintacticException(12,token.numLinea);
-            nextToken();
-            if(token.codigo!=Token.OF) throw new SintacticException(13,token.numLinea);
-            TipoSimple tr = tipoSimple();
-            if ( ti.esEntero() ) 
-                throw new SemanticException(4, token.numLinea);
-            return TipoFactory.crearTipoArreglo(ti,tr);
-        }
-        
-        else if(token.codigo==Token.ID || token.codigo==Token.NUMERO || token.codigo==Token.OP_SUMA || token.codigo==Token.OP_RESTA){
-            
-            if(token.codigo==Token.ID){
-                Entrada entradaTipo = TS.buscarTipo(token.lexema);
-                if(entradaTipo!=null) return entradaTipo.tipo;
-            }
-            restaurarToken=true;
-            return tipoSimple();
+        if(token.codigo==Token.ID){
+        	Entry entradaTipo = TS.buscarTipo(token.lexema);
+        	if(entradaTipo!=null) return entradaTipo.tipo;
+        	restaurarToken=true;
+        	return tipoSimple();
         } else
             throw new SintacticException(9,token.numLinea);
     }
@@ -560,99 +361,24 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private TipoSimple tipoSimple()throws Exception{
         nextToken();
-        if(token.codigo == Token.ID){            
+        //token.codigo == Token.ID           
             return restoTipoSimple(token.lexema);
-        } 
-        else if(token.codigo==Token.NUMERO){
-            int li = convertirAEntero(token.lexema,token.numLinea).intValue();
-            nextToken();
-            if(token.codigo!=Token.PUNTO_PUNTO)  throw new SintacticException(14,token.numLinea);
-            Entrada entrada = constante();
-            if(entrada.tipo.esBoolean()) throw new SemanticException(9,token.numLinea,entrada.nombre);
-            
-            int ls = ((Integer)entrada.valor).intValue();
-            
-            /* aca se controla que el li no sea mayor al ls */            
-            if(ls<li) throw new SemanticException(38,token.numLinea);
-            
-            return TipoFactory.crearTipoSubrango(li,ls);
-            
-        } 
-        else if(token.codigo==Token.OP_SUMA )  {
-            return restoSubrango("+");
-        } 
-        else if(token.codigo==Token.OP_RESTA )  {
-            return restoSubrango("-");
-        }else
-            throw new SintacticException(10,token.numLinea);
+        
     }
     
-    /**
-     * 
-     * @throws java.lang.Exception 
-     */
-    private TipoSubrango restoSubrango(String signo)throws Exception{
-        nextToken();
-        if(token.codigo!=Token.ID && token.codigo!=Token.NUMERO) throw new SintacticException(28,token.numLinea);
-        Integer val;
-        if(token.codigo == Token.ID){
-            Entrada entradaLi = TS.buscarConstante (token.lexema);
-            if (entradaLi == null) throw new SemanticException(2,token.numLinea,token.lexema);
-            
-            if(entradaLi.tipo.esBoolean()) throw new SemanticException(9,token.numLinea,entradaLi.nombre);
-            
-            val = (Integer)entradaLi.valor;
-        }else
-            val = convertirAEntero(token.lexema,token.numLinea);
-        
-        if (signo.equals("-")) val = val * -1;
-        
-        nextToken();
-        if(token.codigo!=Token.PUNTO_PUNTO) throw new SintacticException(14,token.numLinea);
-        Entrada entradaLs = constante();
-        
-        if(entradaLs.tipo.esBoolean()) throw new SemanticException(9,token.numLinea,entradaLs.nombre);
-        
-        int li = val.intValue();
-        int ls = ((Integer)entradaLs.valor).intValue();
-        
-        /* aca se controla que el li no sea mayor al ls */            
-        if(ls<li) throw new SemanticException(38,token.numLinea);
-        
-        return TipoFactory.crearTipoSubrango(li,ls);
-    }
     
     /**
      * 
      * @throws java.lang.Exception 
      */
     private TipoSimple restoTipoSimple(String id)throws Exception{
-        int ultLinea = token.numLinea;
         nextToken();
-        if(token.codigo==Token.PUNTO_PUNTO) {            
-            Entrada entradaLS = constante();
-            Entrada entradaLI = TS.buscarConstante(id);
-            
-            if(entradaLI == null) throw new SemanticException(2,token.numLinea,id);
-            else 
-                if(entradaLI.tipo.esBoolean()) throw new SemanticException(9,ultLinea,id);
-            
-            if(entradaLS.tipo.esBoolean()) throw new SemanticException(9,token.numLinea,entradaLS.nombre);
-            
-            int li = ((Integer)entradaLI.valor).intValue();
-            int ls = ((Integer)entradaLS.valor).intValue();
-            /* aca se controla que el li no sea mayor al ls */            
-            if(ls<li) throw new SemanticException(38,token.numLinea);
-            
-            return TipoFactory.crearTipoSubrango(li,ls);
-            
-        } else{
-            Entrada entrada = TS.buscarTipo(id);
-            if(entrada==null) throw new SemanticException(5,token.numLinea,id);
-            if(!entrada.tipo.esSimple()) throw new SemanticException(5,token.numLinea,id);
-            restaurarToken=true;
-            return (TipoSimple)entrada.tipo;
-        }
+        Entry entrada = TS.buscarTipo(id);
+        if(entrada==null) throw new SemanticException(5,token.numLinea,id);
+        if(!entrada.tipo.esSimple()) throw new SemanticException(5,token.numLinea,id);
+        restaurarToken=true;
+        return (TipoSimple)entrada.tipo;
+
     }
     
     /**
@@ -698,8 +424,7 @@ public final class AnalizadorSintactico implements Testeable{
             if(token.codigo!=Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
             int tamVar2 = restoDefinicionDeVariables();
             return tamVar1 + tamVar2;
-        } else if(token.codigo==Token.PROCEDURE || token.codigo==Token.BEGIN ||
-                token.codigo==Token.FUNCTION){
+        } else if(token.codigo==Token.BEGIN ){
             restaurarToken = true;
             return 0;    //lambda
         } else
@@ -739,269 +464,6 @@ public final class AnalizadorSintactico implements Testeable{
         
     }
     
-    /**
-     * @throws java.lang.Exception si ocurre error lexico (LexicException) o sintactico (SintacticException)
-     */
-    private void seccionDeclaracionProcYFunciones() throws Exception {
-        nextToken();
-        if(token.codigo!=Token.PROCEDURE && token.codigo!=Token.FUNCTION){
-            restaurarToken=true;
-            return;
-        }
-        
-        restaurarToken=true;
-        if(token.codigo== Token.PROCEDURE){
-            declaracionDeProcedimiento();
-           
-        } else{
-            declaracionDeFuncion();           
-        }
-        nextToken();
-        if(token.codigo!=Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
-        seccionDeclaracionProcYFunciones();
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private void declaracionDeProcedimiento() throws Exception {
-        Entrada entradaProc = encabezadoDeProcedimiento();        
-        bloque(entradaProc.etiqueta,false,entradaProc.nivelLexico,entradaProc.sizeParametros);
-        TS.eliminarNivelLexico();
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private Entrada encabezadoDeProcedimiento() throws Exception {
-        nextToken();
-        
-        nextToken();
-        if(token.codigo!= Token.ID) throw new SintacticException(1,token.numLinea);
-        
-        if(TS.estaDeclarado(token.lexema)) throw new SemanticException(0,token.numLinea,token.lexema);
-        String id = token.lexema;        
-        LinkedList<Entrada> listaPar = restoEncabezadoDeProcedimiento();                
-        String eti = genEtiqueta();           
-        Entrada entradaProc = TS.agregarProcedimiento(id,listaPar,eti);                
-        TS.crearNivelLexico();
-        entradaProc.nivelLexico = TS.getNivelLexico();
-        TS.agregarDesplazamientos(listaPar);
-        TS.agregarParFormales(listaPar);
-        
-        return entradaProc;
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private LinkedList<Entrada> restoEncabezadoDeProcedimiento() throws Exception {
-        nextToken();
-        if(token.codigo==Token.PUNTO_Y_COMA){
-            return new LinkedList<Entrada>();
-        } 
-        else if(token.codigo==Token.PAR_ABRE){
-            LinkedList<Entrada> lista =  listaParametrosFormales();
-            nextToken();
-            if(token.codigo!=Token.PAR_CIERRA) throw new SintacticException(18,token.numLinea);
-            nextToken();
-            if(token.codigo!=Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
-            return lista;
-        } 
-        else
-            throw new SintacticException(19,token.numLinea);
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private LinkedList<Entrada> listaParametrosFormales()throws Exception{
-        HashSet<String> conjId = new HashSet<String>();
-        LinkedList<Entrada> listaPar = grupoDeParametros(new LinkedList<Entrada>(), conjId);
-        return restoListaParametrosFormales(listaPar,conjId);
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private LinkedList<Entrada> grupoDeParametros(LinkedList<Entrada> listaPar , HashSet<String> conjId)throws Exception{
-        nextToken();
-        //por valor
-        if(token.codigo == Token.ID){
-            restaurarToken=true;
-            LinkedList<String> listaId = listaIdentificadorParametroFormales(conjId);
-            nextToken();
-            if(token.codigo!=Token.DOS_PUNTOS) throw new SintacticException(15,token.numLinea);
-            nextToken();
-            if(token.codigo!=Token.ID) throw new SintacticException(9,token.numLinea);
-            Entrada etipo = TS.buscarTipo(token.lexema);
-            if (etipo == null) throw new SemanticException(5,token.numLinea,token.lexema);
-            Entrada e;
-            String id;
-            while(listaId.size()>0){
-                id = listaId.removeFirst();
-                e = new Entrada(id,Entrada.PARAMETRO);                
-                e.tipo = etipo.tipo;
-                e.porValor = true;
-                e.asignable = true;
-                listaPar.addLast(e);
-            }
-            return listaPar;
-        }
-        //por referencia
-        else if(token.codigo == Token.VAR){
-            LinkedList<String> listaId = listaIdentificadorParametroFormales(conjId);
-            nextToken();
-            if(token.codigo!=Token.DOS_PUNTOS) throw new SintacticException(15,token.numLinea);
-            nextToken();
-            if(token.codigo!=Token.ID) throw new SintacticException(9,token.numLinea);
-            Entrada etipo = TS.buscarTipo(token.lexema);
-            if (etipo == null) throw new SemanticException(5,token.numLinea,token.lexema);
-            Entrada e;
-            String id;
-            while(listaId.size()>0){
-                id = listaId.removeFirst();
-                e = new Entrada(id,Entrada.PARAMETRO);
-                e.tipo = etipo.tipo;
-                e.porValor = false;
-                e.asignable = true;
-                listaPar.addLast(e);
-            }
-            return listaPar;
-        } else
-            throw new SintacticException(20,token.numLinea);
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private LinkedList<Entrada>  restoListaParametrosFormales(LinkedList<Entrada> listaPar, HashSet<String> conjId)throws Exception{
-        nextToken();
-        if(token.codigo==Token.PUNTO_Y_COMA){
-            LinkedList<Entrada> listaP = grupoDeParametros(listaPar,conjId);
-            return restoListaParametrosFormales(listaP,conjId);
-        } else {
-            restaurarToken=true;
-            return listaPar;
-        }
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private LinkedList<String> listaIdentificadorParametroFormales(HashSet<String> conjId) throws Exception{
-        nextToken();
-        if(token.codigo!= Token.ID) throw new SintacticException(1,token.numLinea);
-        if(conjId.contains(token.lexema)) throw new SemanticException(6,token.numLinea);
-        conjId.add(token.lexema);
-        String id = token.lexema;
-        LinkedList<String> listaId= restoListaIdentificadorParametroFormales(conjId);
-        listaId.addFirst(id);
-        return listaId;
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private LinkedList<String> restoListaIdentificadorParametroFormales(HashSet<String> conjId) throws Exception{
-        nextToken();
-        
-        if(token.codigo== Token.COMA){
-            nextToken();
-            if(token.codigo!= Token.ID) throw new SintacticException(1,token.numLinea);
-            String id = token.lexema;
-            if (conjId.contains(id)) throw new SemanticException(6,token.numLinea);
-            conjId.add(id);
-            LinkedList<String> listaId = restoListaIdentificadorParametroFormales(conjId);
-            listaId.addFirst(id);
-            return listaId;
-        } else{
-            restaurarToken=true;
-            return new LinkedList<String>();
-        }
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private void declaracionDeFuncion() throws Exception {
-        Entrada entradaFun = encabezadoDeFuncion();
-        bloque(entradaFun.etiqueta,false,entradaFun.nivelLexico,entradaFun.sizeParametros);
-        entradaFun.asignable = false;
-        TS.eliminarNivelLexico();
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private Entrada encabezadoDeFuncion() throws Exception {
-        nextToken();//ya se leyo function        
-        nextToken();
-        if(token.codigo!= Token.ID) throw new SintacticException(21,token.numLinea);
-        
-        if (TS.estaDeclarado(token.lexema)) throw new SemanticException(0, token.numLinea,token.lexema);
-        return restoEncabezadoDeFuncion(token.lexema);
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private Entrada restoEncabezadoDeFuncion(String id) throws Exception {
-        nextToken();
-        //Funcion sin parametros
-        if(token.codigo==Token.DOS_PUNTOS){
-            nextToken();
-            if(token.codigo!= Token.ID) throw new SintacticException(22,token.numLinea);
-            Entrada etipo = TS.buscarTipo(token.lexema);
-            if (etipo==null) throw new SemanticException(5,token.numLinea,token.lexema);
-            if(!etipo.tipo.esSimple()) throw new SemanticException (1, token.numLinea);
-            LinkedList<Entrada> listaPar = new LinkedList<Entrada>();
-            String eti = genEtiqueta();            
-            Entrada efun = TS.agregarFuncion(id, etipo.tipo,eti,listaPar);
-            TS.crearNivelLexico();
-            efun.nivelLexico = TS.getNivelLexico();
-            efun.desplazamiento = -3;
-            nextToken();
-            if(token.codigo!= Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
-            return efun;
-        } 
-        //Funcion con parametros
-        else if(token.codigo==Token.PAR_ABRE){
-            LinkedList<Entrada> listaPar = listaParametrosFormales();
-            nextToken();
-            if(token.codigo!= Token.PAR_CIERRA) throw new SintacticException(18,token.numLinea);
-            nextToken();
-            if(token.codigo!= Token.DOS_PUNTOS) throw new SintacticException(15,token.numLinea);
-            nextToken();
-            if(token.codigo!= Token.ID) throw new SintacticException(22,token.numLinea);
-            Entrada etipo = TS.buscarTipo(token.lexema);
-            if (etipo==null) throw new SemanticException(5,token.numLinea,token.lexema);
-            if(!etipo.tipo.esSimple()) throw new SemanticException (1, token.numLinea);
-            String eti = genEtiqueta();
-            Entrada efun = TS.agregarFuncion(id, etipo.tipo,eti,listaPar);
-            TS.crearNivelLexico();
-            int desplazamiento = TS.agregarDesplazamientos(listaPar);
-            efun.nivelLexico = TS.getNivelLexico();
-            efun.desplazamiento = desplazamiento -1;
-            TS.agregarParFormales(listaPar);                    
-            nextToken();
-            if(token.codigo!= Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
-            return efun;
-        } 
-        else
-            throw new SintacticException(23,token.numLinea);
-    }
     
     /**
      * @throws java.lang.Exception si ocurre error lexico (LexicException) o sintactico (SintacticException)
@@ -1027,13 +489,7 @@ public final class AnalizadorSintactico implements Testeable{
             sentenciaSimple();
         } else if(token.codigo==Token.BEGIN){
             sentenciaCompuesta();
-        } else if(token.codigo==Token.IF){
-            sentenciaIF();
-        } else if(token.codigo==Token.CASE){
-            sentenciaCASE();
-        } else if(token.codigo==Token.WHILE){
-            sentenciaWHILE();
-        }
+        } 
         
     }
     
@@ -1057,7 +513,7 @@ public final class AnalizadorSintactico implements Testeable{
     private void sentenciaSimple()throws Exception{
         nextToken();
         //no chequeo, ya viene un ID
-        Entrada e = TS.buscar(token.lexema);    
+        Entry e = TS.buscar(token.lexema);    
         
         if (e == null) throw new SemanticException (7, token.numLinea,token.lexema) ;
         restoSentenciaSimple(e);
@@ -1067,7 +523,8 @@ public final class AnalizadorSintactico implements Testeable{
      *
      * @throws java.lang.Exception
      */
-    private void restoSentenciaSimple(Entrada e)throws Exception{ 
+    private void restoSentenciaSimple(Entry e)throws Exception{
+        int lineaId = token.numLinea; 
         nextToken();        
         //:= exp
         if(token.codigo==Token.ASIGNACION){
@@ -1075,260 +532,15 @@ public final class AnalizadorSintactico implements Testeable{
             Tipo tipoExp = expresion(true);            
             if(!e.tipo.equivalenteCon(tipoExp)) throw new SemanticException(8,token.numLinea);
             
-            if(e.esVariable() || e.esFuncion() || (e.esParametro() && e.porValor)){
+            if(e.esVariable() ){
                 if(e.tipo.esSimple()){
-                    if (e.tipo.esSubrango())
-                        genMepa("CONT" ,true, ((TipoSubrango)e.tipo).getValInferior() , ((TipoSubrango)e.tipo).getValSuperior());
-                    genMepa("ALVL", true,e.nivelLexico,e.desplazamiento);
-                } 
-                else{//copia el arreglo apilado a la memoria de la variable
-                    genMepa("POAR",true,e.nivelLexico,e.desplazamiento,((TipoArray)e.tipo).getNumComponentes());                    
-                }
-            }else{ //asignación de un valor a un param formal pasado por referencia
-                if(e.tipo.esSimple()){
-                    if(e.tipo.esSubrango())
-                        genMepa("CONT",true,((TipoSubrango)e.tipo).getValInferior(),((TipoSubrango)e.tipo).getValSuperior());
-                    genMepa("ALVI",true,e.nivelLexico,e.desplazamiento);
-                } 
-                else{//param formal, arreglo  por referencia
-                    genMepa("POAI",true,e.nivelLexico,e.desplazamiento,((TipoArray)e.tipo).getNumComponentes());
+                   genMepa("ALVL", true,e.nivelLexico,e.desplazamiento);
                 }
             }         
         }
         //[exp1] := exp2
-        else if(token.codigo==Token.COR_ABRE){
-            if(!e.asignable) throw new SemanticException(34,token.numLinea);
-            
-            if(!e.tipo.esArreglo()) throw new SemanticException(10,token.numLinea);
-            
-            TipoArray tipo = (TipoArray)e.tipo;            
-            Tipo tipoExp = expresion(true);
-            
-            if (!tipo.tipoDominio.equivalenteCon(tipoExp))
-                throw new SemanticException(12,token.numLinea);
-            
-            if (tipo.tipoDominio.esSubrango()){
-                genMepa( "CONT" ,true, ((TipoSubrango)tipo.tipoDominio).getValInferior()
-                                ,((TipoSubrango)tipo.tipoDominio).getValSuperior());
-                genMepa("APCT",true, ((TipoSubrango)tipo.tipoDominio).getValInferior());
-                genMepa("SUST",true);     
-            }else //puede ser boolean
-                genMepa( "CONT" ,true, 0,1);            
-           
-            nextToken();
-            if(token.codigo!=Token.COR_CIERRA) throw new SintacticException(12,token.numLinea);
-            nextToken();
-            if(token.codigo!=Token.ASIGNACION) throw new SintacticException(26,token.numLinea);
-                        
-            Tipo tipoExp2 = expresion(true);
-            if (!tipo.tipoRango.equivalenteCon(tipoExp2))
-                throw new SemanticException(12,token.numLinea);
-            
-            if (tipo.tipoRango.esSubrango())
-                genMepa( "CONT",true , ((TipoSubrango)tipo.tipoRango).getValInferior()
-                    , ((TipoSubrango)tipo.tipoRango).getValSuperior());
-            
-            if (!e.porValor)
-                genMepa("ALAI",true, e.nivelLexico,e.desplazamiento);
-            else
-                genMepa("ALAR",true, e.nivelLexico,e.desplazamiento);
-
-        }// id(params) 
-        else if(token.codigo== Token.PAR_ABRE){
-            if(!e.esProcedimiento()) throw new SemanticException(33,token.numLinea);
-            if(e.listaParametros.size()==0 && !e.predefinido) throw new SemanticException(31,token.numLinea);
-            
-            listaParametrosActuales(e);
-            nextToken();
-            if(token.codigo!=Token.PAR_CIERRA) throw new SintacticException(18,token.numLinea);
-            if(!e.predefinido) 
-                genMepa("LLPR "+e.etiqueta,true);
-            
-        } 
-        else{ //procedimiento sin parametros           
-           restaurarToken=true;
-           if(!e.esProcedimiento()) throw new SemanticException(33,token.numLinea);
-           if(e.listaParametros.size()>0)throw new SemanticException(31,token.numLinea);
-           
-           if(!e.predefinido)
-               genMepa("LLPR " + e.etiqueta,true);
-           else{
-               if(e.nombre.equals("writeln"))  genMepa("IMLV",true) ;               
-           }
-        }
     }
     
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private void sentenciaIF()throws Exception{
-        nextToken();
-        int linea = token.numLinea;
-        //ya asume que es IF
-        Tipo texp = expresion(true);
-        if(!texp.esBoolean()) throw new SemanticException(11, linea);
-        nextToken();
-        if(token.codigo!=Token.THEN) throw new SintacticException(27,token.numLinea);
-        String eti = genEtiqueta();
-        genMepa("DSVF "+ eti,true);
-        sentencia();
-        restoSentenciaIF(eti);
-    }
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private void restoSentenciaIF(String etiqueta)throws Exception{
-        nextToken();
-        if(token.codigo==Token.ELSE){
-            String eti =  genEtiqueta();
-            genMepa("DSVS "+ eti,true);
-            genMepa(etiqueta + "NADA",false) ;
-            sentencia();
-            genMepa(eti +"NADA",false);
-        } else{
-            restaurarToken=true;
-            genMepa(etiqueta + "NADA",false) ;
-        }
-    }
-    
-    
-    
-    /**
-     * <sentenciaCASE> ::= case <expresion> of <listaElementosCASE> end
-     * 
-     */
-    private void sentenciaCASE()throws Exception{
-        nextToken();
-        //asume que vino CASE
-        Tipo texp = expresion(true);
-        if (! texp.esSimple()) throw new SemanticException(12, token.numLinea);
-        nextToken();
-        if(token.codigo!=Token.OF)throw new SintacticException(13,token.numLinea);
-        String etiFinCase = genEtiqueta();
-        
-        HashSet conjId = new HashSet();
-        listaElementosCASE(texp,etiFinCase,conjId);
-        nextToken();
-        if(token.codigo!=Token.END)throw new SintacticException(25,token.numLinea);
-        genMepa(etiFinCase+" LMEM 1",false);
-    }
-    
-    /**
-     * <listaElementosCASE> ::= <etiquetaListaCASE> <restoListaElementosCASE>
-     * 
-     */
-    private HashSet listaElementosCASE(Tipo t,String etiFinCase, HashSet conjId)throws Exception{
-        HashSet conjIdSint = etiquetaListaCASE(t,etiFinCase,conjId);
-        return restoListaElementosCASE(t,etiFinCase, conjIdSint);
-    }
-    
-    /**     
-     * <etiquetaListaCASE>::= <consatnte><restoEtiquetas>: <sentencia> | <vacio>
-     *     
-     */
-    private HashSet etiquetaListaCASE(Tipo t,String etiFinCase,HashSet conjId)throws Exception{
-        nextToken();
-        restaurarToken = true; 
-        if (token.codigo!=Token.ID && token.codigo!=Token.NUMERO &&token.codigo!=Token.OP_SUMA && token.codigo!=Token.OP_RESTA  ){
-            return conjId;
-        }        
-        String etiFinSent = genEtiqueta();
-        Entrada econ = constante(); 
-        if(!econ.tipo.equivalenteCon(t)) throw new SemanticException(37, token.numLinea); 
-        
-        if(conjId.contains(econ.valor)) throw new SemanticException(13,token.numLinea);
-        else 
-            conjId.add(econ.valor);
-        
-        genMepa("DUPT",true);
-	genMepa("APCT "+econ.valorStr,true);	
-	genMepa("CMIG",true);
-	String etiSent = genEtiqueta();
-	genMepa("DSVV " + etiSent,true);
-        
-        HashSet conjIdSint = restoEtiquetas(t,etiFinCase,etiSent,conjId);   
-        
-        nextToken();
-        if (token.codigo!=Token.DOS_PUNTOS) throw new SintacticException(15, token.numLinea );
-        genMepa("DSVS " + etiFinSent,true);
-	genMepa(etiSent +"NADA",false);	
-        
-        sentencia();
-        
-        genMepa("DSVS " + etiFinCase,true);
-	genMepa(etiFinSent +"NADA",false);	
-        return conjIdSint;
-    }
-    
-    /**
-     * <restoListaElementosCASE>::= ; <listaElementosCASE> | <vacio>
-     * @throws java.lang.Exception 
-     */
-    private HashSet restoListaElementosCASE(Tipo t,String etiFinCase, HashSet conjId)throws Exception{
-        nextToken();
-        if(token.codigo==Token.PUNTO_Y_COMA){
-            return listaElementosCASE(t,etiFinCase,conjId);
-        } else{
-            restaurarToken = true;
-            return conjId;
-        }
-    }
-   
-    /**
-     * <restoEtiquetas> ::= , <constante> <restoEtiquetas> | <vacio>
-     * 
-     */
-    private HashSet restoEtiquetas(Tipo t, String etiFinCase, String etiSent,HashSet conjId)throws Exception{
-        nextToken();
-        if(token.codigo==Token.COMA){
-            Entrada econ = constante();
-            if(!econ.tipo.equivalenteCon(t))throw new SemanticException(37, token.numLinea); 
-            
-            if(conjId.contains(econ.valor)) throw new SemanticException(13,token.numLinea);
-            else 
-                conjId.add(econ.valor);
-            
-            genMepa("DUPT",true);
-            genMepa("APCT "+econ.valorStr,true);	
-            genMepa("CMIG",true);
-            genMepa("DSVV "+etiSent,true);
-            return restoEtiquetas(t,etiFinCase,etiSent,conjId);        
-        }
-        else
-            restaurarToken=true;        
-            return conjId;
-    }
-    
-    /**
-     * <sentenciaWHILE> ::= while <expresion> do <sentencia>
-     * 
-     */
-    private void sentenciaWHILE()throws Exception{
-        nextToken();
-        if(token.codigo==Token.WHILE){
-            String eti = genEtiqueta();
-            int lineaErr = token.numLinea;
-            genMepa(eti+"NADA",false);
-            
-            Tipo texp = expresion(true);
-            
-            if(!texp.esBoolean()) throw new SemanticException(11,lineaErr);
-            nextToken();
-            if(token.codigo !=Token.DO) throw new SintacticException(30,token.numLinea);
-            String etiFin = genEtiqueta();
-            genMepa("DSVF "+etiFin,true);
-            
-            sentencia();
-            
-            genMepa("DSVS "+eti,true);
-            genMepa(etiFin+"NADA",false);
-        } else
-            throw new SintacticException(31,token.numLinea);
-        
-    }
     
     /**
      * <expresion> ::= <expresionSimple> <restoExpresion>     
@@ -1471,8 +683,8 @@ public final class AnalizadorSintactico implements Testeable{
     /**
      * <listaParametrosActuales> ::= <vacio> | <expresion> <restoListaParametrosActuales>     
      */
-    private void listaParametrosActuales(Entrada e)throws Exception{
-        Entrada ePar=null;
+    private void listaParametrosActuales(Entry e)throws Exception{
+        Entry ePar=null;
         if(!e.predefinido) 
             ePar = e.listaParametros.get(0);
         Tipo texp;
@@ -1500,11 +712,11 @@ public final class AnalizadorSintactico implements Testeable{
      *
      * @throws java.lang.Exception
      */
-    private void restoListaParametrosActuales(Entrada e, int indice)throws Exception{
+    private void restoListaParametrosActuales(Entry e, int indice)throws Exception{
         nextToken();           
         if(token.codigo==Token.COMA){
             if(indice >= e.listaParametros.size() && !e.predefinido) throw new SemanticException(31,token.numLinea); 
-            Entrada ePar=null;
+            Entry ePar=null;
             if(!e.predefinido) 
                 ePar= e.listaParametros.get(indice);  
             
@@ -1556,7 +768,7 @@ public final class AnalizadorSintactico implements Testeable{
             return TipoFactory.crearTipoEntero();
         }
         else  if(token.codigo==Token.ID){
-            Entrada e = TS.buscar(token.lexema);
+            Entry e = TS.buscar(token.lexema);
             if(e == null)  throw new SemanticException(7,token.numLinea,token.lexema);
             return restoFactor(porValor,e);
         } else
@@ -1568,7 +780,7 @@ public final class AnalizadorSintactico implements Testeable{
      *
      * @throws java.lang.Exception
      */
-    private Tipo restoFactor(boolean porValor, Entrada e)throws Exception{
+    private Tipo restoFactor(boolean porValor, Entry e)throws Exception{
         nextToken();
         //id[exp]
         if(token.codigo==Token.COR_ABRE){
@@ -1576,7 +788,7 @@ public final class AnalizadorSintactico implements Testeable{
            
             Tipo texp = expresion(true);
             
-            TipoArray tipo = (TipoArray)e.tipo;
+            TipoArreglo tipo = (TipoArreglo)e.tipo;
             
             if(! tipo.tipoDominio.equivalenteCon(texp))
                 throw new SemanticException(12,token.numLinea);
@@ -1635,7 +847,7 @@ public final class AnalizadorSintactico implements Testeable{
                         genMepa("APVL",true,e.nivelLexico,e.desplazamiento);
                         return e.tipo;
                     }else{//copia del arreglo
-                        int n = ((TipoArray)e.tipo).getNumComponentes();
+                        int n = ((TipoArreglo)e.tipo).getNumComponentes();
                         genMepa("PUAR",true,e.nivelLexico,e.desplazamiento,n);                        
                         return e.tipo;
                     }
@@ -1646,7 +858,7 @@ public final class AnalizadorSintactico implements Testeable{
                             genMepa("APVL",true,e.nivelLexico,e.desplazamiento);
                             return e.tipo;
                         }else{//copia del arreglo
-                            int n = ((TipoArray)e.tipo).getNumComponentes();
+                            int n = ((TipoArreglo)e.tipo).getNumComponentes();
                             genMepa("PUAR",true, e.nivelLexico,e.desplazamiento,n);                            
                             return e.tipo;
                         }
@@ -1657,7 +869,7 @@ public final class AnalizadorSintactico implements Testeable{
                             return e.tipo;
                         }
                         else{//copia del arreglo
-                            int n = ((TipoArray)e.tipo).getNumComponentes();
+                            int n = ((TipoArreglo)e.tipo).getNumComponentes();
                             genMepa("PUAI",true, e.nivelLexico,e.desplazamiento,n);                            
                             return e.tipo;
                         }

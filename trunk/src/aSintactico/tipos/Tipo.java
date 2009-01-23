@@ -1,22 +1,21 @@
 package aSintactico.tipos;
 
+import aSintactico.Entry;
 /**
  * Clase abstracta para representar los tipos del lenguaje
+ * @author Agustin Ramone
   * @see aSintactico.tipos.TipoFactory
  */
 public abstract class Tipo {
     
-    private static final int VOID = -1;
     
     public static final int INTEGER = 0;
     
     public static final int BOOLEAN = 1;
     
-    public static final int SUBRANGO = 2;
+
     
-    public static final int ARRAY   = 3;
-    
-    protected int clase = VOID;
+    protected int clase;
     
     /**
      * Constructor
@@ -44,23 +43,7 @@ public abstract class Tipo {
      */
     public abstract boolean esBoolean();
     
-    /**
-     * Chequea si el tipo es subrango
-     * @return true si el tipo es subrango
-     */
-    public abstract boolean esSubrango();
-    
-    /**
-     * Chequea si el tipo es array
-     * @return true si el tipo es arreglo
-     */
-    public  abstract boolean esArreglo();
-            
-    /**
-     * Chequea si el tipo actual es compatible con el tipo t
-     * @param t tipo a comparar
-     * @return true si son tipos compatibles
-     */
+
     public abstract boolean equivalenteCon(Tipo t);    
     
     /**
@@ -72,7 +55,6 @@ public abstract class Tipo {
     /**
      * @return  la representacion del tipo como string
      */
-    @Override
-	public abstract String toString();
+    public abstract String toString();
     
 }

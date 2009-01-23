@@ -2,6 +2,7 @@ package aSintactico.tipos;
 
 /**
  * Representa un tipo simple del lenguaje. Puede ser integer, boolean y subrango
+ * @author Agustin Ramone
   * @see aSintactico.tipos.TipoFactory
  */
 public class TipoSimple extends Tipo{
@@ -20,13 +21,10 @@ public class TipoSimple extends Tipo{
      * @param t tipo a chequear
      * @return true si son equivalentes, false en caso contrario
      */
-    @Override
-	public boolean equivalenteCon(Tipo t) {
+    public boolean equivalenteCon(Tipo t) {
         if(clase == t.clase)
             return true;
-        else if((clase == INTEGER && t.clase == SUBRANGO) || (clase == SUBRANGO && t.clase == INTEGER))
-            return true;
-        else
+        else 
             return false;
     }
 
@@ -34,8 +32,7 @@ public class TipoSimple extends Tipo{
      * Obtiene el tamaño del tipo en locaciones de memoria
      * @return un tamaño de 1 posicion
      */
-    @Override
-	public int getSize() {
+    public int getSize() {
         return 1;
     }
 
@@ -43,11 +40,9 @@ public class TipoSimple extends Tipo{
      * Obtiene la representacion del tipo como string
      * @return el string que representa el tipo
      */
-    @Override
-	public String toString(){
+    public String toString(){
         if(clase == INTEGER) return "integer";
-        if(clase == BOOLEAN) return "boolean";
-        if(clase == SUBRANGO)return "subrango";        
+        if(clase == BOOLEAN) return "boolean";      
         return "";
     }
     
@@ -55,8 +50,7 @@ public class TipoSimple extends Tipo{
      * 
      * @return 
      */
-    @Override
-	public boolean esSimple() {
+    public boolean esSimple() {
         return true;
     }
 
@@ -64,8 +58,7 @@ public class TipoSimple extends Tipo{
      * 
      * @return 
      */
-    @Override
-	public boolean esEntero() {
+    public boolean esEntero() {
         return clase == INTEGER;
     }
 
@@ -73,26 +66,9 @@ public class TipoSimple extends Tipo{
      * 
      * @return 
      */
-    @Override
-	public boolean esBoolean() {
+    public boolean esBoolean() {
         return clase == BOOLEAN;
     }
 
-    /**
-     * 
-     * @return 
-     */
-    @Override
-	public boolean esSubrango() {
-        return clase == SUBRANGO;
-    }
 
-    /**
-     * 
-     * @return 
-     */
-    @Override
-	public boolean esArreglo() {
-        return false;
-    }
 }
