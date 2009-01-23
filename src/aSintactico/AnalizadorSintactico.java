@@ -565,9 +565,8 @@ public final class AnalizadorSintactico implements Testeable{
         }
         else {
             String signo = token.lex;
-            if(!porValor) throw new SemanticException(16,token.numLin);
             Tipo tterm = termino(true);
-            if(!(tterm.esEntero()|| tterm.esSubrango())) 
+            if(!(tterm.esEntero())) 
                 throw new SemanticException(18,token.numLin);
             if(signo.equals("-")) genMepa("UMEN",true);
             return restoExpresionSimple(true,tterm);
@@ -587,12 +586,12 @@ public final class AnalizadorSintactico implements Testeable{
             Tipo tfactor = factor(true);
             if (!tfactor.equivalenteCon(t)) throw new SemanticException(20,token.numLin);
             if(operador.equals("*")) {
-                if(tfactor.esBoolean() || tfactor.esArreglo()) 
+                if(tfactor.esBoolean()) 
                         throw new SemanticException(22,token.numLin);
                 genMepa("MULT",true);
             }
             else  if(operador.equals("div")) {
-                if(tfactor.esBoolean() || tfactor.esArreglo()) 
+                if(tfactor.esBoolean()) 
                         throw new SemanticException(22,token.numLin);
                 genMepa("DIVC",true);           
                 genMepa("DIVI",true);
@@ -630,12 +629,12 @@ public final class AnalizadorSintactico implements Testeable{
             
             if (!tterm.equivalenteCon(t)) throw new SemanticException(20,token.numLin);
             if(op.equals("+")) {
-                if(tterm.esBoolean() || tterm.esArreglo()) 
+                if(tterm.esBoolean()) 
                         throw new SemanticException(21,token.numLin);
                 genMepa("SUMA",true);
             }
             else if(op.equals("-")) {
-                if(tterm.esBoolean() || tterm.esArreglo()) 
+                if(tterm.esBoolean()) 
                         throw new SemanticException(21,token.numLin);
                 genMepa("SUST",true);
             }
@@ -660,17 +659,13 @@ public final class AnalizadorSintactico implements Testeable{
         if(token.cod==Token.OPREL  || token.cod==Token.IGUAL){
            String op = token.lex;
            if(!porValor ) throw new SemanticException(17,token.numLin);
-           if (t.esArreglo())throw new SemanticException(14,token.numLin);
            Tipo texp = expresionSimple(true);
-                                
-           if (texp.esArreglo())throw new SemanticException(14,token.numLin);
            if(!texp.equivalenteCon(t)) throw new SemanticException(15,token.numLin);
-                      
            if(op.equals("<")) genMepa("CMME",true);
            else if(op.equals("<=")) genMepa("CMNI",true);
            else if(op.equals(">")) genMepa("CMMA",true);
            else if(op.equals(">=")) genMepa("CMYI",true);
-           else if(op.equals("<>")) genMepa("CMDG",true);
+           else if(op.equals("!=")) genMepa("CMDG",true);
            else if(op.equals("=")) genMepa("CMIG",true);
            
            return TipoFactory.crearTipoBooleano();
@@ -678,67 +673,6 @@ public final class AnalizadorSintactico implements Testeable{
             restaurarToken=true;
             return t;
         }       
-    }
-    
-    /**
-     * <listaParametrosActuales> ::= <vacio> | <expresion> <restoListaParametrosActuales>     
-     */
-    private void listaParametrosActuales(Entry e)throws Exception{
-        Entry ePar=null;
-        if(!e.predefinido) 
-            ePar = e.listaParametros.get(0);
-        Tipo texp;
-        if(e.predefinido){
-            if(e.nombre.equals("read") || e.nombre.equals("readln"))
-               texp = expresion(false);
-            else texp = expresion(true);
-        }else 
-            texp = expresion(ePar.porValor);
-        
-        
-        if (!e.predefinido && !ePar.tipo.equivalenteCon(texp))  
-            throw new SemanticException(29,token.numLin);
-        
-        if(e.predefinido) {
-            if(!texp.esSimple()) throw new SemanticException(30,token.numLin);
-            genPredefinida(e.nombre, texp);
-        }
-        restoListaParametrosActuales(e,1);
-    }
-    
-   
-    
-    /**
-     *
-     * @throws java.lang.Exception
-     */
-    private void restoListaParametrosActuales(Entry e, int indice)throws Exception{
-        nextToken();           
-        if(token.cod==Token.COMA){
-            if(indice >= e.listaParametros.size() && !e.predefinido) throw new SemanticException(31,token.numLin); 
-            Entry ePar=null;
-            if(!e.predefinido) 
-                ePar= e.listaParametros.get(indice);  
-            
-            Tipo texp;
-            if(e.predefinido){
-                if(e.nombre.equals("read") || e.nombre.equals("readln"))
-                    texp = expresion(false);
-                else 
-                    texp = expresion(true);
-            } else 
-                texp = expresion(ePar.porValor);
-            
-            if(!e.predefinido && !ePar.tipo.equivalenteCon(texp)) throw new SemanticException(29,token.numLin); 
-            if(e.predefinido) {
-                if(!texp.esSimple()) throw new SemanticException(30,token.numLin);
-                genPredefinida(e.nombre, texp);
-            }
-            restoListaParametrosActuales(e,indice+1);
-        } else{
-            restaurarToken=true;
-            if(indice < e.listaParametros.size()&& !e.predefinido) throw new SemanticException(31,token.numLin);            
-        }
     }
     
     /**
@@ -782,127 +716,22 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private Tipo restoFactor(boolean porValor, Entry e)throws Exception{
         nextToken();
-        //id[exp]
-        if(token.cod==Token.COR_ABRE){
-            if (!e.tipo.esArreglo())  throw new SemanticException(10,token.numLin);
-           
-            Tipo texp = expresion(true);
-            
-            TipoArreglo tipo = (TipoArreglo)e.tipo;
-            
-            if(! tipo.tipoDominio.equivalenteCon(texp))
-                throw new SemanticException(12,token.numLin);
-           
-            if(tipo.tipoDominio.esBoolean()) genMepa("CONT",true,0,1);
-            else{
-                TipoSubrango t = (TipoSubrango)tipo.tipoDominio;
-                genMepa("CONT",true,t.getValInferior(),t.getValSuperior());
-                genMepa("APCT",true,t.getValInferior());
-                genMepa("SUST",true);
-            }
-            nextToken();
-            if(token.cod != Token.COR_CIERRA) throw new SintacticException(12,token.numLin);
-            
-            if(porValor) {//debe dejar el valor
-                //variable o parametro array por valor
-                if(e.porValor) genMepa("APAR",true,e.nivelLexico,e.desplazamiento);
-                //parametro array por referencia
-                else genMepa("APAI",true,e.nivelLexico,e.desplazamiento);
-            }
-            else {//debe dejar la referencia
-                
-                //CORRECCION!
-                //variable o parametro array por valor
-                //if(e.porValor)  genMepa("APDR",true,e.nivelLexico,e.desplazamiento);
-                                
-                //parametro array por referencia
-               // else  
-                    genMepa("APDC",true, e.nivelLexico,e.desplazamiento);                
-            }
-            return tipo.tipoRango;
-        } 
-        //id(params)
-        else if(token.cod==Token.PA){
-            if(!e.esFuncion())throw new SemanticException(26,token.numLin);
-            if(!porValor) throw new SemanticException(27,token.numLin);
-            if(!e.predefinido) genMepa("RMEM 1",true);
-            listaParametrosActuales(e);
-            nextToken();
-            if(token.cod!=Token.PC)   throw new SintacticException(18,token.numLin);
-            if(!e.predefinido) genMepa("LLPR " + e.etiqueta, true);
-            return e.tipo;
-        } 
-        //id 
-        else{
-            restaurarToken=true;
-            if(e.esPrograma() || e.esProcedimiento() || e.esTipo())
-                throw new SemanticException(36,token.numLin);
-            if(porValor){
-                if(e.esConstante()){
-                    genMepa("APCT  "+ e.valorStr,true);
-                    return e.tipo;
-                }
-                else if(e.esVariable() ){
-                    if(e.tipo.esSimple()){
-                        genMepa("APVL",true,e.nivelLexico,e.desplazamiento);
-                        return e.tipo;
-                    }else{//copia del arreglo
-                        int n = ((TipoArreglo)e.tipo).getNumComponentes();
-                        genMepa("PUAR",true,e.nivelLexico,e.desplazamiento,n);                        
-                        return e.tipo;
-                    }
-                } 
-                else if (e.esParametro()){
-                    if(e.porValor){
-                        if(e.tipo.esSimple()){
-                            genMepa("APVL",true,e.nivelLexico,e.desplazamiento);
-                            return e.tipo;
-                        }else{//copia del arreglo
-                            int n = ((TipoArreglo)e.tipo).getNumComponentes();
-                            genMepa("PUAR",true, e.nivelLexico,e.desplazamiento,n);                            
-                            return e.tipo;
-                        }
-                    }
-                    else{
-                        if(e.tipo.esSimple()){
-                            genMepa("APVI",true,e.nivelLexico,e.desplazamiento);
-                            return e.tipo;
-                        }
-                        else{//copia del arreglo
-                            int n = ((TipoArreglo)e.tipo).getNumComponentes();
-                            genMepa("PUAI",true, e.nivelLexico,e.desplazamiento,n);                            
-                            return e.tipo;
-                        }
-                    }
-                }
-                else{//funcion
-                    if(e.listaParametros.size()!=0) throw new SemanticException(28,token.numLin);
-                    genMepa("RMEM 1",true);
-                    genMepa("LLPR "+e.etiqueta, true);
-                    return e.tipo;
-                }
-            }
-            else {// por referencia
-                if(e.esConstante() || e.esFuncion())
-                    throw new SemanticException(24,token.numLin);
-                else if(e.esVariable() || (e.esParametro() && e.porValor)){
-                    if(e.tipo.esSimple()){
-                        genMepa("APDR",true,e.nivelLexico,e.desplazamiento);
-                        return e.tipo;
-                    }
-                    else{//copia del arreglo
-                        genMepa("APCT",true,0);
-                        genMepa("APDC",true, e.nivelLexico,e.desplazamiento);                        
-                        return e.tipo;
-                    }
-                }
-                else {// parametro formal por referencia
-                    genMepa("APVL",true,e.nivelLexico,e.desplazamiento);
-                    return e.tipo;
-                }
-            }
-        }
+       //id 
+        restaurarToken=true;
+        if(e.esPrograma() || e.esTipo())
+        	throw new SemanticException(36,token.numLin);
+        if(e.tipo.esSimple()){
+        	genMepa("APVL",true,e.nivelLexico,e.desplazamiento);
+        	return e.tipo;
+        }else{//copia del arreglo
+        	int n = ((TipoArreglo)e.tipo).getNumComponentes();
+        	genMepa("PUAR",true,e.nivelLexico,e.desplazamiento,n);                        
+       		return e.tipo;
+       	}
     }
+       
+        
+    
 
     
       /**
@@ -925,7 +754,7 @@ public final class AnalizadorSintactico implements Testeable{
      * @throws java.lang.Exception 
      */
     private void genMepa(String inst, boolean conEti, int... par)throws Exception{
-        if(!gencod) return;
+        if(!genCodigo) return;
         
         String linea = inst;
         if(par.length == 1)
@@ -952,47 +781,16 @@ public final class AnalizadorSintactico implements Testeable{
      * @param t tipo del parametro
      */
     private void genPredefinida(String id, Tipo t) throws Exception{
-        if (!(t.esEntero() || t.esSubrango()))
+        if (!(t.esEntero()))
             throw new SemanticException(35,token.numLin);
         
         if ( id.equalsIgnoreCase("write")) genMepa("IMPR",true);
         
-        else if( id.equalsIgnoreCase("writeln"))  genMepa("IMLN",true);
-        
         else if( id.equalsIgnoreCase("read")) {
             genMepa("LEER",true);
-            if (t.esSubrango())
-                genMepa("CONT", true,((TipoSubrango)t).getValInferior(),((TipoSubrango)t).getValSuperior());
             genMepa("ALDR",true);
         } 
-        
-        else if(id.equalsIgnoreCase("readln")){
-            genMepa("LELN",true);
-            if (t. esSubrango())
-                genMepa("CONT", true,((TipoSubrango)t).getValInferior(),((TipoSubrango)t).getValSuperior());
-            genMepa("ALDR",true);
-        } 
-        
-        else if(id.equalsIgnoreCase("succ")) {
-            if (t.esSubrango())
-                genMepa("CONT",true, ((TipoSubrango)t).getValInferior(),((TipoSubrango)t).getValSuperior());
-            else
-                genMepa("CONT",true, Integer.MIN_VALUE,Integer.MAX_VALUE-1);
-            genMepa("APCT 1",true );
-            genMepa("SUMA",true);
-            
-        } 
-        
-        else if(id.equalsIgnoreCase("pred")) {
-             if (t. esSubrango())
-                genMepa("CONT",true, ((TipoSubrango)t).getValInferior(),((TipoSubrango)t).getValSuperior());
-            else
-                genMepa("CONT",true, Integer.MIN_VALUE+1,Integer.MAX_VALUE );
-            genMepa("APCT 1",true );
-            genMepa("SUST",true);
-           
-        }
-    }
+     }
     
     /** 
      * @param num
