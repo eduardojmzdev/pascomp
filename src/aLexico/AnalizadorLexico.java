@@ -100,6 +100,9 @@ public final class AnalizadorLexico {
             } else if (ch.charValue() == '*') {
                 leerCaracter();
                 return new Token(Token.MUL, "", lastLine);
+            } else if (ch.charValue() == '/') {
+                leerCaracter();
+                return new Token(Token.DIV, "", lastLine);
             }else if (ch.charValue() == '!'){
                 return leerDistinto();
             }else if (ch.charValue() == '=') {
