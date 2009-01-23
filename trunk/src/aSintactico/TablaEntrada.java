@@ -3,20 +3,19 @@ package aSintactico;
 
 import aSintactico.tipos.*;
 
-import java.util.Hashtable;
 import java.util.LinkedList;
 
 /**
  * Implementa la tabla de simbolos para almacenar objetos Entry
  * 
- * @since jdk 1.5
- * @see aSintactico.AbstractSimbolTable
- * @see aSintactico.Entry
+ * @since jdk 1.6
+ * @see aSintactico.TablaDeSimbolos
+ * @see aSintactico.Entrada
  */
-public final class EntryTable extends AbstractSimbolTable<Entry>{
+public final class TablaEntrada extends TablaDeSimbolos<Entrada>{
     
     /** Constructor */
-    public EntryTable() {
+    public TablaEntrada() {
         super();
     }
 
@@ -24,7 +23,8 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * Implementacion del metodo init
      * Agrega los tipos, funciones y constantes predefinidas del lenguaje
      */
-    public void init() {
+    @Override
+	public void init() {
         if(pila.size()>0) {
             pila.clear();
             if(tablaActual!=null) tablaActual.clear();
@@ -41,21 +41,21 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
         agregarTipo("boolean",tboolean);
         
         //Constantes predefinidas
-        Entry e = new Entry("true",Entry.CONSTANTE);
+        Entrada e = new Entrada("true",Entrada.CONSTANTE);
         e.asignable = false;
         e.tipo = tboolean;
         e.valor = Boolean.TRUE;
         e.valorStr = "1";
         agregarConstante(e);
                 
-        e = new Entry("false",Entry.CONSTANTE);
+        e = new Entrada("false",Entrada.CONSTANTE);
         e.asignable = false;
         e.tipo = tboolean;
         e.valor = Boolean.FALSE;
         e.valorStr = "0";
         agregarConstante(e);
         
-        e = new Entry("maxint",Entry.CONSTANTE);
+        e = new Entrada("maxint",Entrada.CONSTANTE);
         e.asignable = false;
         e.tipo = tinteger;
         e.valor = Integer.MAX_VALUE;        
@@ -63,8 +63,8 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
         agregarConstante(e);
         
        //PROCEDIMIENTOS Y FUNCIONES PREDEFINIDAS
-        LinkedList<Entry> l = new LinkedList<Entry>();
-        Entry ep = agregarProcedimiento("write",l,null);
+        LinkedList<Entrada> l = new LinkedList<Entrada>();
+        Entrada ep = agregarProcedimiento("write",l,null);
         ep.predefinido = true;
         
         ep = agregarProcedimiento("writeln",l,null);
@@ -76,7 +76,7 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
         ep = agregarProcedimiento("readln",l,null);
         ep.predefinido = true;
         
-        Entry ef = agregarFuncion("succ",tinteger,null,l);
+        Entrada ef = agregarFuncion("succ",tinteger,null,l);
         ef.predefinido = true;
         
         ef = agregarFuncion("pred",tinteger,null,l);
@@ -89,7 +89,7 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * @param id nombre del programa
      */
     public void agregarPrograma(String id){
-        Entry e = new Entry(id, Entry.PROGRAMA);
+        Entrada e = new Entrada(id, Entrada.PROGRAMA);
         e.asignable = false;
         inserta(id,e);
     }
@@ -99,7 +99,7 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * @param id nombre de la constante
      * @param e entrada
      */
-    public void agregarConstante(Entry e){
+    public void agregarConstante(Entrada e){
         e.asignable=false;
         inserta(e.nombre,e);
     }
@@ -110,7 +110,7 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * @param tipo tipo
      */
     public void agregarTipo(String id, Tipo tipo){
-        Entry e = new Entry(id,Entry.TIPO);
+        Entrada e = new Entrada(id,Entrada.TIPO);
         e.tipo = tipo;
         e.asignable=false;
         inserta(id,e);
@@ -125,14 +125,14 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * @param etiqueta etiqueta de procedimiento
      * @return entrada creada
      */
-    public Entry agregarProcedimiento(String id, LinkedList<Entry> listaPar, String etiqueta){
-        Entry e = new Entry(id,Entry.PROCEDIMIENTO);
+    public Entrada agregarProcedimiento(String id, LinkedList<Entrada> listaPar, String etiqueta){
+        Entrada e = new Entrada(id,Entrada.PROCEDIMIENTO);
         e.etiqueta = etiqueta;
         e.listaParametros = listaPar;
         e.asignable=false;
         int tamPar=0;
         int size=listaPar.size();
-        Entry entryPar;
+        Entrada entryPar;
                                 
         for(int i=0;i<size;i++){ //calcula el espacio para los parámetros formales            
             entryPar= listaPar.get(i);            
@@ -155,9 +155,9 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * calculados
      * @param listaPar parametros formales
      */
-    public void agregarParFormales(LinkedList<Entry> listaPar){
+    public void agregarParFormales(LinkedList<Entrada> listaPar){
         int size=listaPar.size();
-        Entry e;
+        Entrada e;
         for(int i=0; i<size ; i++){
             e = listaPar.get(i);
             inserta(e.nombre, e);
@@ -176,15 +176,15 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * @param listaPar lista de parametros formales
      * @return entrada creada
      */
-    public Entry agregarFuncion(String id, Tipo tipo, String eti, LinkedList<Entry> listaPar){
-        Entry e;
-        e = new Entry(id,Entry.FUNCION);
+    public Entrada agregarFuncion(String id, Tipo tipo, String eti, LinkedList<Entrada> listaPar){
+        Entrada e;
+        e = new Entrada(id,Entrada.FUNCION);
         e.tipo = tipo;
         e.etiqueta=eti;
         e.listaParametros = listaPar;
         int tamPar = 0;
         int size = listaPar.size();
-        Entry entryPar;
+        Entrada entryPar;
         for(int i=0;i<size;i++){
             //calcula el espacio para los parámetros formales
             entryPar = listaPar.get(i);
@@ -207,10 +207,10 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * @param listaPar parametros formales
      * @return desplazamiento del primer parametro
      */
-    public int agregarDesplazamientos(LinkedList <Entry>listaPar){
+    public int agregarDesplazamientos(LinkedList <Entrada>listaPar){
         int base=-2; //tiene en cuenta el puntero de retorn y el valor del
         //display salvado por ENPR
-        Entry e;
+        Entrada e;
         int tam;
         int size = listaPar.size();
         for(int i=size-1; i>=0 ; i--){
@@ -236,11 +236,11 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      */
     public void agregarVariables(LinkedList<String> listaID, Tipo tipo){
         int size = listaID.size();
-        Entry e;
+        Entrada e;
         String id;
         for(int i=0;i<size; i++){
             id = listaID.get(i);
-            e = new Entry(id, Entry.VARIABLE);
+            e = new Entrada(id, Entrada.VARIABLE);
             e.nivelLexico = getNivelLexico();
             e.desplazamiento = getOffset();
             e.tipo = tipo;
@@ -256,8 +256,8 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * @param lex identificador de constante
      * @return la entrada para la constante o null si no existe     
      */
-    public Entry buscarConstante(String lex){
-        Entry entry = buscar(lex);
+    public Entrada buscarConstante(String lex){
+        Entrada entry = buscar(lex);
         return (entry!=null && entry.esConstante())? entry: null;        
     }
     
@@ -266,8 +266,8 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
      * @param lex 
      * @return la entrada para el tipo o null si no existe     
      */
-    public Entry buscarTipo(String lex){
-        Entry entry = buscar(lex);        
+    public Entrada buscarTipo(String lex){
+        Entrada entry = buscar(lex);        
         return (entry!=null && entry.esTipo())?entry:null;        
     }
 }

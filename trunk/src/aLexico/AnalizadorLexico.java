@@ -2,16 +2,17 @@ package aLexico;
 
 import Utils.BufferedFileReader;
 import Utils.Reader;
-import exceptions.LexicException;
+import excepciones.LexicException;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.HashMap;
 import main.Testeable;
 
 /**
- * <P>Analizador Lexico para el lenguaje Mini-Pascal. Este lenguaje es un
- * subconjunto del lenguaje Pascal Standar. (ver manual de usuario)
- * El metodo nextToken es el principal y retorna un <code>Token</code>
+ * <P>Analizador Lexico para el lenguaje. Este lenguaje es un
+ * subconjunto del lenguaje Pascal. 
+ * El metodo nextToken es el principal y devuelve un <code>Token</code>
  * del lenguaje.
  * <br>Modo uso:
  * <pre>
@@ -37,9 +38,9 @@ import main.Testeable;
  *</pre>
  * @see aLexico.Token
  * @see aLexico.BufferedFileReader
- * @see exceptions.LexicException
+ * @see excepciones.LexicException
  * @see main.Testeable
- * @since jdk 1.5
+ * @since jdk 1.6
  */
 public final class AnalizadorLexico implements Testeable{
     

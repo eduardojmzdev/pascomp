@@ -1,4 +1,6 @@
-package exceptions;
+package excepciones;
+
+import excepciones.BasicException;
 
 /**
  * Representa a un error en la maquina virtual MEPA
@@ -6,7 +8,12 @@ package exceptions;
  */
 public class MepaException extends BasicException{
     
-    /** MAPEO DE CODIGOS A ERRORES */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** MAPEO DE CODIGOS A ERRORES */
     static{
         errorMap.put(new Integer(0),"Valor fuera de rango permitido!");
         errorMap.put(new Integer(1),"Division por cero!");

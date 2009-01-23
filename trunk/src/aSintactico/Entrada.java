@@ -8,10 +8,10 @@ import java.util.LinkedList;
  * Mantiene la informacion para las distintas entidades 
  * del lenguaje: constantes,variables,parametros,funciones,etc
  *
- * @since jdk 1.5
- * @see aSintactico.EntryTable
+ * @since jdk 1.6
+ * @see aSintactico.TablaEntrada
  */
-public final class Entry {
+public final class Entrada {
     
     public static final int DEFAULT_ENTRY   = -1;
     public static final int CONSTANTE       = 0;
@@ -52,7 +52,7 @@ public final class Entry {
     public boolean asignable = true;
     
     /** parametros (para proc y func)*/
-    public LinkedList<Entry> listaParametros = null;
+    public LinkedList<Entrada> listaParametros = null;
     
     /** tamaño de parametros (para proc y func)*/
     public int sizeParametros;
@@ -64,13 +64,13 @@ public final class Entry {
     public boolean predefinido = false;
     
     /** Constructor */
-    public Entry() { }
+    public Entrada() { }
         
     /**
      * Constructor
      * @param claseEntrada 
      */
-    public Entry(int clase) {
+    public Entrada(int clase) {
         this.clase = clase;
     }
     
@@ -79,7 +79,7 @@ public final class Entry {
      * @param name 
      * @param claseEntrada 
      */
-    public Entry(String name, int clase){
+    public Entrada(String name, int clase){
         this.nombre = name;
         this.clase = clase;
     }
@@ -90,7 +90,7 @@ public final class Entry {
      * @param claseEntrada 
      * @param tipo 
      */
-    public Entry(String name, int clase, Tipo tipo){
+    public Entrada(String name, int clase, Tipo tipo){
         this.nombre = name;
         this.clase = clase;
         this.tipo = tipo;

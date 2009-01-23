@@ -6,7 +6,7 @@ import java.io.IOException;
 import mepa.Mepa;
 
 /**
- * COMPILADOR MINIPASCAL
+ * COMPILADOR 
  * 
  * @see aSintactico.AnalizadorSintactico
  * @see mepa.Mepa

@@ -58,7 +58,8 @@ public final class TipoSubrango extends TipoSimple {
      * @param t tipo a comparar
      * @return true si el tipo es compatible con el tipo t
      */
-    public boolean equivalenteCon(Tipo t) {
+    @Override
+	public boolean equivalenteCon(Tipo t) {
         if(t.esSubrango() || t.esEntero()){
             return true;
         }
@@ -67,30 +68,36 @@ public final class TipoSubrango extends TipoSimple {
     
     /**
      */
-    public String toString(){
+    @Override
+	public String toString(){
         return "subrango";                
     }
     
     /***/
-    public boolean esSimple() {
+    @Override
+	public boolean esSimple() {
         return true;
     }
     /***/
-    public boolean esEntero() {
+    @Override
+	public boolean esEntero() {
         return false;
     }
     
     /***/
-    public boolean esBoolean() {
+    @Override
+	public boolean esBoolean() {
         return false;
     }
     /***/
-    public boolean esSubrango() {
+    @Override
+	public boolean esSubrango() {
         return true;
     }
     
     /***/
-    public boolean esArreglo() {
+    @Override
+	public boolean esArreglo() {
         return false;
     }
 }

@@ -125,6 +125,7 @@ public final class Token{
 	 * Convierte el token a String
 	 * @return el string que representa el token
 	 */
+	@Override
 	public String toString(){
 		String n = Integer.toString(numLinea);
 		String nl = ("00" + numLinea).substring(n.length()-1);

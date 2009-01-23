@@ -1,15 +1,20 @@
 
-package exceptions;
+package excepciones;
 
 import java.util.HashMap;
 
 /**
- * Clase padre de las excepciones del compilador
+ * Clase base de las excepciones del compilador
  *
  */
 public class BasicException extends Exception{
     
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Map que asocia a un codigo a un mensaje de error
      */
     protected static final HashMap<Integer,String> errorMap = new HashMap<Integer,String>();

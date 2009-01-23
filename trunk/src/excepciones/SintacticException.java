@@ -1,4 +1,6 @@
-package exceptions;
+package excepciones;
+
+import excepciones.BasicException;
 
 /**
  * Representa a un error en el Analisis Sintactico
@@ -7,7 +9,12 @@ package exceptions;
  */
 public final class SintacticException extends BasicException{
     
-    /** 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** 
      * ESPECIFICACION DE INFORME DE ERRORES
      * Formato: [CODIGO, MENSAJE]
      */

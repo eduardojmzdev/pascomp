@@ -6,7 +6,7 @@ import java.io.FileReader;
 
 /**
  * BufferedFileReader.java
- * Permite bufferear la lectura de caracteres de un archivo
+ * Permite hacer un buffer la lectura de caracteres de un archivo
  * 
  */
 public final class BufferedFileReader extends BufferedReader implements Reader{
@@ -33,6 +33,7 @@ public final class BufferedFileReader extends BufferedReader implements Reader{
 	/** 
 	 * Cierra el archivo
 	*/ 
+	@Override
 	public void close(){
 		try {
 			super.close();

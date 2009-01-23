@@ -8,7 +8,7 @@ import java.util.Hashtable;
  *
  * @since jdk 1.6
  */
-public abstract class AbstractSimbolTable <T>{
+public abstract class TablaDeSimbolos <T>{
     
     /**
      * Mantiene las tablas de simbolos de los distintos
@@ -35,7 +35,7 @@ public abstract class AbstractSimbolTable <T>{
     /**
      * Crea la tabla de simbolos
      */
-    public AbstractSimbolTable() {
+    public TablaDeSimbolos() {
         //construye la pila
         pila= new LinkedList <Hashtable<String,T>>();        
     }
