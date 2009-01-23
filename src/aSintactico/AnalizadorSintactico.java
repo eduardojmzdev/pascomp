@@ -7,7 +7,6 @@ import aLexico.Token;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import excepciones.*;
 import aSintactico.tipos.*;
@@ -523,8 +522,7 @@ public final class AnalizadorSintactico implements Testeable{
      *
      * @throws java.lang.Exception
      */
-    private void restoSentenciaSimple(Entry e)throws Exception{
-        int lineaid = token.numLin; 
+    private void restoSentenciaSimple(Entry e)throws Exception{ 
         nextToken();        
         //:= exp
         if(token.cod==Token.ASIG){

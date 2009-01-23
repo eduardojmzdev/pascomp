@@ -3,7 +3,6 @@ package aSintactico;
 
 import aSintactico.tipos.*;
 
-import java.util.Hashtable;
 import java.util.LinkedList;
 
 /**
@@ -19,6 +18,7 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
     /** Constructor */
     public EntryTable() {
         super();
+        
     }
 
     /**
@@ -41,6 +41,18 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
         agregarTipo("integer",tinteger);
         agregarTipo("boolean",tboolean);
         
+      //Constantes predefinidas 
+        Entry e = new Entry("true",Entry.CONSTANTE); e.asignable = false;
+        e.tipo = tboolean;
+        e.valor = Boolean.TRUE;
+        e.valorStr = "1";
+        agregarConstante(e);
+         e = new Entry("false",Entry.CONSTANTE);
+        e.asignable = false;
+        e.tipo = tboolean;
+        e.valor = Boolean.FALSE;
+        e.valorStr = "0";
+        agregarConstante(e);
         
     }
     
@@ -93,6 +105,11 @@ public final class EntryTable extends AbstractSimbolTable<Entry>{
         }
     }
     
+    /** * Inserta una entrada que corresponde a una constante * @param id nombre de la constante * @param e entrada */ 
+    public void agregarConstante(Entry e){ 
+     e.asignable=false;
+     inserta(e.nombre,e);
+     } 
     /**
      * Busca una entrada de tipo     
      * @param lex 

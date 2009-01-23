@@ -18,7 +18,6 @@ import java.io.File;
  *      java main.Testeador mepa.Mepa
  *</pre>
  *
- * @version 1.2 ("Compiladores e Interpretes"-Universidad Nacional del Sur)
  * @see aLexico.AnalizadorLexico
  * @see aSintactico.AnalizadorSintactico
  */
