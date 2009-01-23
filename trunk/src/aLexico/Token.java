@@ -8,7 +8,7 @@ public final class Token {
     public int numLin;
     public static final String[] LEXEMAS = {"",null, null, //0-1
         ";", ".", ":", ",", "(", ")", "!=", "program", "var", //2-10
-        "begin", "end", "true", "false", "integer", "boolean", //11-16
+        "begin", "end", //11-16
         ":=", null, "+", "-", "*", "/", "not", "and", "or", "="};   //17-27
 
 
@@ -32,20 +32,16 @@ public final class Token {
     public static final int VAR = 11;
     public static final int SEP = 12;
     public static final int FIN = 13;
-    public static final int cierto = 14;
-    public static final int falso = 15;
-    public static final int tipent = 16;
-    public static final int tipbool = 17;
-    public static final int ASIG = 18;
-    public static final int OPREL = 19;
-    public static final int SUMA = 20;
-    public static final int RESTA = 21;
-    public static final int MUL = 22;
-    public static final int DIV = 23;
-    public static final int NOT = 24;
-    public static final int AND = 25;
-    public static final int OR = 26;
-    public static final int IGUAL = 27;
+    public static final int ASIG = 14;
+    public static final int OPREL = 15;
+    public static final int SUMA = 16;
+    public static final int RESTA = 17;
+    public static final int MUL = 18;
+    public static final int DIV = 19;
+    public static final int NOT = 20;
+    public static final int AND = 21;
+    public static final int OR = 22;
+    public static final int IGUAL = 23;
 
     
     public Token(int cod, String lex, int numLin) {

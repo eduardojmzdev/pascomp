@@ -28,10 +28,6 @@ public final class AnalizadorLexico {
         palabrasReservadas.put("not", new Integer(Token.NOT));
         palabrasReservadas.put("or", new Integer(Token.OR));
         palabrasReservadas.put("program", new Integer(Token.INICIO));
-        palabrasReservadas.put("integer", new Integer(Token.tipent));
-        palabrasReservadas.put("boolean", new Integer(Token.tipbool));
-        palabrasReservadas.put("true", new Integer(Token.cierto));
-        palabrasReservadas.put("false", new Integer(Token.falso));
         palabrasReservadas.put("var", new Integer(Token.VAR));            
     }
 
