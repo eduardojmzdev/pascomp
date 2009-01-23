@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import exceptions.*;
+import excepciones.*;
 import aSintactico.tipos.*;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -720,15 +720,9 @@ public final class AnalizadorSintactico implements Testeable{
         restaurarToken=true;
         if(e.esPrograma() || e.esTipo())
         	throw new SemanticException(36,token.numLin);
-        if(e.tipo.esSimple()){
-        	genMepa("APVL",true,e.nivelLexico,e.desplazamiento);
-        	return e.tipo;
-        }else{//copia del arreglo
-        	int n = ((TipoArreglo)e.tipo).getNumComponentes();
-        	genMepa("PUAR",true,e.nivelLexico,e.desplazamiento,n);                        
-       		return e.tipo;
-       	}
-    }
+       	genMepa("APVL",true,e.nivelLexico,e.desplazamiento);
+        return e.tipo;
+     }
        
         
     
