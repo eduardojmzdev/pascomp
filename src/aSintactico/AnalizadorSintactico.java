@@ -287,20 +287,20 @@ public final class AnalizadorSintactico implements Testeable{
             /* fin accion semantica*/
             
             nextToken();
-            if(token.cod!=Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
+            if(token.cod!=Token.PYCOMA) throw new SintacticException(2,token.numLin);
             
             bloque(e,true,0,0);
             
             nextToken();
-            if(token.cod!=Token.PUNTO) throw new SintacticException(3,token.numLinea);
+            if(token.cod!=Token.PUNTO) throw new SintacticException(3,token.numLin);
             
             /* accion semantica*/
             genMepa("PARA",true);            
              /* fin accion semantica*/
             
             nextToken();
-            if(token.cod!=Token.EOF) //throw new SintacticException(4,token.numLinea);
-                System.out.println("Warning["+token.numLinea+"]: se ignora el cod que sigue al punto final del programa\n");
+            if(token.cod!=Token.EOF) //throw new SintacticException(4,token.numLin);
+                System.out.println("Warning["+token.numLin+"]: se ignora el cod que sigue al punto final del programa\n");
             
             //Analisis exitoso
             if(debug)   System.out.println("Analisis Sintactico OK!");
@@ -316,7 +316,7 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private void bloque(String etiqueta, boolean esProgram,int nivelLexico, int sizeParamFor)throws Exception{
         nextToken();
-        if(token.cod==Token.VAR|| token.cod==Token.BEGIN){
+        if(token.cod==Token.VAR|| token.cod==Token.SEP){
             restaurarToken=true;
 
             int tamVar = seccionDefinicionDeVariables();
@@ -336,7 +336,7 @@ public final class AnalizadorSintactico implements Testeable{
              /* fin accion semantica*/
             
         } else
-            throw new SintacticException(5,token.numLinea);
+            throw new SintacticException(5,token.numLin);
     }
     
     
@@ -346,13 +346,13 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private Tipo tipo()throws Exception{
         nextToken();
-        if(token.cod==Token.ID){
+        if(token.cod==Token.id){
         	Entry entradaTipo = TS.buscarTipo(token.lex);
         	if(entradaTipo!=null) return entradaTipo.tipo;
         	restaurarToken=true;
         	return tipoSimple();
         } else
-            throw new SintacticException(9,token.numLinea);
+            throw new SintacticException(9,token.numLin);
     }
     
     /**
@@ -361,7 +361,7 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private TipoSimple tipoSimple()throws Exception{
         nextToken();
-        //token.cod == Token.ID           
+        //token.cod == Token.id           
             return restoTipoSimple(token.lex);
         
     }
@@ -374,8 +374,8 @@ public final class AnalizadorSintactico implements Testeable{
     private TipoSimple restoTipoSimple(String id)throws Exception{
         nextToken();
         Entry entrada = TS.buscarTipo(id);
-        if(entrada==null) throw new SemanticException(5,token.numLinea,id);
-        if(!entrada.tipo.esSimple()) throw new SemanticException(5,token.numLinea,id);
+        if(entrada==null) throw new SemanticException(5,token.numLin,id);
+        if(!entrada.tipo.esSimple()) throw new SemanticException(5,token.numLin,id);
         restaurarToken=true;
         return (TipoSimple)entrada.tipo;
 
@@ -392,7 +392,7 @@ public final class AnalizadorSintactico implements Testeable{
         }
         int tamVar1 = declaracionDeVariables();
         nextToken();
-        if(token.cod!=Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
+        if(token.cod!=Token.PYCOMA) throw new SintacticException(2,token.numLin);
         int tamVar2 = restoDefinicionDeVariables();
         return tamVar1 + tamVar2;
     }
@@ -404,7 +404,7 @@ public final class AnalizadorSintactico implements Testeable{
     private int declaracionDeVariables()throws Exception{
         LinkedList<String> listaId = listaIdentificadoresDeVariables();
         nextToken();
-        if(token.cod!=Token.DOS_PUNTOS) throw new SintacticException(15,token.numLinea);
+        if(token.cod!=Token.DOSPUNTOS) throw new SintacticException(15,token.numLin);
         Tipo tipo = tipo();        
         
         TS.agregarVariables(listaId,tipo);
@@ -417,18 +417,18 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private int restoDefinicionDeVariables()throws Exception{
         nextToken();
-        if(token.cod == Token.ID){
+        if(token.cod == Token.id){
             restaurarToken =true;
             int tamVar1 = declaracionDeVariables();
             nextToken();
-            if(token.cod!=Token.PUNTO_Y_COMA) throw new SintacticException(2,token.numLinea);
+            if(token.cod!=Token.PYCOMA) throw new SintacticException(2,token.numLin);
             int tamVar2 = restoDefinicionDeVariables();
             return tamVar1 + tamVar2;
-        } else if(token.cod==Token.BEGIN ){
+        } else if(token.cod==Token.SEP ){
             restaurarToken = true;
             return 0;    //lambda
         } else
-            throw new SintacticException(16,token.numLinea);
+            throw new SintacticException(16,token.numLin);
     }
     
     /**
@@ -437,9 +437,9 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private LinkedList<String> listaIdentificadoresDeVariables()throws Exception{
         nextToken();
-        if(token.cod!= Token.ID) throw new SintacticException(1,token.numLinea);
+        if(token.cod!= Token.id) throw new SintacticException(1,token.numLin);
         
-        if (TS.estaDeclarado(token.lex)) throw new SemanticException(0,token.numLinea,token.lex);
+        if (TS.estaDeclarado(token.lex)) throw new SemanticException(0,token.numLin,token.lex);
         LinkedList<String> l = new LinkedList<String>();
         l.addFirst(token.lex);
         return restoListaIdentificadoresDeVariables(l);
@@ -453,8 +453,8 @@ public final class AnalizadorSintactico implements Testeable{
         nextToken();
         if(token.cod== Token.COMA) {
             nextToken();
-            if(token.cod!= Token.ID) throw new SintacticException(1,token.numLinea);
-            if (TS.estaDeclarado(token.lex) || listIn.contains(token.lex)) throw new SemanticException(0,token.numLinea,token.lex);
+            if(token.cod!= Token.id) throw new SintacticException(1,token.numLin);
+            if (TS.estaDeclarado(token.lex) || listIn.contains(token.lex)) throw new SemanticException(0,token.numLin,token.lex);
             listIn.addFirst(token.lex);
             return restoListaIdentificadoresDeVariables(listIn);
         } else{
@@ -470,11 +470,11 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private void sentenciaCompuesta()  throws Exception{
         nextToken();
-        if(token.cod!=Token.BEGIN) throw new SintacticException(24,token.numLinea);
+        if(token.cod!=Token.SEP) throw new SintacticException(24,token.numLin);
         sentencia();
         restoSentencia();
         nextToken();
-        if(token.cod!=Token.END) throw new SintacticException(25,token.numLinea);
+        if(token.cod!=Token.FIN) throw new SintacticException(25,token.numLin);
     }
     
     /**
@@ -485,9 +485,9 @@ public final class AnalizadorSintactico implements Testeable{
         nextToken();
         restaurarToken=true;
         
-        if(token.cod==Token.ID){
+        if(token.cod==Token.id){
             sentenciaSimple();
-        } else if(token.cod==Token.BEGIN){
+        } else if(token.cod==Token.SEP){
             sentenciaCompuesta();
         } 
         
@@ -499,7 +499,7 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private void restoSentencia()throws Exception{
         nextToken();
-        if(token.cod==Token.PUNTO_Y_COMA){
+        if(token.cod==Token.PYCOMA){
             sentencia();
             restoSentencia();
         } else
@@ -512,10 +512,10 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private void sentenciaSimple()throws Exception{
         nextToken();
-        //no chequeo, ya viene un ID
+        //no chequeo, ya viene un id
         Entry e = TS.buscar(token.lex);    
         
-        if (e == null) throw new SemanticException (7, token.numLinea,token.lex) ;
+        if (e == null) throw new SemanticException (7, token.numLin,token.lex) ;
         restoSentenciaSimple(e);
     }
     
@@ -524,13 +524,13 @@ public final class AnalizadorSintactico implements Testeable{
      * @throws java.lang.Exception
      */
     private void restoSentenciaSimple(Entry e)throws Exception{
-        int lineaId = token.numLinea; 
+        int lineaid = token.numLin; 
         nextToken();        
         //:= exp
-        if(token.cod==Token.ASIGNACION){
-            if (!e.asignable) throw new SemanticException(34,token.numLinea,e.nombre);
+        if(token.cod==Token.ASIG){
+            if (!e.asignable) throw new SemanticException(34,token.numLin,e.nombre);
             Tipo tipoExp = expresion(true);            
-            if(!e.tipo.equivalenteCon(tipoExp)) throw new SemanticException(8,token.numLinea);
+            if(!e.tipo.equivalenteCon(tipoExp)) throw new SemanticException(8,token.numLin);
             
             if(e.esVariable() ){
                 if(e.tipo.esSimple()){
@@ -558,17 +558,17 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private Tipo expresionSimple(boolean porValor)throws Exception{
         nextToken();
-        if(token.cod!=Token.OP_RESTA && token.cod!=Token.OP_SUMA){
+        if(token.cod!=Token.RESTA && token.cod!=Token.SUMA){
             restaurarToken=true;
             Tipo tterm = termino(porValor);
             return restoExpresionSimple(porValor,tterm);
         }
         else {
             String signo = token.lex;
-            if(!porValor) throw new SemanticException(16,token.numLinea);
+            if(!porValor) throw new SemanticException(16,token.numLin);
             Tipo tterm = termino(true);
             if(!(tterm.esEntero()|| tterm.esSubrango())) 
-                throw new SemanticException(18,token.numLinea);
+                throw new SemanticException(18,token.numLin);
             if(signo.equals("-")) genMepa("UMEN",true);
             return restoExpresionSimple(true,tterm);
         }
@@ -581,25 +581,25 @@ public final class AnalizadorSintactico implements Testeable{
     
     private Tipo restoTermino(boolean porValor, Tipo t)throws Exception{
         nextToken();
-        if(token.cod==Token.OP_MULT || token.cod==Token.OP_DIV || token.cod==Token.AND){
+        if(token.cod==Token.MUL || token.cod==Token.DIV || token.cod==Token.AND){
             String operador = token.lex;
-            if (!porValor) throw new SemanticException(16,token.numLinea);
+            if (!porValor) throw new SemanticException(16,token.numLin);
             Tipo tfactor = factor(true);
-            if (!tfactor.equivalenteCon(t)) throw new SemanticException(20,token.numLinea);
+            if (!tfactor.equivalenteCon(t)) throw new SemanticException(20,token.numLin);
             if(operador.equals("*")) {
                 if(tfactor.esBoolean() || tfactor.esArreglo()) 
-                        throw new SemanticException(22,token.numLinea);
+                        throw new SemanticException(22,token.numLin);
                 genMepa("MULT",true);
             }
             else  if(operador.equals("div")) {
                 if(tfactor.esBoolean() || tfactor.esArreglo()) 
-                        throw new SemanticException(22,token.numLinea);
+                        throw new SemanticException(22,token.numLin);
                 genMepa("DIVC",true);           
                 genMepa("DIVI",true);
             }
             else  if(operador.equals("and")) {
                 if(!tfactor.esBoolean()) 
-                    throw new SemanticException(23,token.numLinea); 
+                    throw new SemanticException(23,token.numLin); 
                 genMepa("CONJ",true);
             }
             return restoTermino(true,tfactor);
@@ -623,25 +623,25 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private Tipo restoExpresionSimple(boolean porValor, Tipo t)throws Exception{
         nextToken();
-        if(token.cod==Token.OP_RESTA || token.cod==Token.OP_SUMA || token.cod==Token.OR){
+        if(token.cod==Token.RESTA || token.cod==Token.SUMA || token.cod==Token.OR){
             String op = token.lex;
-            if(!porValor) throw new SemanticException(19,token.numLinea);
+            if(!porValor) throw new SemanticException(19,token.numLin);
             Tipo tterm = termino(true);
             
-            if (!tterm.equivalenteCon(t)) throw new SemanticException(20,token.numLinea);
+            if (!tterm.equivalenteCon(t)) throw new SemanticException(20,token.numLin);
             if(op.equals("+")) {
                 if(tterm.esBoolean() || tterm.esArreglo()) 
-                        throw new SemanticException(21,token.numLinea);
+                        throw new SemanticException(21,token.numLin);
                 genMepa("SUMA",true);
             }
             else if(op.equals("-")) {
                 if(tterm.esBoolean() || tterm.esArreglo()) 
-                        throw new SemanticException(21,token.numLinea);
+                        throw new SemanticException(21,token.numLin);
                 genMepa("SUST",true);
             }
             else  if(op.equals("or")) {
                 if(!tterm.esBoolean()) 
-                    throw new SemanticException(23,token.numLinea); 
+                    throw new SemanticException(23,token.numLin); 
                 genMepa("DISJ",true);
             }
             return restoExpresionSimple(true,tterm);
@@ -657,14 +657,14 @@ public final class AnalizadorSintactico implements Testeable{
     private Tipo restoExpresion(boolean porValor, Tipo t)throws Exception{
         nextToken();
         
-        if(token.cod==Token.OP_RELACIONAL  || token.cod==Token.IGUAL){
+        if(token.cod==Token.OPREL  || token.cod==Token.IGUAL){
            String op = token.lex;
-           if(!porValor ) throw new SemanticException(17,token.numLinea);
-           if (t.esArreglo())throw new SemanticException(14,token.numLinea);
+           if(!porValor ) throw new SemanticException(17,token.numLin);
+           if (t.esArreglo())throw new SemanticException(14,token.numLin);
            Tipo texp = expresionSimple(true);
                                 
-           if (texp.esArreglo())throw new SemanticException(14,token.numLinea);
-           if(!texp.equivalenteCon(t)) throw new SemanticException(15,token.numLinea);
+           if (texp.esArreglo())throw new SemanticException(14,token.numLin);
+           if(!texp.equivalenteCon(t)) throw new SemanticException(15,token.numLin);
                       
            if(op.equals("<")) genMepa("CMME",true);
            else if(op.equals("<=")) genMepa("CMNI",true);
@@ -697,10 +697,10 @@ public final class AnalizadorSintactico implements Testeable{
         
         
         if (!e.predefinido && !ePar.tipo.equivalenteCon(texp))  
-            throw new SemanticException(29,token.numLinea);
+            throw new SemanticException(29,token.numLin);
         
         if(e.predefinido) {
-            if(!texp.esSimple()) throw new SemanticException(30,token.numLinea);
+            if(!texp.esSimple()) throw new SemanticException(30,token.numLin);
             genPredefinida(e.nombre, texp);
         }
         restoListaParametrosActuales(e,1);
@@ -715,7 +715,7 @@ public final class AnalizadorSintactico implements Testeable{
     private void restoListaParametrosActuales(Entry e, int indice)throws Exception{
         nextToken();           
         if(token.cod==Token.COMA){
-            if(indice >= e.listaParametros.size() && !e.predefinido) throw new SemanticException(31,token.numLinea); 
+            if(indice >= e.listaParametros.size() && !e.predefinido) throw new SemanticException(31,token.numLin); 
             Entry ePar=null;
             if(!e.predefinido) 
                 ePar= e.listaParametros.get(indice);  
@@ -729,15 +729,15 @@ public final class AnalizadorSintactico implements Testeable{
             } else 
                 texp = expresion(ePar.porValor);
             
-            if(!e.predefinido && !ePar.tipo.equivalenteCon(texp)) throw new SemanticException(29,token.numLinea); 
+            if(!e.predefinido && !ePar.tipo.equivalenteCon(texp)) throw new SemanticException(29,token.numLin); 
             if(e.predefinido) {
-                if(!texp.esSimple()) throw new SemanticException(30,token.numLinea);
+                if(!texp.esSimple()) throw new SemanticException(30,token.numLin);
                 genPredefinida(e.nombre, texp);
             }
             restoListaParametrosActuales(e,indice+1);
         } else{
             restaurarToken=true;
-            if(indice < e.listaParametros.size()&& !e.predefinido) throw new SemanticException(31,token.numLinea);            
+            if(indice < e.listaParametros.size()&& !e.predefinido) throw new SemanticException(31,token.numLin);            
         }
     }
     
@@ -747,32 +747,32 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private Tipo factor(boolean porValor)throws Exception{
         nextToken();
-        if(token.cod==Token.PAR_ABRE){
-            if(!porValor)  throw new SemanticException(16,token.numLinea);  
+        if(token.cod==Token.PA){
+            if(!porValor)  throw new SemanticException(16,token.numLin);  
             Tipo texp = expresion(true);
             nextToken();
-            if(token.cod!=Token.PAR_CIERRA) throw new SintacticException(18,token.numLinea);
+            if(token.cod!=Token.PC) throw new SintacticException(18,token.numLin);
             return texp;
         } 
         else  if(token.cod==Token.NOT){
-            if(!porValor)  throw new SemanticException(19,token.numLinea);  
+            if(!porValor)  throw new SemanticException(19,token.numLin);  
             Tipo tfactor =  factor(true);
-            if(!tfactor.esBoolean()) throw new SemanticException(11,token.numLinea);
+            if(!tfactor.esBoolean()) throw new SemanticException(11,token.numLin);
             genMepa("NEGA",true);
             return tfactor;
         }
-        else  if(token.cod==Token.NUMERO){
-            if(!porValor)  throw new SemanticException(19,token.numLinea);
-            int num = convertirAEntero(token.lex,token.numLinea);
+        else  if(token.cod==Token.digito){
+            if(!porValor)  throw new SemanticException(19,token.numLin);
+            int num = convertirAEntero(token.lex,token.numLin);
             genMepa("APCT",true,num);
             return TipoFactory.crearTipoEntero();
         }
-        else  if(token.cod==Token.ID){
+        else  if(token.cod==Token.id){
             Entry e = TS.buscar(token.lex);
-            if(e == null)  throw new SemanticException(7,token.numLinea,token.lex);
+            if(e == null)  throw new SemanticException(7,token.numLin,token.lex);
             return restoFactor(porValor,e);
         } else
-            throw new SintacticException(32,token.numLinea);
+            throw new SintacticException(32,token.numLin);
         
     }
     
@@ -784,14 +784,14 @@ public final class AnalizadorSintactico implements Testeable{
         nextToken();
         //id[exp]
         if(token.cod==Token.COR_ABRE){
-            if (!e.tipo.esArreglo())  throw new SemanticException(10,token.numLinea);
+            if (!e.tipo.esArreglo())  throw new SemanticException(10,token.numLin);
            
             Tipo texp = expresion(true);
             
             TipoArreglo tipo = (TipoArreglo)e.tipo;
             
             if(! tipo.tipoDominio.equivalenteCon(texp))
-                throw new SemanticException(12,token.numLinea);
+                throw new SemanticException(12,token.numLin);
            
             if(tipo.tipoDominio.esBoolean()) genMepa("CONT",true,0,1);
             else{
@@ -801,7 +801,7 @@ public final class AnalizadorSintactico implements Testeable{
                 genMepa("SUST",true);
             }
             nextToken();
-            if(token.cod != Token.COR_CIERRA) throw new SintacticException(12,token.numLinea);
+            if(token.cod != Token.COR_CIERRA) throw new SintacticException(12,token.numLin);
             
             if(porValor) {//debe dejar el valor
                 //variable o parametro array por valor
@@ -822,13 +822,13 @@ public final class AnalizadorSintactico implements Testeable{
             return tipo.tipoRango;
         } 
         //id(params)
-        else if(token.cod==Token.PAR_ABRE){
-            if(!e.esFuncion())throw new SemanticException(26,token.numLinea);
-            if(!porValor) throw new SemanticException(27,token.numLinea);
+        else if(token.cod==Token.PA){
+            if(!e.esFuncion())throw new SemanticException(26,token.numLin);
+            if(!porValor) throw new SemanticException(27,token.numLin);
             if(!e.predefinido) genMepa("RMEM 1",true);
             listaParametrosActuales(e);
             nextToken();
-            if(token.cod!=Token.PAR_CIERRA)   throw new SintacticException(18,token.numLinea);
+            if(token.cod!=Token.PC)   throw new SintacticException(18,token.numLin);
             if(!e.predefinido) genMepa("LLPR " + e.etiqueta, true);
             return e.tipo;
         } 
@@ -836,7 +836,7 @@ public final class AnalizadorSintactico implements Testeable{
         else{
             restaurarToken=true;
             if(e.esPrograma() || e.esProcedimiento() || e.esTipo())
-                throw new SemanticException(36,token.numLinea);
+                throw new SemanticException(36,token.numLin);
             if(porValor){
                 if(e.esConstante()){
                     genMepa("APCT  "+ e.valorStr,true);
@@ -876,7 +876,7 @@ public final class AnalizadorSintactico implements Testeable{
                     }
                 }
                 else{//funcion
-                    if(e.listaParametros.size()!=0) throw new SemanticException(28,token.numLinea);
+                    if(e.listaParametros.size()!=0) throw new SemanticException(28,token.numLin);
                     genMepa("RMEM 1",true);
                     genMepa("LLPR "+e.etiqueta, true);
                     return e.tipo;
@@ -884,7 +884,7 @@ public final class AnalizadorSintactico implements Testeable{
             }
             else {// por referencia
                 if(e.esConstante() || e.esFuncion())
-                    throw new SemanticException(24,token.numLinea);
+                    throw new SemanticException(24,token.numLin);
                 else if(e.esVariable() || (e.esParametro() && e.porValor)){
                     if(e.tipo.esSimple()){
                         genMepa("APDR",true,e.nivelLexico,e.desplazamiento);
@@ -953,7 +953,7 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private void genPredefinida(String id, Tipo t) throws Exception{
         if (!(t.esEntero() || t.esSubrango()))
-            throw new SemanticException(35,token.numLinea);
+            throw new SemanticException(35,token.numLin);
         
         if ( id.equalsIgnoreCase("write")) genMepa("IMPR",true);
         
@@ -996,15 +996,15 @@ public final class AnalizadorSintactico implements Testeable{
     
     /** 
      * @param num
-     * @param numLinea
+     * @param numLin
      * @return 
      */
-    private Integer convertirAEntero(String num, int numLinea)throws Exception{
+    private Integer convertirAEntero(String num, int numLin)throws Exception{
         Integer numI;
         try{
             numI=new Integer(Integer.parseInt(num));
         }catch(NumberFormatException e){
-            throw new SemanticException(39,numLinea);
+            throw new SemanticException(39,numLin);
         }
         return numI;
     }
