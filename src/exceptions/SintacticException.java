@@ -3,7 +3,6 @@ package exceptions;
 /**
  * Representa a un error en el Analisis Sintactico
  *
- *@author Agustin Ramone
   *@see aSintactico.AnalizadorSintactico
  */
 public final class SintacticException extends BasicException{

@@ -10,7 +10,6 @@ import main.Testeable;
 
 /**
  *
- * @author Agustin Ramone
  *
  * @see aLexico.TokenMepa
  * @see aLexico.BufferedFileReader

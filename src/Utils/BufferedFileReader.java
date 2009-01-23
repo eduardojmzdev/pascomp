@@ -8,7 +8,6 @@ import java.io.FileReader;
  * BufferedFileReader.java
  * Permite bufferear la lectura de caracteres de un archivo
  * 
- * @author Agustin Ramone
  */
 public final class BufferedFileReader extends BufferedReader implements Reader{
 	

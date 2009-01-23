@@ -2,8 +2,7 @@ package exceptions;
 
 /**
  * Representa a un error Lexico
- *
- * @author Mayra Echandi 
+ * 
  *
  */
 public final class LexicException extends BasicException {

@@ -3,7 +3,6 @@ package mepa;
 /**
  * Clase Instruccion
  * Representa a una instruccion MEPA
- * @author Agustin Ramone
  * @see mepa.Mepa
  */
 public final class Instruccion{

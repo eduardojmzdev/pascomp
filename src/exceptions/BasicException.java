@@ -6,7 +6,6 @@ import java.util.HashMap;
 /**
  * Clase padre de las excepciones del compilador
  *
- * @author Agustin Ramone
  */
 public class BasicException extends Exception{
     

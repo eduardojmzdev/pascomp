@@ -6,7 +6,6 @@ import java.util.ArrayList;
 /**
  * Representa al tipo array
  *
- * @author Agustin Ramone
   * @see aSintactico.tipos.TipoFactory
  */
 public final class TipoArreglo extends Tipo{

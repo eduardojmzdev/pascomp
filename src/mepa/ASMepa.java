@@ -11,7 +11,6 @@ import main.Testeable;
  * A la vez, realiza la carga de las instrucciones y resuelve las direcciones
  * para las etiquetas del programa
  *
- * @author Agustin Ramone
  * @since jdk 1.5
  * @see mepa.ALMepa
  * @see mepa.Instruccion

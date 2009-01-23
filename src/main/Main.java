@@ -10,7 +10,6 @@ import mepa.Mepa;
  * 
  * Compiladores e Interpretes - Universidad Nacional del Sur - Bahia Blanca
  *
- * @author Agustin Ramone
  * @version 1.0  ("Compiladores e Interpretes"- Universidad Nacional del Sur) 	  
  */
 public class Main {

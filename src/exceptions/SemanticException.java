@@ -3,7 +3,6 @@ package exceptions;
 /**
  * Representa a un error en la semantica del lenguaje
  *
- * @author Agustin Ramone
   * @see exceptions.BasicException
  */
 public class SemanticException extends BasicException{

@@ -8,7 +8,6 @@ import mepa.Mepa;
 /**
  * COMPILADOR MINIPASCAL
  * 
- * @author Agustin Ramone
  * @see aSintactico.AnalizadorSintactico
  * @see mepa.Mepa
  * @since 1.5
