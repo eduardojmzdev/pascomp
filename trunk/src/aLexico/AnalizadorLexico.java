@@ -2,7 +2,7 @@ package aLexico;
 
 import Utils.BufferedFileReader;
 import Utils.Reader;
-import exceptions.LexicException;
+import excepciones.LexicException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.HashMap;
@@ -69,20 +69,12 @@ public final class AnalizadorLexico {
         LastCharRead = null;
     }
 
-    /**
-     * Cierra el lector de codigo fuente
-     * @throws IOException si hubo error al cerrarlo
-     */
+
     public void cerrarLector() throws IOException {
         reader.close();
     }
 
-    /**
-     * Metodo principal de la clase. Su funcion es retornar el siguiente token.
-     * @return el token encontrado o EOF si se encuentra el final de archivo.
-     * @throws IOException si hubo error en la lectura
-     * @throws LexicException si hubo algun error lexico
-     */
+
     public Token nextToken() throws IOException, LexicException {
 
         while (true) {
@@ -112,7 +104,9 @@ public final class AnalizadorLexico {
             } else if (ch.charValue() == '*') {
                 leerCaracter();
                 return new Token(Token.MUL, "", lastLine);
-            } else if (ch.charValue() == '=') {
+            }else if (ch.charValue() == '!'){
+                return leerDistinto();
+            }else if (ch.charValue() == '=') {
                 leerCaracter();
                 return new Token(Token.IGUAL, "", lastLine);
             } else if (ch.charValue() == '.') {
@@ -134,16 +128,23 @@ public final class AnalizadorLexico {
             } else if (ch.charValue() == ':') {
                 return leerDosPuntosAsig();
             } //RECONOCIMIENTO DE IDENTIFICADORES Y PALABRAS RESERVADAS
-            else if (esLetra(ch)) {
-                return getTokenID();
+            else if (esCaracter(ch)) {
+                return leerTokenId();
             } //RECONOCIMIENTO DE NUMEROS
             else if (esDigito(ch)) {
-                return getTokenNumero();
+                return leerTokenDigito();
             } else {
                 //caracter no perteneciente al alfabeto
-                throw new LexicException(4, ch.toString(), lastLine);
+                throw new LexicException(2, ch.toString(), lastLine);
             }
         }
+    }
+
+    private Token leerDistinto() throws IOException,LexicException {
+        Character ch = leerCaracter();
+        if((ch == Reader.EOF)||(ch.charValue()!= '='))
+           throw new LexicException(2, "!" + ch.toString(), numLin); 
+        return new Token(Token.DISTINTO,"",numLin);
     }
 
     private Token leerDosPuntosAsig() throws IOException {
@@ -175,7 +176,7 @@ public final class AnalizadorLexico {
                 
     }
 
-    private Token getTokenID() throws IOException {
+    private Token leerTokenId() throws IOException {
         Character c;
         StringBuffer buff = new StringBuffer();
         c = LastCharRead; //asume que es una letra
@@ -183,7 +184,7 @@ public final class AnalizadorLexico {
         do {
             buff.append(c.charValue());
             c = leerCaracter();
-        } while (esDigito(c) || esLetra(c));
+        } while (esDigito(c) || esCaracter(c));
         String lex = buff.toString();
         String lexema = lex.toLowerCase();
         Integer cod = palabrasReservadas.get(lexema);
@@ -194,7 +195,7 @@ public final class AnalizadorLexico {
         }
     }
 
-    private Token getTokenNumero() throws IOException, LexicException {
+    private Token leerTokenDigito() throws IOException, LexicException {
         Character c;
         StringBuffer buff = new StringBuffer();
         c = LastCharRead;
@@ -203,26 +204,24 @@ public final class AnalizadorLexico {
             buff.append(c.charValue());
             c = leerCaracter();
         } while (esDigito(c));
-        if (esLetra(c)) {
-            throw new LexicException(0, buff.toString() + c.toString(), lineaUlt);
+        if (esCaracter(c)) {
+            throw new LexicException(1, buff.toString() + c.toString(), lineaUlt);
         }
         return new Token(Token.digito, buff.toString(), lineaUlt);
     }
 
     private Character leerCaracter() throws IOException {
         if (reader == null) {
-            throw new IOException("No creaste ningun Reader para la clase!");
+            throw new IOException("Reader no creado");
         }
         LastCharRead = reader.readCharacter();
-        if (esFinalDeLinea(LastCharRead)) {
+        if (esFinDeLinea(LastCharRead)) {
             numLin++; //incrementa la linea
 
         }
         return LastCharRead;
     }
-    /**
-     * Conjunto de digitos
-     */
+
     private static final HashSet<Character> digitos = new HashSet<Character>(10);
     
 
@@ -232,22 +231,21 @@ public final class AnalizadorLexico {
         }
     }
 
-    private static final char[] listLetras = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    private static final char[] listaCaracteres = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
     };
     
-    private static final HashSet<Character> letras = new HashSet<Character>(listLetras.length);
+    private static final HashSet<Character> caracteres = new HashSet<Character>(listaCaracteres.length);
     
 
     static {
-        for (char ch : listLetras) {
-            letras.add(new Character(ch));
+        for (char ch : listaCaracteres) {
+            caracteres.add(new Character(ch));
         }
     }
     
     private static final HashSet<Character> separadores = new HashSet<Character>(4);
     
-
     static {
         separadores.add(new Character(' '));
         separadores.add(new Character('\n'));
@@ -255,8 +253,8 @@ public final class AnalizadorLexico {
         separadores.add(new Character('\r'));
     }
 
-    private boolean esLetra(Character ch) {
-        return letras.contains(ch);
+    private boolean esCaracter(Character ch) {
+        return caracteres.contains(ch);
     }
 
     private boolean esDigito(Character ch) {
@@ -267,7 +265,7 @@ public final class AnalizadorLexico {
         return separadores.contains(ch);
     }
 
-    private boolean esFinalDeLinea(Character ch) {
+    private boolean esFinDeLinea(Character ch) {
         return ((ch != null) && (ch.charValue() == '\n'));
     }
 
@@ -283,17 +281,7 @@ public final class AnalizadorLexico {
         cerrarLector();
     }
 
-    /**
-     * Implementa el metodo finish de la interface Testeable
-     */
-    public void finish() {
-        try {
-            cerrarLector();
-        } catch (IOException ex) {
-        }
-    }
-
-    public boolean validaExtencion(String strFile) {
+    public boolean validaExtension(String strFile) {
         return strFile.endsWith(".pas");
     }
 }
