@@ -8,7 +8,6 @@ import java.io.IOException;
 /**
  * Permite bufferear la escritura en archivo
  *
- * @author Agustin Ramone
  */
 public class BufferedFileWriter extends BufferedWriter {
     

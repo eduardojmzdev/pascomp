@@ -9,7 +9,6 @@ import java.util.LinkedList;
 /**
  * Implementa la tabla de simbolos para almacenar objetos Entry
  * 
-  *@author Agustin Ramone
  * @since jdk 1.5
  * @see aSintactico.AbstractSimbolTable
  * @see aSintactico.Entry

@@ -8,7 +8,6 @@ import java.util.LinkedList;
  * Mantiene la informacion para las distintas entidades 
  * del lenguaje: constantes,variables,parametros,funciones,etc
  *
- * @author Agustin Ramone
  * @since jdk 1.5
  * @see aSintactico.EntryTable
  */

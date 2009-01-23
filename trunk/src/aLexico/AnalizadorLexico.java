@@ -35,8 +35,6 @@ import main.Testeable;
  *      t.start();
  *
  *</pre>
-  * @author Agustin Ramone
- * @version 1.2 10/09/2006 ("Compiladores e Interpretes"- Universidad Nacional del Sur)
  * @see aLexico.Token
  * @see aLexico.BufferedFileReader
  * @see exceptions.LexicException

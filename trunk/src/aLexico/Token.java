@@ -8,7 +8,6 @@ package aLexico;
  * el archivo fuente del programa. Los tokens generados seran consumidos posteriormente por 
  * el <code>AnalizadorSintactico</code> para validar la sintaxis del programa.
  *
-  * @author Agustin Ramone
  * @see aLexico.AnalizadorLexico
  * @version 1.0
  */

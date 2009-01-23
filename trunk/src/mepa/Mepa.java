@@ -11,7 +11,6 @@ import main.Testeable;
  * Mepa.java
  * Maquina Virtual del lenguaje MiniPascal 
  * 
- * @author Agustin Ramone
  * @since jdk1.5
  */
 

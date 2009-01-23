@@ -4,7 +4,6 @@ package mepa;
  * TokenMepa
  * Representa a un componente lexico del lenguaje
  
- * @author Agustin Ramone
  */
 public final class TokenMepa{
     /** Codigo que identifica univocamente a un token */

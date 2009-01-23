@@ -3,7 +3,6 @@ package aSintactico.tipos;
 /**
  * Clase TipoSubrango
  *
- * @author Agustin Ramone
   * @see aSintactico.tipos.TipoFactory
  */
 public final class TipoSubrango extends TipoSimple {

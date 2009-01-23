@@ -19,7 +19,6 @@ import java.io.File;
  *</pre>
  *
  * @version 1.2 ("Compiladores e Interpretes"-Universidad Nacional del Sur)
- * @author Agustin Ramone
  * @see aLexico.AnalizadorLexico
  * @see aSintactico.AnalizadorSintactico
  */

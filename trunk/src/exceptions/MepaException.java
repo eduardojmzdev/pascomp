@@ -3,7 +3,6 @@ package exceptions;
 /**
  * Representa a un error en la maquina virtual MEPA
  *
- * @author Agustin Ramone
  */
 public class MepaException extends BasicException{
     

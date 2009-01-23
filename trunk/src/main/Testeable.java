@@ -8,7 +8,6 @@ import java.io.IOException;
  * Por ejemplo, la clases AnalizadorLexico y AnalizadorSintactico implementan
  * esta interface para poder ser testeadas por el testeador
  * 
- *@author Agustin Ramone
  *@see Testeador
  */
 public interface Testeable {
