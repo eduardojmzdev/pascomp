@@ -1,4 +1,4 @@
-package compilador;
+package aLexico;
 
 import Utils.BufferedFileReader;
 import Utils.Reader;
