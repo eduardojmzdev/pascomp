@@ -6,15 +6,15 @@ public final class Token {
     public String lex;
     public int cod;
     public int numLin;
-    public static final String[] LEXEMAS = {"",null, null, //0-1
-        ";", ".", ":", ",", "(", ")", "!=", "program", "var", //2-10
-        "begin", "end", //11-16
-        ":=", null, "+", "-", "*", "/", "not", "and", "or", "="};   //17-27
+    public static final String[] LEXEMAS = {"",null, null, //0-2
+        ";", ".", ":", ",", "(", ")", "!=", "program", "var", //3-11
+        "begin", "end", //12-13
+        ":=", null, "+", "-", "*", "/", "not", "and", "or", "="};   //14-23
 
 
     public static final String[] TOKENS = {"EOF","id", "digito",
         "PYCOMA", "PUNTO", "DOSPUNTOS", "COMA", "PA", "PC", "DISTINTO", "INICIO", "VAR",
-        "SEP", "FIN", "cierto", "falso", "tipent", "tipbool",
+        "SEP", "FIN", 
         "ASIG", "OPREL", "SUMA", "RESTA", "MUL", "DIV", "NOT", "AND", "OR", "IGUAL"
     };
     
