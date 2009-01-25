@@ -142,8 +142,10 @@ public final class AnalizadorLexico {
     private Token leerDistinto() throws IOException,LexicException {
         Character ch = leerCaracter();
         if((ch == Reader.EOF)||(ch.charValue()!= '='))
-           throw new LexicException(2, "!" + ch.toString(), numLin); 
-        return new Token(Token.DISTINTO,"",numLin);
+           throw new LexicException(2, "!" + ch.toString(), numLin);
+        else{
+        	leerCaracter();// prueba
+        	return new Token(Token.DISTINTO,"",numLin);}
     }
 
     private Token leerDosPuntosAsig() throws IOException {

@@ -654,7 +654,7 @@ public final class AnalizadorSintactico implements Testeable{
     private Tipo restoExpresion(boolean porValor, Tipo t)throws Exception{
         nextToken();
         
-        if(token.cod==Token.OPREL  || token.cod==Token.IGUAL){
+        if(token.cod==Token.OPREL  || token.cod==Token.IGUAL  || token.cod==Token.DISTINTO ){
            String op = token.lex;
            if(!porValor ) throw new SemanticException(17,token.numLin);
            Tipo texp = expresionSimple(true);
