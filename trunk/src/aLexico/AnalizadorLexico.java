@@ -90,8 +90,7 @@ public final class AnalizadorLexico {
                 leerCaracter();
                 return new Token(Token.PA, "", lastLine);
             } //RECONOCIMIENTO DE CARACTERES SIMPLES
-            else if (ch.charValue() == '+') {
-                //avanza al proximo carater antes de retornar
+            else if (ch.charValue() == '+') {                
                 leerCaracter();
                 return new Token(Token.SUMA, "", lastLine);
             } else if (ch.charValue() == '-') {
