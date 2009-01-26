@@ -37,11 +37,10 @@ import main.Testeable;
  *       t.start();
  *
  *</pre>
-  * @author Agustin Ramone
  *
  * @see aLexico.AnalizadorLexico
  * @see aSintactico.TablaSimbolos
- * @since jdk 1.5
+ * @since jdk 1.6
  */
 public final class AnalizadorSintactico implements Testeable{
     

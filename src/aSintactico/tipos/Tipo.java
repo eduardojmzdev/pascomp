@@ -2,7 +2,6 @@ package aSintactico.tipos;
 
 /**
  * Clase abstracta para representar los tipos del lenguaje
- * @author Agustin Ramone
   * @see aSintactico.tipos.TipoFactory
  */
 public abstract class Tipo {

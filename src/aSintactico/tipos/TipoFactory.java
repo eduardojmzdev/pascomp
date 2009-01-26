@@ -4,8 +4,6 @@ package aSintactico.tipos;
  * Clase TipoFactory
  * Provee metodos para la creacion eficiente de tipos
  *
- * @author Agustin Ramone
- * @author Mayra Echandi
  */
 public final class TipoFactory {
     /** Tipo integer*/
