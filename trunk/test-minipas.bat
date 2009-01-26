@@ -1,15 +1,13 @@
 cls
 @echo off
 echo ###################################
-echo ##     COMPILADOR MINIPASCAL     ##
+echo ##     COMPILADOR PLG 08/09      ##
 echo ##                               ##
-echo ## AUTORES:                      ##	
-echo ##    Mayra Echandi              ##
-echo ##    Esteban A. Bett            ##
+echo ##            GRUPO 8            ##	
+echo ## 			      ##
+echo ## 			      ##
 echo ##                               ##
-echo ## Help file: readme.txt         ##
-echo ## Config file: minipas.conf     ##
 echo ###################################
-echo loading java...
+echo Cargando...
 java -jar dist/minipascal.jar main.MiniPas %1 |more
 pause

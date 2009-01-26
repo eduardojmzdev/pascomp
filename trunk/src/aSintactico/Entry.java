@@ -7,8 +7,7 @@ import aSintactico.tipos.Tipo;
  * Mantiene la informacion para las distintas entidades 
  * del lenguaje: constantes,variables,parametros,funciones,etc
  *
- * @author Agustin Ramone
- * @since jdk 1.5
+ * @since jdk 1.6
  * @see aSintactico.EntryTable
  */
 public final class Entry {

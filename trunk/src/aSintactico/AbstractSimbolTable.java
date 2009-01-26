@@ -7,8 +7,7 @@ import java.util.Hashtable;
 /**
  * Es una plantilla generica para tablas de simbolos de lenguajes de programacion
  *
-  * @author Agustin Ramone
- * @since jdk 1.5
+ * @since jdk 1.6
  */
 public abstract class AbstractSimbolTable <T>{
     

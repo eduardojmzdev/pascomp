@@ -2,7 +2,6 @@ package aSintactico.tipos;
 
 /**
  * Representa un tipo simple del lenguaje. Puede ser integer, boolean y subrango
- * @author Agustin Ramone
   * @see aSintactico.tipos.TipoFactory
  */
 public class TipoSimple extends Tipo{
