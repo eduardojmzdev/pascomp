@@ -22,6 +22,6 @@ public interface Testeable {
     public void finish();
     
     /** Comprueba si la extension del archivo es la correcta para el test */
-    public boolean validaExtencion(String strFile);
+    public boolean validaExtension(String strFile);
     
 }

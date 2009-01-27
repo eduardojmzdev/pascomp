@@ -194,7 +194,21 @@ public final class AnalizadorSintactico implements Testeable{
     public File getOutputFile() {
         if(fileMepa!=null) return fileMepa.getFile();
         return null;
-    } 
+    }
+
+    private void idValido() throws Exception {
+       nextToken();
+       if(token.cod != Token.id) throw new SintacticException(1,token.numLin);       
+    }
+
+    private void lectura() throws Exception {
+      restaurarToken=false;
+      nextToken();
+      if(token.cod != Token.PA) throw new SintacticException(29,token.numLin);
+      idValido();
+      nextToken();
+      if(token.cod != Token.PC) throw new SintacticException(18,token.numLin);
+    }
     /**
      * Invoca al analizador lexico para que nos devuelva
      * el siguiente token.
@@ -249,7 +263,7 @@ public final class AnalizadorSintactico implements Testeable{
      * @param strFile 
      * @return 
      */
-    public boolean validaExtencion(String strFile) {
+    public boolean validaExtension(String strFile) {
         int i = strFile.lastIndexOf(".");        
         if(i>0){
             String ext = strFile.substring(i);            
@@ -483,7 +497,13 @@ public final class AnalizadorSintactico implements Testeable{
         nextToken();
         restaurarToken=true;
         
-        if(token.cod==Token.id){
+        if(token.cod==Token.READ){
+          lectura();
+        }
+        else if(token.cod==Token.WRITE){
+            
+        }
+        else if(token.cod==Token.id){
             sentenciaSimple();
         } else if(token.cod==Token.SEP){
             sentenciaCompuesta();
@@ -510,7 +530,6 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private void sentenciaSimple()throws Exception{
         nextToken();
-        //no chequeo, ya viene un id
         Entry e = TS.buscar(token.lex);    
         
         if (e == null) throw new SemanticException (7, token.numLin,token.lex) ;
