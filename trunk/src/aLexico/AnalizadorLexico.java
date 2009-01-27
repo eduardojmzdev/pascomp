@@ -28,7 +28,9 @@ public final class AnalizadorLexico {
         palabrasReservadas.put("not", new Integer(Token.NOT));
         palabrasReservadas.put("or", new Integer(Token.OR));
         palabrasReservadas.put("program", new Integer(Token.INICIO));
-        palabrasReservadas.put("var", new Integer(Token.VAR));            
+        palabrasReservadas.put("var", new Integer(Token.VAR));
+        palabrasReservadas.put("read", new Integer(Token.READ));
+        palabrasReservadas.put("write", new Integer(Token.WRITE));
     }
 
     public AnalizadorLexico() {
