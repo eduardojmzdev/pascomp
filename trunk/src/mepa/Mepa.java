@@ -90,7 +90,7 @@ public class Mepa implements Testeable{
      * @param strFile nombre de archivo a verificar
      * @return true si el archivo tiene la extension correcta
      */
-    public boolean validaExtencion(String strFile) {
+    public boolean validaExtension(String strFile) {
         return strFile.endsWith(".mep") ;
     }
     

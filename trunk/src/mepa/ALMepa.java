@@ -386,7 +386,7 @@ public final class ALMepa implements Testeable{
      * @param strFile el nombre de archivo a verificar
      * @return true si tiene la extension correcta
      */
-    public boolean validaExtencion(String strFile) {
+    public boolean validaExtension(String strFile) {
         return strFile.endsWith(".mep");
     }
     

@@ -249,7 +249,7 @@ public final class AnalizadorSintactico implements Testeable{
      * @param strFile 
      * @return 
      */
-    public boolean validaExtencion(String strFile) {
+    public boolean validaExtension(String strFile) {
         int i = strFile.lastIndexOf(".");        
         if(i>0){
             String ext = strFile.substring(i);            
@@ -500,9 +500,7 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private void sentenciaSimple()throws Exception{
         nextToken();
-        //no chequeo, ya viene un id
-        Entry e = TS.buscar(token.lex);    
-        
+        Entry e = TS.buscar(token.lex);            
         if (e == null) throw new SemanticException (7, token.numLin,token.lex) ;
         restoSentenciaSimple(e);
     }
@@ -707,7 +705,8 @@ public final class AnalizadorSintactico implements Testeable{
         restaurarToken=true;
         if(e.esPrograma() || e.esTipo())
         	throw new SemanticException(36,token.numLin);
-        if (e.valorStr.equals("true") || e.valorStr.equals("false")){
+        
+        if ((e.valorStr!=null)&&((e.valorStr.equals("true") || e.valorStr.equals("false")))){
             generaCodigo2("apila",true,e.valorStr);
         }else{
             generaCodigo("apila_dir",true,e.desplazamiento);
