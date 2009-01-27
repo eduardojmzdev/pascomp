@@ -3,7 +3,8 @@ package main;
 
 import aSintactico.AnalizadorSintactico;
 import java.io.IOException;
-import mepa.MaquinaVirtual;
+
+import mVirtual.MaquinaVirtual;
 
 /**
  * COMPILADOR 
