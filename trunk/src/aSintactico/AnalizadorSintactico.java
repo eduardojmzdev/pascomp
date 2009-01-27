@@ -299,7 +299,7 @@ public final class AnalizadorSintactico implements Testeable {
 				throw new SemanticException(7, token.numLin, token.lex);
 			return restoFactor(porValor, e);
 		} else
-			throw new SintacticException(32, token.numLin);
+			throw new SintacticException(30, token.numLin);
 
 	}
 
@@ -404,6 +404,12 @@ public final class AnalizadorSintactico implements Testeable {
 		nextToken();
 		if (token.cod != Token.id)
 			throw new SintacticException(1, token.numLin);
+		Entry e = TS.buscar(token.lex);
+		if (e==null)
+			throw new SemanticException(7, token.numLin);
+		if(e.tipo.esBoolean())
+			throw new SemanticException(5, token.numLin);
+		//hacer lo de la mepa 
 	}
 
 	private void lectura() throws Exception {
@@ -415,6 +421,25 @@ public final class AnalizadorSintactico implements Testeable {
 		nextToken();
 		if (token.cod != Token.PC)
 			throw new SintacticException(18, token.numLin);
+	}
+
+	private void escritura() throws Exception {
+		restaurarToken = false;
+		nextToken();
+		if (token.cod != Token.PA)
+			throw new SintacticException(29, token.numLin);
+		textoValido();
+		nextToken();
+		if (token.cod != Token.PC)
+			throw new SintacticException(18, token.numLin);
+	}
+	
+	private void textoValido() throws Exception {
+		nextToken();
+		if (token.cod != Token.id)
+			throw new SintacticException(17, token.numLin);
+		//hacer lo de la mepa segun los casos
+			
 	}
 
 	/**
@@ -765,7 +790,7 @@ public final class AnalizadorSintactico implements Testeable {
 		if (token.cod == Token.READ) {
 			lectura();
 		} else if (token.cod == Token.WRITE) {
-
+			escritura();
 		} else if (token.cod == Token.id) {
 			sentenciaSimple();
 		} else if (token.cod == Token.SEP) {
@@ -773,6 +798,8 @@ public final class AnalizadorSintactico implements Testeable {
 		}
 
 	}
+
+	
 
 	/**
 	 * @throws java.lang.Exception
