@@ -21,7 +21,7 @@ public final class SintacticException extends BasicException{
     static{
         errorMap.put(new Integer(0),"Se espera 'program'");
         errorMap.put(new Integer(1),"Se espera un identificador");
-        errorMap.put(new Integer(2),"Se espera un punto y coma ';'");
+        errorMap.put(new Integer(2),"Se espera ';'");
         errorMap.put(new Integer(3),"Se espera un punto '.'");
         errorMap.put(new Integer(4),"Se espera =");
         errorMap.put(new Integer(5),

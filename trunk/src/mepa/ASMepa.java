@@ -122,7 +122,7 @@ public class ASMepa implements Testeable{
      * @param strFile nombre de archivo a verificar
      * @return true si es una extension valida
      */
-    public boolean validaExtencion(String strFile) {
+    public boolean validaExtension(String strFile) {
         return strFile.endsWith(".mep");
     }
     

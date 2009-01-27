@@ -1,10 +1,11 @@
 program prueba;
 var
-b: boolean;
+a,b: boolean;
 c: integer;
 e: integer;
 begin
-     b:= false and true;
+     read(casdasd);     
+     a:= false and true;
      b:= ( false );
      c:= 4 + 7;
 	 c:= 5 * 8;

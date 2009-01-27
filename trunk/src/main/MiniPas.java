@@ -87,8 +87,8 @@ public final class MiniPas implements Testeable{
      * @return  true si el archivo soporta la extension correcta
      * @see config.conf
      */
-    public boolean validaExtencion(String strFile) {
-        return as.validaExtencion(strFile);
+    public boolean validaExtension(String strFile) {
+        return as.validaExtension(strFile);
     }
     
 }
