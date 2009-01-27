@@ -9,13 +9,16 @@ public final class Token {
     public static final String[] LEXEMAS = {"",null, null, //0-2
         ";", ".", ":", ",", "(", ")", "!=", "program", "var", //3-11
         "begin", "end", //12-13
-        ":=", null, "+", "-", "*", "/", "not", "and", "or", "="};   //14-23
+        ":=", null, "+", "-", "*", "/", "not", "and", "or", "=", //14-23
+        "read", "write" //24-25
+    };   
 
 
     public static final String[] TOKENS = {"EOF","id", "digito",
         "PYCOMA", "PUNTO", "DOSPUNTOS", "COMA", "PA", "PC", "DISTINTO", "INICIO", "VAR",
         "SEP", "FIN", 
-        "ASIG", "OPREL", "SUMA", "RESTA", "MUL", "DIV", "NOT", "AND", "OR", "IGUAL"
+        "ASIG", "OPREL", "SUMA", "RESTA", "MUL", "DIV", "NOT", "AND", "OR", "IGUAL",
+        "READ", "WRITE"
     };
     
     public static final int EOF = 0;
@@ -42,7 +45,8 @@ public final class Token {
     public static final int AND = 21;
     public static final int OR = 22;
     public static final int IGUAL = 23;
-
+    public static final int READ = 24;
+    public static final int WRITE = 25;
     
     public Token(int cod, String lex, int numLin) {
         this.cod = cod;
