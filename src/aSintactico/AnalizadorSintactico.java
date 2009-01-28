@@ -803,7 +803,8 @@ private Entry textoValido() throws Exception {
         nextToken();
         if (token.cod != Token.id)
             throw new SintacticException(27, token.numLin);
-        Entry e = new Entry(token.lex,Entry.CONSTANTE);                 
+        Entry e = new Entry(token.lex,Entry.CONSTANTE);
+        e.valorStr = token.lex;
         TS.agregarConstante(e);
         nextToken();
         if (token.cod != Token.COMILLAS)
