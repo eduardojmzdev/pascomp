@@ -71,10 +71,7 @@ public final class AnalizadorSintactico implements Testeable{
      */
     private boolean restaurarToken = false;
     
-    /** permite generar un nombre de etiqueta diferente cada vez
-     *  que se solicita.
-     */
-    private int numEtiqueta = 1;
+
 
     /** 
      * Se mantiene en false a menos que se produzca una excepcion
@@ -173,7 +170,6 @@ public final class AnalizadorSintactico implements Testeable{
         if(genCodigo)
             fileMV = new BufferedFileWriter(strFile+".mep");        
         
-        numEtiqueta = 1;
         restaurarToken = false;
         token = null;
         HUBO_ERROR= false;
@@ -719,16 +715,6 @@ public final class AnalizadorSintactico implements Testeable{
     
 
     
-      /**
-     * Genera la proxima etiqueta
-     * @return 
-     */
-    private String genEtiqueta(){        
-        String l = "L"+numEtiqueta + "     ";
-        String e = l.substring(0,5);
-        numEtiqueta++;
-        return e;
-    }
     
     
     /**
@@ -767,29 +753,7 @@ public final class AnalizadorSintactico implements Testeable{
 
     }
      
-    /** */
-    private String negar(String val) {
-        if (val.charAt(0)=='-') return val.substring(1);
-        else return "-" + val;
-    }
 
-    /**
-     * Genera el cod para las funcinoes y procedimientos predefinidos
-     * con parametros.
-     * @param id nombre de la funcion/procedimiento
-     * @param t tipo del parametro
-     */
-    private void genPredefinida(String id, Tipo t) throws Exception{
-        if (!(t.esEntero()))
-            throw new SemanticException(35,token.numLin);
-        
-        if ( id.equalsIgnoreCase("write")) generaCodigo("escribe",true);
-        
-        else if( id.equalsIgnoreCase("read")) {
-            generaCodigo("lee",true);
-            //generaCodigo("ALDR",true);
-        } 
-     }
     
     /** 
      * @param num
