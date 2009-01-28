@@ -53,6 +53,7 @@ public class SemanticException extends BasicException{
         errorMap.put(new Integer(37),"valor de tipo incompatible con la expresion en la sentencia case");             
         errorMap.put(new Integer(38),"subrango de valores invalido (el limite inferior debe ser menor al limite superior)");                   
         errorMap.put(new Integer(39),"Magnitud no representable");
+        errorMap.put(new Integer(39),"Variable no inicializada");
     }
     
     /** Constructor */
