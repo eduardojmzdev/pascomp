@@ -33,10 +33,10 @@ public final class SintacticException extends BasicException{
         errorMap.put(new Integer(11),"Se espera un [");
         errorMap.put(new Integer(12),"Se espera un ]");
         errorMap.put(new Integer(13),"Se espera un of");
-        errorMap.put(new Integer(14),"Se espera  '..'");
+        errorMap.put(new Integer(14),"Se espera  \"");
         errorMap.put(new Integer(15),"Se espera  un ':'");
         errorMap.put(new Integer(16), "Se espera un identificador de variable o  alguna de las siguientes palabras reservadas: procedure,function o begin");
-        errorMap.put(new Integer(17), "Se espera texto o un identificador valido");
+        errorMap.put(new Integer(17), "Se espera \" o un identificador valido");
         errorMap.put(new Integer(18),"Se espera  un  ')'");
         errorMap.put(new Integer(19), "Se espera ';' o falta la lista de parametros formales.");
         errorMap.put(new Integer(20), "Se espera 'var' o un identificador");
@@ -46,7 +46,7 @@ public final class SintacticException extends BasicException{
         errorMap.put(new Integer(24),"Se espera un begin");
         errorMap.put(new Integer(25),"Se espera un end");
         errorMap.put(new Integer(26),"Se espera := ");
-        errorMap.put(new Integer(27),"Se espera un then");
+        errorMap.put(new Integer(27),"Se espera un texto");
         errorMap.put(new Integer(28),"Se espera una constante no signada");
         errorMap.put(new Integer(29),"Se espera [, ( o :=  ");        
         errorMap.put(new Integer(30), "Se espera una  expresion ");
