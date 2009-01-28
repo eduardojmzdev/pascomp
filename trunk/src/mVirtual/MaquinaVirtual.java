@@ -1,5 +1,6 @@
 package mVirtual;
 
+import excepciones.MepaException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -32,7 +33,7 @@ public class MaquinaVirtual {
     private String codigoObjeto;
 
     // Constructor
-    public MaquinaVirtual(String archivo) throws IOException {
+    public MaquinaVirtual(String archivo) throws Exception {
         setFichero(archivo);
         inicializar();
     }
@@ -150,7 +151,7 @@ public class MaquinaVirtual {
      */
     private void ejecutar(String instruccion) throws Exception {
 
-        try {
+        
             //Apila un valor en la cima de la pila.
             //Puede ser un entero o un booleano.
             if (instruccion.contains("apila") && !instruccion.contains("desapila_dir") && !instruccion.contains("apila_dir")) {
@@ -220,7 +221,7 @@ public class MaquinaVirtual {
                 int resultado;
                 // Lanzamos un error si es una división por cero
                 if (op1 == 0) {
-                    error = new Error("División por cero.");
+                    error = new Error("Division por cero.");
                     resultado = 0;
                 } else {
                     resultado = (op2 / op1);
@@ -425,7 +426,7 @@ public class MaquinaVirtual {
 
                 if (dig > 57 || dig < 48)//ERROR -Si despues de leer el menos no viene un digito
                 {
-                    //throw new MepaException(25, ins.numLinea);
+                    throw new MepaException(25,5);
                 }
 
                 while (dig >= 48 && dig <= 57) {
@@ -433,7 +434,7 @@ public class MaquinaVirtual {
                     valLeido = (valLeido * 10) + (dig - 48);
                     if (valLongLeido > valLongPer) //ERROR overflow
                     {
-                        //throw new MepaException(26, ins.numLinea);
+                        throw new MepaException(26, 5);
                     }
                     dig = System.in.read();
                     ultCarLeido = dig;
@@ -455,9 +456,7 @@ public class MaquinaVirtual {
             }
 
 
-        } catch (IndexOutOfBoundsException e) {
-            throw new Exception();
-        }
+        
     }
     /**     
      * se usa para leer 
