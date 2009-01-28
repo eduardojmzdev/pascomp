@@ -774,10 +774,12 @@ public final class AnalizadorSintactico implements Testeable{
         nextToken();
         if (token.cod != Token.PA)
                 throw new SintacticException(29, token.numLin);
-        idValido();
+        nextToken();
+        Entry e = idValido(true);
         nextToken();
         if (token.cod != Token.PC)
                 throw new SintacticException(18, token.numLin);
+        //hacer lo de la pila, devuelvo entry e por si hace falta usarlo aki
 }
 
 private void escritura() throws Exception {
@@ -790,25 +792,35 @@ private void escritura() throws Exception {
         if (token.cod != Token.PC)
                 throw new SintacticException(18, token.numLin);
 }
-private void textoValido() throws Exception {
+private Entry textoValido() throws Exception {
     nextToken();
-    if (token.cod != Token.id)
+    if ((token.cod != Token.id)&&(token.cod != Token.COMILLAS))
             throw new SintacticException(17, token.numLin);
-    //hacer lo de la mepa segun los casos
-            
+    if (token.cod == Token.id)
+       return  idValido(false);
+    else{
+        nextToken();
+        if (token.cod != Token.id)
+            throw new SintacticException(27, token.numLin);
+        //tratar texto
+        nextToken();
+        if (token.cod != Token.COMILLAS)
+            throw new SintacticException(14, token.numLin);
+        return null;
+    }
+        
 }
 
 
-    private void idValido() throws Exception {
-        nextToken();
+    private Entry idValido(boolean lectura) throws Exception {        
         if (token.cod != Token.id)
                 throw new SintacticException(1, token.numLin);
         Entry e = TS.buscar(token.lex);
         if (e==null)
                 throw new SemanticException(7, token.numLin);
-        if(e.tipo.esBoolean())
+        if(e.tipo.esBoolean()&&lectura)
                 throw new SemanticException(5, token.numLin);
-        //hacer lo de la mepa 
+      return e;          
 }
 
 }
