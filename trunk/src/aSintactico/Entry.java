@@ -47,7 +47,7 @@ public final class Entry {
      * o cualquier otra entidad que no se le pueden asignar valores
      */
     public boolean asignable = true;
-    
+    public boolean tieneValor = false;
     
     /** Constructor */
     public Entry() { }

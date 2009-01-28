@@ -515,6 +515,7 @@ public final class AnalizadorSintactico implements Testeable{
             
             if(e.esVariable() ){
                 if(e.tipo.esSimple()){
+                    e.tieneValor=true;
                    generaCodigo("desapila_dir", true, e.desplazamiento);
                 }
             }         
@@ -704,9 +705,11 @@ public final class AnalizadorSintactico implements Testeable{
         
         if ((e.valorStr!=null)&&((e.valorStr.equals("true") || e.valorStr.equals("false")))){
             generaCodigo2("apila",true,e.valorStr);
-        }else{
+        }else if(e.tieneValor){
             generaCodigo("apila_dir",true,e.desplazamiento);
         }
+        else
+            throw new SemanticException(40,token.numLin);
         return e.tipo;
 
      }
