@@ -88,12 +88,13 @@ public final class AnalizadorLexico {
                 do {
                     ch = leerCaracter();
                 } while (ch != Reader.EOF && esSeparador(ch));
-
             } else if (ch.charValue() == '(') {
                 leerCaracter();
-                return new Token(Token.PA, "", lastLine);
-            } //RECONOCIMIENTO DE CARACTERES SIMPLES
-            else if (ch.charValue() == '+') {                
+                return new Token(Token.PA, "", lastLine);             
+            } else if (ch.charValue() == '"') {
+                leerCaracter();
+                return new Token(Token.COMILLAS, "", lastLine);                   
+            } else if (ch.charValue() == '+') {                
                 leerCaracter();
                 return new Token(Token.SUMA, "", lastLine);
             } else if (ch.charValue() == '-') {

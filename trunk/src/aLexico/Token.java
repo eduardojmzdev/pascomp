@@ -9,13 +9,13 @@ public final class Token {
                         ";", ".", ":", ",", "(", ")", "!=", "program", "var", // 3-11
                         "begin", "end", // 12-13
                         ":=", null, "+", "-", "*", "/", "not", "and", "or", "=", // 14-23
-                        "read", "write" // 24-25
+                        "read", "write","\"" // 24-26
         };
 
         public static final String[] TOKENS = { "EOF", "id", "digito", "PYCOMA",
                         "PUNTO", "DOSPUNTOS", "COMA", "PA", "PC", "DISTINTO", "INICIO",
                         "VAR", "SEP", "FIN", "ASIG", "OPREL", "SUMA", "RESTA", "MUL",
-                        "DIV", "NOT", "AND", "OR", "IGUAL", "READ", "WRITE" };
+                        "DIV", "NOT", "AND", "OR", "IGUAL", "READ", "WRITE","COMILLAS" };
 
         public static final int EOF = 0;
         public static final int id = 1;
@@ -43,6 +43,7 @@ public final class Token {
         public static final int IGUAL = 23;
         public static final int READ = 24;
         public static final int WRITE = 25;
+        public static final int COMILLAS = 26;
 
         public Token(int cod, String lex, int numLin) {
                 this.cod = cod;
