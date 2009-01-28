@@ -787,10 +787,11 @@ private void escritura() throws Exception {
         nextToken();
         if (token.cod != Token.PA)
                 throw new SintacticException(29, token.numLin);
-        textoValido();
+        Entry e = textoValido();
         nextToken();
         if (token.cod != Token.PC)
                 throw new SintacticException(18, token.numLin);
+        //tienes el entry e hacer lo q hay  hacer de la pila y eso
 }
 private Entry textoValido() throws Exception {
     nextToken();
@@ -802,11 +803,12 @@ private Entry textoValido() throws Exception {
         nextToken();
         if (token.cod != Token.id)
             throw new SintacticException(27, token.numLin);
-        //tratar texto
+        Entry e = new Entry(token.lex,Entry.CONSTANTE);                 
+        TS.agregarConstante(e);
         nextToken();
         if (token.cod != Token.COMILLAS)
             throw new SintacticException(14, token.numLin);
-        return null;
+        return e;
     }
         
 }
