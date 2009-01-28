@@ -75,10 +75,8 @@ public final class AnalizadorLexico {
 
 
     public Token nextToken() throws IOException, LexicException {
-
-        while (true) {
-            //guardo la ultima linea
-            int lastLine = numLin;
+        while (true) {            
+            int lastLine = numLin;            
             Character ch = LastCharRead;
 
             if (ch == Reader.EOF) {
@@ -137,7 +135,7 @@ public final class AnalizadorLexico {
                 return leerTokenDigito();
             } else {
                 //caracter no perteneciente al alfabeto
-                throw new LexicException(2, ch.toString(), lastLine);
+                throw new LexicException(1, ch.toString(), lastLine);
             }
         }
     }
@@ -145,7 +143,7 @@ public final class AnalizadorLexico {
     private Token leerDistinto() throws IOException,LexicException {
         Character ch = leerCaracter();
         if((ch == Reader.EOF)||(ch.charValue()!= '='))
-           throw new LexicException(2, "!" + ch.toString(), numLin);
+           throw new LexicException(1, "!" + ch.toString(), numLin);
         else{
         	leerCaracter();// prueba
         	return new Token(Token.DISTINTO,"",numLin);}
@@ -209,7 +207,7 @@ public final class AnalizadorLexico {
             c = leerCaracter();
         } while (esDigito(c));
         if (esCaracter(c)) {
-            throw new LexicException(1, buff.toString() + c.toString(), lineaUlt);
+            throw new LexicException(0, buff.toString() + c.toString(), lineaUlt);
         }
         return new Token(Token.digito, buff.toString(), lineaUlt);
     }
@@ -273,19 +271,7 @@ public final class AnalizadorLexico {
         return ((ch != null) && (ch.charValue() == '\n'));
     }
 
-    public void run() throws Exception {
-        //Obtengo los tokens
-        Token t = null;
-        leerCaracter();
-        for (t = nextToken(); t.cod != Token.EOF; t = nextToken()) {
-            System.out.println(t);
-        }
-        //imprimo eof
-        System.out.println(t);
-        cerrarLector();
-    }
-
     public boolean validaExtension(String strFile) {
-        return strFile.endsWith(".pas");
+        return strFile.endsWith(".src");
     }
 }
