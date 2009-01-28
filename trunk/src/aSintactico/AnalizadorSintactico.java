@@ -779,7 +779,8 @@ public final class AnalizadorSintactico implements Testeable{
         nextToken();
         if (token.cod != Token.PC)
                 throw new SintacticException(18, token.numLin);
-        //hacer lo de la pila, devuelvo entry e por si hace falta usarlo aki
+        generaCodigo("lee",true);
+        generaCodigo("desapila_dir",true,e.desplazamiento);
 }
 
 private void escritura() throws Exception {
@@ -791,7 +792,13 @@ private void escritura() throws Exception {
         nextToken();
         if (token.cod != Token.PC)
                 throw new SintacticException(18, token.numLin);
-        //tienes el entry e hacer lo q hay  hacer de la pila y eso
+        if(e.asignable){
+            generaCodigo("apila_dir",true,e.desplazamiento);
+            generaCodigo("escribe",true);
+        }else{
+            generaCodigo2("apila",true,e.valorStr);
+            generaCodigo("escribe",true);
+        }
 }
 private Entry textoValido() throws Exception {
     nextToken();
