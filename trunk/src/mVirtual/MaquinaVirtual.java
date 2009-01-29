@@ -160,19 +160,24 @@ public class MaquinaVirtual {
 	 *            Instruccion de entrada
 	 * @return
 	 */
-	private String argumento(String instruccion) {
-		char letra = instruccion.charAt(0);
-		int i = 0;
-		while (letra == ' ') {
-			i++;
-			letra = instruccion.charAt(i);
-		}
-		String temp = instruccion.substring(i);
-		String[] array = temp.split(" ");
-		temp = array[1];
-
-		return temp;
-	}
+    private String argumento(String instruccion) {
+        
+        char letra=instruccion.charAt(0);
+        int i=0;
+        while (letra==' '){
+            i++;
+            letra=instruccion.charAt(i);
+        }
+        String temp = instruccion.substring(i);
+        i=0;
+        letra = temp.charAt(0);
+        while (letra!=' '){
+            i++;
+            letra=temp.charAt(i);
+        }
+        temp = temp.substring(i+1);
+        return temp;
+    }
 
 	/**
 	 * Ejecuta una instruccion

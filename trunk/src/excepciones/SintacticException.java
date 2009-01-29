@@ -32,8 +32,7 @@ public final class SintacticException extends BasicException{
         errorMap.put(new Integer(12), "Se espera :=");
         errorMap.put(new Integer(13), "Se espera (");        
         errorMap.put(new Integer(14), "Se espera una  expresion");
-        errorMap.put(new Integer(15), "Se espera un identifacador valido o \"");
-        errorMap.put(new Integer(16), "Se espera \"");
+        errorMap.put(new Integer(15), "Se espera un identifacador valido o \"");        
     }
     
   
