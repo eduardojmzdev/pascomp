@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Ejercicios Expresiones Regulares</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+
+<body>
+
+<H1>Ejercicios expresiones regulares </H1>
+
+<p class="titulo"><strong>1 </strong><strong>) </strong> Para los lenguajes dados sobre &sect; = {a, b} construir una expresi&oacute;n regular de &eacute;l y un Aut&oacute;mata Finito que lo acepte: </p>
+<p class="meterse">a) L = {w|w tiene un numero par de a ' s} </p>
+<p class="meterse">b) L = {w|w tiene un numero impar de a ' s} </p>
+<p class="meterse">c) L = {w|w tiene un numero m&uacute;ltiplo de 3 de a ' s} </p>
+<p >Soluci&oacute;n </strong></p>
+<p>a) Una expresi&oacute;n regular que represente el lenguaje L es (b * ab * a) * . El diagrama de transici&oacute;n de un Aut&oacute;mata Finito es: </p>
+<p><img src="EjerciciosExpRegimage002.jpg"></p>
+<p>b) Una expresi&oacute;n regular para este lenguaje es: b * a(b * ab * a) * . El diagrama de transici&oacute;n de un Aut&oacute;mata Finito es: </p>
+<p><img src="EjerciciosExpRegimage004.jpg"></p>
+<p>c) Una expresi&oacute;n regular para este lenguaje es: (b * ab * ab * a) * . El diagrama de transici&oacute;n de un Aut&oacute;mata Finito es: </p>
+<p><img src="EjerciciosExpRegimage006.jpg"></p>
+<p class="titulo"><strong>2 </strong><strong>) </strong>&iquest;Cu&aacute;l es la palabra m&aacute;s corta, conteniendo ocurrencias de "0" y " 1 ", del lenguaje descrito por la expresi&oacute;n regular 0 * (100 * ) * 1 * ?&iquest;Y la m&aacute;s corta que no pertenece a ese lenguaje, conteniendo ocurrencias de "0" y "1"?. </p>
+<p>Solucion:</p><p> a) Hay dos:01 y 10;</p>
+<p> b) 110 . </p>
+<p class="titulo"><strong> 3) </strong>Dadas las expresiones regulares </p>
+<p>R1=0 * +1 * y R2=01 * + 10 * + 1 * 0 + (0 * 1) * , </p>
+<p>escribir la palabra m&aacute;s corta en los siguientes casos: </p>
+<p>a) &isin; R1 &and; &#8713 R2, b) &#8713; R1 &and; &#8712; R2, c) &isin; R1 &and; &isin; R2 y d) &Iuml; R1 &and; &Iuml; R2. </p>
+<p>Solución:</p><p> a) 00; b) 01 y 10 ;c) 0 y 1 ; d) 010 y 101 . </p>
+<p class="titulo"><strong>4) </strong>Simplificar las siguientes expresiones regulares: </p>
+<p>( &#955; +ab) * , (ab+ba+abba+baab) * , (a(a+b) * ) + , ab((ab) * ab+(ab) * )+(ab) * </p>
+<p>Solución:</p><p> (ab) * (ab+ba) * a(a+b) * (ab) * </p>
+<p class="titulo"><strong>5) </strong>Escribir la expresi&oacute;n regular del lenguaje cuya definici&oacute;n recursiva es: </p>
+<p>1&ordm;) &#955; &isin; L, 2&ordm;)Si X &isin; L, entonces 001X &isin; L &and; X11 &isin; L </p>
+<p>3&ordm;) Cierre: &forall; y &isin; L se puede construir a partir de 1) y 2). <strong></strong></p>
+<p>Solución:</p><p> (001) * (11) * </p>
+<p><strong></strong></p>
+<p class="titulo"><strong>6) </strong>Escribir la expresi&oacute;n regular del lenguaje cuya definici&oacute;n recursiva es: </p>
+<p>1&ordm;) &#955; &isin; L, 2&ordm;) Si X &isin; L, entonces 001X &isin; L &and; X11 &isin; L &and; X001 &isin; L, </p>
+<p>3&ordm;)Cierre: &forall; y &isin; L se puede construir a partir de 1) y 2). </p>
+<p>Solución:</p><p> (001) * (11) * + (001) * ) </p>
+<p class="titulo"><strong>7) </strong>Expresar, mediante una expresi&oacute;n regular, el lenguaje formado por todas las palabras de longitud =5, sobre &#8721; ={a,b}. </p>
+<p>Solución:</p><p> (a+b)(a+b)(a+b)(a+b)(a+b)=(a+b) <sup>5 </sup></p>
+<p class="titulo"><strong>8) </strong>Expresar, mediante una expresi&oacute;n regular, el lenguaje formado por todas las palabras de longitud &pound; 5, sobre &#8721; ={a,b}. </p>
+<p>Solución:</p><p> ( &#955; +a+b) 5 </p>
+<p class="titulo"><strong>9) </strong>Investigar si el lenguaje de las palabras de longitud par sobre &#8721; ={a,b} es regular, intentando describirlo mediante la expresi&oacute;n regular correspondiente. </p>
+<p>Solución:</p><p> (a a +ab + ba + b b) * </p>
+<p class="titulo"><strong>10) </strong>Investigar si el lenguaje de las palabras de longitud impar sobre &#8721; ={a,b} es regular, describi&eacute;ndolo mediante la expresi&oacute;n regular correspondiente. </p>
+<p>Solución:</p><p> (a+b) (aa+ab+ba+bb) * =(aa+ab+ba+bb) * (a+b) </p>
+<p class="titulo"><strong>11) </strong>Describir, mediante una expresi&oacute;n regular, el lenguaje de las palabras sobre &#8721; ={0,1} que contienen, al menos, un "0". </p>
+<br>
+<p>Solución:</p><p> (0+1) * 0 (0+1) * ; 1 * 0 (0+1) * ; (0+1) * 01 * </p>
+</body>
+</html>
