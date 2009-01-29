@@ -12,7 +12,7 @@ léxico y sintactico, también para los tests.
 2- ¿Cómo ejecutar el compilador?
 
   Teniendo una máquina virtual de java 1.6 o superior en ruta, desde la linea de comandos:
-  java -cp dist/plg0809-grupo8.jar main.Main archivo.pas
+  java -cp dist/plg0809-grupo8.jar main.Main archivo.src
   
   Si solamente deseamos compilar sin generar codigo,
   cambiar el valor gen_codigo a off dentro del archivo
