@@ -156,7 +156,7 @@ public final class AnalizadorSintactico implements Testeable {
             fileMV = null;
         }
         if (genCodigo) {
-            fileMV = new BufferedFileWriter(strFile + ".mep");
+            fileMV = new BufferedFileWriter(strFile + ".mv");
         }
         restaurarToken = false;
         token = null;
