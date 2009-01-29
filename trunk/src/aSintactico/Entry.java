@@ -1,6 +1,6 @@
 package aSintactico;
 
-import aSintactico.tipos.Comprueba;
+import aSintactico.tipos.Tipo;
 
 /**
  * Representa una entrada en la tabla de simbolos Mantiene la informacion para
@@ -11,7 +11,6 @@ import aSintactico.tipos.Comprueba;
  * @see aSintactico.EntryTable
  */
 public final class Entry {
-
 	public static final int DEFAULT_ENTRY = -1;
 	public static final int CONSTANTE = 0;
 	public static final int PROGRAMA = 1;
@@ -25,7 +24,7 @@ public final class Entry {
 	public String nombre = null;
 
 	/** tipo de datos */
-	public Comprueba tipo = null;
+	public Tipo tipo = null;
 
 	/** valor de la entidad */
 	public Object valor = null;
@@ -79,7 +78,7 @@ public final class Entry {
 	 * @param claseEntrada
 	 * @param tipo
 	 */
-	public Entry(String name, int clase, Comprueba tipo) {
+	public Entry(String name, int clase, Tipo tipo) {
 		this.nombre = name;
 		this.clase = clase;
 		this.tipo = tipo;

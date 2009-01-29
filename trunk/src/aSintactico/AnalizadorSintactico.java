@@ -250,7 +250,7 @@ public final class AnalizadorSintactico implements Testeable {
     }
 
     /**
-     * Comprueba si el archivo tiene una extension valida
+     * Tipo si el archivo tiene una extension valida
      * 
      * @param strFile
      * @return
@@ -348,7 +348,7 @@ public final class AnalizadorSintactico implements Testeable {
      * 
      * @throws java.lang.Exception
      */
-    private Comprueba tipo() throws Exception {
+    private Tipo tipo() throws Exception {
         nextToken();
         if (token.cod == Token.id) {
             Entry entradaTipo = TS.buscarTipo(token.lex);
@@ -392,7 +392,7 @@ public final class AnalizadorSintactico implements Testeable {
         if (token.cod != Token.DOSPUNTOS) {
             throw new SintacticException(6, token.numLin);
         }
-        Comprueba tipo = tipo();
+        Tipo tipo = tipo();
 
         TS.agregarVariables(listaId, tipo);
 
@@ -537,7 +537,7 @@ public final class AnalizadorSintactico implements Testeable {
             if (!e.asignable) {
                 throw new SemanticException(10, token.numLin, e.nombre);
             }
-            Comprueba tipoExp = expresion();
+            Tipo tipoExp = expresion();
             if (!e.tipo.equivalenteCon(tipoExp)) {
                 throw new SemanticException(3, token.numLin);
             }
@@ -555,9 +555,9 @@ public final class AnalizadorSintactico implements Testeable {
     /**
      * <expresion> ::= <expresionSimple> <restoExpresion>
      */
-    private Comprueba expresion() throws Exception {
-        Comprueba texp = expresionSimple();
-        Comprueba trestoexp = restoExpresion(texp);
+    private Tipo expresion() throws Exception {
+        Tipo texp = expresionSimple();
+        Tipo trestoexp = restoExpresion(texp);
         return trestoexp;
     }
 
@@ -565,15 +565,15 @@ public final class AnalizadorSintactico implements Testeable {
      * <expresionSimple> ::= <termino> <restoExpresionSimple> | <signo>
      * <termino> <restoExpresionSimple>
      */
-    private Comprueba expresionSimple() throws Exception {
+    private Tipo expresionSimple() throws Exception {
         nextToken();
         if (token.cod != Token.RESTA && token.cod != Token.SUMA) {
             restaurarToken = true;
-            Comprueba tterm = termino();
+            Tipo tterm = termino();
             return restoExpresionSimple(tterm);
         } else {
             String signo = token.lex;
-            Comprueba tterm = termino();
+            Tipo tterm = termino();
             if (!(tterm.esEntero())) {
                 throw new SemanticException(5, token.numLin);
             }
@@ -588,11 +588,11 @@ public final class AnalizadorSintactico implements Testeable {
     /**
      * <restoTermino> ::= <op-multipilcador> <factor> <restoTermino> | <vacio>
      */
-    private Comprueba restoTermino(Comprueba t) throws Exception {
+    private Tipo restoTermino(Tipo t) throws Exception {
         nextToken();
         if (token.cod == Token.MUL || token.cod == Token.DIV || token.cod == Token.AND) {
             String operador = token.lex;
-            Comprueba tfactor = factor();
+            Tipo tfactor = factor();
             if (!tfactor.equivalenteCon(t)) {
                 throw new SemanticException(6, token.numLin);
             }
@@ -623,8 +623,8 @@ public final class AnalizadorSintactico implements Testeable {
     /**
      * <termino> :: <factor> <restoTermino>
      */
-    private Comprueba termino() throws Exception {
-        Comprueba tfactor = factor();
+    private Tipo termino() throws Exception {
+        Tipo tfactor = factor();
         return restoTermino(tfactor);
     }
 
@@ -632,12 +632,12 @@ public final class AnalizadorSintactico implements Testeable {
      * <restoExpresionSimple> ::= vacio | <op-sumador> <termino>
      * <restoExpresionSimple>
      */
-    private Comprueba restoExpresionSimple(Comprueba t) throws Exception {
+    private Tipo restoExpresionSimple(Tipo t) throws Exception {
         nextToken();
         if (token.cod == Token.RESTA || token.cod == Token.SUMA || token.cod == Token.OR) {
             String op = token.lex;
 
-            Comprueba tterm = termino();
+            Tipo tterm = termino();
 
             if (!tterm.equivalenteCon(t)) {
                 throw new SemanticException(6, token.numLin);
@@ -668,13 +668,13 @@ public final class AnalizadorSintactico implements Testeable {
     /**
      * <restoExpresion> ::= <op-relacional> <expresionSimple> | <vacio>
      */
-    private Comprueba restoExpresion(Comprueba t) throws Exception {
+    private Tipo restoExpresion(Tipo t) throws Exception {
         nextToken();
 
         if (token.cod == Token.OPREL || token.cod == Token.IGUAL || token.cod == Token.DISTINTO) {
             String op = token.lex;
 
-            Comprueba texp = expresionSimple();
+            Tipo texp = expresionSimple();
             if (!texp.equivalenteCon(t)) {
                 throw new SemanticException(15, token.numLin);
             }
@@ -702,17 +702,17 @@ public final class AnalizadorSintactico implements Testeable {
      * 
      * @throws java.lang.Exception
      */
-    private Comprueba factor() throws Exception {
+    private Tipo factor() throws Exception {
         nextToken();
         if (token.cod == Token.PA) {
-            Comprueba texp = expresion();
+            Tipo texp = expresion();
             nextToken();
             if (token.cod != Token.PC) {
                 throw new SintacticException(8, token.numLin);
             }
             return texp;
         } else if (token.cod == Token.NOT) {
-            Comprueba tfactor = factor();
+            Tipo tfactor = factor();
             if (!tfactor.esBoolean()) {
                 throw new SemanticException(4, token.numLin);
             }
@@ -737,7 +737,7 @@ public final class AnalizadorSintactico implements Testeable {
      * 
      * @throws java.lang.Exception
      */
-    private Comprueba restoFactor(Entry e) throws Exception {
+    private Tipo restoFactor(Entry e) throws Exception {
         nextToken();
         // id
         restaurarToken = true;

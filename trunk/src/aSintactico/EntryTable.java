@@ -35,8 +35,8 @@ public final class EntryTable extends AbstractSimbolTable<Entry> {
 		nivelLexico = -1;
 
 		// Tipos predefinidos
-		Comprueba tinteger = TipoFactory.crearTipoEntero();
-		Comprueba tboolean = TipoFactory.crearTipoBooleano();
+		Tipo tinteger = TipoFactory.crearTipoEntero();
+		Tipo tboolean = TipoFactory.crearTipoBooleano();
 		agregarTipo("integer", tinteger);
 		agregarTipo("boolean", tboolean);
 
@@ -76,7 +76,7 @@ public final class EntryTable extends AbstractSimbolTable<Entry> {
 	 * @param tipo
 	 *            tipo
 	 */
-	public void agregarTipo(String id, Comprueba tipo) {
+	public void agregarTipo(String id, Tipo tipo) {
 		Entry e = new Entry(id, Entry.TIPO);
 		e.tipo = tipo;
 		e.asignable = false;
@@ -93,7 +93,7 @@ public final class EntryTable extends AbstractSimbolTable<Entry> {
 	 * @param tipo
 	 *            tipo de las variables
 	 */
-	public void agregarVariables(LinkedList<String> listaID, Comprueba tipo) {
+	public void agregarVariables(LinkedList<String> listaID, Tipo tipo) {
 		int size = listaID.size();
 		Entry e;
 		String id;
