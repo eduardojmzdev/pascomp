@@ -22,21 +22,21 @@ public abstract class Tipo {
 	}
 
 	/**
-	 * Chequea si el tipo es simple
+	 * Comprueba si el tipo es simple
 	 * 
 	 * @return true si el tipo es simple
 	 */
 	public abstract boolean esSimple();
 
 	/**
-	 * Chequea si el tipo es entero
+	 * Comprueba si el tipo es entero
 	 * 
 	 * @return true si el tipo es entero
 	 */
 	public abstract boolean esEntero();
 
 	/**
-	 * Chequea si el tipo es boolean
+	 * Comprueba si el tipo es boolean
 	 * 
 	 * @return true si el tipo es boolean
 	 */
