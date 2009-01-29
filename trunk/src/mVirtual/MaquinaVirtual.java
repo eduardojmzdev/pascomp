@@ -475,8 +475,7 @@ public class MaquinaVirtual {
 				ultCarLeido = dig;
 			}
 
-			if (dig > 57 || dig < 48)// ERROR -Si despues de leer el menos no
-			// viene un digito
+			if (dig > 57 || dig < 48)//digito invalido
 			{
 				throw new MaquinaVirtualException(1);
 			}
@@ -491,7 +490,10 @@ public class MaquinaVirtual {
 				dig = System.in.read();
 				ultCarLeido = dig;
 			}
-
+			if ((dig > 57 || dig < 48)&&(dig!=10))//digito invalido 
+			{
+				throw new MaquinaVirtualException(1);
+			}
 			if (nega) {
 				valLeido = -valLeido;
 			}
