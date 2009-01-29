@@ -1,0 +1,11 @@
+     inicio
+     apila 5
+     desapila_dir 1
+     apila_dir 1
+     negativo
+     desapila_dir 0
+     apila_dir 1
+     apila_dir 0
+     menor_igual
+     desapila_dir 2
+     stop
