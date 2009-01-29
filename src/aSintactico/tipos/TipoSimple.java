@@ -5,7 +5,7 @@ package aSintactico.tipos;
  * 
  * @see aSintactico.tipos.TipoFactory
  */
-public class TipoSimple extends Comprueba {
+public class TipoSimple extends Tipo {
 
 	/**
 	 * Constructor
@@ -24,7 +24,7 @@ public class TipoSimple extends Comprueba {
 	 *            tipo a chequear
 	 * @return true si son equivalentes, false en caso contrario
 	 */
-	public boolean equivalenteCon(Comprueba t) {
+	public boolean equivalenteCon(Tipo t) {
 		if (clase == t.clase)
 			return true;
 		else

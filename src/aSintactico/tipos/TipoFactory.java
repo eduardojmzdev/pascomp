@@ -6,10 +6,10 @@ package aSintactico.tipos;
  */
 public final class TipoFactory {
 	/** Tipo integer */
-	private static final TipoSimple tipoInteger = new TipoSimple(Comprueba.INTEGER);
+	private static final TipoSimple tipoInteger = new TipoSimple(Tipo.INTEGER);
 
 	/** Tipo boolean */
-	private static final TipoSimple tipoBoolean = new TipoSimple(Comprueba.BOOLEAN);
+	private static final TipoSimple tipoBoolean = new TipoSimple(Tipo.BOOLEAN);
 
 	/**
 	 * Permite construir un tipo simlpe
@@ -19,9 +19,9 @@ public final class TipoFactory {
 	 * @return un tipo simple
 	 */
 	public static TipoSimple crearTipoSimple(int cod) {
-		if (cod == Comprueba.BOOLEAN)
+		if (cod == Tipo.BOOLEAN)
 			return tipoBoolean;
-		else if (cod == Comprueba.INTEGER)
+		else if (cod == Tipo.INTEGER)
 			return tipoInteger;
 		else
 			return null;
