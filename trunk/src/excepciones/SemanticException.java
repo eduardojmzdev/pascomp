@@ -2,16 +2,20 @@ package excepciones;
 
 /**
  * Representa a un error en la semantica del lenguaje
- *
-  * @see excepciones.BasicException
+ * 
+ * @see excepciones.BasicException
  */
-public class SemanticException extends BasicException{
-    /**
-	 * 
+/**
+ * @author usuario_local
+ *
+ */
+public class SemanticException extends BasicException {
+	/**
+	 * Identificador de version
 	 */
 	private static final long serialVersionUID = 1L;
 
-	static{
+	static {
         errorMap.put(new Integer(0), "Identificador ya declarado");                                      
         errorMap.put(new Integer(1), "Identificador de tipo no valido");        
         errorMap.put(new Integer(2), "Identificador desconocido");
@@ -26,17 +30,37 @@ public class SemanticException extends BasicException{
         errorMap.put(new Integer(11), "se esperan un identificador de Variable,  true o false");                
         errorMap.put(new Integer(12), "Magnitud no representable");
         errorMap.put(new Integer(13), "Variable no inicializada");
-    }
-    
-    /** Constructor */
-    public SemanticException(int cod, int numLinea, String param) {        
-        super("Error Semantico en linea " + numLinea + ": " + errorMap.get(new Integer(cod)) +  " '"+param+"'");
-	codigo = cod;
-    }            
-    
-    /** Constructor */
-    public SemanticException(int cod, int numLinea) {        
-        super("Error Semantico en linea " + numLinea + ": " + errorMap.get(new Integer(cod)) );
-	codigo = cod;
-    }            
+	}
+
+
+	/**
+	 * Constructor de la excepcion
+	 * 
+	 * @param cod
+	 *            Codigo
+	 * @param numLinea
+	 *            Numero de linea de la excepcion
+	 * @param param
+	 *            Parametro
+	 */
+	public SemanticException(int cod, int numLinea, String param) {
+		super("Error Semantico en linea " + numLinea + ": "
+				+ errorMap.get(new Integer(cod)) + " '" + param + "'");
+		codigo = cod;
+	}
+
+	/**
+	 * Constructor de la excepcion
+	 * 
+	 * @param cod
+	 *            Codigo
+	 * @param numLinea
+	 *            Numero de linea
+	 * 
+	 */
+	public SemanticException(int cod, int numLinea) {
+		super("Error Semantico en linea " + numLinea + ": "
+				+ errorMap.get(new Integer(cod)));
+		codigo = cod;
+	}
 }
