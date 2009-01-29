@@ -2,7 +2,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen"> 
-		<title>Procesador del lenguaje</title>
+		<title>Construcción del procesador</title>
 	</head><body>
 		<div id="grupo">
 			<h3>PLG 08/09</h3>	
@@ -19,40 +19,40 @@
 			</ul>
 		</div>
 		<div id="cabecera">
-			<h1>Procesador del lenguaje</h1>
+			<h1>Construcción del procesador</h1>
 		</div>
 		<div id="contenido">
 			<!--Datos del OdA-->
 			<div>
 				<h2 id="datos">Datos</h2>
 				<div class="cajaInterna" id="divDatos">
-					<p><strong>Nombre: </strong>Procesador del lenguaje.</p>
-					<p><strong>Descripción: </strong>Procesador para el lenguaje definido en la práctica.</p>
-					<p><strong>Función: </strong>Traducir código fuente del lenguaje definido a un lenguaje objeto.</p>
+					<p><strong>Nombre: </strong>Construcción del procesador.</p>
+
+					<p><strong>Función: </strong>Acondicionamiento de las gramáticas de atributos definidas para la traducción predictivo-recursiva. Definición de los esquemas de traducción a partir de la gramática acondicionada si fuera necesario.</p>
 				</div>
 			</div>
 			<!--Metadatos del OdA-->
 			<div>
 				<h2 id="metadatos">Metadatos</h2>
 				<div class="cajaInterna" id="divMetadatos">
-					<p><strong>Descripción: </strong>El procesador permite traducir el código fuente del lenguaje definido de alto nivel a otro lenguaje de nivel inferior. De esta manera un programador puede diseñar un programa en un lenguaje mucho más cercano a como piensa un ser humano, para luego compilarlo a un programa más manejable por una computadora..</p>
+					<p><strong>Descripción: </strong>Acondicionamiento de las gramáticas de atributos definidas para la traducción predictivo-recursiva. Definición de los esquemas de traducción a partir de la gramática acondicionada si fuera necesario.</p>
 					<p><strong>Ciclo de vida: </strong></p>
 					<!--Una division por cada ciclo de vida-->
 					<div class="cicloDeVida">
 						<ul>
 							<li><p><strong>Estado: </strong>Borrador 1</p></li>
-							<li><p><strong>Participantes: </strong>Ignacio Fernández Cuesta.</p></li>
+							<li><p><strong>Participantes: </strong>Antonio Ariza Guerrero, Carlos Fernández Agüero, Isamu Juan Takebe Heras, Carla Margalef Bentabol, Daniel Álvarez Ramírez, Jesús de Lara Gimeno, Ignacio Fernández Cuesta.</p></li>
 							<li><p><strong>Rol: </strong>Creador del objeto</p></li>
-							<li><p><strong>Fecha: </strong>21-1-2009</p></li>
+							<li><p><strong>Fecha: </strong>22-01-2009</p></li>
 						</ul>
 					</div>
 					<!--Fin de la división-->
 					<p><strong>Clasificación: </strong></p>
 					<ul>
-					    <li><strong>Fuente: </strong> .
+					    <li><strong>Fuente: </strong>PLG -> Material docente -> 1.2.Normas & índice de las Prácticas ->  Modelo de índice de la memoria del trabajo de prácticas.
 						<ul>
-						    <li><strong>Propia. </strong></li>
-						</ul></li>
+						    <li><strong>Ruta: </strong>Sección 2.2.</li>
+						    <li><strong>Taxon: </strong>Bibliografía.
 					</ul>
 					</div>
 			</div>
@@ -70,22 +70,34 @@
 						</tr>
 						<tr>
 							<td>D01</td>
-							<td>Recurso externo</td>
-							<td>Artículo sobre Compiladores de la wikipedia</td>
-							<td><a href="http://es.wikipedia.org/wiki/Compilador">Enlace</a></td>
+							<td>Recurso externo.</td>
+							<td>Apuntes de la asignatura</td>
+							<td><a href="recursos/Tema1-7_V2_Construccion_del_procesador.pdf">Construcción del procesador - Teoría</a></td>
 						</tr>
-						<tr>
+						<tr>						
 							<td>D02</td>
 							<td>Recurso propio</td>
-							<td>Javadoc del compilador implementado</td>
-							<td><a href="./recursos/javadoc/index.html">Enlace</a></td>
+							<td>Gramática de Atributos final acondicionada del lenguaje</td>
+							<td><a href="recursos/Gramática_final_de_atributos_acondicionada.pdf">Gramática Final</a></td>
 						</tr>
-						<tr>
+						<tr>						
 							<td>D03</td>
 							<td>Recurso propio</td>
-							<td>Código fuente del compilador implementado</td>
-							<td><a href="./recursos/codigo/">Enlace</a></td>
-						</tr>						
+							<td>Ejemplo de ejercicio sobre el acondicionamiento de gramáticas</td>
+							<td><a href="recursos/EjercicioConstruccion.pdf">Ejercicio Construcción</a></td>
+						</tr>	
+						<tr>						
+							<td>D04</td>
+							<td>Recurso propio</td>
+							<td>Esquemas de traducción</td>
+							<td><a href="esquemas_de_traduccion.pdf">Esquemas</a></td>
+						</tr>
+						<tr>
+							<td>D05</td>
+							<td>Recurso propio.</td>
+							<td>Enlace al OdA del compilador implementado</td>
+							<td><a href="Compilador.html">Compilador</a></td>
+						</tr>
 					</table>				
 				</div>		
 			</div>
@@ -94,7 +106,7 @@
 				<h2 id="esquema">Esquema General</h2>
 				<div class="cajaInterna" id="divOdas">
 					<ul>
-						<li><a class="menu" href="Introduccion.html">Introducción</a>
+					        <li><a class="menu" href="Introduccion.html">Introducción</a>
 						<li><a class="menu" href="Metodologia.html">Metodología</a>
 						<li><a class="menu" href="DesarrolloDelTrabajo.html">Desarrollo del trabajo</a>
 						<li><a class="menu" href="DefinicionDelLenguajeFuente.html">Definición del lenguaje fuente</a>
@@ -109,7 +121,10 @@
 							<li><a class="menu" href="MaqVirtual.html">Definición del lenguaje objeto y la máquina virtual</a>
 							<li><a class="menu" href="Traduccion.html">Definición formal de la traducción</a>
 						</ul></li>
-						<li><a class="menu" href="Construccion.html">Construcción del procesador</a>
+						<li><a class="menu" href="Construccion.html"><strong>Construcción del procesador</strong></a>
+							<ul>
+								<li><a class="menu" href="Compilador.html">Procesador del Lenguaje implementado</a>
+							</ul></li>
 						<li><a class="menu" href="Conclusiones.html">Conclusiones</a></li>
 						<li><a class="menu" href="Bibliografia.htm">Bibliografía</a></li>
 						<li><a class="menu" href="Apendice.html">Apéndices</a></li>
@@ -118,4 +133,5 @@
 			</div>
 			
 		</div>
+	    </ul>
 	</body></html>
