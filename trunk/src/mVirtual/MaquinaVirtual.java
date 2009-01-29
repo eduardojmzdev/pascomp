@@ -1,6 +1,6 @@
 package mVirtual;
 
-import excepciones.MepaException;
+import excepciones.MaquinaVirtualException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,23 +11,19 @@ import java.util.Stack;
 
 public class MaquinaVirtual {
 
-    /** Tamaño maximo de la Pila */
-    private static final int MAX_PILA = 65536;
-    /** Tope de pila */
-    private int cima;
-    /** Contador de programa */
-    private int contador;
+    /**     
+     * se usa para leer 
+     */
+    private int ultCarLeido = ' ';
+    
     /** Pila */
     private Stack<String> pila;
-    /** Instrucciones */
-    private ArrayList instrucciones;
+
     /**
      * Tabla Hash que contiene la memoria de datos.
      */
     private Hashtable<Integer, String> memoriaDatos;
 
-    //Mensajes de error
-    private Error error;
 
     //Nombre del fichero que almacena el código objeto
     private String codigoObjeto;
@@ -42,8 +38,6 @@ public class MaquinaVirtual {
     public void inicializar() {
         pila = new Stack<String>();
         memoriaDatos = new Hashtable<Integer, String>();
-        contador = 0;
-        error = null;
     }
 
     public void setFichero(String archivo) throws IOException {
@@ -96,8 +90,6 @@ public class MaquinaVirtual {
         try {
             ArrayList<String> aux = obtenerInstrucciones();
 
-            //for(int i = 0;i<aux.size();i++) P[i+1] = aux.get(i);
-
             String inst = null;
             int i = 0;
             do {
@@ -113,7 +105,7 @@ public class MaquinaVirtual {
             } while (!(eliminaBlancos(inst)).equals("stop") || i < aux.size());
 
         } catch (java.lang.OutOfMemoryError ex) {
-            throw new Exception();
+            throw new Exception(ex);
         }
     }
 
@@ -150,8 +142,7 @@ public class MaquinaVirtual {
      * @throws java.lang.Exception si hubo error
      */
     private void ejecutar(String instruccion) throws Exception {
-
-        
+   
             //Apila un valor en la cima de la pila.
             //Puede ser un entero o un booleano.
             if (instruccion.contains("apila") && !instruccion.contains("desapila_dir") && !instruccion.contains("apila_dir")) {
@@ -221,8 +212,7 @@ public class MaquinaVirtual {
                 int resultado;
                 // Lanzamos un error si es una división por cero
                 if (op1 == 0) {
-                    error = new Error("Division por cero.");
-                    resultado = 0;
+                    throw new MaquinaVirtualException(0);
                 } else {
                     resultado = (op2 / op1);
                 }
@@ -426,7 +416,7 @@ public class MaquinaVirtual {
 
                 if (dig > 57 || dig < 48)//ERROR -Si despues de leer el menos no viene un digito
                 {
-                    throw new MepaException(25,5);
+                    throw new MaquinaVirtualException(1);
                 }
 
                 while (dig >= 48 && dig <= 57) {
@@ -434,17 +424,12 @@ public class MaquinaVirtual {
                     valLeido = (valLeido * 10) + (dig - 48);
                     if (valLongLeido > valLongPer) //ERROR overflow
                     {
-                        throw new MepaException(26, 5);
+                        throw new MaquinaVirtualException(2);
                     }
                     dig = System.in.read();
                     ultCarLeido = dig;
                 }
 
-                /*if (ins.opc == TokenMepa.LELN) {
-                while (ultCarLeido != '\n') {//descara todo hasta final de linea
-                ultCarLeido = System.in.read();
-                }
-                }*/
 
                 if (nega) {
                     valLeido = -valLeido;
@@ -457,17 +442,5 @@ public class MaquinaVirtual {
 
 
         
-    }
-    /**     
-     * se usa para leer 
-     */
-    private int ultCarLeido = ' ';
-
-    /**
-     * Lee un valor del teclado
-     * @param ins 
-     * @throws java.lang.Exception 
-     */
-    private void leer() throws Exception {
     }
 }

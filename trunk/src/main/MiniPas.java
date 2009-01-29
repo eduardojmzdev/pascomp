@@ -48,7 +48,7 @@ public final class MiniPas implements Testeable{
         
         /** ETAPA DE EJECUCION */
         try{
-            //OBTENGO EL ARCHIVO .mep GENERADO
+            //OBTENGO EL ARCHIVO .MV GENERADO
             java.io.File f = as.getOutputFile();
             
             //PUEDE SER NULL SI COMPILO SIN GENERACION DE CODIGO
@@ -60,10 +60,8 @@ public final class MiniPas implements Testeable{
             //MV.finish();
             
         }
-        catch(Exception ex){
-            //MV.finish();
-            //throw ex;
-            ex.printStackTrace();
+        catch(Exception ex){            
+            throw ex;            
         }
     }
     
