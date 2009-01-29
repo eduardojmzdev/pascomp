@@ -43,7 +43,14 @@ Práctica PLG 08/09 Grupo 8
   En Program Arguments introducimos la ruta del fichero que queremos compilar, por ejemplo "./tests/Buenos/opsEnteros.src" (sin comillas).
    
   En el directorio tests dentro del directorio del proyecto están todos los tests.
+  
 
 5. ¿Cómo abrir la documentación?
 
   Abrir con un navegador el fichero index.html dentro de la carpeta memoria.
+
+
+NOTA: Cuando se ejecuta la aplicación, si el código fuente pasado por parámetro es correcto, 
+  se procede a su ejecución mediante la máquina virtual. Para esta primera versión, a modo de test y para comprobar 
+  que se realizan bien las operaciones sobre la pila, después de la ejecución de cada instrucción se muestra por pantalla 
+  el contenido completo de la pila en ese instante, en el caso de que esta no esté vacía.
