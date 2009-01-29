@@ -339,15 +339,19 @@ public final class AnalizadorLexico {
 		separadores.add(new Character('\r'));
 	}
 
-	/** Identifica un caracter
-	 * @param ch 
+	/**
+	 * Identifica un caracter
+	 * 
+	 * @param ch
 	 * @return True si es un caracter, false en caso contrario
 	 */
 	private boolean esCaracter(Character ch) {
 		return caracteres.contains(ch);
 	}
 
-	/** Identifica un digito
+	/**
+	 * Identifica un digito
+	 * 
 	 * @param ch
 	 * @return True si es un digito, false en caso contrario
 	 */
@@ -355,7 +359,9 @@ public final class AnalizadorLexico {
 		return digitos.contains(ch);
 	}
 
-	/** Identifica un caracter separador
+	/**
+	 * Identifica un caracter separador
+	 * 
 	 * @param ch
 	 * @return True si es un separador, false en caso contrario
 	 */
@@ -363,7 +369,9 @@ public final class AnalizadorLexico {
 		return separadores.contains(ch);
 	}
 
-	/** Identifica un fin de linea
+	/**
+	 * Identifica un fin de linea
+	 * 
 	 * @param ch
 	 * @return True si es un fin de linea, false en caso contrario
 	 */
@@ -371,7 +379,9 @@ public final class AnalizadorLexico {
 		return ((ch != null) && (ch.charValue() == '\n'));
 	}
 
-	/** Valida la extension de un fichero
+	/**
+	 * Valida la extension de un fichero
+	 * 
 	 * @param strFile
 	 * @return True si la extension es "src", false en caso contrario
 	 */
