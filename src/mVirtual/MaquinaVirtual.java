@@ -341,6 +341,8 @@ public class MaquinaVirtual {
 			int a, b;
 
 			b = Integer.parseInt(temp);
+			temp = pila.pop();
+
 			a = Integer.parseInt(temp);
 
 			if (a > b) {
@@ -356,6 +358,8 @@ public class MaquinaVirtual {
 			int a, b;
 
 			b = Integer.parseInt(temp);
+			temp = pila.pop();
+
 			a = Integer.parseInt(temp);
 
 			if (a < b) {
@@ -371,6 +375,8 @@ public class MaquinaVirtual {
 			int a, b;
 
 			b = Integer.parseInt(temp);
+			temp = pila.pop();
+
 			a = Integer.parseInt(temp);
 
 			if (a >= b) {
@@ -386,6 +392,8 @@ public class MaquinaVirtual {
 			int a, b;
 
 			b = Integer.parseInt(temp);
+			temp = pila.pop();
+
 			a = Integer.parseInt(temp);
 
 			if (a <= b) {
