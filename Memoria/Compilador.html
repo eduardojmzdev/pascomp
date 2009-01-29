@@ -2,7 +2,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen"> 
-		<title>Sintaxis del Lenguaje</title>
+		<title>Procesador del lenguaje</title>
 	</head><body>
 		<div id="grupo">
 			<h3>PLG 08/09</h3>	
@@ -19,47 +19,40 @@
 			</ul>
 		</div>
 		<div id="cabecera">
-			<h1>Definición de la sintaxis del lenguaje</h1>
-		</div></div>
+			<h1>Procesador del lenguaje</h1>
+		</div>
 		<div id="contenido">
 			<!--Datos del OdA-->
 			<div>
 				<h2 id="datos">Datos</h2>
 				<div class="cajaInterna" id="divDatos">
-					<p><strong>Nombre: </strong>Definición formal de la estructura del lenguaje.</p>
-					<p><strong>Función: </strong>En este OdA se agrupan los elementos necesarios que nos han permitido definir la sintaxis del lenguaje.</p>
+					<p><strong>Nombre: </strong>Procesador del lenguaje.</p>
+					<p><strong>Descripción: </strong>Procesador para el lenguaje definido en la práctica.</p>
+					<p><strong>Función: </strong>Traducir código fuente del lenguaje definido a un lenguaje objeto.</p>
 				</div>
 			</div>
 			<!--Metadatos del OdA-->
 			<div>
 				<h2 id="metadatos">Metadatos</h2>
 				<div class="cajaInterna" id="divMetadatos">
-					<p><strong>Descripción: </strong>Definición formal de la estructura del lenguaje.</p>
+					<p><strong>Descripción: </strong>El procesador permite traducir el código fuente del lenguaje definido de alto nivel a otro lenguaje de nivel inferior. De esta manera un programador puede diseñar un programa en un lenguaje mucho más cercano a como piensa un ser humano, para luego compilarlo a un programa más manejable por una computadora. Debido a la especial naturaleza del ciclo de vida de este ODA, se ha creado un recurso en el cual se detalla su evolución.</p>
 					<p><strong>Ciclo de vida: </strong></p>
 					<!--Una division por cada ciclo de vida-->
 					<div class="cicloDeVida">
 						<ul>
 							<li><p><strong>Estado: </strong>Borrador 1</p></li>
-							<li><p><strong>Participantes: </strong>Víctor Abascal Pelayo.</p></li>
-							<li><p><strong>Rol: </strong>Creador del objeto.</p></li>
-							<li><p><strong>Fecha: </strong>16-01-2009</p></li>
+							<li><p><strong>Participantes: </strong>Ignacio Fernández Cuesta, Isamu Takebe Heras, Carlos Fernández Agüero, Antonio Ariza Guerrero, Carla Margalef Bentabol, Daniel Álvarez Ramírez, Jesús De Lara Gimeno.</p></li>
+							<li><p><strong>Rol: </strong>Creador del objeto</p></li>
+							<li><p><strong>Fecha: </strong>21-1-2009</p></li>
 						</ul>
 					</div>
 					<!--Fin de la división-->
 					<p><strong>Clasificación: </strong></p>
 					<ul>
-					    <li><strong>Fuente: </strong>PLG -> Material docente -> 1.2.Normas & índice de las Prácticas ->  Modelo de índice de la memoria del trabajo de prácticas.
+					    <li><strong>Fuente: </strong> .
 						<ul>
-						    <li><strong>Sección: </strong>2</li>
-						    <li><strong>Taxon: </strong>Desarrollo del trabajo.</li>
-						    <ul>
-							    <li><strong>Subsección: </strong>2.1</li>
-						          <li><strong>Taxon: </strong>Definición del lenguaje fuente.</li>
-						        <ul>
-									<li><strong>Subsección: </strong>2.1.1</li>
-										<li><strong>Taxon: </strong>Definición formal de la estructura (sintaxis) del lenguaje.</li>
-							</ul>
-						</ul>
+						    <li><strong>Propia. </strong></li>
+						</ul></li>
 					</ul>
 					</div>
 			</div>
@@ -77,28 +70,21 @@
 						</tr>
 						<tr>
 							<td>D01</td>
-							<td>Recurso&nbsp; Propio.</td>
-							<td>Descripción formal de los aspectos léxicos.</td>	
-							<td><a href="AnalizadorLexico.html">Explicación de aspectos léxicos</a></td>
+							<td>Recurso externo</td>
+							<td>Artículo sobre Compiladores de la wikipedia</td>
+							<td><a href="http://es.wikipedia.org/wiki/Compilador">Enlace</a></td>
 						</tr>
 						<tr>
 							<td>D02</td>
-							<td>Recurso propio.</td>
-							<td>Descripción formal de los aspectos sintácticos.</td>
-							<td><a href="AnalizadorSintactico.html">Explicación de aspectos sintácticos</a></td>
-						</tr>						
+							<td>Recurso propio</td>
+							<td>Javadoc del compilador implementado</td>
+							<td><a href="./recursos/javadoc/index.html">Enlace</a></td>
+						</tr>
 						<tr>
 							<td>D03</td>
-							<td>Recurso propio.</td>
-							<td>Estructura y construcción de la tabla de símbolos</td>
-							<td><a href="TablaSimbolos.html"> OdA que engloba todo lo referente a la tabla de símbolos</a></td>
-						</tr>				
-						<tr>
-							<td>D04</td>
-							<td>Recurso propio.</td>
-
-							<td>Restricciones contextuales.</td>
-							<td><a href="RestriccionesContextuales.html">Todo lo referente a las restricciones contextuales y a su descripción formal</a></td>
+							<td>Recurso propio</td>
+							<td>Código fuente del compilador implementado</td>
+							<td><a href="./recursos/codigo/">Enlace</a></td>
 						</tr>						
 					</table>				
 				</div>		
@@ -108,12 +94,12 @@
 				<h2 id="esquema">Esquema General</h2>
 				<div class="cajaInterna" id="divOdas">
 					<ul>
-					      <li><a class="menu" href="Introduccion.html">Introducción</a>
+						<li><a class="menu" href="Introduccion.html">Introducción</a>
 						<li><a class="menu" href="Metodologia.html">Metodología</a>
 						<li><a class="menu" href="DesarrolloDelTrabajo.html">Desarrollo del trabajo</a>
 						<li><a class="menu" href="DefinicionDelLenguajeFuente.html">Definición del lenguaje fuente</a>
 						<ul>
-							<li><a class="menu" href="DefinicionFormal.html"><strong>Definición formal de la estructura (sintaxis) del lenguaje</strong></a>
+							<li><a class="menu" href="DefinicionFormal.html">Definición formal de la estructura (sintaxis) del lenguaje</a>
 							<ul>
 								<li><a class="menu" href="AnalizadorLexico.html">Descripción formal de los aspectos léxicos</a></li>
 								<li><a class="menu" href="AnalizadorSintactico.html">Descripción formal de los aspectos sintácticos (independientes del contexto)</a></li>
@@ -125,7 +111,7 @@
 						</ul></li>
 						<li><a class="menu" href="Construccion.html">Construcción del procesador</a>
 							<ul>
-								<li><a class="menu" href="Compilador.html">Procesador del Lenguaje implementado</a>
+								<li><a class="menu" href="Compilador.html"><strong>Procesador del Lenguaje implementado</strong></a>
 							</ul></li>
 						<li><a class="menu" href="Conclusiones.html">Conclusiones</a></li>
 						<li><a class="menu" href="Bibliografia.htm">Bibliografía</a></li>
@@ -135,6 +121,4 @@
 			</div>
 			
 		</div>
-	    </ul>
-	    </ul>
 	</body></html>
