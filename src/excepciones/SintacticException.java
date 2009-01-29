@@ -8,7 +8,7 @@ package excepciones;
 public final class SintacticException extends BasicException{
     
     /**
-	 * 
+	 * Identificador de la version
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -36,12 +36,16 @@ public final class SintacticException extends BasicException{
         errorMap.put(new Integer(16), "Se espera \"");
     }
     
+  
     /**
-     *
-     */   
-    public SintacticException(int cod, int numLinea) {
-        super("Error Sintactico en linea " + numLinea + ": " + errorMap.get(new Integer(cod)));
+	 * Constructor de la excepcion
+	 * @param cod Codigo
+	 * @param numLinea Numero de linea
+	 */
+	public SintacticException(int cod, int numLinea) {
+		super("Error Sintactico en linea " + numLinea + ": "
+				+ errorMap.get(new Integer(cod)));
 		codigo = cod;
-    }        
+	}        
     
 }
