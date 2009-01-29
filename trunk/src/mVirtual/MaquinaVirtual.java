@@ -32,23 +32,44 @@ public class MaquinaVirtual {
 	// Nombre del fichero que almacena el código objeto
 	private String codigoObjeto;
 
-	// Constructor
+	/**
+	 * Constructor que recibe como parametro un fichero
+	 * 
+	 * @param archivo
+	 *            Ruta del fichero de entrada
+	 * @throws Exception
+	 */
 	public MaquinaVirtual(String archivo) throws Exception {
 		setFichero(archivo);
 		inicializar();
 	}
 
-	// Crea una nueva memoria de datos y pila, y pone el contador de programa a
-	// cero.
+	/**
+	 * Crea una nueva memoria de datos y pila, y pone el contador de programa a
+	 * cero.
+	 * 
+	 */
 	public void inicializar() {
 		pila = new Stack<String>();
 		memoriaDatos = new Hashtable<Integer, String>();
 	}
 
+	/**
+	 * Metodo setter del atributo archivo
+	 * 
+	 * @param archivo
+	 *            Ruta del fichero
+	 * @throws IOException
+	 */
 	public void setFichero(String archivo) throws IOException {
 		codigoObjeto = archivo;
 	}
 
+	/**
+	 * Crea un arraylist con las instrucciones
+	 * 
+	 * @return Arraylist con instrucciones
+	 */
 	public ArrayList obtenerInstrucciones() {
 		ArrayList temp = new ArrayList();
 		File archivo = null;
@@ -114,6 +135,13 @@ public class MaquinaVirtual {
 		}
 	}
 
+	/**
+	 * Metodo auxiliar para eliminar espacios innecesarios
+	 * 
+	 * @param instruccion
+	 *            Instruccion para eliminar los espacios
+	 * @return
+	 */
 	private String eliminaBlancos(String instruccion) {
 		char letra = instruccion.charAt(0);
 		int i = 0;
@@ -125,8 +153,14 @@ public class MaquinaVirtual {
 		return temp;
 	}
 
+	/**
+	 * Metodo auxiliar que dada una instrccuion devuelve su argumento
+	 * 
+	 * @param instruccion
+	 *            Instruccion de entrada
+	 * @return
+	 */
 	private String argumento(String instruccion) {
-
 		char letra = instruccion.charAt(0);
 		int i = 0;
 		while (letra == ' ') {
@@ -429,7 +463,7 @@ public class MaquinaVirtual {
 			}
 
 			if (dig > 57 || dig < 48)// ERROR -Si despues de leer el menos no
-										// viene un digito
+			// viene un digito
 			{
 				throw new MaquinaVirtualException(1);
 			}
