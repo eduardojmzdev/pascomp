@@ -12,7 +12,7 @@ import mVirtual.MaquinaVirtual;
  * @see mepa.Mepa
  * @since 1.5
  */
-public final class MiniPas implements Testeable{
+public final class Compilador implements Testeable{
     /** Analizador sintactico */
     private AnalizadorSintactico as = null;
     
@@ -25,7 +25,7 @@ public final class MiniPas implements Testeable{
     /**
      * Constructor 
      */
-    public MiniPas(){
+    public Compilador(){
         as = new AnalizadorSintactico();
     }
     

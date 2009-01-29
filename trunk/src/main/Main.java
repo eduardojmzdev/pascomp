@@ -16,7 +16,7 @@ public class Main {
         if(args.length ==0){
             System.out.println("Modo de Uso: <program name> <in_file>");
         } else{
-            Testeador test = new Testeador(args[0],new MiniPas());
+            Testeador test = new Testeador(args[0],new Compilador());
             test.start();            
         }
         
