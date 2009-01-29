@@ -19,7 +19,7 @@ public class BasicException extends Exception {
 	protected static final HashMap<Integer, String> errorMap = new HashMap<Integer, String>();
 
 	/**
-	 * Codigo de error, es el key del hash errorMap. Permite obtener el mensaje
+	 * Codigo de error, es la clave del hash errorMap. Permite obtener el mensaje
 	 * de error
 	 */
 	protected int codigo;
