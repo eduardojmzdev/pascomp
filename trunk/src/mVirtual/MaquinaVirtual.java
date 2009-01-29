@@ -29,7 +29,7 @@ public class MaquinaVirtual {
 	 */
 	private Hashtable<Integer, String> memoriaDatos;
 
-	// Nombre del fichero que almacena el código objeto
+	// Nombre del fichero que almacena el codigo objeto
 	private String codigoObjeto;
 
 	/**

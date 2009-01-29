@@ -250,7 +250,7 @@ public final class AnalizadorLexico {
 		Character c;
 		StringBuffer buff = new StringBuffer();
 		c = LastCharRead; // asume que es una letra
-		int ultimaLinea = numLin; // salva la linea actual
+		int ultimaLinea = numLin; 
 		do {
 			buff.append(c.charValue());
 			c = leerCaracter();
@@ -276,7 +276,7 @@ public final class AnalizadorLexico {
 		Character c;
 		StringBuffer buff = new StringBuffer();
 		c = LastCharRead;
-		int lineaUlt = numLin;// salva la liena actual
+		int lineaUlt = numLin;
 		do {
 			buff.append(c.charValue());
 			c = leerCaracter();
@@ -300,7 +300,7 @@ public final class AnalizadorLexico {
 		}
 		LastCharRead = reader.readCharacter();
 		if (esFinDeLinea(LastCharRead)) {
-			numLin++; // incrementa la linea
+			numLin++; 
 
 		}
 		return LastCharRead;

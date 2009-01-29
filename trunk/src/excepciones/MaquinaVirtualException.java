@@ -25,7 +25,7 @@ public class MaquinaVirtualException extends BasicException {
 	 *            codigo de error
 	 */
 	public MaquinaVirtualException(int codigo) {
-		super("[MEPA] Error: " + errorMap.get(new Integer(codigo)));
+		super("[MV] Error: " + errorMap.get(new Integer(codigo)));
 		this.codigo = codigo;
 	}
 
