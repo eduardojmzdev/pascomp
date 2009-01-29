@@ -1,0 +1,12 @@
+program prueba;
+var
+	a: integer;
+	b: boolean;
+begin
+	read(a);
+	write(a);
+	b:=true;
+	write(false);
+	write(b);
+	write("algo");
+end.
