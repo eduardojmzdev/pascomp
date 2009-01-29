@@ -10,7 +10,7 @@ Práctica PLG 08/09 Grupo 8
     Para ejecutar: jre 1.6 o superior
     Para compilar: jdk 1.6 o superior
     Para importar el proyecto es necesario utilizar Eclipse.
-
+    Recomendado usar Firefox para ver las páginas web de los ODA's.
 
 2. ¿Cómo ejecutar el compilador?
 
