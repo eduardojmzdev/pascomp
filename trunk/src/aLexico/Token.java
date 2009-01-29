@@ -1,5 +1,9 @@
 package aLexico;
 
+/**
+ * Clase que contiene todos los tokens
+ *
+ */
 public final class Token {
 
         public String lex;

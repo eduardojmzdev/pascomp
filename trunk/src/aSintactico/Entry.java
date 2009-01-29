@@ -83,7 +83,7 @@ public final class Entry {
     }
     
     /**
-     * 
+     * Metodo auxiliar para detectar el identificador "PROGRAMA"
      * @return true si  la entidad es el programa
      */
     public boolean esPrograma(){
@@ -91,7 +91,7 @@ public final class Entry {
     }
     
      /**
-     * 
+     * Metodo auxiliar para detectar si es una variable
      * @return true si  la entidad es una variable
      */
     public boolean esVariable(){
@@ -99,15 +99,15 @@ public final class Entry {
     }
     
     /**
-     * 
+     * Metodo auxiliar para detectar si es un tipo
      * @return true si  la entidad es un Tipo
      */
     public boolean esTipo(){
         return clase == TIPO;
     }
+    
     /**
-	 * * *
-	 * 
+	 * Metodo auxiliar para comprobar constantes
 	 * @return true si la entidad es una constante
 	 */
 	public boolean esConstante() {

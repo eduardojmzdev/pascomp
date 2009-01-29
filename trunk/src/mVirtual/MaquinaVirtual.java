@@ -9,6 +9,11 @@ import java.util.Hashtable;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * Clase que implementa la Maquina Virtual
+ * 
+ *
+ */
 public class MaquinaVirtual {
 
     /**     
