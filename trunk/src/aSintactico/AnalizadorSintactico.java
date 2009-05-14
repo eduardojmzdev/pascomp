@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import excepciones.*;
 import aSintactico.tipos.*;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Properties;
@@ -332,17 +333,72 @@ public final class AnalizadorSintactico implements Testeable {
      */
     private void bloque() throws Exception {
         nextToken();
-        if (token.cod == Token.VAR || token.cod == Token.SEP) {
+        if (token.cod == Token.VAR || token.cod == Token.SEP || token.cod == Token.PROC
+        		|| token.cod == Token.TYPE) {
             restaurarToken = true;
-
+            seccionDefinicionDeTipos();
             seccionDefinicionDeVariables();
-
             sentenciaCompuesta();
 
         } else {
             throw new SintacticException(4, token.numLin);
         }
     }
+    
+    /**
+     * @throws java.lang.Exception si ocurre error lexico (LexicException) o sintactico (SintacticException)
+     */
+    private void seccionDefinicionDeTipos()  throws Exception{
+        nextToken();
+        if(token.cod!=Token.TYPE){
+            restaurarToken=true;
+            return;
+        }
+        definicionDeTipo();
+        nextToken();
+        if (token.cod!=Token.PYCOMA)
+            throw new SintacticException(2,token.numLin);
+        restoDefinicionDeTipo();
+    }
+    
+    /**
+    *
+    * @throws java.lang.Exception
+    */
+   private void definicionDeTipo()  throws Exception{
+       nextToken();
+       if(token.cod!= Token.id) throw new SintacticException(1,token.numLin);
+       /*accion semantica*/
+       if ( TS.estaDeclarado(token.lex)) 
+               throw new SemanticException(0,token.numLin,token.lex);              
+       String id=token.lex;
+       nextToken();
+       if(token.cod!= Token.DOSPUNTOS) throw new SintacticException(4,token.numLin);
+       Tipo t = tipo();
+       /*accion semantica*/
+       
+       TS.agregarTipo(id,t);
+   }
+   
+   /**
+   *
+   * @throws java.lang.Exception
+   */
+  private void restoDefinicionDeTipo()  throws Exception{
+      nextToken();
+      if(token.cod==Token.id){
+          restaurarToken=true;
+          definicionDeTipo();
+          nextToken();
+          if (token.cod!=Token.PYCOMA)   throw new SintacticException(2,token.numLin);
+          restoDefinicionDeTipo();
+      } else if (token.cod==Token.VAR || token.cod==Token.SEP || token.cod==Token.PROC ){
+          restaurarToken=true;
+          return;
+      } else
+          throw new SintacticException(6,token.numLin);
+  }
+
 
     /**
      * 
