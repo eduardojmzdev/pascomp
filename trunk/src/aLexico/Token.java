@@ -13,13 +13,14 @@ public final class Token {
 			";", ".", ":", ",", "(", ")", "!=", "program", "var", // 3-11
 			"begin", "end", // 12-13
 			":=", null, "+", "-", "*", "/", "not", "and", "or", "=", // 14-23
-			"read", "write", "\"" // 24-26
+			"read", "write", "\"", "while", "if", "else", "then", "procedure", "registro", "fregistro" // 24-26
 	};
 
 	public static final String[] TOKENS = { "EOF", "id", "digito", "PYCOMA",
 			"PUNTO", "DOSPUNTOS", "COMA", "PA", "PC", "DISTINTO", "INICIO",
 			"VAR", "SEP", "FIN", "ASIG", "OPREL", "SUMA", "RESTA", "MUL",
-			"DIV", "NOT", "AND", "OR", "IGUAL", "READ", "WRITE", "COMILLAS" };
+			"DIV", "NOT", "AND", "OR", "IGUAL", "READ", "WRITE", "COMILLAS",
+			"MIENTRAS", "SI", "SINO", "ENTONCES", "PROC", "REG", "FREG"};
 
 	public static final int EOF = 0;
 	public static final int id = 1;
@@ -48,7 +49,14 @@ public final class Token {
 	public static final int READ = 24;
 	public static final int WRITE = 25;
 	public static final int COMILLAS = 26;
-
+	public static final int MIENTRAS = 27;
+	public static final int SI = 28;
+	public static final int SINO = 29;
+	public static final int ENTONCES = 30;
+	public static final int PROC = 31;
+	public static final int REG = 32;
+	public static final int FREG = 33;
+	
 	public Token(int cod, String lex, int numLin) {
 		this.cod = cod;
 		this.numLin = numLin;
