@@ -33,7 +33,13 @@ public final class AnalizadorLexico {
 		palabrasReservadas.put("var", new Integer(Token.VAR));
 		palabrasReservadas.put("read", new Integer(Token.READ));
 		palabrasReservadas.put("write", new Integer(Token.WRITE));
-
+		palabrasReservadas.put("mientras", new Integer(Token.MIENTRAS));
+		palabrasReservadas.put("si", new Integer(Token.SI));
+		palabrasReservadas.put("sino", new Integer(Token.SINO));
+		palabrasReservadas.put("entonces", new Integer(Token.ENTONCES));
+		palabrasReservadas.put("procedure", new Integer(Token.PROC));
+		palabrasReservadas.put("registro", new Integer(Token.REG));
+		palabrasReservadas.put("fregistro", new Integer(Token.FREG));
 	}
 
 	/**

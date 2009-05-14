@@ -13,7 +13,7 @@ public final class Token {
 			";", ".", ":", ",", "(", ")", "!=", "program", "var", // 3-11
 			"begin", "end", // 12-13
 			":=", null, "+", "-", "*", "/", "not", "and", "or", "=", // 14-23
-			"read", "write", "\"", "while", "if", "else", "then", "procedure", "registro", "fregistro" // 24-26
+			"read", "write", "\"", "while", "if", "else", "then", "procedure", "registro", "fregistro" // 24-33
 	};
 
 	public static final String[] TOKENS = { "EOF", "id", "digito", "PYCOMA",
