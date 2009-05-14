@@ -26,8 +26,10 @@ public final class EntryTable extends AbstractSimbolTable<Entry> {
 	public void init() {
 		if (pila.size() > 0) {
 			pila.clear();
-			if (tablaActual != null)
+			if (tablaActual != null){
 				tablaActual.clear();
+				if(tablaActual!=null) tablaActual.clear();
+			}
 		}
 
 		// crea una tabla con nivel lexico -1
@@ -133,4 +135,35 @@ public final class EntryTable extends AbstractSimbolTable<Entry> {
 		Entry entry = buscar(lex);
 		return (entry != null && entry.esTipo()) ? entry : null;
 	}
+	
+	/**     
+     * Agrega una declaración de procedimientos en el n.l actual y retorna la
+     * entrada generada
+     * @param id nombre del procedimiento
+     * @param listaPar lista de parametros
+     * @param etiqueta etiqueta de procedimiento
+     * @return entrada creada
+     */
+    public Entry agregarProcedimiento(String id, LinkedList<Entry> listaPar, String etiqueta){
+        Entry e = new Entry(id,Entry.PROCEDIMIENTO);
+        e.etiqueta = etiqueta;
+        e.listaParametros = listaPar;
+        e.asignable=false;
+        int tamPar=0;
+        int size=listaPar.size();
+        Entry entryPar;
+                                
+        for(int i=0;i<size;i++){ //calcula el espacio para los parámetros formales            
+            entryPar= listaPar.get(i);            
+            if(entryPar.porValor)
+                tamPar += entryPar.tipo.getSize();
+            else
+                tamPar++;//las referencias ocupan 1 celda
+            
+        }
+        e.sizeParametros = tamPar;
+        
+        inserta(id, e);
+        return e;
+    }
 }
