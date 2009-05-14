@@ -40,6 +40,9 @@ public final class AnalizadorLexico {
 		palabrasReservadas.put("procedure", new Integer(Token.PROC));
 		palabrasReservadas.put("registro", new Integer(Token.REG));
 		palabrasReservadas.put("fregistro", new Integer(Token.FREG));
+		palabrasReservadas.put("tipo", new Integer(Token.TYPE));
+		palabrasReservadas.put("liberar", new Integer(Token.DISPOSE));
+		palabrasReservadas.put("nuevo", new Integer(Token.NEW));
 	}
 
 	/**
@@ -140,6 +143,9 @@ public final class AnalizadorLexico {
 			} else if (ch.charValue() == '"') {
 				leerCaracter();
 				return new Token(Token.COMILLAS, "", lastLine);
+			} else if (ch.charValue() == '^') {
+				leerCaracter();
+				return new Token(Token.TIPUNTERO, "", lastLine);
 			} else if (ch.charValue() == '+') {
 				leerCaracter();
 				return new Token(Token.SUMA, "", lastLine);

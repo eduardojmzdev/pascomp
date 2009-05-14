@@ -13,14 +13,16 @@ public final class Token {
 			";", ".", ":", ",", "(", ")", "!=", "program", "var", // 3-11
 			"begin", "end", // 12-13
 			":=", null, "+", "-", "*", "/", "not", "and", "or", "=", // 14-23
-			"read", "write", "\"", "while", "if", "else", "then", "procedure", "registro", "fregistro" // 24-33
+			"read", "write", "\"", "while", "if", "else", "then", // 24-30 
+			"procedure", "registro", "fregistro", "tipo", "liberar", "^", "nuevo" //31-36
 	};
 
 	public static final String[] TOKENS = { "EOF", "id", "digito", "PYCOMA",
 			"PUNTO", "DOSPUNTOS", "COMA", "PA", "PC", "DISTINTO", "INICIO",
 			"VAR", "SEP", "FIN", "ASIG", "OPREL", "SUMA", "RESTA", "MUL",
 			"DIV", "NOT", "AND", "OR", "IGUAL", "READ", "WRITE", "COMILLAS",
-			"MIENTRAS", "SI", "SINO", "ENTONCES", "PROC", "REG", "FREG"};
+			"MIENTRAS", "SI", "SINO", "ENTONCES", "PROC", "REG", "FREG", 
+			"TYPE", "DISPOSE", "TIPUNTERO","NEW"};
 
 	public static final int EOF = 0;
 	public static final int id = 1;
@@ -56,6 +58,11 @@ public final class Token {
 	public static final int PROC = 31;
 	public static final int REG = 32;
 	public static final int FREG = 33;
+	public static final int TYPE = 34;
+	public static final int DISPOSE = 35;
+	public static final int TIPUNTERO = 36;
+	public static final int NEW = 37;
+	
 	
 	public Token(int cod, String lex, int numLin) {
 		this.cod = cod;
