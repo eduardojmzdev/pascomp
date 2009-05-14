@@ -1,5 +1,0 @@
-program prueba;
-	a,b: integer;
-begin
-	a := 5 < 7;
-end.

@@ -1,5 +1,0 @@
-program prueba;
-	a: integer;
-	b: boolean;
-begin
-end.

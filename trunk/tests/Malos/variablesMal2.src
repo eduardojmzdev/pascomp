@@ -1,4 +1,0 @@
-program prueba;
-begin
-var a:integer;
-end.

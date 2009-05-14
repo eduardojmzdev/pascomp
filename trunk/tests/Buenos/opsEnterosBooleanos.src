@@ -1,9 +1,0 @@
-program prueba;
-var
-	a,b: integer;
-	c: boolean;
-begin
-	a := 5;
-	b := -a;
-	c := a <= b;
-end.
