@@ -1,0 +1,6 @@
+program prueba;
+var
+	a: boolean;
+begin
+	a := 0;
+end.
