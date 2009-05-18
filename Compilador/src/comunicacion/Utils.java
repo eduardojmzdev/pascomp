@@ -10,7 +10,7 @@ public class Utils {
 	/**
 	 * Extension dam
 	 */
-	public final static String dam = "dam";
+	public final static String extension = "pas";
 
 	
 	/**

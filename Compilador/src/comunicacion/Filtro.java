@@ -12,7 +12,7 @@ public class Filtro {
 	    
 	    String extension = Utils.getExtension(s);
 	    if (extension != null) {
-		if (extension.equals(Utils.dam)) {
+		if (extension.equals(Utils.extension)) {
 		        return true;
 		} else {
 		    return false;

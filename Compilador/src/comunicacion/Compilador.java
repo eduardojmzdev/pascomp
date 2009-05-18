@@ -44,7 +44,7 @@ public class Compilador implements Modelo {
 				}
 			else{
 			//Fichero no aceptado
-		    error="Tiempo de ejecucion: compruebe que la extension sea: .dam o que haya introducido un fichero y escriba el nombre del fichero de salida";
+		    error="Tiempo de ejecucion: compruebe que la extension sea: .pas o que haya introducido un fichero y escriba el nombre del fichero de salida";
 		    throw new Exception();
 			}
 		} catch (Exception e) {
