@@ -1,0 +1,9 @@
+program prueba;
+var
+	a,b: boolean;
+begin
+	a := true;
+	b := not a;
+	b := a or b;
+	a := (a and b) and b;
+end.

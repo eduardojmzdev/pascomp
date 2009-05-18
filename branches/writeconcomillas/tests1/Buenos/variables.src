@@ -1,0 +1,6 @@
+program prueba;
+var
+	a,e: integer;
+	b,c: boolean;
+begin
+end.
