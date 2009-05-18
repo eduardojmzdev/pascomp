@@ -1703,7 +1703,11 @@ public class ASintacticoImp extends ASintactico {
 			token=ALexico.getInstance().obtenerToken();
 			return tabla.dameTipo("boolean",nivel);			
 		}
-		
+		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENCOMILLAS)){
+			String codigoEmitido="apila(\""+token.getLexema()+"\");.";
+			emitirCodigo(codigoEmitido);
+			return tabla.dameTipo("boolean",nivel);			
+		}
 		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR))){
 			String asignado=token.getLexema();
 			if (tabla.existeConstante(asignado,nivel)||tabla.existeVariable(asignado,nivel)){

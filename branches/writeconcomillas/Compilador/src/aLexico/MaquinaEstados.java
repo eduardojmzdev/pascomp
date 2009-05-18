@@ -21,6 +21,7 @@ public enum MaquinaEstados {
 	EDISTINTO,
 	ECORCHETEAPER,
 	ECORCHETECIER,
-	EPUNTERO;
+	EPUNTERO,
+	ECOMILLAS;
 	
 }

@@ -2,7 +2,6 @@ package aLexico;
 
 import java.io.FileReader;
 
-
 public abstract class ALexico {
 	
 

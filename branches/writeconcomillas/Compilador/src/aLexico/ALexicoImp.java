@@ -75,6 +75,17 @@ public class ALexicoImp extends ALexico {
 		return s;
 	}
 	
+	private String leeComillas(String s) throws IOException{
+		pasaAMinusculas();
+		while ((buffer!='"')){
+			s+=""+buffer;
+			buffer=(char)ficheroFuente.read();
+//			if (buffer == -1) throw new IOException("No hay fin de comillas");
+			pasaAMinusculas();
+		}
+		ficheroFuente.read();
+		return s;
+	}
 	
 	private String leeNumero(String s) throws IOException{
 		pasaAMinusculas();
@@ -214,6 +225,10 @@ public class ALexicoImp extends ALexico {
 						lexema +=buffer; 
 						transita(MaquinaEstados.EPUNTERO);
 						break;
+					case '"':
+						lexema +=buffer; 
+						transita(MaquinaEstados.ECOMILLAS);
+						break;
 					default:
 						if(ficheroFuente.ready()){
 							throw new Exception("Error Lexico: Linea "+lineaActual+":"+" '"+buffer+"'"+".");
@@ -332,6 +347,10 @@ public class ALexicoImp extends ALexico {
 					return token;
 				case EDISTINTO:
 					rellenaInfoToken(EnumToken.TOKENDISTINTO,lexema,null,MaquinaEstados.EINICIAL);
+					return token;
+				case ECOMILLAS:
+					lexema=leeComillas(lexema);
+					rellenaInfoToken(EnumToken.TOKENCOMILLAS,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				}
 			}
