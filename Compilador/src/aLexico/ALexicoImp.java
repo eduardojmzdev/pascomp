@@ -92,7 +92,6 @@ public class ALexicoImp extends ALexico {
 		else if (s.equals("begin")) rellenaInfoToken(EnumToken.BEGIN,s,null,MaquinaEstados.EINICIAL);
 		else if (s.equals("end")) rellenaInfoToken(EnumToken.END,s,null,MaquinaEstados.EINICIAL);
 		else if (s.equals("var")) rellenaInfoToken(EnumToken.VAR,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("const")) rellenaInfoToken(EnumToken.CONST,s,null,MaquinaEstados.EINICIAL);
 		else if (s.equals("read")) rellenaInfoToken(EnumToken.READ,s,null,MaquinaEstados.EINICIAL);
 		else if (s.equals("write")) rellenaInfoToken(EnumToken.WRITE,s,null,MaquinaEstados.EINICIAL);
 		else if (s.equals("integer")) rellenaInfoToken(EnumToken.INTEGER,s,null,MaquinaEstados.EINICIAL);

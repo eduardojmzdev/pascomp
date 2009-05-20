@@ -85,10 +85,7 @@ public class ASintacticoImp extends ASintactico {
 	
 	private void reconoceRestoPrograma()throws Exception {
 			int tmp0=0;
-			if (!hayErrorLexico(token)
-					&& (comparaTokens(token.getCategoria(), EnumToken.CONST))) {
-				reconoceZonaConstantes();
-			}
+
 			if (!hayErrorLexico(token)
 					&& (comparaTokens(token.getCategoria(), EnumToken.TYPE))) {
 				reconoceZonaTipos();
@@ -442,20 +439,8 @@ public class ASintacticoImp extends ASintactico {
 
 
 
-	private void reconoceZonaConstantes() throws Exception {
-		token = ALexico.getInstance().obtenerToken();
-		reconoceConstantes();
-		reconoceRestoConstantes();
-	}
 
 	
-	private void reconoceRestoConstantes() throws Exception{
-		while (!hayErrorLexico(token)
-				&& (comparaTokens(token.getCategoria(),
-						EnumToken.IDENTIFICADOR)) && !hayError) {
-			reconoceConstantes();
-		}
-	}
 	
 	
 	@SuppressWarnings("unchecked")
@@ -1880,8 +1865,6 @@ public class ASintacticoImp extends ASintactico {
 			return "END";
 		case VAR:
 			return "VAR";
-		case CONST:
-			return "CONST";
 		case INTEGER:
 			return "TIPO";
 		case BOOLEAN:
