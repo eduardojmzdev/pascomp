@@ -5,6 +5,8 @@ package mVirtual;
 
 //LIBRERÍAS:
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Stack;
 
 import mVirtual.instrucciones.ExcepcionEnEjecucion;
@@ -67,6 +69,11 @@ public class MaquinaVirtualImp extends MaquinaVirtual{
 			Instruccion aux = memoriaInstrucciones.getCodigo().get(contadorPrograma);
 			aux.Ejecutar();
 			contadorPrograma++;
+			System.out.println(printMemoria());
+			System.out.println(printPila());
+			System.out.println();
+			
+
 		}	
 		} catch (ExcepcionEnEjecucion e) {
 			// TODO Auto-generated catch block
@@ -152,11 +159,36 @@ public class MaquinaVirtualImp extends MaquinaVirtual{
 		return memoriaInstrucciones;
 	}
 
-public void setContadorPrograma(int contadorPrograma) {
-	this.contadorPrograma = contadorPrograma;
+	public void setContadorPrograma(int contadorPrograma) {
+		this.contadorPrograma = contadorPrograma;
+	}
+	
+	public void setMemoriaInstrucciones(CodigoObjeto memoriaInstrucciones) {
+		this.memoriaInstrucciones = memoriaInstrucciones;
+	}
+	
+	public String printMemoria(){
+		Set<Integer> keys = memoriaDatos.keySet();
+		Iterator<Integer> keysIt = keys.iterator();
+		String salida = "";	
+		
+		Integer pos;
+		while (keysIt.hasNext()){
+			pos = keysIt.next();
+			salida += "Posición de memoria: "+ pos + " contiene: " + memoriaDatos.get(pos) + "\n";
+		}
+		return salida;	
+	}
+	
+	public String printPila(){
+		Iterator<String> pilaIt= pila.iterator();
+		String salida = "";	
+		while (pilaIt.hasNext()){
+			String datoPila = pilaIt.next();
+			salida += datoPila + "\n";
+		}
+		return salida;
+		
+	}
 }
 
-public void setMemoriaInstrucciones(CodigoObjeto memoriaInstrucciones) {
-	this.memoriaInstrucciones = memoriaInstrucciones;
-}
-}
