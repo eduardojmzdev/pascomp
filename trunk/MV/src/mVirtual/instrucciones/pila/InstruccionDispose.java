@@ -29,7 +29,10 @@ public class InstruccionDispose implements Instruccion {
 	 */
 	public void Ejecutar() throws ExcepcionEnEjecucion {
 		try{
-		//	MaquinaVirtual.obtenerInstancia().getPila().pop();
+			int pos = Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop());
+			for(int i=pos; i<pos + Integer.parseInt(datos); i++){
+				MaquinaVirtual.obtenerInstancia().getMemoriaDatos().remove(i);	
+			}
 		}catch (Exception e){
 			throw new ExcepcionEnEjecucion("Error de acceso a memoria");
 		} 
