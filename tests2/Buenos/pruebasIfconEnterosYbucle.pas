@@ -1,6 +1,8 @@
 program pruebasIfconEnterosYbucle;
 var
-x,y,z:integer;
+	x:integer;
+	y:integer;
+	z:integer;
 
 begin
 	x:=1;

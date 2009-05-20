@@ -1,5 +1,7 @@
 program prueba;
-	a,b: boolean;
+var
+	a: boolean;
+	b: boolean;
 begin
 	a := true;
 	b := a + a;
