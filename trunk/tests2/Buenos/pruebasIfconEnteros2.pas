@@ -1,7 +1,7 @@
 program pruebasIfconEnteros2;
 var
-x,y:integer;
-
+	x:integer;
+	y:integer;
 begin
 	x:=1;
 	y:=5;

@@ -1,6 +1,7 @@
 program pruebasIfconEnteros;
 var
-x,y:integer;
+	x:integer;
+	y:integer;
 
 begin
 	x:=1;

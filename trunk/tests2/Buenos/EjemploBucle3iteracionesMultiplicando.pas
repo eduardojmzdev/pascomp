@@ -1,7 +1,7 @@
 program EjemploBucle3iteracionesMultiplicando;
 var
 x:integer;
-
+y:integer;
 begin
 	x:=0;
 	y:=3;
