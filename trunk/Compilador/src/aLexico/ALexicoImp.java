@@ -88,35 +88,35 @@ public class ALexicoImp extends ALexico {
 	
 	
 	private void evaluaPalabra(String s){
-		if (s.equals("program")) rellenaInfoToken(EnumToken.TOKENPROGRAM,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("begin")) rellenaInfoToken(EnumToken.TOKENBEGIN,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("end")) rellenaInfoToken(EnumToken.TOKENEND,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("var")) rellenaInfoToken(EnumToken.TOKENVAR,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("const")) rellenaInfoToken(EnumToken.TOKENCONST,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("read")) rellenaInfoToken(EnumToken.TOKENREAD,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("write")) rellenaInfoToken(EnumToken.TOKENWRITE,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("integer")) rellenaInfoToken(EnumToken.TOKENINTEGER,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("boolean")) rellenaInfoToken(EnumToken.TOKENBOOLEAN,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("true")) rellenaInfoToken(EnumToken.TOKENTRUE,s,s,MaquinaEstados.EINICIAL);
-		else if (s.equals("false")) rellenaInfoToken(EnumToken.TOKENFALSE,s,s,MaquinaEstados.EINICIAL);
-		else if (s.equals("and")) rellenaInfoToken(EnumToken.TOKENAND,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("div")) rellenaInfoToken(EnumToken.TOKENDIV,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("mod")) rellenaInfoToken(EnumToken.TOKENMODULO,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("or")) rellenaInfoToken(EnumToken.TOKENOR,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("not")) rellenaInfoToken(EnumToken.TOKENNOT,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("if")) rellenaInfoToken(EnumToken.TOKENIF,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("then")) rellenaInfoToken(EnumToken.TOKENTHEN,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("else")) rellenaInfoToken(EnumToken.TOKENELSE,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("while")) rellenaInfoToken(EnumToken.TOKENWHILE,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("do")) rellenaInfoToken(EnumToken.TOKENDO,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("array")) rellenaInfoToken(EnumToken.TOKENARRAY,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("of")) rellenaInfoToken(EnumToken.TOKENOF,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("type")) rellenaInfoToken(EnumToken.TOKENTYPE,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("procedure")) rellenaInfoToken(EnumToken.TOKENPROCEDURE,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("new")) rellenaInfoToken(EnumToken.TOKENNEW,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("dispose")) rellenaInfoToken(EnumToken.TOKENDISPOSE,s,null,MaquinaEstados.EINICIAL);
-		else if (s.equals("nil")) rellenaInfoToken(EnumToken.TOKENNIL,s,null,MaquinaEstados.EINICIAL);
-		else rellenaInfoToken(EnumToken.TOKENIDENTIFICADOR,s,null,MaquinaEstados.EINICIAL);
+		if (s.equals("program")) rellenaInfoToken(EnumToken.PROGRAM,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("begin")) rellenaInfoToken(EnumToken.BEGIN,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("end")) rellenaInfoToken(EnumToken.END,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("var")) rellenaInfoToken(EnumToken.VAR,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("const")) rellenaInfoToken(EnumToken.CONST,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("read")) rellenaInfoToken(EnumToken.READ,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("write")) rellenaInfoToken(EnumToken.WRITE,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("integer")) rellenaInfoToken(EnumToken.INTEGER,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("boolean")) rellenaInfoToken(EnumToken.BOOLEAN,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("true")) rellenaInfoToken(EnumToken.TRUE,s,s,MaquinaEstados.EINICIAL);
+		else if (s.equals("false")) rellenaInfoToken(EnumToken.FALSE,s,s,MaquinaEstados.EINICIAL);
+		else if (s.equals("and")) rellenaInfoToken(EnumToken.AND,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("div")) rellenaInfoToken(EnumToken.DIV,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("mod")) rellenaInfoToken(EnumToken.MODULO,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("or")) rellenaInfoToken(EnumToken.OR,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("not")) rellenaInfoToken(EnumToken.NOT,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("if")) rellenaInfoToken(EnumToken.IF,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("then")) rellenaInfoToken(EnumToken.THEN,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("else")) rellenaInfoToken(EnumToken.ELSE,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("while")) rellenaInfoToken(EnumToken.WHILE,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("do")) rellenaInfoToken(EnumToken.DO,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("array")) rellenaInfoToken(EnumToken.ARRAY,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("of")) rellenaInfoToken(EnumToken.OF,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("type")) rellenaInfoToken(EnumToken.TYPE,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("procedure")) rellenaInfoToken(EnumToken.PROCEDURE,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("new")) rellenaInfoToken(EnumToken.NEW,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("dispose")) rellenaInfoToken(EnumToken.DISPOSE,s,null,MaquinaEstados.EINICIAL);
+		else if (s.equals("nil")) rellenaInfoToken(EnumToken.NIL,s,null,MaquinaEstados.EINICIAL);
+		else rellenaInfoToken(EnumToken.IDENTIFICADOR,s,null,MaquinaEstados.EINICIAL);
 	}
 
 
@@ -223,7 +223,7 @@ public class ALexicoImp extends ALexico {
 				case ENUMCERO:
 					lexema=leeNumero(lexema);
 					if (!((buffer>='a' && buffer<='z')||(buffer>='A' && buffer <='Z'))){
-						rellenaInfoToken(EnumToken.TOKENNUMERO,lexema,Integer.parseInt(lexema),MaquinaEstados.EINICIAL);
+						rellenaInfoToken(EnumToken.NUMERO,lexema,Integer.parseInt(lexema),MaquinaEstados.EINICIAL);
 						return token;
 					}
 					else{
@@ -232,7 +232,7 @@ public class ALexicoImp extends ALexico {
 				case ENUMERO:
 					lexema=leeNumero(lexema);
 					if (!(buffer>='a' && buffer<='z')){
-						rellenaInfoToken(EnumToken.TOKENNUMERO,lexema,Integer.parseInt(lexema),MaquinaEstados.EINICIAL);	
+						rellenaInfoToken(EnumToken.NUMERO,lexema,Integer.parseInt(lexema),MaquinaEstados.EINICIAL);	
 						return token;
 					}
 					else{
@@ -243,28 +243,28 @@ public class ALexicoImp extends ALexico {
 					evaluaPalabra(lexema);
 					return token;
 				case ECOMA:
-					rellenaInfoToken(EnumToken.TOKENCOMA,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.COMA,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EPUNTO:
-					rellenaInfoToken(EnumToken.TOKENPUNTO,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.PUNTO,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EPUNTOYCOMA:
-					rellenaInfoToken(EnumToken.TOKENPUNTOYCOMA,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.PUNTOYCOMA,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EPARENTESISAPER:
-					rellenaInfoToken(EnumToken.TOKENPARENTESISAPER,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.PARENTESISAPER,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EPARENTESISCIER:
-					rellenaInfoToken(EnumToken.TOKENPARENTESISCIER,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.PARENTESISCIER,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case ECORCHETEAPER:
-					rellenaInfoToken(EnumToken.TOKENCORCHETEAPER,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.CORCHETEAPER,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case ECORCHETECIER:
-					rellenaInfoToken(EnumToken.TOKENCORCHETECIER,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.CORCHETECIER,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EPUNTERO:
-					rellenaInfoToken(EnumToken.TOKENPUNTERO,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.PUNTERO,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EDOSPUNTOS:
 					if (buffer== '='){
@@ -272,33 +272,33 @@ public class ALexicoImp extends ALexico {
 						transita(MaquinaEstados.EASIGNACION);
 					}
 					else{
-						rellenaInfoToken(EnumToken.TOKENDOSPUNTOS,lexema,null,MaquinaEstados.EINICIAL);
+						rellenaInfoToken(EnumToken.DOSPUNTOS,lexema,null,MaquinaEstados.EINICIAL);
 						return token;
 					}
 					break;
 				case EASIGNACION:
-					rellenaInfoToken(EnumToken.TOKENASIGNACION,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.ASIGNACION,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case ESUMORESOMULODIV:
 					if (lexema.equals("+")){
-						rellenaInfoToken(EnumToken.TOKENSUMA,lexema,null,MaquinaEstados.EINICIAL);
+						rellenaInfoToken(EnumToken.SUMA,lexema,null,MaquinaEstados.EINICIAL);
 						return token;
 					}
 					else if (lexema.equals("-")){
-						rellenaInfoToken(EnumToken.TOKENRESTA,lexema,null,MaquinaEstados.EINICIAL);
+						rellenaInfoToken(EnumToken.RESTA,lexema,null,MaquinaEstados.EINICIAL);
 						return token;
 					}
 					else if (lexema.equals("*")){
-						rellenaInfoToken(EnumToken.TOKENPRODUCTO,lexema,null,MaquinaEstados.EINICIAL);
+						rellenaInfoToken(EnumToken.PRODUCTO,lexema,null,MaquinaEstados.EINICIAL);
 						return token;
 					}
 					else if (lexema.equals("/")){
-						rellenaInfoToken(EnumToken.TOKENDIVISION,lexema,null,MaquinaEstados.EINICIAL);
+						rellenaInfoToken(EnumToken.DIVISION,lexema,null,MaquinaEstados.EINICIAL);
 						return token;
 					}
 					break;
 				case EIGUAL:
-					rellenaInfoToken(EnumToken.TOKENIGUAL,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.IGUAL,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EMENOR:
 					if (buffer== '='){
@@ -310,7 +310,7 @@ public class ALexicoImp extends ALexico {
 						transita(MaquinaEstados.EDISTINTO);
 					}
 					else{
-						rellenaInfoToken(EnumToken.TOKENMENOR,lexema,null,MaquinaEstados.EINICIAL);
+						rellenaInfoToken(EnumToken.MENOR,lexema,null,MaquinaEstados.EINICIAL);
 						return token;
 					}
 					break;
@@ -320,18 +320,18 @@ public class ALexicoImp extends ALexico {
 						transita(MaquinaEstados.EMAYORIGUAL);
 					}
 					else{
-						rellenaInfoToken(EnumToken.TOKENMAYOR,lexema,null,MaquinaEstados.EINICIAL);
+						rellenaInfoToken(EnumToken.MAYOR,lexema,null,MaquinaEstados.EINICIAL);
 						return token;
 					}
 					break;
 				case EMENORIGUAL:
-					rellenaInfoToken(EnumToken.TOKENMENORIGUAL,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.MENORIGUAL,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EMAYORIGUAL:
-					rellenaInfoToken(EnumToken.TOKENMAYORIGUAL,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.MAYORIGUAL,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				case EDISTINTO:
-					rellenaInfoToken(EnumToken.TOKENDISTINTO,lexema,null,MaquinaEstados.EINICIAL);
+					rellenaInfoToken(EnumToken.DISTINTO,lexema,null,MaquinaEstados.EINICIAL);
 					return token;
 				}
 			}
