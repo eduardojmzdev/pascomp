@@ -57,9 +57,9 @@ public class ASintacticoImp extends ASintactico {
 		reconoceCabecera();
 		reconoceRestoPrograma();
 		token = ALexico.getInstance().obtenerToken();
-		compruebaTokens(token.getCategoria(),EnumToken.TOKENPUNTO);
+		compruebaTokens(token.getCategoria(),EnumToken.PUNTO);
 		token = ALexico.getInstance().obtenerToken();
-		if (token!=null&&comparaTokens(token.getCategoria(),EnumToken.TOKENPUNTO)){
+		if (token!=null&&comparaTokens(token.getCategoria(),EnumToken.PUNTO)){
 			String error="Error Sintactico: Línea "+ALexico.getInstance().getLinea()+"'.' No esperado";
 			throw new Exception(error);
 		}
@@ -71,13 +71,13 @@ public class ASintacticoImp extends ASintactico {
 		token = ALexico.getInstance().obtenerToken();
 		if (!hayErrorLexico(token)
 				&& (compruebaTokens(token.getCategoria(),
-						EnumToken.TOKENPROGRAM))) {
+						EnumToken.PROGRAM))) {
 			reconoceIdentificadorCabecera();
 		}
 		token = ALexico.getInstance().obtenerToken();
 		if (!hayErrorLexico(token)
 				&& (compruebaTokens(token.getCategoria(),
-						EnumToken.TOKENPUNTOYCOMA))) {
+						EnumToken.PUNTOYCOMA))) {
 			token = ALexico.getInstance().obtenerToken();
 		}
 	}
@@ -86,19 +86,19 @@ public class ASintacticoImp extends ASintactico {
 	private void reconoceRestoPrograma()throws Exception {
 			int tmp0=0;
 			if (!hayErrorLexico(token)
-					&& (comparaTokens(token.getCategoria(), EnumToken.TOKENCONST))) {
+					&& (comparaTokens(token.getCategoria(), EnumToken.CONST))) {
 				reconoceZonaConstantes();
 			}
 			if (!hayErrorLexico(token)
-					&& (comparaTokens(token.getCategoria(), EnumToken.TOKENTYPE))) {
+					&& (comparaTokens(token.getCategoria(), EnumToken.TYPE))) {
 				reconoceZonaTipos();
 			}
 			if (!hayErrorLexico(token)
-					&& (comparaTokens(token.getCategoria(), EnumToken.TOKENVAR))) {
+					&& (comparaTokens(token.getCategoria(), EnumToken.VAR))) {
 				reconoceDeclaraciones();
 			}
 			if (!hayErrorLexico(token)
-					&& (comparaTokens(token.getCategoria(), EnumToken.TOKENPROCEDURE))) {
+					&& (comparaTokens(token.getCategoria(), EnumToken.PROCEDURE))) {
 				String codigo="cargaCP;.";
 				emitirCodigo(codigo);
 				codigo="ir-a();.";
@@ -111,9 +111,9 @@ public class ASintacticoImp extends ASintactico {
 				codigo="irIndice;.";
 				emitirCodigo(codigo);
 				while (!hayErrorLexico(token)
-						&& (!comparaTokens(token.getCategoria(), EnumToken.TOKENBEGIN))){
+						&& (!comparaTokens(token.getCategoria(), EnumToken.BEGIN))){
 					if (!hayErrorLexico(token)
-							&& (compruebaTokens(token.getCategoria(), EnumToken.TOKENPROCEDURE))) {
+							&& (compruebaTokens(token.getCategoria(), EnumToken.PROCEDURE))) {
 						direccion=1;
 						reconoceProcedimiento();
 						epilogo(nivel+1);
@@ -124,7 +124,7 @@ public class ASintacticoImp extends ASintactico {
 				parchea(tmp0,contadorInstrucciones);
 			}
 			if (!hayErrorLexico(token)
-				&& (compruebaTokens(token.getCategoria(), EnumToken.TOKENBEGIN))) {
+				&& (compruebaTokens(token.getCategoria(), EnumToken.BEGIN))) {
 		    reconoceCuerpo();
 		}	
 	}
@@ -134,12 +134,12 @@ public class ASintacticoImp extends ASintactico {
 		token = ALexico.getInstance().obtenerToken();
 		if (!hayErrorLexico(token)
 				&& (compruebaTokens(token.getCategoria(),
-						EnumToken.TOKENIDENTIFICADOR))) {
+						EnumToken.IDENTIFICADOR))) {
 			String nombreProc = token.getLexema();
 			token = ALexico.getInstance().obtenerToken();
 			if (!hayErrorLexico(token)
 					&& (comparaTokens(token.getCategoria(),
-							EnumToken.TOKENPUNTOYCOMA))){
+							EnumToken.PUNTOYCOMA))){
 				TablaSimbolos tabla = TablaSimbolos.getInstance();
 				if (!existeID(nombreProc)) {
 					prologo(nivel,tamaño);
@@ -159,7 +159,7 @@ public class ASintacticoImp extends ASintactico {
 			}
 			else if (!hayErrorLexico(token)
 					&& (compruebaTokens(token.getCategoria(),
-							EnumToken.TOKENPARENTESISAPER))){
+							EnumToken.PARENTESISAPER))){
 				TablaSimbolos tabla = TablaSimbolos.getInstance();
 				if (!existeID(nombreProc)) {					
 					nivel++;
@@ -193,35 +193,35 @@ public class ASintacticoImp extends ASintactico {
 			ArrayList<String> aL = new ArrayList<String>();
 			if (!hayErrorLexico(token)
 					&& (comparaTokens(token.getCategoria(),
-							EnumToken.TOKENVAR))) {
+							EnumToken.VAR))) {
 				porVariable=Modo.VARIABLE;
 				token = ALexico.getInstance().obtenerToken();
 			}
 			if (!hayErrorLexico(token)
 					&& (compruebaTokens(token.getCategoria(),
-							EnumToken.TOKENIDENTIFICADOR))) {
+							EnumToken.IDENTIFICADOR))) {
 				aL.add(token.getLexema());
 			}
 			token = ALexico.getInstance().obtenerToken();
 			while (!hayErrorLexico(token)
-					&& (comparaTokens(token.getCategoria(), EnumToken.TOKENPUNTOYCOMA))
+					&& (comparaTokens(token.getCategoria(), EnumToken.PUNTOYCOMA))
 					&& !hayError) {
 				token = ALexico.getInstance().obtenerToken();
 				if (!hayErrorLexico(token)
 						&& (compruebaTokens(token.getCategoria(),
-								EnumToken.TOKENIDENTIFICADOR))) {
+								EnumToken.IDENTIFICADOR))) {
 					aL.add(token.getLexema());// resto
 				}
 				token = ALexico.getInstance().obtenerToken();
 			}
 			if (!hayErrorLexico(token)
 					&& (compruebaTokens(token.getCategoria(),
-							EnumToken.TOKENDOSPUNTOS))) {
+							EnumToken.DOSPUNTOS))) {
 				token = ALexico.getInstance().obtenerToken();// obtenemos el tipo
 
 				if (!hayErrorLexico(token)
 						&& (comparaTokens(token.getCategoria(),
-								EnumToken.TOKENBOOLEAN))) {
+								EnumToken.BOOLEAN))) {
 					for (int i = 0; i < aL.size(); i++) {
 						if (!existeID((String) aL.get(i))) {
 							TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -234,7 +234,7 @@ public class ASintacticoImp extends ASintactico {
 					}
 				} else if (!hayErrorLexico(token)
 						&& (comparaTokens(token.getCategoria(),
-								EnumToken.TOKENINTEGER))) {
+								EnumToken.INTEGER))) {
 					for (int i = 0; i < aL.size(); i++) {
 						if (!existeID((String) aL.get(i))) {
 							TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -247,7 +247,7 @@ public class ASintacticoImp extends ASintactico {
 					}
 				} else if (!hayErrorLexico(token)
 						&& (comparaTokens(token.getCategoria(),
-								EnumToken.TOKENIDENTIFICADOR))) {
+								EnumToken.IDENTIFICADOR))) {
 					for (int i = 0; i < aL.size(); i++) {
 						if (!existeID((String) aL.get(i))) {
 							TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -263,7 +263,7 @@ public class ASintacticoImp extends ASintactico {
 					}
 				}else if (!hayErrorLexico(token)
 						&& (comparaTokens(token.getCategoria(),
-								EnumToken.TOKENARRAY))) {
+								EnumToken.ARRAY))) {
 					int tam=reconoceDeclaracionArray();
 					for (int i = 0; i < aL.size(); i++) {
 						if (!existeID((String) aL.get(i))) {
@@ -280,11 +280,11 @@ public class ASintacticoImp extends ASintactico {
 					}
 				}else if (!hayErrorLexico(token)
 						&& (compruebaTokens(token.getCategoria(),
-								EnumToken.TOKENPUNTERO))) {
+								EnumToken.PUNTERO))) {
 						token = ALexico.getInstance().obtenerToken();
 						if (!hayErrorLexico(token)
 								&& (compruebaTokens(token.getCategoria(),
-										EnumToken.TOKENIDENTIFICADOR))) {
+										EnumToken.IDENTIFICADOR))) {
 							for (int i = 0; i < aL.size(); i++) {
 								if (!existeID((String) aL.get(i))) {
 									TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -305,11 +305,11 @@ public class ASintacticoImp extends ASintactico {
 			token = ALexico.getInstance().obtenerToken();
 			if (!hayErrorLexico(token)
 					&& (comparaTokens(token.getCategoria(),
-							EnumToken.TOKENPARENTESISCIER))) {
+							EnumToken.PARENTESISCIER))) {
 				fin=true;
 			}
 			else{
-				compruebaTokens(token.getCategoria(),EnumToken.TOKENPUNTOYCOMA);
+				compruebaTokens(token.getCategoria(),EnumToken.PUNTOYCOMA);
 				token = ALexico.getInstance().obtenerToken();
 			}
 		}
@@ -327,7 +327,7 @@ public class ASintacticoImp extends ASintactico {
 	private void reconoceRestoTipos()throws Exception {
 		while (!hayErrorLexico(token)
 				&& (comparaTokens(token.getCategoria(),
-						EnumToken.TOKENIDENTIFICADOR)) && !hayError) {
+						EnumToken.IDENTIFICADOR)) && !hayError) {
 			reconoceTipo();
 		}
 	}
@@ -336,31 +336,31 @@ public class ASintacticoImp extends ASintactico {
 	private void reconoceTipo() throws Exception {
 		if (!hayErrorLexico(token)
 				&& (compruebaTokens(token.getCategoria(),
-						EnumToken.TOKENIDENTIFICADOR))) {
+						EnumToken.INDENTIFICADOR))) {
 			String nombre = token.getLexema();
 			TablaSimbolos Ts = TablaSimbolos.getInstance();
 			if(!Ts.existeTipoNivel(nombre,nivel)){				
 				token = ALexico.getInstance().obtenerToken();
 				if (!hayErrorLexico(token)
 						&& (compruebaTokens(token.getCategoria(),
-								EnumToken.TOKENIGUAL))) {
+								EnumToken.IGUAL))) {                              
 					token = ALexico.getInstance().obtenerToken();
 				
 					if (!hayErrorLexico(token)
 							&& (comparaTokens(token.getCategoria(),
-									EnumToken.TOKENINTEGER))) {					
+									EnumToken.INTEGER))) {					
 						PropTipos p=Ts.dameTipo(token.getLexema(),nivel);
 						Ts.añadeTipo(nombre,p,nivel);
 						}
 					else if (!hayErrorLexico(token)
 							&& (comparaTokens(token.getCategoria(),
-									EnumToken.TOKENBOOLEAN))) {
+									EnumToken.BOOLEAN))) {
 						PropTipos p=Ts.dameTipo(token.getLexema(),nivel);
 						Ts.añadeTipo(nombre,p,nivel);
 						}
 					else if (!hayErrorLexico(token)
 							&& (comparaTokens(token.getCategoria(),
-									EnumToken.TOKENIDENTIFICADOR))) {
+									EnumToken.INDENTIFICADOR))) {
 							if (existeTipo(token.getLexema())) {
 								PropTipos p=Ts.dameTipo(token.getLexema(),nivel);
 								Ts.añadeTipo(nombre,p,nivel);
@@ -368,21 +368,21 @@ public class ASintacticoImp extends ASintactico {
 						}
 					else if (!hayErrorLexico(token)
 							&& (comparaTokens(token.getCategoria(),
-									EnumToken.TOKENARRAY))) {
+									EnumToken.ARRAY))) {
 						token = ALexico.getInstance().obtenerToken();
 						if (!hayErrorLexico(token)
 								&& (compruebaTokens(token.getCategoria(),
-										EnumToken.TOKENCORCHETEAPER))) {
+										EnumToken.CORCHETEAPER))) {
 							token = ALexico.getInstance().obtenerToken();
 							int tam=reconoceIntervalo();
 							token = ALexico.getInstance().obtenerToken();
 							if (!hayErrorLexico(token)
 									&& (compruebaTokens(token.getCategoria(),
-											EnumToken.TOKENCORCHETECIER))) {
+											EnumToken.CORCHETECIER))) {
 								token = ALexico.getInstance().obtenerToken();
 								if (!hayErrorLexico(token)
 										&& (compruebaTokens(token.getCategoria(),
-												EnumToken.TOKENOF))) {
+												EnumToken.OF))) {
 									token = ALexico.getInstance().obtenerToken();		
 									TablaSimbolos tabla = TablaSimbolos.getInstance();
 									if (tabla.existeTipo(token.getLexema(),nivel)){
@@ -396,7 +396,7 @@ public class ASintacticoImp extends ASintactico {
 					}
 					else if (!hayErrorLexico(token)
 							&& (compruebaTokens(token.getCategoria(),
-									EnumToken.TOKENPUNTERO))) {
+									EnumToken.PUNTERO))) {
 							token = ALexico.getInstance().obtenerToken();
 							TablaSimbolos tabla = TablaSimbolos.getInstance();
 							if (tabla.existeTipo(token.getLexema(),nivel)){
@@ -421,15 +421,15 @@ public class ASintacticoImp extends ASintactico {
 		if(num!=0)throw new Exception("Intervalo no válido "+ ALexico.getInstance().getLinea());		
 		else{
 			token = ALexico.getInstance().obtenerToken();
-			if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENPUNTO))) {
+			if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.PUNTO))) {
 				token = ALexico.getInstance().obtenerToken();
 				if (!hayErrorLexico(token)
 						&& (compruebaTokens(token.getCategoria(),
-								EnumToken.TOKENPUNTO))) {
+								EnumToken.PUNTO))) {
 					token = ALexico.getInstance().obtenerToken();
 					if (!hayErrorLexico(token)
 							&& (compruebaTokens(token.getCategoria(),
-									EnumToken.TOKENNUMERO))) {
+									EnumToken.NUMERO))) {
 						int num2=Integer.parseInt(token.getLexema());
 						if(num2<0)throw new Exception("El intervalo debe ser positivo "+ ALexico.getInstance().getLinea());					
 						return num2+1;
@@ -452,7 +452,7 @@ public class ASintacticoImp extends ASintactico {
 	private void reconoceRestoConstantes() throws Exception{
 		while (!hayErrorLexico(token)
 				&& (comparaTokens(token.getCategoria(),
-						EnumToken.TOKENIDENTIFICADOR)) && !hayError) {
+						EnumToken.INDENTIFICADOR)) && !hayError) {
 			reconoceConstantes();
 		}
 	}
@@ -462,16 +462,16 @@ public class ASintacticoImp extends ASintactico {
 	private void reconoceConstantes() throws Exception {
 		if (!hayErrorLexico(token)
 				&& (compruebaTokens(token.getCategoria(),
-						EnumToken.TOKENIDENTIFICADOR))) {
+						EnumToken.INDENTIFICADOR))) {
 			String nombre = token.getLexema();
 			token = ALexico.getInstance().obtenerToken();
 			if (!hayErrorLexico(token)
 					&& (compruebaTokens(token.getCategoria(),
-							EnumToken.TOKENIGUAL))) {
+							EnumToken.IGUAL))) {
 				token = ALexico.getInstance().obtenerToken();
 				if (!hayErrorLexico(token)
 						&& (comparaTokens(token.getCategoria(),
-								EnumToken.TOKENTRUE))) {
+								EnumToken.TRUE))) {
 					if (!existeIDNivel(nombre)) {
 						TablaSimbolos Ts = TablaSimbolos.getInstance();
 						PropTipos p=Ts.dameTipo("boolean",nivel);
@@ -482,7 +482,7 @@ public class ASintacticoImp extends ASintactico {
 					}
 				} else if (!hayErrorLexico(token)
 						&& (comparaTokens(token.getCategoria(),
-								EnumToken.TOKENFALSE))) {
+								EnumToken.FALSE))) {
 					if (!existeIDNivel(nombre)) {
 		
 						TablaSimbolos Ts = TablaSimbolos.getInstance();
@@ -494,7 +494,7 @@ public class ASintacticoImp extends ASintactico {
 					}
 				} else if (!hayErrorLexico(token)
 						&& (comparaTokens(token.getCategoria(),
-								EnumToken.TOKENNUMERO))) {
+								EnumToken.NUMERO))) {
 					if (!existeIDNivel(nombre)) {
 						TablaSimbolos Ts = TablaSimbolos.getInstance();
 						PropTipos p=Ts.dameTipo("integer",nivel);
@@ -505,14 +505,14 @@ public class ASintacticoImp extends ASintactico {
 					}
 				}else if (!hayErrorLexico(token)
 						&& (compruebaTokens(token.getCategoria(),
-								EnumToken.TOKENCORCHETEAPER))) {
+								EnumToken.CORCHETEAPER))) {
 					if (!existeIDNivel(nombre)) {
 						TablaSimbolos Ts = TablaSimbolos.getInstance();
 						token = ALexico.getInstance().obtenerToken();
 						String tipo="";
-						if (comparaTokens(token.getCategoria(),EnumToken.TOKENNUMERO)) tipo="integer";
-						else if (comparaTokens(token.getCategoria(),EnumToken.TOKENTRUE)||comparaTokens(token.getCategoria(),EnumToken.TOKENFALSE)) tipo="boolean";
-						else if(compruebaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR)){
+						if (comparaTokens(token.getCategoria(),EnumToken.NUMERO)) tipo="integer";
+						else if (comparaTokens(token.getCategoria(),EnumToken.TRUE)||comparaTokens(token.getCategoria(),EnumToken.FALSE)) tipo="boolean";
+						else if(compruebaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR)){
 							tipo=tipoConstante(token.getLexema());
 						}
 						ArrayList arrayConstante = obtenerArrayConstante(tipo);
@@ -535,35 +535,35 @@ public class ASintacticoImp extends ASintactico {
 		if (tipo.equals("integer")){
 			aConst.add(token.getLexema());
 			token = ALexico.getInstance().obtenerToken();
-			while (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA))){
+			while (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.COMA))){
 				token = ALexico.getInstance().obtenerToken();
-				if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENNUMERO))){
+				if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.NUMERO))){
 					aConst.add(token.getLexema());
 					token = ALexico.getInstance().obtenerToken();
 				}
-				else if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR))&&(tipoConstante(token.getLexema()).equals("integer"))){
+				else if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR))&&(tipoConstante(token.getLexema()).equals("integer"))){
 					aConst.add(token.getLexema());
 					token = ALexico.getInstance().obtenerToken();
 				}
 			}
-			compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER);
+			compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER);
 			return aConst;
 		}
 		if (tipo.equals("boolean")){
 			aConst.add(token.getLexema());
 			token = ALexico.getInstance().obtenerToken();
-			while (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA))){
+			while (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.COMA))){
 				token = ALexico.getInstance().obtenerToken();
-				if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENTRUE)||comparaTokens(token.getCategoria(),EnumToken.TOKENFALSE))){
+				if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TRUE)||comparaTokens(token.getCategoria(),EnumToken.FALSE))){
 					aConst.add(token.getLexema());
 					token = ALexico.getInstance().obtenerToken();
 				}
-				else if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR))&&(tipoConstante(token.getLexema()).equals("boolean"))){
+				else if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR))&&(tipoConstante(token.getLexema()).equals("boolean"))){
 					aConst.add(token.getLexema());
 					token = ALexico.getInstance().obtenerToken();
 				}
 			}
-			compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER);
+			compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER);
 			return aConst;
 		}
 		return null;
@@ -602,29 +602,29 @@ public class ASintacticoImp extends ASintactico {
 		ArrayList<String> aL = new ArrayList<String>();
 		if (!hayErrorLexico(token)
 				&& (compruebaTokens(token.getCategoria(),
-						EnumToken.TOKENIDENTIFICADOR))) {
+						EnumToken.INDENTIFICADOR))) {
 			aL.add(token.getLexema());
 		}
 		token = ALexico.getInstance().obtenerToken();
 		while (!hayErrorLexico(token)
-				&& (comparaTokens(token.getCategoria(), EnumToken.TOKENCOMA))
+				&& (comparaTokens(token.getCategoria(), EnumToken.COMA))
 				&& !hayError) {
 			token = ALexico.getInstance().obtenerToken();
 			if (!hayErrorLexico(token)
 					&& (compruebaTokens(token.getCategoria(),
-							EnumToken.TOKENIDENTIFICADOR))) {
+							EnumToken.INDENTIFICADOR))) {
 				aL.add(token.getLexema());// resto
 			}
 			token = ALexico.getInstance().obtenerToken();
 		}
 		if (!hayErrorLexico(token)
 				&& (compruebaTokens(token.getCategoria(),
-						EnumToken.TOKENDOSPUNTOS))) {
+						EnumToken.DOSPUNTOS))) {
 			token = ALexico.getInstance().obtenerToken();// obtenemos el tipo
 
 			if (!hayErrorLexico(token)
 					&& (comparaTokens(token.getCategoria(),
-							EnumToken.TOKENBOOLEAN))) {
+							EnumToken.BOOLEAN))) {
 				for (int i = 0; i < aL.size(); i++) {
 					if (!existeIDNivel((String) aL.get(i))) {
 						TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -645,7 +645,7 @@ public class ASintacticoImp extends ASintactico {
 				}
 			} else if (!hayErrorLexico(token)
 					&& (comparaTokens(token.getCategoria(),
-							EnumToken.TOKENINTEGER))) {
+							EnumToken.INTEGER))) {
 				for (int i = 0; i < aL.size(); i++) {
 					if (!existeIDNivel((String) aL.get(i))) {
 						TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -666,7 +666,7 @@ public class ASintacticoImp extends ASintactico {
 				}
 			} else if (!hayErrorLexico(token)
 					&& (comparaTokens(token.getCategoria(),
-							EnumToken.TOKENIDENTIFICADOR))) {
+							EnumToken.INDENTIFICADOR))) {
 				for (int i = 0; i < aL.size(); i++) {
 					if (!existeIDNivel((String) aL.get(i))) {
 						TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -717,7 +717,7 @@ public class ASintacticoImp extends ASintactico {
 				}
 			}else if (!hayErrorLexico(token)
 					&& (comparaTokens(token.getCategoria(),
-							EnumToken.TOKENARRAY))) {
+							EnumToken.ARRAY))) {
 				int tam=reconoceDeclaracionArray();
 				for (int i = 0; i < aL.size(); i++) {
 					if (!existeIDNivel((String) aL.get(i))) {
@@ -774,11 +774,11 @@ public class ASintacticoImp extends ASintactico {
 				
 			}else if (!hayErrorLexico(token)
 					&& (compruebaTokens(token.getCategoria(),
-							EnumToken.TOKENPUNTERO))) {
+							EnumToken.PUNTERO))) {
 					token = ALexico.getInstance().obtenerToken();
 					if (!hayErrorLexico(token)
 							&& (comparaTokens(token.getCategoria(),
-									EnumToken.TOKENINTEGER))) {
+									EnumToken.INTEGER))) {
 						for (int i = 0; i < aL.size(); i++) {
 							if (!existeIDNivel((String) aL.get(i))) {
 								TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -801,7 +801,7 @@ public class ASintacticoImp extends ASintactico {
 					}
 					else if (!hayErrorLexico(token)
 							&& (comparaTokens(token.getCategoria(),
-									EnumToken.TOKENBOOLEAN))) {
+									EnumToken.BOOLEAN))) {
 						for (int i = 0; i < aL.size(); i++) {
 							if (!existeIDNivel((String) aL.get(i))) {
 								TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -826,7 +826,7 @@ public class ASintacticoImp extends ASintactico {
 					
 					else if (!hayErrorLexico(token)
 							&& (comparaTokens(token.getCategoria(),
-									EnumToken.TOKENIDENTIFICADOR))) {
+									EnumToken.INDENTIFICADOR))) {
 						for (int i = 0; i < aL.size(); i++) {
 							if (!existeIDNivel((String) aL.get(i))) {
 								TablaSimbolos tabla = TablaSimbolos.getInstance();
@@ -841,7 +841,7 @@ public class ASintacticoImp extends ASintactico {
 					}
 					else if (!hayErrorLexico(token)
 							&& (compruebaTokens(token.getCategoria(),
-									EnumToken.TOKENARRAY))) {
+									EnumToken.ARRAY))) {
 
 						int tam=reconoceDeclaracionArray();
 						for (int i = 0; i < aL.size(); i++) {
@@ -884,13 +884,13 @@ public class ASintacticoImp extends ASintactico {
 	private int reconoceDeclaracionArray() throws Exception {
 		int tam=0;
 		token = ALexico.getInstance().obtenerToken();
-		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETEAPER))) {
+		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.CORCHETEAPER))) {
 			token = ALexico.getInstance().obtenerToken();
 			tam=reconoceIntervalo();
 			token = ALexico.getInstance().obtenerToken();
-			if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER))) {
+			if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER))) {
 				token = ALexico.getInstance().obtenerToken();
-				if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENOF))) {
+				if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.OF))) {
 					token = ALexico.getInstance().obtenerToken();
 				}
 			}
@@ -900,7 +900,7 @@ public class ASintacticoImp extends ASintactico {
 
 	private void reconoceRestoDeclaracion() throws Exception {
 		while (!hayErrorLexico(token)
-				&& (comparaTokens(token.getCategoria(), EnumToken.TOKENIDENTIFICADOR))
+				&& (comparaTokens(token.getCategoria(), EnumToken.INDENTIFICADOR))
 				&& !hayError) {
 			reconoceDeclaracion();
 		}
@@ -909,7 +909,7 @@ public class ASintacticoImp extends ASintactico {
 	
 	private void reconoceCuerpo() throws Exception {
 		token = ALexico.getInstance().obtenerToken();
-		if (!hayErrorLexico(token)&&!comparaTokens(token.getCategoria(), EnumToken.TOKENEND)){
+		if (!hayErrorLexico(token)&&!comparaTokens(token.getCategoria(), EnumToken.END)){
 			reconoceInstrucciones();
 		}
 		
@@ -924,10 +924,10 @@ public class ASintacticoImp extends ASintactico {
 	
 	private void reconoceInstruccion() throws Exception {
 		TablaSimbolos t=TablaSimbolos.getInstance();
-		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR))) {
+		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR))) {
 			String asignada=token.getLexema();
 			token=ALexico.getInstance().obtenerToken();
-			if(comparaTokens(token.getCategoria(),EnumToken.TOKENASIGNACION)){
+			if(comparaTokens(token.getCategoria(),EnumToken.ASIGNACION)){
 				//es una variable normal, se queda como en la primera version,
 			
 				if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){							
@@ -963,11 +963,11 @@ public class ASintacticoImp extends ASintactico {
 					}																																	
 				}
 			}
-			else if(comparaTokens(token.getCategoria(),EnumToken.TOKENCORCHETEAPER)){
+			else if(comparaTokens(token.getCategoria(),EnumToken.CORCHETEAPER)){
 				//es un array, el nombre del array esta en asignada
 				token=ALexico.getInstance().obtenerToken();
 				if(compruebaTipos(reconoceExpresion(),t.dameTipo("integer",nivel))){
-					if(compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER)){
+					if(compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER)){
 						//Obtener direccion del array
 						String codigoEmitir="apila("+(t.obtenerInfo(asignada,nivel).dameDir()-1)+");.";
 						emitirCodigo(codigoEmitir);
@@ -978,7 +978,7 @@ public class ASintacticoImp extends ASintactico {
 						codigoEmitir="suma;.";
 						emitirCodigo(codigoEmitir);
 						token=ALexico.getInstance().obtenerToken();
-						if(comparaTokens(token.getCategoria(),EnumToken.TOKENASIGNACION)){
+						if(comparaTokens(token.getCategoria(),EnumToken.ASIGNACION)){
 											
 							if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){							
 								PropTiposArray p=(PropTiposArray)t.obtenerInfo(asignada,nivel).getProp();
@@ -992,16 +992,16 @@ public class ASintacticoImp extends ASintactico {
 					}
 				}
 			}
-			else if(comparaTokens(token.getCategoria(),EnumToken.TOKENPUNTERO)){			
+			else if(comparaTokens(token.getCategoria(),EnumToken.PUNTERO)){			
 				//el nombre del puntero está en asignada
 				if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){							
 					token=ALexico.getInstance().obtenerToken();
-					if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCORCHETEAPER)){
+					if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.CORCHETEAPER)){
 						token=ALexico.getInstance().obtenerToken();
 						if(compruebaTipos(reconoceExpresion(),t.dameTipo("integer",nivel))){
-							if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER)){																
+							if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER)){																
 								token=ALexico.getInstance().obtenerToken();
-								if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.TOKENASIGNACION)){
+								if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.ASIGNACION)){
 									PropTipos p=((PropTiposArray)(((PropTiposPointer)t.dameTipo(asignada, nivel)).getRef())).getRef();
 									if(compruebaTipos(p,reconoceAsignacion())){
 										reconocePuntoYComa();
@@ -1011,7 +1011,7 @@ public class ASintacticoImp extends ASintactico {
 							}
 						}
 					}
-				else if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENASIGNACION)){
+				else if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.ASIGNACION)){
 						
 					PropTiposPointer p =(PropTiposPointer) t.obtenerInfo(asignada,nivel).getProp();
 					String codigo="apilaDireccion("+(1+(t.dameNivel(asignada,nivel)))+");.";
@@ -1030,7 +1030,7 @@ public class ASintacticoImp extends ASintactico {
 				}
 				}
 			}
-			else if (comparaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISAPER)){
+			else if (comparaTokens(token.getCategoria(),EnumToken.PARENTESISAPER)){
 				//llamada a un procedimiento con parentesis
 				int i =0;
 				int nParam=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().size();
@@ -1047,9 +1047,9 @@ public class ASintacticoImp extends ASintactico {
 				emitirCodigo(excodigo);
 				excodigo="desapilaIndice;.";
 				emitirCodigo(excodigo);
-				while (!comparaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER)){
+				while (!comparaTokens(token.getCategoria(),EnumToken.PARENTESISCIER)){
 						if(i>=nParam){throw new Exception("Número de parámetros incorrecto en línea "+ ALexico.getInstance().getLinea());}
-						if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR)){
+						if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR)){
 							String nombreParam=token.getLexema();
 							//Tenemos variable entera.
 							//Determinamos el modo
@@ -1096,10 +1096,10 @@ public class ASintacticoImp extends ASintactico {
 								emitirCodigo(codigo);								
 							}
 							token=ALexico.getInstance().obtenerToken();
-							if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCORCHETEAPER)){
+							if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.CORCHETEAPER)){
 								token=ALexico.getInstance().obtenerToken();
 								if(compruebaTipos(reconoceExpresion(),t.dameTipo("integer",nivel))){
-									if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER)){
+									if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER)){
 										PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 										PropTipos parametroEsperado=((PropTiposArray)t.dameTipo(nombreParam,nivel)).getRef();
 										if(compruebaTipos(param,parametroEsperado)){
@@ -1109,7 +1109,7 @@ public class ASintacticoImp extends ASintactico {
 												}																																	
 											}
 												token=ALexico.getInstance().obtenerToken();
-												if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA)){
+												if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
 													token=ALexico.getInstance().obtenerToken();												
 												}	
 												i++;	
@@ -1118,12 +1118,12 @@ public class ASintacticoImp extends ASintactico {
 									}
 								}
 							}						
-							else if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENPUNTERO)){
+							else if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.PUNTERO)){
 								token=ALexico.getInstance().obtenerToken();
-								if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCORCHETEAPER)){
+								if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.CORCHETEAPER)){
 									token=ALexico.getInstance().obtenerToken();
 									if(compruebaTipos(reconoceExpresion(),t.dameTipo("integer",nivel))){
-										if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER)){
+										if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER)){
 											PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 											PropTipos parametroEsperado=((PropTiposArray)((PropTiposPointer)t.dameTipo(nombreParam,nivel)).getRef()).getRef();
 											if(compruebaTipos(param,parametroEsperado)){
@@ -1133,7 +1133,7 @@ public class ASintacticoImp extends ASintactico {
 														}																																	
 												}
 													token=ALexico.getInstance().obtenerToken();
-													if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA)){
+													if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
 														token=ALexico.getInstance().obtenerToken();												
 													}	
 													i++;	
@@ -1142,16 +1142,16 @@ public class ASintacticoImp extends ASintactico {
 										}
 									}
 								}
-								else if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA)||comparaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER))){
+								else if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.COMA)||comparaTokens(token.getCategoria(),EnumToken.PARENTESISCIER))){
 									PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 									PropTipos parametroEsperado=((PropTiposPointer)t.dameTipo(nombreParam,nivel)).getRef();
 									if(compruebaTipos(param,parametroEsperado)){
 										if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){																															
-											if(!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA))){
+											if(!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.COMA))){
 												token=ALexico.getInstance().obtenerToken();
 											}											
 										}else{
-											if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA))){
+											if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.COMA))){
 												token=ALexico.getInstance().obtenerToken();											
 											}											
 										}
@@ -1162,7 +1162,7 @@ public class ASintacticoImp extends ASintactico {
 									throw new Exception("Token No esperado en línea "+ ALexico.getInstance().getLinea());
 									}				
 							}
-							else if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER)||comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA))){
+							else if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.PARENTESISCIER)||comparaTokens(token.getCategoria(),EnumToken.COMA))){
 								
 									PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 									PropTipos parametroEsperado=t.dameTipo(nombreParam,nivel);
@@ -1172,7 +1172,7 @@ public class ASintacticoImp extends ASintactico {
 												throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());												
 												}																																	
 										}
-										if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA)){
+										if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
 											token=ALexico.getInstance().obtenerToken();	
 										}	
 										i++;
@@ -1183,42 +1183,42 @@ public class ASintacticoImp extends ASintactico {
 								
 								}
 						}
-						else if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENTRUE)){						
+						else if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TRUE)){						
 							PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 							if(compruebaTipos(param,t.dameTipo("boolean",nivel))){
 								if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
 									throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());																																																					
 									}else{
 									token=ALexico.getInstance().obtenerToken();
-									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA)){
+									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
 										token=ALexico.getInstance().obtenerToken();							
 									}	
 									i++;
 								}																																							
 							}		
 						}
-						else if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENFALSE)){
+						else if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.FALSE)){
 							PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 							if(compruebaTipos(param,t.dameTipo("boolean",nivel))){
 								if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
 									throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());																																																					
 									}else{
 									token=ALexico.getInstance().obtenerToken();
-									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA)){
+									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
 										token=ALexico.getInstance().obtenerToken();							
 									}	
 									i++;
 								}																																							
 							}
 						}
-						else if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.TOKENNUMERO)){
+						else if (!hayErrorLexico(token)&&compruebaTokens(token.getCategoria(),EnumToken.NUMERO)){
 							PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 							if(compruebaTipos(param,t.dameTipo("integer",nivel))){
 								if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
 									throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());																																																					
 								}else{
 									token=ALexico.getInstance().obtenerToken();
-									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.TOKENCOMA)){
+									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
 										token=ALexico.getInstance().obtenerToken();							
 									}	
 									i++;
@@ -1235,37 +1235,37 @@ public class ASintacticoImp extends ASintactico {
 						throw new Exception("Número de parámetros incorrecto en línea "+ ALexico.getInstance().getLinea());					
 					}
 					token=ALexico.getInstance().obtenerToken();
-					if (comparaTokens(token.getCategoria(),EnumToken.TOKENPUNTOYCOMA)){
+					if (comparaTokens(token.getCategoria(),EnumToken.PUNTOYCOMA)){
 						reconocePuntoYComa();
 					}
 				}
-				else if (comparaTokens(token.getCategoria(),EnumToken.TOKENPUNTOYCOMA)){
+				else if (comparaTokens(token.getCategoria(),EnumToken.PUNTOYCOMA)){
 					reconocePuntoYComa();
 					apilaRet(contadorInstrucciones+6);
 					String codigo="ir-a("+TablaSimbolos.getInstance().obtenerInfo(asignada,nivel).dameDir()+");.";
 					emitirCodigo(codigo);
 				}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENWRITE))) {
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.WRITE))) {
 			reconoceEscritura();
 			String codigoEmitido="write;.";
 			emitirCodigo(codigoEmitido);
 		}					
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENREAD))) {
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.READ))) {
 			reconoceLectura();						
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENIF))) {
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.IF))) {
 			token=ALexico.getInstance().obtenerToken();
 			if(compruebaTipos(reconoceExpresion(),t.dameTipo("boolean",nivel))){
 				String codigoEmitido="ir-f();.";
 				emitirCodigo(codigoEmitido);
 				int etq1=contadorInstrucciones;
 				//salvar el ccpp para luego parchear				
-				if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENTHEN))) {
+				if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.THEN))) {
 					reconoceCuerpoBucle();
 					parchea(etq1,contadorInstrucciones+1);
 				}
-				if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENELSE))) {
+				if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.ELSE))) {
 					codigoEmitido="ir-a();.";
 					emitirCodigo(codigoEmitido);
 					int etq2=contadorInstrucciones;
@@ -1278,15 +1278,15 @@ public class ASintacticoImp extends ASintactico {
 				//else{reconocePuntoYComa();}
 			}
 		}
-		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENNEW)){
+		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.NEW)){
 			token=ALexico.getInstance().obtenerToken();
-			if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISAPER)){
+			if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.PARENTESISAPER)){
 				token=ALexico.getInstance().obtenerToken();
-				if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR)){
+				if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR)){
 					String nombreVar=token.getLexema();
 					if(t.dameTipo(nombreVar,nivel).getNombreTipo()==TTipo.PUNTERO){
 						token=ALexico.getInstance().obtenerToken();
-						if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER)){
+						if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.PARENTESISCIER)){
 							int contador=0;
 							PropTiposPointer aux;
 							boolean sigue=true;
@@ -1322,15 +1322,15 @@ public class ASintacticoImp extends ASintactico {
 			}
 		}
 		
-		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENDISPOSE)){
+		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.DISPOSE)){
 			token=ALexico.getInstance().obtenerToken();
-			if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISAPER)){
+			if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.PARENTESISAPER)){
 				token=ALexico.getInstance().obtenerToken();
-				if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR)){
+				if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR)){
 					String nombreVar=token.getLexema();
 					if(t.dameTipo(nombreVar,nivel).getNombreTipo()==TTipo.PUNTERO){
 						token=ALexico.getInstance().obtenerToken();
-						if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER)){
+						if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.PARENTESISCIER)){
 							String codigo="del("+TablaSimbolos.getInstance().dameTipo(nombreVar,nivel).getTam()+");.";
 							emitirCodigo(codigo);
 							token=ALexico.getInstance().obtenerToken();
@@ -1341,7 +1341,7 @@ public class ASintacticoImp extends ASintactico {
 			}
 			
 		}
-		else if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENWHILE))) {
+		else if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.WHILE))) {
 			token=ALexico.getInstance().obtenerToken();
 			//salvar el ccpp para luego parchear
 			int etq0=contadorInstrucciones;
@@ -1350,7 +1350,7 @@ public class ASintacticoImp extends ASintactico {
 				int etq1=contadorInstrucciones;
 				emitirCodigo(codigoEmitido);
 				
-				if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENDO))) {
+				if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.DO))) {
 					reconoceCuerpoBucle();
 					
 					codigoEmitido="ir-a("+(etq0)+");.";
@@ -1381,12 +1381,12 @@ public class ASintacticoImp extends ASintactico {
 	private void reconoceCuerpoBucle()throws Exception  {
 		
 		token = ALexico.getInstance().obtenerToken();
-		if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(), EnumToken.TOKENBEGIN)){
-			if (!hayErrorLexico(token)&&!comparaTokens(token.getCategoria(), EnumToken.TOKENEND)){
+		if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(), EnumToken.BEGIN)){
+			if (!hayErrorLexico(token)&&!comparaTokens(token.getCategoria(), EnumToken.END)){
 				token = ALexico.getInstance().obtenerToken();
 				reconoceInstrucciones();				
 				token = ALexico.getInstance().obtenerToken();			
-				if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(), EnumToken.TOKENPUNTOYCOMA)){
+				if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(), EnumToken.PUNTOYCOMA)){
 					reconocePuntoYComa();
 				}
 			}						
@@ -1398,15 +1398,15 @@ public class ASintacticoImp extends ASintactico {
 	}
 
 	private void reconoceRestoInstrucciones() throws Exception {
-		while (!hayErrorLexico(token)&&(!comparaTokens(token.getCategoria(), EnumToken.TOKENEND))){
+		while (!hayErrorLexico(token)&&(!comparaTokens(token.getCategoria(), EnumToken.END))){
 			reconoceInstruccion();
 		}
 	}
 
 
 	private void reconocePuntoYComa() throws Exception {
-		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENPUNTOYCOMA))) {
-			while (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENPUNTOYCOMA))) {
+		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.PUNTOYCOMA))) {
+			while (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.PUNTOYCOMA))) {
 				token = ALexico.getInstance().obtenerToken();
 			}
 		}
@@ -1415,12 +1415,12 @@ public class ASintacticoImp extends ASintactico {
 	private void reconoceLectura() throws Exception{
 		token = ALexico.getInstance().obtenerToken();
 		TablaSimbolos t=TablaSimbolos.getInstance();
-		if (!hayErrorLexico(token)&&(compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISAPER))){
+		if (!hayErrorLexico(token)&&(compruebaTokens(token.getCategoria(),EnumToken.PARENTESISAPER))){
 			token = ALexico.getInstance().obtenerToken();
-			if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR))) {
+			if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR))) {
 				String asignada=token.getLexema();
 				token=ALexico.getInstance().obtenerToken();
-				if(comparaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER)){
+				if(comparaTokens(token.getCategoria(),EnumToken.PARENTESISCIER)){
 					//es una variable normal, se queda como en la primera version,				
 					if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){														
 						if (compruebaTiposNoExcep(t.dameTipo("integer",nivel),t.dameTipo(asignada,nivel))
@@ -1430,11 +1430,11 @@ public class ASintacticoImp extends ASintactico {
 						}
 					}
 				}
-				else if(comparaTokens(token.getCategoria(),EnumToken.TOKENCORCHETEAPER)){
+				else if(comparaTokens(token.getCategoria(),EnumToken.CORCHETEAPER)){
 					//es un array, el nombre del array esta en asignada
 					token=ALexico.getInstance().obtenerToken();
 					if(compruebaTipos(reconoceExpresion(),t.dameTipo("integer",nivel))){
-						if(compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER)){
+						if(compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER)){
 							//emitir codigo
 							token=ALexico.getInstance().obtenerToken();																		
 							if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){
@@ -1445,7 +1445,7 @@ public class ASintacticoImp extends ASintactico {
 						}
 					}
 				}
-				else if(comparaTokens(token.getCategoria(),EnumToken.TOKENPUNTERO)){			
+				else if(comparaTokens(token.getCategoria(),EnumToken.PUNTERO)){			
 					//el nombre del puntero está en asignada
 					if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){													
 						token=ALexico.getInstance().obtenerToken();						
@@ -1454,7 +1454,7 @@ public class ASintacticoImp extends ASintactico {
 				}																															
 			}
 																								
-		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER))){
+		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.PARENTESISCIER))){
 			token = ALexico.getInstance().obtenerToken();
 			reconocePuntoYComa();
 		}
@@ -1464,10 +1464,10 @@ public class ASintacticoImp extends ASintactico {
 	 	
 	private void reconoceEscritura()throws Exception {
 		token = ALexico.getInstance().obtenerToken();
-		if (!hayErrorLexico(token)&&(compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISAPER))){
+		if (!hayErrorLexico(token)&&(compruebaTokens(token.getCategoria(),EnumToken.PARENTESISAPER))){
 			token = ALexico.getInstance().obtenerToken();
 			reconoceExpresion();													
-			if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER))){
+			if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.PARENTESISCIER))){
 				token = ALexico.getInstance().obtenerToken();
 				reconocePuntoYComa();
 			/*	String codigo="write;.";
@@ -1489,7 +1489,7 @@ public class ASintacticoImp extends ASintactico {
 		PropTipos tp=null;
 		PropTipos tp2=null;
 		
-		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENIGUAL))){			
+		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.IGUAL))){			
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionSuma();
 			
@@ -1500,7 +1500,7 @@ public class ASintacticoImp extends ASintactico {
 				return tabla.dameTipo("boolean",nivel);
 			}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENMENOR))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.MENOR))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionSuma();
 			if (compruebaTipos(t,tp)){ 
@@ -1510,7 +1510,7 @@ public class ASintacticoImp extends ASintactico {
 				return tabla.dameTipo("boolean",nivel);
 			}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENMAYOR))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.MAYOR))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionSuma();
 			if (compruebaTipos(t,tp)){ 
@@ -1520,7 +1520,7 @@ public class ASintacticoImp extends ASintactico {
 				return tabla.dameTipo("boolean",nivel);
 			}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENMENORIGUAL))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.MENORIGUAL))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionSuma();
 			if (compruebaTipos(t,tp)){ 
@@ -1530,7 +1530,7 @@ public class ASintacticoImp extends ASintactico {
 				return tabla.dameTipo("boolean",nivel);
 			}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENMAYORIGUAL))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.MAYORIGUAL))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionSuma();
 			if (compruebaTipos(t,tp)){ 
@@ -1540,7 +1540,7 @@ public class ASintacticoImp extends ASintactico {
 				return tabla.dameTipo("boolean",nivel);
 			}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENDISTINTO))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.DISTINTO))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionSuma();
 			if (compruebaTipos(t,tp)){ 
@@ -1566,7 +1566,7 @@ public class ASintacticoImp extends ASintactico {
 		PropTipos tp=null;
 		PropTipos tp2=null;
 		TablaSimbolos tabla=TablaSimbolos.getInstance();
-		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENSUMA))){
+		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.SUMA))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionProd();
 			
@@ -1577,7 +1577,7 @@ public class ASintacticoImp extends ASintactico {
 				return tabla.dameTipo("integer",nivel);				
 			}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENRESTA))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.RESTA))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionProd();
 			if (compruebaTipos(t,tp)){
@@ -1588,7 +1588,7 @@ public class ASintacticoImp extends ASintactico {
 			}
 			
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENOR))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.OR))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionProd();
 			if (compruebaTipos(t,tp)){
@@ -1615,7 +1615,7 @@ public class ASintacticoImp extends ASintactico {
 		PropTipos tp=null;
 		PropTipos tp2=null;
 		TablaSimbolos tabla=TablaSimbolos.getInstance();
-		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENPRODUCTO))){
+		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.PRODUCTO))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionNeg();
 			if (compruebaTipos(t,tp)){
@@ -1626,7 +1626,7 @@ public class ASintacticoImp extends ASintactico {
 			}
 			
 		}		
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENDIVISION))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.DIVISION))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionNeg();
 			if (compruebaTipos(t,tp)){
@@ -1636,7 +1636,7 @@ public class ASintacticoImp extends ASintactico {
 				return tabla.dameTipo("integer",nivel);			
 			}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENAND))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.AND))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionNeg();
 			if (compruebaTipos(t,tp)){
@@ -1646,7 +1646,7 @@ public class ASintacticoImp extends ASintactico {
 				return tabla.dameTipo("boolean",nivel);			
 			}
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENMODULO))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.MODULO))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresionNeg();
 			if (compruebaTipos(t,tp)){
@@ -1664,7 +1664,7 @@ public class ASintacticoImp extends ASintactico {
 	private PropTipos reconoceExpresionNeg() throws Exception{
 		PropTipos tp;
 		TablaSimbolos tabla=TablaSimbolos.getInstance();
-		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENNOT))){
+		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.NOT))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresion();
 			if (compruebaTipos(tp,tabla.dameTipo("boolean",nivel))){
@@ -1673,49 +1673,49 @@ public class ASintacticoImp extends ASintactico {
 			return tp;				
 			}			
 		}
-		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISAPER))){
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.PARENTESISAPER))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresion();
-			compruebaTokens(token.getCategoria(),EnumToken.TOKENPARENTESISCIER);
+			compruebaTokens(token.getCategoria(),EnumToken.PARENTESISCIER);
 			token=ALexico.getInstance().obtenerToken();
 			return tp;
 		} 		
-		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENNUMERO)){
+		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.NUMERO)){
 			String codigoEmitido="apila("+token.getLexema()+");.";
 			emitirCodigo(codigoEmitido);
 			token=ALexico.getInstance().obtenerToken();
 			return tabla.dameTipo("integer",nivel);			
 		}
-		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENNIL)){
+		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.NIL)){
 			//emitir codigo
 			token=ALexico.getInstance().obtenerToken();
 			return new PropTipos(TTipo.VACIO,0);			
 		}
-		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENTRUE)){
+		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TRUE)){
 			String codigoEmitido="apila(TRUE);.";
 			emitirCodigo(codigoEmitido);
 			token=ALexico.getInstance().obtenerToken();
 			return tabla.dameTipo("boolean",nivel);			
 		}
-		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENFALSE)){
+		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.FALSE)){
 			String codigoEmitido="apila(FALSE);.";
 			emitirCodigo(codigoEmitido);
 			token=ALexico.getInstance().obtenerToken();
 			return tabla.dameTipo("boolean",nivel);			
 		}
 		
-		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.TOKENIDENTIFICADOR))){
+		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.INDENTIFICADOR))){
 			String asignado=token.getLexema();
 			if (tabla.existeConstante(asignado,nivel)||tabla.existeVariable(asignado,nivel)){
 
 				token = ALexico.getInstance().obtenerToken();
 			
 				//al avanzar, el token se queda apuntando a lo siguiente al nombre, que será, o un puntero, o un array, o el parentesis de cierre
-				if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.TOKENCORCHETEAPER))){
+				if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.CORCHETEAPER))){
 					
 					token=ALexico.getInstance().obtenerToken();
 					if(compruebaTipos(reconoceExpresion(),tabla.dameTipo("integer",nivel))){
-						if(compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER)){
+						if(compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER)){
 							String  codigo="apilaDireccion("+(1+(tabla.dameNivel(asignado,nivel)))+");.";
 							emitirCodigo(codigo);
 							codigo="apila("+(tabla.obtenerInfo(asignado,nivel).dameDir()-1)+");.";
@@ -1731,13 +1731,13 @@ public class ASintacticoImp extends ASintactico {
 						}
 					}
 				}
-				else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENPUNTERO)){
+				else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.PUNTERO)){
 					//es un puntero
 					token=ALexico.getInstance().obtenerToken();
-					if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.TOKENCORCHETEAPER))){						
+					if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.CORCHETEAPER))){						
 						token=ALexico.getInstance().obtenerToken();
 						if(compruebaTipos(reconoceExpresion(),tabla.dameTipo("integer",nivel))){
-							if(compruebaTokens(token.getCategoria(),EnumToken.TOKENCORCHETECIER)){
+							if(compruebaTokens(token.getCategoria(),EnumToken.CORCHETECIER)){
 								//emitir codigo
 								token=ALexico.getInstance().obtenerToken();
 								return ((PropTiposArray)((PropTiposPointer) tabla.dameTipo(asignado,nivel)).getRef()).getRef();
@@ -1782,18 +1782,18 @@ public class ASintacticoImp extends ASintactico {
 			}
 			return tabla.dameTipo(asignado,nivel);
 		}
-		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.TOKENSUMA)){
+		else if (!hayErrorLexico(token)&& comparaTokens(token.getCategoria(),EnumToken.SUMA)){
 			token=ALexico.getInstance().obtenerToken();	
-			if (compruebaTokens(token.getCategoria(),EnumToken.TOKENNUMERO)){									
+			if (compruebaTokens(token.getCategoria(),EnumToken.NUMERO)){									
 				String codigoEmitido="apila("+"-"+token.getLexema()+");.";
 				emitirCodigo(codigoEmitido);
 				token=ALexico.getInstance().obtenerToken();
 				return tabla.dameTipo("integer",nivel);
 			}
 		}
-		else if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.TOKENRESTA)){
+		else if (!hayErrorLexico(token)&& compruebaTokens(token.getCategoria(),EnumToken.RESTA)){
 			token=ALexico.getInstance().obtenerToken();
-			if (compruebaTokens(token.getCategoria(),EnumToken.TOKENNUMERO)){								
+			if (compruebaTokens(token.getCategoria(),EnumToken.NUMERO)){								
 				String codigoEmitido="apila("+"-"+token.getLexema()+");.";
 				emitirCodigo(codigoEmitido);
 				token=ALexico.getInstance().obtenerToken();				
@@ -1808,7 +1808,7 @@ public class ASintacticoImp extends ASintactico {
 	private PropTipos reconoceAsignacion()throws Exception{
 
 	PropTipos devolver=null;
-	if (!hayErrorLexico(token)&&(compruebaTokens(token.getCategoria(),EnumToken.TOKENASIGNACION))){
+	if (!hayErrorLexico(token)&&(compruebaTokens(token.getCategoria(),EnumToken.ASIGNACION))){
 		token=ALexico.getInstance().obtenerToken();
 		devolver= reconoceExpresion();
 	}
@@ -1820,7 +1820,7 @@ public class ASintacticoImp extends ASintactico {
 		token = ALexico.getInstance().obtenerToken();
 		if (!hayErrorLexico(token)
 				&& (compruebaTokens(token.getCategoria(),
-						EnumToken.TOKENIDENTIFICADOR))) {
+						EnumToken.INDENTIFICADOR))) {
 			if (!existeID(token.getLexema())) {
 				//Ver que se hace aqui con el indentiicador del programa
 				//ya que ahora no tenemos el TError
@@ -1857,73 +1857,73 @@ public class ASintacticoImp extends ASintactico {
 
 	private String cadenaToken(EnumToken tokenEsperado) {
 		switch (tokenEsperado) {
-		case TOKENPROGRAM:
+		case PROGRAM:
 			return "PROGRAM";
-		case TOKENBEGIN:
+		case BEGIN:
 			return "BEGIN";
-		case TOKENEND:
+		case END:
 			return "END";
-		case TOKENVAR:
+		case VAR:
 			return "VAR";
-		case TOKENCONST:
+		case CONST:
 			return "CONST";
-		case TOKENINTEGER:
+		case INTEGER:
 			return "TIPO";
-		case TOKENBOOLEAN:
+		case BOOLEAN:
 			return "TIPO";
-		case TOKENREAD:
+		case READ:
 			return "READ";
-		case TOKENWRITE:
+		case WRITE:
 			return "WRITE";
-		case TOKENTRUE:
+		case TRUE:
 			return "TRUE";
-		case TOKENFALSE:
+		case FALSE:
 			return "FALSE";
-		case TOKENNOT:
+		case NOT:
 			return "NOT";
-		case TOKENPARENTESISAPER:
+		case PARENTESISAPER:
 			return "(";
-		case TOKENPARENTESISCIER:
+		case PARENTESISCIER:
 			return ")";
-		case TOKENPUNTO:
+		case PUNTO:
 			return ".";
-		case TOKENCOMA:
+		case COMA:
 			return ";";
-		case TOKENPUNTOYCOMA:
+		case PUNTOYCOMA:
 			return ";";
-		case TOKENDOSPUNTOS:
+		case DOSPUNTOS:
 			return ":";
-		case TOKENASIGNACION:
+		case ASIGNACION:
 			return ":=";
-		case TOKENSUMA:
+		case SUMA:
 			return "+";
-		case TOKENRESTA:
+		case RESTA:
 			return "-";
-		case TOKENOR:
+		case OR:
 			return "OR";
-		case TOKENPRODUCTO:
+		case PRODUCTO:
 			return "*";
-		case TOKENDIVISION:
+		case DIVISION:
 			return "/";
-		case TOKENAND:
+		case AND:
 			return "AND";		
-		case TOKENMODULO:
+		case MODULO:
 			return "MOD";
-		case TOKENIGUAL:
+		case IGUAL:
 			return "=";
-		case TOKENDISTINTO:
+		case DISTINTO:
 			return "<>";
-		case TOKENMAYOR:
+		case MAYOR:
 			return ">";
-		case TOKENMENOR:
+		case MENOR:
 			return "<";
-		case TOKENMAYORIGUAL:
+		case MAYORIGUAL:
 			return ">=";
-		case TOKENMENORIGUAL:
+		case MENORIGUAL:
 			return "<=";
-		case TOKENIDENTIFICADOR:
+		case INDENTIFICADOR:
 			return "Identificador";
-		case TOKENNUMERO:
+		case NUMERO:
 			return "Valor";
 		default:
 			return "";
