@@ -10,8 +10,21 @@ public class Utils {
 	/**
 	 * Extension dam
 	 */
-	public final static String extension = "pas";
+	private final static String extension = "src";
 
+	public static boolean compruebaExtension(String s) {
+	    
+	    String extension = Utils.getExtension(s);
+	    if (extension != null) {
+		if (extension.equals(Utils.extension)) {
+		        return true;
+		} else {
+		    return false;
+		}
+	    }
+
+	    return false;
+	}
 	
 	/**
 	 * Obtiene la extension de un fichero
@@ -19,7 +32,7 @@ public class Utils {
 	 * @param f Fichero del que obtener la extension
 	 * @return la extension
 	 */
-	public static String getExtension(String s) {
+	private static String getExtension(String s) {
 		String ext = null;
 		int i = s.lastIndexOf('.');
 

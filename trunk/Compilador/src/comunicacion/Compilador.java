@@ -24,10 +24,9 @@ public class Compilador implements Modelo {
 			ficheroSalida+=trans.getTexto().charAt(puntero);
 			puntero++;
 		}
-		Filtro filtro=new Filtro();
 		FileReader fuente;
 		try{
-			if(filtro.accept(rutaFichero)&&!ficheroSalida.equals("")){
+			if(Utils.compruebaExtension(rutaFichero) && !ficheroSalida.equals("")){
 				try{
 					fuente = new FileReader(rutaFichero);
 					}
