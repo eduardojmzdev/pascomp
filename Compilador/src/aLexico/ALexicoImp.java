@@ -4,6 +4,8 @@ package aLexico;
 import java.io.FileReader;
 import java.io.IOException;
 
+import excepciones.LexicException;
+
 
 
 public class ALexicoImp extends ALexico {
@@ -214,7 +216,7 @@ public class ALexicoImp extends ALexico {
 						break;
 					default:
 						if(ficheroFuente.ready()){
-							throw new Exception("Error Lexico: Linea "+lineaActual+":"+" '"+buffer+"'"+".");
+							throw new LexicException(2, ((Character)buffer).toString(), lineaActual);													
 						}
 					}
 					break;
@@ -225,7 +227,7 @@ public class ALexicoImp extends ALexico {
 						return token;
 					}
 					else{
-						throw new Exception("Error Lexico: Linea "+lineaActual+":"+" '"+lexema+buffer+"'"+".");
+						throw new LexicException(1, ((Character)buffer).toString(), lineaActual);
 						}
 				case ENUMERO:
 					lexema=leeNumero(lexema);
@@ -234,7 +236,7 @@ public class ALexicoImp extends ALexico {
 						return token;
 					}
 					else{
-						throw new Exception("Error Lexico: Linea "+lineaActual+":"+" '"+lexema+buffer+"'"+".");
+						throw new LexicException(1, ((Character)buffer).toString(), lineaActual);
 						}						
 				case EIDENOPALRES:
 					lexema=leePalabra(lexema);

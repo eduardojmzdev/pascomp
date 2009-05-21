@@ -20,7 +20,7 @@ public class Main {
     		try {
     			Compilador compilador = new Compilador(args[0], args[1]);
     			compilador.ejecutar();
-    			System.out.println("FInalizado");
+    			System.out.println("Finalizado");
     			
     		} catch (Exception e) {
     		e.printStackTrace();

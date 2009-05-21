@@ -25,12 +25,13 @@ public class Compilador {
 
 				ASintacticoImp.getInstance().setCodigo(new PrintWriter(ficheroSalida + ".mv"));
 				ASintacticoImp.getInstance().analizar(fuente);
-				System.out.println("Se ha compilador correctamente, escribiendo el fichero "
+				System.out.println("Se ha compilado correctamente, escribiendo el fichero "
 								+ ficheroSalida + "...");
 			} else {
 				System.out.println("Error en la extensiond el fichero");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
