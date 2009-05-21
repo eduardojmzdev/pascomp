@@ -23,7 +23,7 @@ public class Compilador {
 
 				fuente = new FileReader(ficheroEntrada);
 
-				ASintacticoImp.getInstance().setCodigo(new PrintWriter(ficheroSalida + ".da"));
+				ASintacticoImp.getInstance().setCodigo(new PrintWriter(ficheroSalida + ".mv"));
 				ASintacticoImp.getInstance().analizar(fuente);
 				System.out.println("Se ha compilador correctamente, escribiendo el fichero "
 								+ ficheroSalida + "...");
