@@ -1844,7 +1844,7 @@ public class ASintacticoImp extends ASintactico {
 		if (tokenRecibido != tokenEsperado) {
 			String mensajeError = "";
 			String cadenaToken = cadenaToken(tokenEsperado);
-			mensajeError = mensajeError + "Se esperaba '" + cadenaToken;
+			mensajeError = mensajeError + "Se esperaba '" + cadenaToken + "'";
 			hayError = true;
 			throw new SintacticException(mensajeError, ALexico.getInstance().getLinea() );
 		}
