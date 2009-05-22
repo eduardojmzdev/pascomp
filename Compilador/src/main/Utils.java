@@ -15,7 +15,7 @@ public class Utils {
 
 	String extension = Utils.getExtension(s);
 	if (extension != null) {
-	    if (extension.equals(Utils.extensionSalida)) {
+	    if (extension.equals(Utils.extensionEntrada)) {
 		return true;
 	    } else {
 		return false;
