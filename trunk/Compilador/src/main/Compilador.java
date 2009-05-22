@@ -11,12 +11,27 @@ import aSintactico.ASintacticoImp;
 public class Compilador {
     String ficheroEntrada;
     String ficheroSalida;
-
+/*
     public Compilador(String ficheroEntrada, String ficheroSalida) {
 	this.ficheroEntrada = ficheroEntrada;
 	this.ficheroSalida = ficheroSalida;
-    }
-
+    }*/
+    public Compilador(){
+    	
+	}
+    public void setEntrada(String s){
+		ficheroEntrada=s;
+	}
+	public void setSalida(String s){
+		ficheroSalida=s;
+	}
+	public String getEntrada(){
+		return ficheroEntrada;
+	}
+	public String getSalida(){
+		return ficheroSalida;
+	}
+    
     public void ejecutar() throws Exception {
 	if (Utils.compruebaExtension(ficheroEntrada) && !ficheroSalida.equals("")) {
 	    FileReader fuente;
