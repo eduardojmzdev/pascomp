@@ -213,7 +213,7 @@ import excepciones.*
 	class OyenteIntegrantes implements ActionListener{
 		public void actionPerformed(ActionEvent evento){
 			//JOptionPane inf = new JOptionPane();
-			JOptionPane.showMessageDialog(null,"Carlos Fernández\n Daniel Álvarez\n Javier Martínez\n Antonio Ariza\n Isamu Takebe\n Carla Margalef\n Víctor Abascal\n Jesús XXXXXX\n Andrés XXXXXX\n José Ignacio XXXXX\n", "Integrantes del grupo", JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,"Carlos Fernández Agüero\n Daniel Álvarez Ramírez\n Javier Martínez Puentes\n Antonio Ariza Guerrero\n Isamu Takebe Heras\n Carla Margalef Bentabol\n Víctor Abascal Pelayo\n Jesús De Lara Gimeno\n Andrés Jiménez Sánchez\n Ignacio Fernández Cuesta\n", "Integrantes del grupo", JOptionPane.INFORMATION_MESSAGE );
 		}
 	}
 	
