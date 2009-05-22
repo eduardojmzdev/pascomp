@@ -4,14 +4,12 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import excepciones.SintacticException;
+
 import aLexico.ALexico;
 import aLexico.EnumToken;
 import aLexico.Token;
 import tablaSimbolos.*;
-import tablaSimbolos.PropTiposPointer;
-import tablaSimbolos.TElemento;
-import tablaSimbolos.TTipo;
-import tablaSimbolos.TablaSimbolos;
 
 public class ASintacticoImp extends ASintactico {
 
@@ -60,8 +58,7 @@ public class ASintacticoImp extends ASintactico {
 		compruebaTokens(token.getCategoria(),EnumToken.PUNTO);
 		token = ALexico.getInstance().obtenerToken();
 		if (token!=null&&comparaTokens(token.getCategoria(),EnumToken.PUNTO)){
-			String error="Error Sintactico: Línea "+ALexico.getInstance().getLinea()+"'.' No esperado";
-			throw new Exception(error);
+			throw new SintacticException(ALexico.getInstance().getLinea()+"'.' No esperado.", ALexico.getInstance().getLinea() );
 		}
 		volcarFicheroCodigo();		
 	}
@@ -406,8 +403,8 @@ public class ASintacticoImp extends ASintactico {
 					reconocePuntoYComa();
 					}						
 				}
-			else{throw new Exception("Identificador de tipo: "+nombre+" repetido "+ ALexico.getInstance().getLinea());
-				
+			else{
+				throw new SintacticException("Identificador de tipo: "+nombre+" repetido ", ALexico.getInstance().getLinea());								
 			}
 			}
 		}
@@ -415,7 +412,8 @@ public class ASintacticoImp extends ASintactico {
 
 	private int reconoceIntervalo()throws Exception {
 		int num=Integer.parseInt(token.getLexema());
-		if(num!=0)throw new Exception("Intervalo no válido "+ ALexico.getInstance().getLinea());		
+		if(num!=0)
+			throw new SintacticException("Intervalo no válido ",  ALexico.getInstance().getLinea());		
 		else{
 			token = ALexico.getInstance().obtenerToken();
 			if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.PUNTO))) {
@@ -428,7 +426,8 @@ public class ASintacticoImp extends ASintactico {
 							&& (compruebaTokens(token.getCategoria(),
 									EnumToken.DIGITO))) {
 						int num2=Integer.parseInt(token.getLexema());
-						if(num2<0)throw new Exception("El intervalo debe ser positivo "+ ALexico.getInstance().getLinea());					
+						if (num2<0) 
+							throw new SintacticException("El intervalo debe ser positivo ", ALexico.getInstance().getLinea());					
 						return num2+1;
 						}
 					}
@@ -558,7 +557,7 @@ public class ASintacticoImp extends ASintactico {
 		TablaSimbolos Ts = TablaSimbolos.getInstance();
 		if (Ts.dameTipo(nombre,nivel).getNombreTipo()==TTipo.BOOLEAN) return "boolean";
 		else if (Ts.dameTipo(nombre,nivel).getNombreTipo()==TTipo.INTEGER) return "integer";
-		else throw new Exception("Valor introducido no válido "+ ALexico.getInstance().getLinea());
+		else throw new SintacticException("Valor introducido no válido ", ALexico.getInstance().getLinea());
 	}
 
 	private void emitirCodigo(String codigoEmitido) {
@@ -748,7 +747,7 @@ public class ASintacticoImp extends ASintactico {
 									emitirCodigo(codigoEmitido);
 									}
 								else{
-									throw new Exception("Tipo no aceptado en esta versión en línea "+ ALexico.getInstance().getLinea());
+									throw new SintacticException("Tipo no aceptado en esta versión en línea ", ALexico.getInstance().getLinea());
 								}
 							}
 							//Emitir el codigo
@@ -850,7 +849,7 @@ public class ASintacticoImp extends ASintactico {
 											emitirCodigo(codigoEmitido);
 											}
 										else{
-											throw new Exception("No se permiten arrays multidimensionales ni arrays de punteros en línea "+ ALexico.getInstance().getLinea());
+											throw new SintacticException("No se permiten arrays multidimensionales ni arrays de punteros", ALexico.getInstance().getLinea());
 										}
 									}
 								}
@@ -1033,7 +1032,9 @@ public class ASintacticoImp extends ASintactico {
 				excodigo="desapilaIndice;.";
 				emitirCodigo(excodigo);
 				while (!comparaTokens(token.getCategoria(),EnumToken.PC)){
-						if(i>=nParam){throw new Exception("Número de parámetros incorrecto en línea "+ ALexico.getInstance().getLinea());}
+						if(i>=nParam){
+							throw new SintacticException("Número de parámetros incorrecto ", ALexico.getInstance().getLinea());
+						}
 						if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.ID)){
 							String nombreParam=token.getLexema();
 							//Tenemos variable entera.
@@ -1090,7 +1091,7 @@ public class ASintacticoImp extends ASintactico {
 										if(compruebaTipos(param,parametroEsperado)){
 											if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
 												if (t.ambitoConstante(nombreParam,nivel)){
-													throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());												
+													throw new SintacticException("Constante pasada por variable ", ALexico.getInstance().getLinea());												
 												}																																	
 											}
 												token=ALexico.getInstance().obtenerToken();
@@ -1114,7 +1115,7 @@ public class ASintacticoImp extends ASintactico {
 											if(compruebaTipos(param,parametroEsperado)){
 												if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
 													if (t.ambitoConstante(nombreParam,nivel)){
-														throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());												
+														throw new SintacticException("Constante pasada por variable en línea ", ALexico.getInstance().getLinea());												
 														}																																	
 												}
 													token=ALexico.getInstance().obtenerToken();
@@ -1144,7 +1145,7 @@ public class ASintacticoImp extends ASintactico {
 										}
 								}
 								else{
-									throw new Exception("Token No esperado en línea "+ ALexico.getInstance().getLinea());
+									throw new SintacticException("Token no esperado ", ALexico.getInstance().getLinea());
 									}				
 							}
 							else if (!hayErrorLexico(token)&&(comparaTokens(token.getCategoria(),EnumToken.PC)||comparaTokens(token.getCategoria(),EnumToken.COMA))){
@@ -1154,7 +1155,7 @@ public class ASintacticoImp extends ASintactico {
 									if(compruebaTipos(param,parametroEsperado)){
 										if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
 											if (t.ambitoConstante(nombreParam,nivel)){
-												throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());												
+												throw new SintacticException("Constante pasada por variable  ", ALexico.getInstance().getLinea());												
 												}																																	
 										}
 										if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
@@ -1164,7 +1165,7 @@ public class ASintacticoImp extends ASintactico {
 									}																												
 							}
 							else{
-								throw new Exception("Parametro no valido en línea "+ ALexico.getInstance().getLinea());
+								throw new SintacticException("Parametro no valido ", ALexico.getInstance().getLinea());
 								
 								}
 						}
@@ -1172,8 +1173,9 @@ public class ASintacticoImp extends ASintactico {
 							PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 							if(compruebaTipos(param,t.dameTipo("boolean",nivel))){
 								if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
-									throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());																																																					
-									}else{
+									throw new SintacticException("Constante pasada por variable en línea ", ALexico.getInstance().getLinea());																																																					
+									}
+								else{
 									token=ALexico.getInstance().obtenerToken();
 									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
 										token=ALexico.getInstance().obtenerToken();							
@@ -1186,8 +1188,9 @@ public class ASintacticoImp extends ASintactico {
 							PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 							if(compruebaTipos(param,t.dameTipo("boolean",nivel))){
 								if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
-									throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());																																																					
-									}else{
+									throw new SintacticException("Constante pasada por variable", ALexico.getInstance().getLinea());																																																					
+									}
+								else{
 									token=ALexico.getInstance().obtenerToken();
 									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
 										token=ALexico.getInstance().obtenerToken();							
@@ -1200,7 +1203,7 @@ public class ASintacticoImp extends ASintactico {
 							PropTipos param=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getTipo();
 							if(compruebaTipos(param,t.dameTipo("integer",nivel))){
 								if(((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().get(i).getModo()==Modo.VARIABLE){											
-									throw new Exception("Constante pasada por variable en línea "+ ALexico.getInstance().getLinea());																																																					
+									throw new SintacticException("Constante pasada por variable ", ALexico.getInstance().getLinea());																																																					
 								}else{
 									token=ALexico.getInstance().obtenerToken();
 									if (!hayErrorLexico(token)&&comparaTokens(token.getCategoria(),EnumToken.COMA)){
@@ -1217,7 +1220,7 @@ public class ASintacticoImp extends ASintactico {
 					emitirCodigo(codigo);
 					//fin del bucle de reconocimiento de parámetros
 					if (i!=nParam){
-						throw new Exception("Número de parámetros incorrecto en línea "+ ALexico.getInstance().getLinea());					
+						throw new SintacticException("Número de parámetros incorrecto ", ALexico.getInstance().getLinea());					
 					}
 					token=ALexico.getInstance().obtenerToken();
 					if (comparaTokens(token.getCategoria(),EnumToken.PYCOMA)){
@@ -1282,9 +1285,10 @@ public class ASintacticoImp extends ASintactico {
 							sigue=sigue&&contador<6;
 							}
 							if (contador==6){
-								throw new Exception("Tipos mutuamente recursivos no sportados en línea "+ ALexico.getInstance().getLinea());
-								}else{
-							contador=aux.getRef().getTam();	
+								throw new SintacticException("Tipos mutuamente recursivos no soportados ", ALexico.getInstance().getLinea());
+								}
+							else{
+								contador=aux.getRef().getTam();	
 							}
 							String codigo="new("+contador+");.";
 							emitirCodigo(codigo);
@@ -1841,11 +1845,8 @@ public class ASintacticoImp extends ASintactico {
 			String mensajeError = "";
 			String cadenaToken = cadenaToken(tokenEsperado);
 			mensajeError = mensajeError + "Se esperaba '" + cadenaToken;
-			mensajeError = "Error Sintactico: Línea "
-					+ ALexico.getInstance().getLinea() + ": " + mensajeError
-					+ "'";
 			hayError = true;
-			throw new Exception(mensajeError);
+			throw new SintacticException(mensajeError, ALexico.getInstance().getLinea() );
 		}
 		return true;
 	}
@@ -1932,10 +1933,7 @@ public class ASintacticoImp extends ASintactico {
 		TablaSimbolos ts = TablaSimbolos.getInstance();
 		if (ts.existeTipoNivel(t,nivel)||ts.existeVariableNivel(t,nivel)||ts.existeConstanteNivel(t,nivel)||ts.existeProcedimientoNivel(t,nivel)) {
 			String mensajeError = "Identificador '" + t + "' repetido";
-			mensajeError = "Error Sintactico: Línea "
-					+ ALexico.getInstance().getLinea() + ": " + mensajeError
-					+ ".";
-			throw new Exception(mensajeError);
+			throw new SintacticException(mensajeError, ALexico.getInstance().getLinea());
 		}
 		return false;
 	}
@@ -1945,10 +1943,7 @@ public class ASintacticoImp extends ASintactico {
 		TablaSimbolos ts = TablaSimbolos.getInstance();
 		if (ts.existeTipo(t,nivel)||ts.existeVariable(t,nivel)||ts.existeConstante(t,nivel)||ts.existeProcedimiento(t,nivel)) {
 			String mensajeError = "Identificador '" + t + "' repetido";
-			mensajeError = "Error Sintactico: Línea "
-					+ ALexico.getInstance().getLinea() + ": " + mensajeError
-					+ ".";
-			throw new Exception(mensajeError);
+			throw new SintacticException(mensajeError, ALexico.getInstance().getLinea());
 		}
 		return false;
 	}
@@ -1958,10 +1953,7 @@ public class ASintacticoImp extends ASintactico {
 		TablaSimbolos ts = TablaSimbolos.getInstance();
 		if (!ts.existeVariable(t,nivel)) {
 			String mensajeError = "El identificador '" + t + "' no ha sido declarado";
-			mensajeError = "Error Sintactico: Línea "
-					+ ALexico.getInstance().getLinea() + ": " + mensajeError
-					+ ".";
-			throw new Exception(mensajeError);
+			throw new SintacticException(mensajeError, ALexico.getInstance().getLinea());
 		}
 		return true;
 	}
@@ -1970,10 +1962,7 @@ public class ASintacticoImp extends ASintactico {
 		TablaSimbolos ts = TablaSimbolos.getInstance();
 		if (!ts.existeTipo(nombre,nivel)) {
 			String mensajeError = "El tipo '" + nombre + "' no ha sido declarado";
-			mensajeError = "Error Sintactico: Línea "
-					+ ALexico.getInstance().getLinea() + ": " + mensajeError
-					+ ".";
-			throw new Exception(mensajeError);
+			throw new SintacticException(mensajeError, ALexico.getInstance().getLinea());
 		}
 		return true;
 	}
@@ -2085,7 +2074,7 @@ public class ASintacticoImp extends ASintactico {
 		compatible =compatibleTipos2(e1,e2,visitadas);
 		if (compatible) return true;
 		else{
-			throw new Exception("Tipos no compatibles en línea "+ ALexico.getInstance().getLinea());
+			throw new SintacticException("Tipos no compatibles", ALexico.getInstance().getLinea());
 			}
 	}
 	

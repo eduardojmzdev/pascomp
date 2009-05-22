@@ -4,6 +4,7 @@ package aLexico;
 import java.io.FileReader;
 import java.io.IOException;
 
+import excepciones.CompiladorException;
 import excepciones.LexicException;
 
 
@@ -127,7 +128,7 @@ public class ALexicoImp extends ALexico {
 	}
 	
 
-	public Token obtenerToken() throws Exception{
+	public Token obtenerToken() throws CompiladorException{
 		String lexema = "";
 		try{
 			boolean finFichero=Character.isDefined(buffer);
@@ -216,7 +217,7 @@ public class ALexicoImp extends ALexico {
 						break;
 					default:
 						if(ficheroFuente.ready()){
-							throw new LexicException(2, ((Character)buffer).toString(), lineaActual);													
+							throw new LexicException(" '" + buffer + "'" + ".", lineaActual);													
 						}
 					}
 					break;
@@ -227,7 +228,7 @@ public class ALexicoImp extends ALexico {
 						return token;
 					}
 					else{
-						throw new LexicException(1, ((Character)buffer).toString(), lineaActual);
+						throw new LexicException(" '" + lexema + buffer + "'" + ".", lineaActual);
 						}
 				case ENUMERO:
 					lexema=leeNumero(lexema);
@@ -236,7 +237,7 @@ public class ALexicoImp extends ALexico {
 						return token;
 					}
 					else{
-						throw new LexicException(1, ((Character)buffer).toString(), lineaActual);
+						throw new LexicException(" '" + lexema + buffer + "'" + ".", lineaActual);
 						}						
 				case EIDENOPALRES:
 					lexema=leePalabra(lexema);
@@ -337,8 +338,7 @@ public class ALexicoImp extends ALexico {
 			}
 		}
 		catch(IOException e){
-			//TODO tratar la excepcion
-			//Tratar excepción
+			throw new CompiladorException("Se ha producido un error de lectura en la línea" + lineaActual);
 		}
 		return null;
 	}
