@@ -36,11 +36,12 @@ public class Compilador {
 	if (Utils.compruebaExtension(ficheroEntrada) && !ficheroSalida.equals("")) {
 	    FileReader fuente;
 	    try {
-		fuente = new FileReader(ficheroEntrada);
-	    } catch (FileNotFoundException e) {		
-		throw new CompiladorException("No se ha encontrado el fichero fuente: " + ficheroEntrada);
+	    	fuente = new FileReader(ficheroEntrada);
 	    }
-	    ASintacticoImp.getInstance().setCodigo(new PrintWriter(ficheroSalida + Utils.extensionSalida));
+	    catch (FileNotFoundException e) {		
+	    	throw new CompiladorException("No se ha encontrado el fichero fuente: " + ficheroEntrada);
+	    }
+	    ASintacticoImp.getInstance().setCodigo(new PrintWriter(ficheroSalida + "." +Utils.extensionSalida));
 	    ASintacticoImp.getInstance().analizar(fuente);
 	} else {
 	    throw new CompiladorException("Error en la extension del fichero, debe ser \".src\"");
