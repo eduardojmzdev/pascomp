@@ -1,6 +1,8 @@
 package tablaSimbolos;
 import java.util.*;
 
+import excepciones.CompiladorException;
+
 
 
 public class TablaSimbolosImp extends TablaSimbolos {
@@ -188,7 +190,7 @@ public class TablaSimbolosImp extends TablaSimbolos {
 		}
 		lvl++;
 		if(!esta){
-			throw new Exception("No existe Identificador");
+			throw new CompiladorException("No existe Identificador en la tabla de símbolos");
 			
 		}
 		return esConst;
