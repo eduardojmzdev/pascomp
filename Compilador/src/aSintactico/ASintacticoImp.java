@@ -1363,7 +1363,7 @@ public class ASintacticoImp extends ASintactico {
 				}			
 				//parchea ir-f 
 			}
-		}			
+		}
 	}
 
 	private void parchea(int etq1, int contadorInstrucciones) {
@@ -1763,7 +1763,9 @@ public class ASintacticoImp extends ASintactico {
 					}	
 				}
 			}
-			
+			else
+			  throw new SintacticException("El id \"" + token.getLexema() + "\" no existe", ALexico.getInstance().getLinea());	
+				
 			//Escritura
 			String codigo="apilaDireccion("+(1+(tabla.dameNivel(asignado,nivel)))+");.";
 			emitirCodigo(codigo);
