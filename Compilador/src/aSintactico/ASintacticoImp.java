@@ -1928,6 +1928,10 @@ public class ASintacticoImp extends ASintactico {
 			return "Identificador";
 		case DIGITO:
 			return "Valor";
+		case DO:
+			return "DO";
+		case ENTONCES:
+			return "THEN";	
 		default:
 			return "";
 		}
