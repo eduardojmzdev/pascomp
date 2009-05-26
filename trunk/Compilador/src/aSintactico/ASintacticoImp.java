@@ -1345,7 +1345,7 @@ public class ASintacticoImp extends ASintactico {
 			}
 			
 		}
-		else if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.MIENTRAS))) {
+		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.MIENTRAS))) {
 			token=ALexico.getInstance().obtenerToken();
 			//salvar el ccpp para luego parchear
 			int etq0=contadorInstrucciones;
@@ -1364,6 +1364,8 @@ public class ASintacticoImp extends ASintactico {
 				//parchea ir-f 
 			}
 		}
+		else
+			throw new SintacticException("Comienzo de instrucción no valido", ALexico.getInstance().getLinea());
 	}
 
 	private void parchea(int etq1, int contadorInstrucciones) {
