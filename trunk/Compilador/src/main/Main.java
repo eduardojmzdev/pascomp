@@ -34,7 +34,7 @@ public class Main {
 				String ficheroSalida = args[1];
 
 				System.out.println("Iniciando compilador...");
-				Compilador compilador = new Compilador(ficheroEntrada, ficheroSalida);
+				Traductor compilador = new Traductor(ficheroEntrada, ficheroSalida);
 
 				System.out.println("Compilando fichero " + ficheroEntrada + "...");
 				compilador.ejecutar();
