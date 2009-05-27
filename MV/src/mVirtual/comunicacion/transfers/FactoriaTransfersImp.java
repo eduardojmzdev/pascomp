@@ -1,4 +1,4 @@
-package comunicacion.transfers;
+package mVirtual.comunicacion.transfers;
 /**
  * Implementa los métodos de la clase abstracta FactoríaTransfer
  *

@@ -1,4 +1,4 @@
-package comunicacion;
+package mVirtual.comunicacion;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,8 +9,8 @@ import java.util.Stack;
 import mVirtual.CodigoObjeto;
 import mVirtual.MaquinaVirtual;
 
-import comunicacion.transfers.Transfer;
-import excepciones.MVException;
+import mVirtual.comunicacion.transfers.Transfer;
+import mVirtual.excepciones.MVException;
 
 /**
  * Clase implemtadora del modelo

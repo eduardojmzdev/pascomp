@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import mVirtual.instrucciones.Instruccion;
-import excepciones.MVException;
+import mVirtual.excepciones.MVException;
 	
 /**
  * Clase que implementa la máquina virtual. Recibirá un conjunto de instrucciones y deberá ejecutarlas una a una

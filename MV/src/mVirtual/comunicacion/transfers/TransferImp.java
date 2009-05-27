@@ -1,4 +1,4 @@
-package comunicacion.transfers;
+package mVirtual.comunicacion.transfers;
 
 import java.util.Vector;
 

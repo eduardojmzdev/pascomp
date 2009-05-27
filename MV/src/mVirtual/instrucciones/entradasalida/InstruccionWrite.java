@@ -4,11 +4,11 @@ package mVirtual.instrucciones.entradasalida;
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 
-import comunicacion.Controlador;
-import comunicacion.transfers.FactoriaTransfers;
-import comunicacion.transfers.Transfer;
+import mVirtual.comunicacion.Controlador;
+import mVirtual.comunicacion.transfers.FactoriaTransfers;
+import mVirtual.comunicacion.transfers.Transfer;
 
-import excepciones.MVException;
+import mVirtual.excepciones.MVException;
 /**
  * Esta clase implementa la ejecución en la pila de la instrucción write de la máquina virtual
  *

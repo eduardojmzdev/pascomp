@@ -1,6 +1,6 @@
-package comunicacion;
+package mVirtual.comunicacion;
 
-import comunicacion.transfers.Transfer;
+import mVirtual.comunicacion.transfers.Transfer;
 
 /**
  * Modeliza la vista en la estructura de model-view-controller

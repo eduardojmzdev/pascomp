@@ -3,7 +3,7 @@ package mVirtual.instrucciones.memoria;
 
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
-import excepciones.MVException;
+import mVirtual.excepciones.MVException;
 
 /**
  * 

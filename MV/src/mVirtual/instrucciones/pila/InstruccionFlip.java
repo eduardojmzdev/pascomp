@@ -5,7 +5,7 @@ import java.util.EmptyStackException;
 
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
-import excepciones.MVException;
+import mVirtual.excepciones.MVException;
 /**
  * 
  * Esta clase implementa la ejecución en la pila de la instrucción desapila  de la máquina virtual

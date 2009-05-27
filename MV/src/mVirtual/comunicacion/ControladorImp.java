@@ -1,7 +1,7 @@
-package comunicacion;
+package mVirtual.comunicacion;
 
-import comunicacion.transfers.Transfer;
-import excepciones.MVException;
+import mVirtual.comunicacion.transfers.Transfer;
+import mVirtual.excepciones.MVException;
 
 /**
  * Clase implementador del controlador (Singleton)
