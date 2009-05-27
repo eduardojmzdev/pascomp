@@ -1,9 +1,11 @@
 package mVirtual.instrucciones.memoria;
 
 
+import java.util.EmptyStackException;
+
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 /**
  * 
@@ -27,15 +29,19 @@ public class InstruccionDispose implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
+	public void Ejecutar() throws MVException {
 		try{
 			int pos = Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop());
 			for(int i=pos; i<pos + Integer.parseInt(datos); i++){
 				MaquinaVirtual.obtenerInstancia().getMemoriaDatos().remove(i);	
 			}
-		}catch (Exception e){
-			throw new ExcepcionEnEjecucion("Error de acceso a memoria");
-		} 
+		}catch (EmptyStackException e) {
+			throw new MVException(30);
+
+		} catch (NumberFormatException e) {
+			throw new MVException(21);
+
+		}
 	}
 
 	/* (non-Javadoc)

@@ -1,9 +1,8 @@
 package mVirtual.instrucciones.pila;
 
 
-import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 /**
  * 
@@ -27,12 +26,12 @@ public class InstruccionBurbuja implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
-		try{
+	public void Ejecutar() throws MVException {
+		//try{
 		//	MaquinaVirtual.obtenerInstancia().getPila().pop();
-		}catch (Exception e){
-			throw new ExcepcionEnEjecucion("Error de acceso a memoria");
-		} 
+		//}catch (Exception e){
+		//	throw new ExcepcionEnEjecucion("Error de acceso a memoria");
+		//} 
 	}
 
 	/* (non-Javadoc)

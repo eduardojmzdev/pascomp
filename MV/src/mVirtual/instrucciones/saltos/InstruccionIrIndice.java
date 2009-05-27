@@ -1,18 +1,25 @@
 package mVirtual.instrucciones.saltos;
 
 
+import java.util.EmptyStackException;
+
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 public class InstruccionIrIndice implements Instruccion {
 
 	private String datos;
 
-	public void Ejecutar()
-			throws ExcepcionEnEjecucion {
-		MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop())-1);
+	public void Ejecutar() throws MVException {
+		try {
+			MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop())-1);
+		}catch (EmptyStackException e) {
+			throw new MVException(30);
 
+		} catch (NumberFormatException e) {
+			throw new MVException(21);
+		}	
 	}
 
 	public String getDatos() {

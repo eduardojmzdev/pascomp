@@ -1,9 +1,11 @@
 package mVirtual.instrucciones.pila;
 
 
+import java.util.EmptyStackException;
+
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 /**
  * 
@@ -27,11 +29,16 @@ public class InstruccionApilaIndice implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
+	public void Ejecutar() throws MVException {
 		try{
 			MaquinaVirtual.obtenerInstancia().getPila().push(MaquinaVirtual.obtenerInstancia().getMemoriaDatos().get(Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop())));
-		}catch (Exception e){
-			throw new ExcepcionEnEjecucion("Error de acceso a memoria");
+		
+		}catch (EmptyStackException e) {
+			throw new MVException(30);
+
+		} catch (NumberFormatException e) {
+			throw new MVException(21);
+
 		} 
 	}
 

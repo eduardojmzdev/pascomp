@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Stack;
 
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 	
 /**
  * Clase que implementa la máquina virtual. Recibirá un conjunto de instrucciones y deberá ejecutarlas una a una
@@ -61,45 +61,48 @@ public class MaquinaVirtualImp extends MaquinaVirtual{
 	/**
 	 * Ejecuta el listado de instrucciones que se encuentran en la memoria de instrucciones.
 	 */
-	public void ejecutar()
-	{
+	public void ejecutar() throws MVException {
 		try {
-		while(contadorPrograma < memoriaInstrucciones.getCodigo().size())
-		{
-			Instruccion aux = memoriaInstrucciones.getCodigo().get(contadorPrograma);
-			aux.Ejecutar();
-			contadorPrograma++;
+			while(contadorPrograma < memoriaInstrucciones.getCodigo().size())
+			{
+				Instruccion aux = memoriaInstrucciones.getCodigo().get(contadorPrograma);
+				aux.Ejecutar();
+				contadorPrograma++;	
+			}	
 			System.out.println(printMemoria());
 			System.out.println(printPila());
 			System.out.println();
-			
-
-		}	
-		} catch (ExcepcionEnEjecucion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
+		} catch (MVException e) {
+			e.setNumLinea(contadorPrograma+1);
+			throw e;
+		}
+
 	}		
 	/**
 	 * Ejecuta un paso de la máquina virtual
 	 * 
 	 */
-	public boolean ejecutarPaso() {
+	public boolean ejecutarPaso() throws MVException{
 		boolean ejecucion=false;
 		try {
-			if (contadorPrograma<memoriaInstrucciones.getCodigo().size())
-			{
+			if (contadorPrograma < memoriaInstrucciones.getCodigo().size()){
 				Instruccion aux = memoriaInstrucciones.getCodigo().get(contadorPrograma);
 				aux.Ejecutar();
 				contadorPrograma++;
 				ejecucion= true;
-			}	
-			else
+				
+				System.out.println(printMemoria());
+				System.out.println(printPila());
+				System.out.println();
+				
+			}else
 				ejecucion= false;
-			} catch (ExcepcionEnEjecucion e) {
-				e.printStackTrace();
-			}
+		
+		} catch (MVException e) {
+			e.setNumLinea(contadorPrograma+1);
+			throw e;
+		}
 		return ejecucion;
 	}
 

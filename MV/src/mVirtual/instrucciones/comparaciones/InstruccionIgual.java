@@ -1,9 +1,11 @@
 package mVirtual.instrucciones.comparaciones;
 
 
+import java.util.EmptyStackException;
+
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 /**
  * 
@@ -21,27 +23,26 @@ public class InstruccionIgual implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
-		// TODO Auto-generated method stub
-		if (MaquinaVirtual.obtenerInstancia().getPila().size() >= 2) {
-			try {
-				String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
-				int a, b;
-				b = Integer.parseInt(bString);
-				String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
-				a = Integer.parseInt(aString);
-				boolean c = a == b;
-				if (c)
-					MaquinaVirtual.obtenerInstancia().getPila().push(new String("TRUE"));
-				else
-					MaquinaVirtual.obtenerInstancia().getPila().push(new String("FALSE"));
-			} catch (Exception e) {
-				throw new ExcepcionEnEjecucion("Tipos erroneos");
-			}
-		} else
-			throw new ExcepcionEnEjecucion(
-					"No se han encontrado operandos validos");
+	public void Ejecutar() throws MVException {
+		try {
+			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			int a, b;
+			b = Integer.parseInt(bString);
+			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			a = Integer.parseInt(aString);
+			boolean c = a == b;
+			if (c)
+				MaquinaVirtual.obtenerInstancia().getPila().push(new String("TRUE"));
+			else
+				MaquinaVirtual.obtenerInstancia().getPila().push(new String("FALSE"));
 
+		}catch (EmptyStackException e) {
+			throw new MVException(30);
+
+		} catch (NumberFormatException e) {
+			throw new MVException(21);
+
+		} 
 	}
 
 	/* (non-Javadoc)

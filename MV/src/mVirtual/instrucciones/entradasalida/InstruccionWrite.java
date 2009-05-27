@@ -1,13 +1,14 @@
 package mVirtual.instrucciones.entradasalida;
 
 
+import mVirtual.MaquinaVirtual;
+import mVirtual.instrucciones.Instruccion;
+
 import comunicacion.Controlador;
 import comunicacion.transfers.FactoriaTransfers;
 import comunicacion.transfers.Transfer;
 
-import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
-import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 /**
  * Esta clase implementa la ejecución en la pila de la instrucción write de la máquina virtual
  *
@@ -24,7 +25,7 @@ public class InstruccionWrite implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
+	public void Ejecutar() throws MVException {
 		Transfer t =FactoriaTransfers.obtenerInstancia().generarTransfer();
 		t.setComunicacionInterna(true);
 		t.setTexto(MaquinaVirtual.obtenerInstancia().getPila().pop()+"",0);
