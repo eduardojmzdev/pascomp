@@ -1,6 +1,5 @@
 package mVirtual.instrucciones;
 
-import mVirtual.instrucciones.aritmeticas.InstruccionDivision;
 import mVirtual.instrucciones.aritmeticas.InstruccionDivisionReal;
 import mVirtual.instrucciones.aritmeticas.InstruccionModulo;
 import mVirtual.instrucciones.aritmeticas.InstruccionMultiplicacion;
@@ -16,21 +15,18 @@ import mVirtual.instrucciones.comparaciones.InstruccionMenor;
 import mVirtual.instrucciones.comparaciones.InstruccionMenorIgual;
 import mVirtual.instrucciones.entradasalida.InstruccionRead;
 import mVirtual.instrucciones.entradasalida.InstruccionWrite;
+import mVirtual.instrucciones.memoria.*;
 import mVirtual.instrucciones.pila.InstruccionApila;
 import mVirtual.instrucciones.pila.InstruccionApilaDireccion;
 import mVirtual.instrucciones.pila.InstruccionApilaIndice;
 import mVirtual.instrucciones.pila.InstruccionBurbuja;
-import mVirtual.instrucciones.pila.InstruccionCargaCP;
 import mVirtual.instrucciones.pila.InstruccionCopiaCima;
-import mVirtual.instrucciones.pila.InstruccionDesapila;
 import mVirtual.instrucciones.pila.InstruccionDesapilaDireccion;
 import mVirtual.instrucciones.pila.InstruccionDesapilaIndice;
-import mVirtual.instrucciones.pila.InstruccionDispose;
 import mVirtual.instrucciones.pila.InstruccionFlip;
 import mVirtual.instrucciones.saltos.InstruccionIrA;
 import mVirtual.instrucciones.saltos.InstruccionIrF;
 import mVirtual.instrucciones.saltos.InstruccionIrIndice;
-import mVirtual.repertorio.instrucciones.*;
 /**
  * La factoria de comandos propiamente dicha (Singleton) 
  *
@@ -47,14 +43,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
 			return new InstruccionApila();
 		if (comando.equals("apilaDireccion"))
 			return new InstruccionApilaDireccion();
-		if (comando.equals("desapila"))
-			return new InstruccionDesapila();
 		if (comando.equals("desapilaDireccion"))
 			return new InstruccionDesapilaDireccion();
 		if (comando.equals("distinto"))
 			return new InstruccionOr();
-		if (comando.equals("divisionEntera"))
-			return new InstruccionDivision();
 		if (comando.equals("division"))
 			return new InstruccionDivisionReal();
 		if (comando.equals("igual"))

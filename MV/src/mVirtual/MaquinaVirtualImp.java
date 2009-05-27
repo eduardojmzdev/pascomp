@@ -119,25 +119,7 @@ public class MaquinaVirtualImp extends MaquinaVirtual{
 		memoriaDatos.put(6,"7");
 		contadorPrograma = 0;
 	}
-	//prueba de la máquina virtual
-	/*public static void main(String[] args){
-		CodigoObjeto co= new CodigoObjeto();
-		co.añadirInstruccion("Apila","1");
-		co.añadirInstruccion("Apila","2");
-		co.añadirInstruccion("Apila","3");
-		co.añadirInstruccion("Apila","4");
-		co.añadirInstruccion("Apila","5");
-		co.añadirInstruccion("Apila","6");
-		co.añadirInstruccion("Desapila");
-		co.añadirInstruccion("Desapila");
-		co.añadirInstruccion("Suma");
-		co.añadirInstruccion("Suma");
-		co.añadirInstruccion("DesapilaDireccion","1");
-		co.añadirInstruccion("Apila","7");
-		co.añadirInstruccion("Resta");
-		MaquinaVirtual mv= new MaquinaVirtual(co);
-		mv.ejecutar();
-	}*/
+
 /**
  * Devuelve la pila actual de la MV
  */
