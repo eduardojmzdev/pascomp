@@ -1,5 +1,5 @@
 
-package excepciones;
+package mVirtual.excepciones;
 
 import java.util.HashMap;
 

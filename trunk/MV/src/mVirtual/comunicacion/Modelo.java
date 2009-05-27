@@ -1,6 +1,6 @@
-package comunicacion;
+package mVirtual.comunicacion;
 
-import comunicacion.transfers.Transfer;
+import mVirtual.comunicacion.transfers.Transfer;
 /**
  * Comportamiento que deberan implementar los diversos modelos que
  * quieran usar esta aplicacion

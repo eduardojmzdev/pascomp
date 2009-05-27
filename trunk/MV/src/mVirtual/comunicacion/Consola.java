@@ -1,10 +1,10 @@
-package comunicacion;
+package mVirtual.comunicacion;
 
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-import comunicacion.transfers.FactoriaTransfers;
-import comunicacion.transfers.Transfer;
+import mVirtual.comunicacion.transfers.FactoriaTransfers;
+import mVirtual.comunicacion.transfers.Transfer;
 /**
  * Implementación de la vista de usuario
  *

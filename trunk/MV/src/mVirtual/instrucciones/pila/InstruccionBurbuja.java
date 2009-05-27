@@ -2,7 +2,7 @@ package mVirtual.instrucciones.pila;
 
 
 import mVirtual.instrucciones.Instruccion;
-import excepciones.MVException;
+import mVirtual.excepciones.MVException;
 
 /**
  * 

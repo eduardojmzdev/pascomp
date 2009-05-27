@@ -3,7 +3,7 @@ package mVirtual.instrucciones.pila;
 
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
-import excepciones.MVException;
+import mVirtual.excepciones.MVException;
 /**
  * 
  * Esta clase implementa la ejecución en la pila de la instrucción apila de la máquina virtual

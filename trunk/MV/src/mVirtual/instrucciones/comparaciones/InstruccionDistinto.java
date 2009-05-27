@@ -5,7 +5,7 @@ import java.util.EmptyStackException;
 
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
-import excepciones.MVException;
+import mVirtual.excepciones.MVException;
 
 /**
  * 
