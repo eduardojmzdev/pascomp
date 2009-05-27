@@ -11,11 +11,11 @@ import aSintactico.ASintacticoImp;
 public class Compilador {
     String ficheroEntrada;
     String ficheroSalida;
-/*
+
     public Compilador(String ficheroEntrada, String ficheroSalida) {
 	this.ficheroEntrada = ficheroEntrada;
 	this.ficheroSalida = ficheroSalida;
-    }*/
+    }
     public Compilador(){
     	
 	}
