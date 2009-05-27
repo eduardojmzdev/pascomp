@@ -12,7 +12,8 @@ public interface Modelo {
 	/**
 	 * Ordena ejecutar la MV
 	 * @param trans Transfer con los datos necesarios
-	 */void ejecutar(Transfer trans);
+	 * @throws Exception 
+	 */void ejecutar(Transfer trans) throws Exception;
 	
 	/**
 	 * Ejecuta paso a paso el código para la MV

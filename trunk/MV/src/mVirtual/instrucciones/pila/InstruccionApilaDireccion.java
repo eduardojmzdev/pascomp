@@ -2,8 +2,8 @@ package mVirtual.instrucciones.pila;
 
 
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 /**
  * 
@@ -27,12 +27,13 @@ public class InstruccionApilaDireccion implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
+	public void Ejecutar() throws MVException {
 		try{
 			MaquinaVirtual.obtenerInstancia().getPila().push(MaquinaVirtual.obtenerInstancia().getMemoriaDatos().get(Integer.parseInt(datos)));
-		}catch (Exception e){
-			throw new ExcepcionEnEjecucion("Error de acceso a memoria");
-		} 
+		
+		} catch (NumberFormatException e) {
+			throw new MVException(21);
+		}
 	}
 
 	/* (non-Javadoc)

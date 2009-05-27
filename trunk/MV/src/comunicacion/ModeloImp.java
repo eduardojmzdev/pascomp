@@ -8,7 +8,9 @@ import java.util.Stack;
 
 import mVirtual.CodigoObjeto;
 import mVirtual.MaquinaVirtual;
+
 import comunicacion.transfers.Transfer;
+import excepciones.MVException;
 
 /**
  * Clase implemtadora del modelo
@@ -122,7 +124,7 @@ public class ModeloImp implements Modelo {
 	/* (non-Javadoc)
 	 * @see comunicacion.Modelo#ejecutar(comunicacion.transfers.Transfer)
 	 */
-	public void ejecutar(Transfer trans) {
+	public void ejecutar(Transfer trans) throws Exception {
 		try{
 			if(trans.getRuta()){
 			cargarFichero(trans);
@@ -131,9 +133,11 @@ public class ModeloImp implements Modelo {
 			MaquinaVirtual.obtenerInstancia().resetear();
 			MaquinaVirtual.obtenerInstancia().ejecutar();
 		}
+		} catch (MVException e) {
+			throw e; 
 		} catch (Exception e) {
-			System.out.println("No se encontro el fichero de codigo");
-			e.printStackTrace();
+			//e.printStackTrace();
+			throw new Exception("No se encontro el fichero de codigo");
 		}
 		
 	}

@@ -1,9 +1,11 @@
 package mVirtual.instrucciones.aritmeticas;
 
 
+import java.util.EmptyStackException;
+
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 /**
  * 
@@ -21,25 +23,24 @@ public class InstruccionSuma implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar()
-			throws ExcepcionEnEjecucion {
+	public void Ejecutar() throws MVException {
 
-		if (MaquinaVirtual.obtenerInstancia().getPila().size() >= 2) {
-			try {
-				String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
-				int a, b;
-				b = Integer.parseInt(bString);
-				String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
-				a = Integer.parseInt(aString);
-				int c = a + b;
-				MaquinaVirtual.obtenerInstancia().getPila().push(new String(String.valueOf(c)));
-			} catch (Exception e) {
-				throw new ExcepcionEnEjecucion("Tipos erroneos");
-			}
-		} else
-			throw new ExcepcionEnEjecucion(
-					"No se han encontrado operandos validos");
+		try {
+			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			int a, b;
+			b = Integer.parseInt(bString);
+			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			a = Integer.parseInt(aString);
+			int c = a + b;
+			MaquinaVirtual.obtenerInstancia().getPila().push(new String(String.valueOf(c)));
 
+		}catch (EmptyStackException e) {
+			throw new MVException(30);
+
+		} catch (NumberFormatException e) {
+			throw new MVException(21);
+
+		} 
 	}
 
 	/* (non-Javadoc)

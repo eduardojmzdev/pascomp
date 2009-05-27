@@ -3,6 +3,8 @@ package mVirtual;
 import java.util.Hashtable;
 import java.util.Stack;
 
+import excepciones.MVException;
+
 public abstract class MaquinaVirtual {
 	private static MaquinaVirtual instancia;
 	
@@ -19,14 +21,16 @@ public abstract class MaquinaVirtual {
 
 	/**
 	 * Ejecuta el listado de instrucciones que se encuentran en la memoria de instrucciones.
+	 * @throws MVException 
 	 */
-	public abstract void ejecutar();
+	public abstract void ejecutar() throws MVException;
 
 	/**
 	 * Ejecuta un paso de la máquina virtual
+	 * @throws MVException 
 	 * 
 	 */
-	public abstract boolean ejecutarPaso();
+	public abstract boolean ejecutarPaso() throws MVException;
 
 	/**
 	 * Crea una nueva memoria de datos y pila, y pone el contador de programa a cero.

@@ -1,6 +1,7 @@
 package comunicacion;
 
 import comunicacion.transfers.Transfer;
+import excepciones.MVException;
 
 /**
  * Clase implementador del controlador (Singleton)
@@ -45,8 +46,10 @@ public class ControladorImp extends Controlador {
 			control.asociarModelo(modelo);
 			control.asociarVista(vista);
 			vista.ejecutar(args);
-		} catch (Exception e) {
-		e.printStackTrace();
+		} catch (MVException e) {
+			System.out.println("[MV] Error el linea " + e.getNumLinea() + ": " + e.getError());
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	/* (non-Javadoc)

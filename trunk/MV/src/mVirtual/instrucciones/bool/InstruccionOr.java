@@ -1,9 +1,11 @@
 package mVirtual.instrucciones.bool;
 
 
+import java.util.EmptyStackException;
+
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 /**
  * 
@@ -21,23 +23,39 @@ public class InstruccionOr implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
-		if (MaquinaVirtual.obtenerInstancia().getPila().size() >= 2) {
-			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+	public void Ejecutar() throws MVException {
+		try {
 			boolean a, b;
-			b = (bString.equals("TRUE"));
+
+			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if (bString.equals("TRUE"))
+				b = true;
+			else if (bString.equals("FALSE"))
+				b = false;
+			else
+				throw new MVException(31);
+
 			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
-			a = (aString.equals("TRUE"));
+			if (aString.equals("TRUE"))
+				a = true;
+			else if (aString.equals("FALSE"))
+				a = false;
+			else
+				throw new MVException(31);
+
 			boolean c = a || b;
 			if (c) {
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String("TRUE"));
 			} else {
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String("FALSE"));
-
 			}
-		} else
-			throw new ExcepcionEnEjecucion(
-					"No se han encontrado operandos validos");
+		
+		}catch (EmptyStackException e) {
+			throw new MVException(30);
+
+		} catch (MVException e) {
+			throw e;
+		}
 	}
 
 	/* (non-Javadoc)

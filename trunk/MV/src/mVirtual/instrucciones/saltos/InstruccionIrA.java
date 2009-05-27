@@ -2,17 +2,19 @@ package mVirtual.instrucciones.saltos;
 
 
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 public class InstruccionIrA implements Instruccion {
 
 	private String datos;
 
-	public void Ejecutar()
-			throws ExcepcionEnEjecucion {
-		MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(datos)-1);
-
+	public void Ejecutar()throws MVException {
+		try {
+			MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(datos)-1);
+		} catch (NumberFormatException e) {
+			throw new MVException(21);
+		}
 	}
 
 	public String getDatos() {

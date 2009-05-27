@@ -1,9 +1,11 @@
 package mVirtual.instrucciones.aritmeticas;
 
 
+import java.util.EmptyStackException;
+
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 
 /**
  * 
@@ -21,9 +23,7 @@ public class InstruccionMultiplicacion implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
-		// TODO Auto-generated method stub
-		if (MaquinaVirtual.obtenerInstancia().getPila().size() >= 2) {
+	public void Ejecutar() throws MVException {
 			try {
 				String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 				int a, b;
@@ -32,13 +32,14 @@ public class InstruccionMultiplicacion implements Instruccion {
 				a = Integer.parseInt(aString);
 				int c = a * b;
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String(String.valueOf(c)));
-			} catch (Exception e) {
-				throw new ExcepcionEnEjecucion("Tipos erroneos");
+			
+			}catch (EmptyStackException e) {
+				throw new MVException(30);
+			
+			} catch (NumberFormatException e) {
+				throw new MVException(21);
+			
 			}
-		} else
-			throw new ExcepcionEnEjecucion(
-					"No se han encontrado operandos validos");
-
 
 	}
 

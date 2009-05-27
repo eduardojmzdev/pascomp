@@ -2,8 +2,8 @@ package mVirtual.instrucciones.pila;
 
 
 import mVirtual.MaquinaVirtual;
-import mVirtual.instrucciones.ExcepcionEnEjecucion;
 import mVirtual.instrucciones.Instruccion;
+import excepciones.MVException;
 /**
  * 
  * Esta clase implementa la ejecución en la pila de la instrucción apila de la máquina virtual
@@ -26,13 +26,9 @@ public class InstruccionApila implements Instruccion {
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
-	public void Ejecutar() throws ExcepcionEnEjecucion {
-		try{
-			MaquinaVirtual.obtenerInstancia().getPila().push(datos);
-			}catch (Exception e){
-				throw new ExcepcionEnEjecucion("Error de acceso a memoria");
-			} 
-
+	public void Ejecutar() throws MVException {
+		MaquinaVirtual.obtenerInstancia().getPila().push(datos);
+		
 	}
 
 	/* (non-Javadoc)

@@ -1,8 +1,10 @@
 package mVirtual;
 
 //LIBRERÍAS
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Vector;
-import java.io.*;
 
 import mVirtual.instrucciones.FactoriaComandos;
 import mVirtual.instrucciones.Instruccion;
