@@ -1941,6 +1941,8 @@ public class ASintacticoImp extends ASintactico {
 			return "DO";
 		case ENTONCES:
 			return "THEN";	
+		case PROC:
+			return "PROCEDURE o BEGIN";	
 		default:
 			return "";
 		}
