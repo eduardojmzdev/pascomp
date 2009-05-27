@@ -33,6 +33,11 @@ public abstract class TablaSimbolos {
 			instancia=new TablaSimbolosImp();			
 		}
 		return instancia;
+		
+		
 	}	
+	public static void reset(){
+		instancia = null;
+	}
 	
 }

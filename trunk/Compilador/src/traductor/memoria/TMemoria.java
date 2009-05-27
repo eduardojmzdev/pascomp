@@ -10,4 +10,7 @@ public abstract class TMemoria {
 			instancia=new TMemoriaImp();			
 		return instancia;									
 	}
+	public static void reset(){
+		instancia = null;
+	}
 }

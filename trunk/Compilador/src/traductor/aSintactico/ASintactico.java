@@ -28,4 +28,7 @@ public abstract class ASintactico {
 	public abstract void analizar(FileReader ficheroFuente) throws Exception;
 	
 	public abstract void setCodigo(PrintWriter codigo);
+	public static void reset(){
+		instancia = null;
+	}
 }

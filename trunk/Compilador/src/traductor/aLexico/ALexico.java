@@ -20,4 +20,8 @@ public abstract class ALexico {
 	public abstract void setFichero(FileReader f);
 	
 	public abstract int getLinea();	
+	
+	public static void reset(){
+		instancia = null;
+	}
 }

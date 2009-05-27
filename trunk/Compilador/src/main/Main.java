@@ -38,8 +38,7 @@ public class Main {
 		e.printStackTrace();
 	    }
 	} else if (args.length == 0) {
-	    Compilador compi = new Compilador();
-	    Ventana ventana = new Ventana(compi);
+	    Ventana ventana = new Ventana();
 	    ventana.setTitle("PLG");
 	    ventana.setSize(700, 500);
 	    ventana.setVisible(true);
