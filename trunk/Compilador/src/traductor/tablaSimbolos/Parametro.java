@@ -1,4 +1,4 @@
-package compilador.tablaSimbolos;
+package traductor.tablaSimbolos;
 
 public class Parametro {
 

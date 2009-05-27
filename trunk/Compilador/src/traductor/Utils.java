@@ -1,4 +1,4 @@
-package compilador;
+package traductor;
 
 /**
  * Realiza los filtros de las extensiones

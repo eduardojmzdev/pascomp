@@ -1,7 +1,7 @@
 /**
  * 
  */
-package compilador.aSintactico;
+package traductor.aSintactico;
 import java.io.FileReader;
 import java.io.PrintWriter;
 

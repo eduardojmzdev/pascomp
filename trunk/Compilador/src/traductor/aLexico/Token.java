@@ -2,7 +2,7 @@
  * Paquete que engloba las distintas clases que componen el módulo de análisis
  * léxico del lenguaje fuente del compilador.
  */
-package compilador.aLexico;
+package traductor.aLexico;
 
 /**
  * Implementa la información requerida para cada token (categoría léxica) de los

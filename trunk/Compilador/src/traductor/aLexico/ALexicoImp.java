@@ -1,11 +1,11 @@
-package compilador.aLexico;
+package traductor.aLexico;
 
 
 import java.io.FileReader;
 import java.io.IOException;
 
-import compilador.excepciones.CompiladorException;
-import compilador.excepciones.LexicException;
+import traductor.excepciones.CompiladorException;
+import traductor.excepciones.LexicException;
 
 
 

@@ -1,4 +1,4 @@
-package compilador.memoria;
+package traductor.memoria;
 
 public abstract class TMemoria {
 	private static TMemoria instancia;

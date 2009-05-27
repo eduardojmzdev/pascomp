@@ -1,10 +1,10 @@
-package compilador;
+package traductor;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
 import main.Compilador;
 
-import compilador.excepciones.CompiladorException;
+import traductor.excepciones.CompiladorException;
 
 import java.awt.*;
 import java.awt.event.*;

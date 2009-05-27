@@ -1,4 +1,4 @@
-package compilador.memoria;
+package traductor.memoria;
 
 import java.util.ArrayList;
 

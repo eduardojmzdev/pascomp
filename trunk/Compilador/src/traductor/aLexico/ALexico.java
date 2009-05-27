@@ -1,4 +1,4 @@
-package compilador.aLexico;
+package traductor.aLexico;
 
 import java.io.FileReader;
 
