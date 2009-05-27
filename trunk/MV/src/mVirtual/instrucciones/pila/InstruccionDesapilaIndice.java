@@ -33,6 +33,8 @@ public class InstruccionDesapilaIndice implements Instruccion {
 		try{
 			String cima=MaquinaVirtual.obtenerInstancia().getPila().pop();
 			String subCima=MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if(subCima.equals("null"))
+				throw new MVException(31);
 			MaquinaVirtual.obtenerInstancia().getMemoriaDatos().put(Integer.parseInt(subCima),cima);
 		
 		}catch (EmptyStackException e) {

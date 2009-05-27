@@ -25,10 +25,16 @@ public class InstruccionResta implements Instruccion {
 	 */
 	public void Ejecutar() throws MVException {
 		try {
-			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			int a, b;
+			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if(bString.equals("null"))
+				throw new MVException(31);
+			
 			b = Integer.parseInt(bString);
 			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if(aString.equals("null"))
+				throw new MVException(31);
+			
 			a = Integer.parseInt(aString);
 			int c = a - b;
 			MaquinaVirtual.obtenerInstancia().getPila().push(new String(String.valueOf(c)));

@@ -47,7 +47,7 @@ public class ControladorImp extends Controlador {
 			control.asociarVista(vista);
 			vista.ejecutar(args);
 		} catch (MVException e) {
-			System.out.println("[MV] Error el linea " + e.getNumLinea() + ": " + e.getError());
+			System.out.println("[MV] Error en linea " + e.getNumLinea() + ": " + e.getError());
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

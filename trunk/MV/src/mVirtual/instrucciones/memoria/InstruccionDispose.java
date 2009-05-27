@@ -31,7 +31,11 @@ public class InstruccionDispose implements Instruccion {
 	 */
 	public void Ejecutar() throws MVException {
 		try{
-			int pos = Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop());
+			String cima = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if(cima.equals("null"))
+				throw new MVException(31);
+			int pos = Integer.parseInt(cima);
+			
 			for(int i=pos; i<pos + Integer.parseInt(datos); i++){
 				MaquinaVirtual.obtenerInstancia().getMemoriaDatos().remove(i);	
 			}

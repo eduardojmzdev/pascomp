@@ -13,7 +13,10 @@ public class InstruccionIrIndice implements Instruccion {
 
 	public void Ejecutar() throws MVException {
 		try {
-			MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop())-1);
+			String cima = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if(cima.equals("null"))
+				throw new MVException(31);
+			MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(cima)-1);
 		}catch (EmptyStackException e) {
 			throw new MVException(30);
 

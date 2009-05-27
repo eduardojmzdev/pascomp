@@ -48,6 +48,8 @@ public class MVException extends BasicException{
         errorMap.put(new Integer(28),"Recursos insuficientes para ejecutar el programa");
         errorMap.put(new Integer(29),"se espera un booleano");
         errorMap.put(new Integer(30),"pila vacia, no hay operandos");
+        errorMap.put(new Integer(31),"valor null (puede que una variable no haya sido inicializada)");
+        errorMap.put(new Integer(32),"se espera un entero o booleano");
         
     }
     
