@@ -1,6 +1,6 @@
-package compilador.aSintactico;
-import compilador.tablaSimbolos.PropTipos;
-import compilador.tablaSimbolos.TInfo;
+package traductor.aSintactico;
+import traductor.tablaSimbolos.PropTipos;
+import traductor.tablaSimbolos.TInfo;
 public class ParejaTipos {
 	
 	private PropTipos e1; 

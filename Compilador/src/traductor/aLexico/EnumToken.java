@@ -1,4 +1,4 @@
-package compilador.aLexico;
+package traductor.aLexico;
 
 public enum EnumToken {
 	// Tokens

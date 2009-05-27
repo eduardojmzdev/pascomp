@@ -1,24 +1,24 @@
-package compilador.aSintactico;
+package traductor.aSintactico;
 
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import compilador.excepciones.SintacticException;
-import compilador.tablaSimbolos.Modo;
-import compilador.tablaSimbolos.Parametro;
-import compilador.tablaSimbolos.PropTipos;
-import compilador.tablaSimbolos.PropTiposArray;
-import compilador.tablaSimbolos.PropTiposNombrado;
-import compilador.tablaSimbolos.PropTiposPointer;
-import compilador.tablaSimbolos.PropTiposPro;
-import compilador.tablaSimbolos.TElemento;
-import compilador.tablaSimbolos.TTipo;
-import compilador.tablaSimbolos.TablaSimbolos;
+import traductor.excepciones.SintacticException;
+import traductor.tablaSimbolos.Modo;
+import traductor.tablaSimbolos.Parametro;
+import traductor.tablaSimbolos.PropTipos;
+import traductor.tablaSimbolos.PropTiposArray;
+import traductor.tablaSimbolos.PropTiposNombrado;
+import traductor.tablaSimbolos.PropTiposPointer;
+import traductor.tablaSimbolos.PropTiposPro;
+import traductor.tablaSimbolos.TElemento;
+import traductor.tablaSimbolos.TTipo;
+import traductor.tablaSimbolos.TablaSimbolos;
 
-import compilador.aLexico.ALexico;
-import compilador.aLexico.EnumToken;
-import compilador.aLexico.Token;
+import traductor.aLexico.ALexico;
+import traductor.aLexico.EnumToken;
+import traductor.aLexico.Token;
 
 public class ASintacticoImp extends ASintactico {
 

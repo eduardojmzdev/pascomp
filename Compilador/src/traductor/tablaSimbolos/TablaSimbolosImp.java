@@ -1,7 +1,7 @@
-package compilador.tablaSimbolos;
+package traductor.tablaSimbolos;
 import java.util.*;
 
-import compilador.excepciones.CompiladorException;
+import traductor.excepciones.CompiladorException;
 
 
 

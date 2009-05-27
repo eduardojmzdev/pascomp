@@ -1,6 +1,6 @@
-package compilador.excepciones;
+package traductor.excepciones;
 
-import compilador.excepciones.BasicException;
+import traductor.excepciones.BasicException;
 
 /**
  * Representa a un error en la maquina virtual MEPA

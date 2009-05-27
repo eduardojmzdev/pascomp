@@ -1,5 +1,5 @@
 
-package compilador.excepciones;
+package traductor.excepciones;
 
 import java.util.HashMap;
 
