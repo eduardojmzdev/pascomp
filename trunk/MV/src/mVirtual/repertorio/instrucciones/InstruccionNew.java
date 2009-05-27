@@ -1,4 +1,4 @@
-package mVirtual.repertorio.instrucciones;
+package mVirtual.instrucciones.memoria;
 
 
 import mVirtual.MaquinaVirtual;

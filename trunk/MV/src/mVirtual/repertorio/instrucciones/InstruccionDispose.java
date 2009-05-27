@@ -1,4 +1,4 @@
-package mVirtual.repertorio.instrucciones;
+package mVirtual.instrucciones.memoria;
 
 
 import mVirtual.MaquinaVirtual;
@@ -10,7 +10,7 @@ import mVirtual.instrucciones.Instruccion;
  * Esta clase implementa la ejecución en la pila de la instrucción apiladir de la máquina virtual
  *
  */
-public class InstruccionMueveS implements Instruccion {
+public class InstruccionDispose implements Instruccion {
 
 	/**
 	 * Los datos con los cuales debe trabajar
@@ -29,9 +29,10 @@ public class InstruccionMueveS implements Instruccion {
 	 */
 	public void Ejecutar() throws ExcepcionEnEjecucion {
 		try{
-			String cima=MaquinaVirtual.obtenerInstancia().getPila().pop();
-			String subCima=MaquinaVirtual.obtenerInstancia().getPila().pop();
-			MaquinaVirtual.obtenerInstancia().getMemoriaDatos().put(Integer.parseInt(subCima),cima);
+			int pos = Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop());
+			for(int i=pos; i<pos + Integer.parseInt(datos); i++){
+				MaquinaVirtual.obtenerInstancia().getMemoriaDatos().remove(i);	
+			}
 		}catch (Exception e){
 			throw new ExcepcionEnEjecucion("Error de acceso a memoria");
 		} 
