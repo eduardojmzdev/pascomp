@@ -620,7 +620,7 @@ public class ASintacticoImp extends ASintactico {
 						emitirCodigo(codigoEmitido);
 						codigoEmitido="suma;.";
 						emitirCodigo(codigoEmitido);
-						codigoEmitido="apila(FALSE);.";
+						codigoEmitido="apila(null);.";
 						emitirCodigo(codigoEmitido);
 						codigoEmitido="desapilaIndice;.";
 						emitirCodigo(codigoEmitido);
@@ -641,7 +641,7 @@ public class ASintacticoImp extends ASintactico {
 						emitirCodigo(codigoEmitido);
 						codigoEmitido="suma;.";
 						emitirCodigo(codigoEmitido);
-						codigoEmitido="apila(0);.";
+						codigoEmitido="apila(null);.";
 						emitirCodigo(codigoEmitido);
 						codigoEmitido="desapilaIndice;.";
 						emitirCodigo(codigoEmitido);
@@ -665,7 +665,7 @@ public class ASintacticoImp extends ASintactico {
 								emitirCodigo(codigoEmitido);
 								codigoEmitido="suma;.";
 								emitirCodigo(codigoEmitido);
-								codigoEmitido="apila(FALSE);.";
+								codigoEmitido="apila(null);.";
 								emitirCodigo(codigoEmitido);
 								codigoEmitido="desapilaIndice;.";
 								emitirCodigo(codigoEmitido);
@@ -678,7 +678,7 @@ public class ASintacticoImp extends ASintactico {
 								emitirCodigo(codigoEmitido);
 								codigoEmitido="suma;.";
 								emitirCodigo(codigoEmitido);
-								codigoEmitido="apila(0);.";
+								codigoEmitido="apila(null);.";
 								emitirCodigo(codigoEmitido);
 								codigoEmitido="desapilaIndice;.";
 								emitirCodigo(codigoEmitido);
@@ -724,7 +724,7 @@ public class ASintacticoImp extends ASintactico {
 									emitirCodigo(codigoEmitido);
 									codigoEmitido="suma;.";
 									emitirCodigo(codigoEmitido);
-									codigoEmitido="apila(FALSE);.";
+									codigoEmitido="apila(null);.";
 									emitirCodigo(codigoEmitido);
 									codigoEmitido="desapilaIndice;.";
 									emitirCodigo(codigoEmitido);
@@ -741,7 +741,7 @@ public class ASintacticoImp extends ASintactico {
 									emitirCodigo(codigoEmitido);
 									codigoEmitido="suma;.";
 									emitirCodigo(codigoEmitido);
-									codigoEmitido="apila(0);.";
+									codigoEmitido="apila(null);.";
 									emitirCodigo(codigoEmitido);
 									codigoEmitido="desapilaIndice;.";
 									emitirCodigo(codigoEmitido);
@@ -840,12 +840,12 @@ public class ASintacticoImp extends ASintactico {
 										//Emitir la dupla de codigo correspondiente al tipado basico del array
 										if (compruebaTiposNoExcep(p.getRef(),tabla.dameTipo("boolean",nivel))){
 											//Array prototipado en booleanos
-										String codigoEmitido="apila(FALSE)"+";"+"desapilaDireccion("+(j-1)+");.";
+										String codigoEmitido="apila(null)"+";"+"desapilaDireccion("+(j-1)+");.";
 										emitirCodigo(codigoEmitido);
 										}
 										else if (compruebaTiposNoExcep(p.getRef(),tabla.dameTipo("integer",nivel))){
 											//Array prototipado en enteros
-											String codigoEmitido="apila(0)"+";"+"desapilaDireccion("+(j-1)+");.";
+											String codigoEmitido="apila(null)"+";"+"desapilaDireccion("+(j-1)+");.";
 											emitirCodigo(codigoEmitido);
 											}
 										else{
