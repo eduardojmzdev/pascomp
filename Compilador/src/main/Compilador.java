@@ -6,7 +6,11 @@ import java.io.PrintWriter;
 
 import traductor.Utils;
 import traductor.excepciones.CompiladorException;
+import traductor.memoria.TMemoria;
+import traductor.tablaSimbolos.TablaSimbolos;
 
+import traductor.aLexico.ALexico;
+import traductor.aSintactico.ASintactico;
 import traductor.aSintactico.ASintacticoImp;
 
 public class Compilador {
@@ -48,5 +52,11 @@ public class Compilador {
 	    throw new CompiladorException("Error en la extension del fichero, debe ser \".src\"");
 	}
     }
+	public static void reset(){
+		ALexico.reset();
+		ASintactico.reset();
+		TMemoria.reset();
+		TablaSimbolos.reset();
+	}
 
 }

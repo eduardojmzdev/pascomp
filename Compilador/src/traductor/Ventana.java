@@ -27,9 +27,8 @@ import java.io.IOException;
 	Compilador compi;
 	
 
-	public Ventana(Compilador compi) {
-		
-		this.compi=compi;	
+	public Ventana() {
+			
 		menu = new JMenuBar();
 		archivo = new JMenu("Archivo");
 		abrir = new JMenuItem("Abrir");
@@ -236,6 +235,8 @@ import java.io.IOException;
 			 catch(IOException ioe){
 				 System.out.println(ioe); //Muestra por consola los errores
 			 }
+			 compi = new Compilador();
+			 compi.reset();
 			 compi.setEntrada(archivoAux.getPath());
 			 compi.setSalida(archivoAux.getPath().substring(0,archivoAux.getPath().length()-4)); 
 			 try{
