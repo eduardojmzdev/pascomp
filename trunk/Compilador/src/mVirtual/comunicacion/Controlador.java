@@ -40,4 +40,8 @@ public abstract class Controlador {
 		 * @param modelo El modelo a asociar
 		 */
 		public void asociarModelo(Modelo modelo){};
+		
+		public static void reset(){
+			controlador = null;
+		}
 }

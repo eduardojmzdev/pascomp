@@ -34,4 +34,8 @@ public abstract class FactoriaComandos {
 	public Instruccion generarComando(String comando){
 		return null;
 	};
+	
+	public static void reset(){
+		instancia = null;
+	}
 }

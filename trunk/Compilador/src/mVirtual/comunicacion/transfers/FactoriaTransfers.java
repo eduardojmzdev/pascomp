@@ -28,4 +28,8 @@ public abstract class FactoriaTransfers {
 	public Transfer generarTransfer(){
 		return null;
 	};
+	
+	public static void reset(){
+		instancia = null;
+	}
 }

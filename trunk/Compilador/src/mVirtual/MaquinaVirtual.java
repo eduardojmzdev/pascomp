@@ -56,4 +56,7 @@ public abstract class MaquinaVirtual {
 	public abstract void setContadorPrograma(int contadorPrograma);
 	public abstract void setMemoriaInstrucciones(CodigoObjeto memoriaInstrucciones);
 
+	public static void reset(){
+		instancia = null;
+	}
 }
