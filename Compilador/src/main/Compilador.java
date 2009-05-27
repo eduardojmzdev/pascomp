@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
-import excepciones.CompiladorException;
+import compilador.Utils;
+import compilador.excepciones.CompiladorException;
 
-import aSintactico.ASintacticoImp;
+import compilador.aSintactico.ASintacticoImp;
 
 public class Compilador {
     String ficheroEntrada;
