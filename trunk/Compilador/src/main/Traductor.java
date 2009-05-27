@@ -48,7 +48,7 @@ public class Traductor {
 			try {
 				fuente = new FileReader(ficheroEntrada);
 			} catch (FileNotFoundException e) {
-				throw new CompiladorException("No se ha encontrado el fichero fuente: " + ficheroEntrada);
+				throw new CompiladorException("No se ha encontrado el fichero fuente: " + System.getProperty("user.dir") + "\\" +  ficheroEntrada);
 			} 
 			ASintacticoImp.getInstance().setCodigo(new PrintWriter(ficheroSalida + "." + Utils.extensionSalida));
 			ASintacticoImp.getInstance().analizar(fuente);
