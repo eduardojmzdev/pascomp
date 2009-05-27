@@ -31,7 +31,10 @@ public class InstruccionApilaIndice implements Instruccion {
 	 */
 	public void Ejecutar() throws MVException {
 		try{
-			MaquinaVirtual.obtenerInstancia().getPila().push(MaquinaVirtual.obtenerInstancia().getMemoriaDatos().get(Integer.parseInt(MaquinaVirtual.obtenerInstancia().getPila().pop())));
+			String cima = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if(cima.equals("null"))
+				throw new MVException(31);
+			MaquinaVirtual.obtenerInstancia().getPila().push(MaquinaVirtual.obtenerInstancia().getMemoriaDatos().get(Integer.parseInt(cima)));
 		
 		}catch (EmptyStackException e) {
 			throw new MVException(30);

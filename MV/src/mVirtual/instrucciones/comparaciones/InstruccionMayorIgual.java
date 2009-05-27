@@ -25,11 +25,17 @@ public class InstruccionMayorIgual implements Instruccion {
 	 */
 	public void Ejecutar() throws MVException {
 		try {
-			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			int a, b;
+			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if(bString.equals("null"))
+				throw new MVException(31);
 			b = Integer.parseInt(bString);
+			
 			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			if(aString.equals("null"))
+				throw new MVException(31);
 			a = Integer.parseInt(aString);
+			
 			boolean c = a >= b;
 			if (c)
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String("TRUE"));

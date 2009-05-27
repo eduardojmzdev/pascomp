@@ -25,12 +25,57 @@ public class InstruccionIgual implements Instruccion {
 	 */
 	public void Ejecutar() throws MVException {
 		try {
+			boolean opBooleanos =false;
+			boolean aBool = false, bBool=false;
+			int aInt=0, bInt=0;
+			
 			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
-			int a, b;
-			b = Integer.parseInt(bString);
+			if(bString.equals("null")){
+				throw new MVException(31);
+			
+			//comparacion entre booleanos
+			}else if (bString.equals("TRUE")){
+				opBooleanos = true;
+				bBool = true;
+			
+			//comparacion entre booleanos
+			}else if (bString.equals("FALSE")){
+				opBooleanos = true;
+				bBool  = false;
+			
+			//comparacion entre enteros
+			}else{
+				try{
+					bInt = Integer.parseInt(bString);	
+				} catch (NumberFormatException e) {
+					throw new MVException(32);
+
+				}
+			}
+			
 			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
-			a = Integer.parseInt(aString);
-			boolean c = a == b;
+			
+			if(aString.equals("null")){
+				throw new MVException(31);
+				
+			//comparacion entre booleanos
+			}else if(opBooleanos){
+				if (aString.equals("TRUE") ){
+					aBool = true;
+				}else if (aString.equals("FALSE")){
+					aBool  = false;
+				}else{
+					throw new MVException(29);
+				}
+			}else{//comparacion entre enteros
+				aInt = Integer.parseInt(aString);	
+			}
+			
+			boolean c;
+			if(opBooleanos)
+				c = aBool == bBool;
+			else
+				c = aInt == bInt;
 			if (c)
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String("TRUE"));
 			else
@@ -42,8 +87,7 @@ public class InstruccionIgual implements Instruccion {
 		} catch (NumberFormatException e) {
 			throw new MVException(21);
 
-		} 
-	}
+		}	}
 
 	/* (non-Javadoc)
 	 * @see maquinaVirtual.repertorio.Instruccion#getDatos()
