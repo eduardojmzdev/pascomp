@@ -13,7 +13,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
-import excepciones.*
 ;public class Ventana extends JFrame{
 
 	private static final long serialVersionUID = 1L;

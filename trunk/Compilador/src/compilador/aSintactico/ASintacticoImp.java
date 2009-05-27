@@ -19,7 +19,6 @@ import compilador.tablaSimbolos.TablaSimbolos;
 import compilador.aLexico.ALexico;
 import compilador.aLexico.EnumToken;
 import compilador.aLexico.Token;
-import tablaSimbolos.*;
 
 public class ASintacticoImp extends ASintactico {
 
