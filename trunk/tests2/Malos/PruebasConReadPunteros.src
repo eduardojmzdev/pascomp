@@ -1,0 +1,6 @@
+program PruebasConReadPunteros;
+var
+x:^integer;
+begin
+read(^x);
+end.
