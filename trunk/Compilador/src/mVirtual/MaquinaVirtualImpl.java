@@ -10,7 +10,7 @@ import java.util.Stack;
 
 import excepciones.MVException;
 import mVirtual.instrucciones.Instruccion;
-import traductor.Utils;
+import main.Utils;
 
 public class MaquinaVirtualImpl extends MaquinaVirtual{
 	/**

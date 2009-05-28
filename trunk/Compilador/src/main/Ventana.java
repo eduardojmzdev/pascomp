@@ -1,4 +1,4 @@
-package traductor;
+package main;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -6,7 +6,6 @@ import javax.swing.filechooser.FileFilter;
 import mVirtual.MaquinaVirtualImpl;
 import mVirtual.MaquinaVirtual;
 import excepciones.MVException;
-import main.Traductor;
 
 import excepciones.CompiladorException;
 
@@ -17,7 +16,10 @@ import java.io.FileReader;
 import java.io.File;
 import java.io.IOException;
 
-;
+/**
+ * @author PLG Esta clase implementa el interfaz gráfico de la aplicación.
+ * 
+ */
 public class Ventana extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +32,11 @@ public class Ventana extends JFrame {
 	JTextArea texto1, texto2, texto3, texto4;
 	File archivoAux;
 	Traductor compi;
-	enum Estados {INI, COMPILADO, PASO}
+
+	enum Estados {
+		INI, COMPILADO, PASO
+	}
+
 	Estados estado = Estados.INI;
 
 	/**
@@ -160,7 +166,7 @@ public class Ventana extends JFrame {
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
 		panel.add(boton2, constraints);
-		
+
 		boton3 = new JButton("Ejecutar");
 		boton3.addActionListener(new OyenteEjecutar());
 		constraints.gridx = 1;
@@ -178,8 +184,9 @@ public class Ventana extends JFrame {
 	/**
 	 * @author PLG
 	 * 
-	 * Esta clase es utilizada para abrir los archivos que compila nuestra aplicacion
-	 *
+	 * Esta clase es utilizada para abrir los archivos que compila nuestra
+	 * aplicacion
+	 * 
 	 */
 	class OyenteAbrir implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
@@ -194,20 +201,22 @@ public class Ventana extends JFrame {
 				abrir.setFileFilter(filter1);
 				abrir.showOpenDialog(null);
 				archivoAux = abrir.getSelectedFile(); // Devuelve el File que
-														// vamos a leerName
+				// vamos a leerName
 				if (archivo != null) {
 					texto1.setText("");
 					fichero = new FileReader(archivoAux);
 					BufferedReader leer = new BufferedReader(fichero);
-					int cont=1;
+					int cont = 1;
 					while ((Text = leer.readLine()) != null) {
-						texto1.append(cont+".  "+Text + "\n"); // append Concatena la linea
-						cont++;							// leida
+						texto1.append(cont + ".  " + Text + "\n"); // append
+																	// Concatena
+																	// la linea
+						cont++; // leida
 					}
 					leer.close();
-	
+
 				}
-				
+
 			} catch (IOException ioe) {
 				System.out.println(ioe);
 			} finally {
@@ -221,26 +230,10 @@ public class Ventana extends JFrame {
 		}
 	}
 
-	/*
-	 * class OyenteGuardar implements ActionListener{ public void
-	 * actionPerformed(ActionEvent evento){ try{ System.getProperty("user.dir");
-	 * //Abre el JFileChooser JFileChooser guardar=new
-	 * JFileChooser(System.getProperty("user.dir")); FileFilter filter1 = new
-	 * ExtensionFileFilter("PAS", new String[] { "pas"});
-	 * guardar.setFileFilter(filter1); guardar.showSaveDialog(null); //Muestra
-	 * el diálogo File archivo = guardar.getSelectedFile(); String nombre= "/" +
-	 * archivo.getName()+ ".pas"; File archivoNuevo = new
-	 * File(archivo.getParent()+nombre);
-	 * 
-	 * if(archivoNuevo !=null){ FileWriter Guardx=new FileWriter(archivoNuevo);
-	 * Guardx.write(texto1.getText()); Guardx.close(); //Cierra el fichero } }
-	 * catch(IOException ioe){ System.out.println(ioe); //Muestra por consola
-	 * los errores } } }
-	 */
 	/**
-	 * @author PLG
-	 * Esta clase se utiliza para mostrar en una ventana emergente los nombres de los componentes del grupo
-	 *
+	 * @author PLG Esta clase se utiliza para mostrar en una ventana emergente
+	 *         los nombres de los componentes del grupo
+	 * 
 	 */
 	class OyenteIntegrantes implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
@@ -254,9 +247,9 @@ public class Ventana extends JFrame {
 	}
 
 	/**
-	 * @author PLG
-	 * Esta clase se utiliza para implementar el oyente de boton Salir
-	 *
+	 * @author PLG Esta clase se utiliza para implementar el oyente de boton
+	 *         Salir
+	 * 
 	 */
 	class OyenteSalir implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
@@ -265,9 +258,9 @@ public class Ventana extends JFrame {
 	}
 
 	/**
-	 * @author PLG
-	 * Esta clase se utiliza para implementar el oyente de boton de ejecucion Normal
-	 *
+	 * @author PLG Esta clase se utiliza para implementar el oyente de boton de
+	 *         ejecucion Normal
+	 * 
 	 */
 	class OyenteNormal implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
@@ -296,10 +289,12 @@ public class Ventana extends JFrame {
 				FileReader Fichero = new FileReader(compi.getSalida() + ".mv");
 				BufferedReader leer = new BufferedReader(Fichero);
 				String temp;
-				int cont=1;
+				int cont = 1;
 				while ((temp = leer.readLine()) != null) {
-					texto2.append(cont+".  "+temp + "\n"); // append Concatena la linea
-					cont++;							// leida
+					texto2.append(cont + ".  " + temp + "\n"); // append
+																// Concatena la
+																// linea
+					cont++; // leida
 				}
 				leer.close();
 			} catch (Exception e) {
@@ -311,87 +306,80 @@ public class Ventana extends JFrame {
 	}
 
 	/**
-	 * @author PLG
- 	 * Esta clase se utiliza para implementar el oyente de boton de ejecucion Paso a Paso
-	 *
+	 * @author PLG Esta clase se utiliza para implementar el oyente de boton de
+	 *         ejecucion Paso a Paso
+	 * 
 	 */
 	class OyentePaso implements ActionListener {
 
 		public void actionPerformed(ActionEvent evento) {
 			texto3.setText("");
 			texto4.setText("");
-			if(estado != Estados.INI){
+			if (estado != Estados.INI) {
 				String result = "";
 				try {
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
-					if(estado != Estados.PASO){
-						String[] args = new String [2];
+					if (estado != Estados.PASO) {
+						String[] args = new String[2];
 						args[0] = compi.getSalida() + ".mv";
 						args[1] = "-b";
 						result = mv.ejecutaIni(args);
 						estado = Estados.PASO;
-					}else{
+					} else {
 						result = mv.ejecutarPaso();
 					}
 					texto4.setText(result);
 				} catch (MVException e) {
-					texto3.setText("[MV] Error en linea " + e.getNumLinea() 
-							+ ":\n\t" + e.getError());
-				}catch (Exception e) {
-					texto3.setText("Se produjeron errores " +
-							"desconocidos al compilar:\n");
+					texto3.setText("[MV] Error en linea " + e.getNumLinea() + ":\n\t" + e.getError());
+				} catch (Exception e) {
+					texto3.setText("Se produjeron errores " + "desconocidos al compilar:\n");
 					texto3.setText(e.getStackTrace().toString());
 				}
-			}else{
+			} else {
 				texto3.setText("No se ha compilado ningún fichero.");
 			}
 		}
 	}
 
-
 	/**
-	 * @author PLG
-	 * Esta clase implementa el oyente del boton Ejecutar
+	 * @author PLG Esta clase implementa el oyente del boton Ejecutar
 	 */
 	class OyenteEjecutar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			texto3.setText("");
 			texto4.setText("");
-			if(estado != Estados.INI){	
-				String result="";
+			if (estado != Estados.INI) {
+				String result = "";
 				try {
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
-					String[] args = new String [1];
+					String[] args = new String[1];
 					args[0] = compi.getSalida() + ".mv";
 					result = mv.ejecutaIni(args);
 					estado = Estados.COMPILADO;
 					texto4.setText(result);
 				} catch (MVException e) {
-					texto3.setText("[MV] Error en linea " + e.getNumLinea() 
-							+ ":\n\t" + e.getError());
-				}catch (Exception e) {
-					texto3.setText("Se produjeron errores " +
-							"desconocidos al compilar:\n");
+					texto3.setText("[MV] Error en linea " + e.getNumLinea() + ":\n\t" + e.getError());
+				} catch (Exception e) {
+					texto3.setText("Se produjeron errores " + "desconocidos al compilar:\n");
 					texto3.setText(e.getStackTrace().toString());
 				}
-			}else{
+			} else {
 				texto3.setText("No se ha compilado ningún fichero.");
 			}
 		}
 	}
 
-	
 	/**
-	 * @author PLG
-	 * Esta clase limita el tipo de ficheros que se pueden abrir con el interfaz
-	 *
+	 * @author PLG Esta clase limita el tipo de ficheros que se pueden abrir con
+	 *         el interfaz
+	 * 
 	 */
 	class ExtensionFileFilter extends FileFilter {
 		String description;
 
 		String extensions[];
 
-				public ExtensionFileFilter(String description, String extension) {
+		public ExtensionFileFilter(String description, String extension) {
 			this(description, new String[] { extension });
 		}
 

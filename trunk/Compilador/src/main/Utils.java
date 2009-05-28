@@ -1,20 +1,22 @@
-package traductor;
+package main;
 
 /**
- * Realiza los filtros de las extensiones
+ * Clase con métodos de ayudas diversas
  * 
  */
 public class Utils {
 	/**
-	 * Extension dam
+	 * Constantes para las extensiones de los ficheros
 	 */
 	public final static String extensionEntrada = "src";
 	public final static String extensionSalida = "mv";
 
 	/**
-	 * Devuelve true o false dependiendo si la extensión es la requerida
-	 * @param s La cadane a tratar
-	 * @return Cierto si aceptado
+	 * Comprueba la extensión del fichero
+	 * 
+	 * @param s
+	 *            El fichero de entrada
+	 * @return True si la ex
 	 */
 	public static boolean compruebaExtension(String s) {
 
@@ -28,10 +30,12 @@ public class Utils {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Devuelve true o false dependiendo si la extensión es la requerida
-	 * @param s La cadane a tratar
+	 * 
+	 * @param s
+	 *            La cadane a tratar
 	 * @return Cierto si aceptado
 	 */
 	public static boolean compruebaExtensionSalida(String s) {
@@ -52,7 +56,7 @@ public class Utils {
 	 * 
 	 * @param f
 	 *            Fichero del que obtener la extension
-	 * @return la extension
+	 * @return La extension del fichero
 	 */
 	private static String getExtension(String s) {
 		String ext = null;
