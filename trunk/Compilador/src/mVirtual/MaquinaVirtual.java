@@ -14,43 +14,43 @@ public abstract class MaquinaVirtual {
 		return instancia;
 	}
 	/**
-	 * Método accesor del atributo memoriaDatos.
+	 * Getter memoria datos
 	 * @return Hashtable con la memoria de datos (resultados).
 	 */
 	public abstract Hashtable<Integer, String> getMemoriaDatos();
 
 	/**
-	 * Ejecuta el listado de instrucciones que se encuentran en la memoria de instrucciones.
+	 * Ejecuta el listado de instrucciones
 	 * @throws MVException 
 	 */
 	public abstract String ejecutar() throws MVException;
 
 	/**
-	 * Ejecuta un paso de la máquina virtual
+	 * Ejecuta un paso de la maquina virtual
 	 * @throws MVException 
 	 * 
 	 */
 	public abstract String ejecutarPaso() throws MVException;
 
 	/**
-	 * Crea una nueva memoria de datos y pila, y pone el contador de programa a cero.
+	 * Crea una nueva memoria de datos y pila, actualizando el contador de programa a 0
 	 */
 	public abstract void resetear();
 
 	/**
-	 * Devuelve la pila actual de la MV
+	 * Devuelve la pila latente a la maquina virtual
 	 */
 	public abstract Stack<String> getPila();
 
 	/**
-	 * Devuelve el contador de programa de la MV
-	 * @return contador del programa de la MV
+	 * Devuelve el contador de programa de la maquina virtual
+	 * @return contador del programa de la maquina virtual
 	 */
 	public abstract int getContadorPrograma();
 
 	/**
-	 * Devuelve la memoria de instrucciones de la MV
-	 * @return memoria de instrucciones de la MV
+	 * Devuelve la memoria de instrucciones de la maquina virtual
+	 * @return memoria de instrucciones de la maquina virtual
 	 */
 	public abstract CodigoObjeto getMemoriaInstrucciones();
 	public abstract void setContadorPrograma(int contadorPrograma);

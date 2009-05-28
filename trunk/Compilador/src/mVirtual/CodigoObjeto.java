@@ -9,24 +9,24 @@ import mVirtual.instrucciones.FactoriaComandos;
 import mVirtual.instrucciones.Instruccion;
 
 /** 
- * Clase que implementa el código objeto que estará compuesto por una secuencia 
- * de instrucciones.
+ * Clase que implementa el código objeto compuesto una secuencia 
+ * de instrucciones
  * 
  */
 public class CodigoObjeto {
 
 	//ATRIBUTOS:
-	/** Vector de Instruccion que va a contener las instrucciones. */
+	/** Va a contener las instrucciones */
 	Vector<Instruccion> codigo;	
 
 	//MÉTODOS:
-	/** Constructora por defecto de la clase. */
+	/** Constructora */
 	public CodigoObjeto(){
 		codigo = new Vector<Instruccion>();
 	}
 
-	/** Constructora de la clase, que crea un nuevo Codigo Objeto a partir
-	 * de uno existente.
+	/** Constructora de la clase, que crea un nuevo Codigo Objeto con uno
+	 * ya existente
 	 * @param cO código objeto existente.
 	 */
 	public CodigoObjeto(CodigoObjeto cO){
@@ -34,14 +34,14 @@ public class CodigoObjeto {
 		codigo.addAll(cO.getCodigo());
 	}
 
-	/** Método accesor para el atributo código.
-	 * @return Devuelve el atributo codigo.
+	/** Getter
+	 * @return Devuelve el atributo codigo
 	 */
 	public Vector<Instruccion> getCodigo(){
 		return codigo;
 	}
 	
-	/** Método que crea una instruccion con los atributos indicados y la inserta.
+	/** Crea una instruccion
 	 * @param nombre String con el nombre de la instruccion.
 	 * @param valor String con el valor que toma la instruccion.
 	 */
@@ -51,8 +51,7 @@ public class CodigoObjeto {
 		codigo.add(i);
 	}
 		
-	/** Crea una instruccion con el atributo indicado y la inserta pero en esta caso
-	 * la instrucción no tiene valores.
+	/** Añade instruccion sin datos (valor) definidos
 	 * @param nombre String con el nombre de la instruccion.
 	 */
 	public void añadirInstruccion(String nombre){
@@ -60,7 +59,7 @@ public class CodigoObjeto {
 		codigo.add(i);
 	}
 	
-	/** Escribe sobre el fichero indicado las instrucciones contenidas en el vector.
+	/** Escribe en el fichero el vector de instrucciones
 	 * @param nombreFichero String que contiene el nombre del fichero donde se van a 
 	 * 			almacenar las instrucciones.
 	 */
@@ -85,8 +84,7 @@ public class CodigoObjeto {
 		}
 	}
 	/**
-	 * Recorremos elemento a elemento nuestro vector y lo vamos poniendo
-	 *	en el fichero de salida.
+	 * Recorre el vector de instrucciones, para la posterior escritura en el fichero de salida
 	 */
 	public String toString(){
 		String s="";
