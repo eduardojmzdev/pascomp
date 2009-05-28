@@ -23,7 +23,7 @@ public class Ventana extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JMenuBar menu;
 	JMenu archivo, compilar, informacion;
-	JMenuItem abrir, guardar, salir, normal, paso, integrantes;
+	JMenuItem abrir, salir, normal, paso, integrantes;
 	JLabel etiqueta1, etiqueta2, etiqueta3, etiqueta4;
 	JButton boton1, boton2, boton3;
 	JPanel panel;
@@ -42,12 +42,9 @@ public class Ventana extends JFrame {
 		archivo = new JMenu("Archivo");
 		abrir = new JMenuItem("Abrir");
 		abrir.addActionListener(new OyenteAbrir());
-		guardar = new JMenuItem("Guardar");
-		// guardar.addActionListener(new OyenteGuardar());
 		salir = new JMenuItem("Salir");
 		salir.addActionListener(new OyenteSalir());
 		archivo.add(abrir);
-		archivo.add(guardar);
 		archivo.add(new JSeparator());
 		archivo.add(salir);
 		menu.add(archivo);
@@ -97,7 +94,7 @@ public class Ventana extends JFrame {
 		constraints.gridheight = 1;
 		panel.add(etiqueta4, constraints);
 
-		texto1 = new JTextArea("program HolaMundo");
+		texto1 = new JTextArea("");
 		texto1.setEditable(false);
 		JScrollPane pScroll1 = new JScrollPane(texto1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		constraints.gridx = 0;
