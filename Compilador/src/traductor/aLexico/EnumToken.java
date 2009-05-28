@@ -1,7 +1,11 @@
 package traductor.aLexico;
 
+/**
+ * @author usuario_local
+ * Tokens validos
+ */
 public enum EnumToken {
-	// Tokens
+	
 	PROGRAM,
 	INICIO,
 	FIN,
