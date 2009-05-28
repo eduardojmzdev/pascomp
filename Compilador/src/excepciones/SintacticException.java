@@ -1,6 +1,6 @@
-package traductor.excepciones;
+package excepciones;
 
-import traductor.excepciones.CompiladorException;
+import excepciones.CompiladorException;
 
 /**
  * Representa a un error en el Analisis Sintactico

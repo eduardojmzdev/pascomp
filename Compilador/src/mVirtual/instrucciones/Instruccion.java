@@ -1,6 +1,6 @@
 package mVirtual.instrucciones;
 
-import mVirtual.excepciones.MVException;
+import excepciones.MVException;
 
 /**
  * Comportamiento que deben presentar todas las instrucciones del codigo objeto para poder ser ejecutadas por el sistema

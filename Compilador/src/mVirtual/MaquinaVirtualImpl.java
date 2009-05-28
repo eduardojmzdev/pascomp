@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
-import mVirtual.excepciones.MVException;
+import excepciones.MVException;
 import mVirtual.instrucciones.Instruccion;
 import traductor.Utils;
 

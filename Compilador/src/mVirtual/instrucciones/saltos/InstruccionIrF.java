@@ -5,7 +5,7 @@ import java.util.EmptyStackException;
 
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
-import mVirtual.excepciones.MVException;
+import excepciones.MVException;
 
 public class InstruccionIrF implements Instruccion {
 

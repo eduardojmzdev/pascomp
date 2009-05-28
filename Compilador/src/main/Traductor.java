@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 
 import traductor.Utils;
-import traductor.excepciones.CompiladorException;
+import excepciones.CompiladorException;
 import traductor.memoria.TMemoria;
 import traductor.tablaSimbolos.TablaSimbolos;
 
