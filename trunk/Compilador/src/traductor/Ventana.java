@@ -3,6 +3,9 @@ package traductor;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
+import mVirtual.MaquinaVirtualImpl;
+import mVirtual.MaquinaVirtual;
+import mVirtual.excepciones.MVException;
 import main.Traductor;
 
 import traductor.excepciones.CompiladorException;
@@ -23,11 +26,13 @@ public class Ventana extends JFrame {
 	JMenu archivo, compilar, informacion;
 	JMenuItem abrir, guardar, salir, normal, paso, integrantes;
 	JLabel etiqueta1, etiqueta2, etiqueta3, etiqueta4;
-	JButton boton1, boton2;
+	JButton boton1, boton2, boton3;
 	JPanel panel;
 	JTextArea texto1, texto2, texto3, texto4;
 	File archivoAux;
 	Traductor compi;
+	enum Estados {INI, COMPILADO, PASO}
+	Estados estado = Estados.INI;
 
 	public Ventana() {
 
@@ -156,6 +161,14 @@ public class Ventana extends JFrame {
 		constraints.gridwidth = 1;
 		constraints.gridheight = 1;
 		panel.add(boton2, constraints);
+		
+		boton3 = new JButton("Ejecutar");
+		boton3.addActionListener(new OyenteEjecutar());
+		constraints.gridx = 1;
+		constraints.gridy = 9;
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+		panel.add(boton3, constraints);
 
 		getContentPane().add(panel);
 		setJMenuBar(menu);
@@ -183,6 +196,7 @@ public class Ventana extends JFrame {
 													// leida
 					}
 					leer.close();
+	
 				}
 			} catch (IOException ioe) {
 				System.out.println(ioe);
@@ -247,6 +261,7 @@ public class Ventana extends JFrame {
 			compi.setSalida(archivoAux.getPath().substring(0, archivoAux.getPath().length() - 4));
 			try {
 				compi.ejecutar();
+				estado = Estados.COMPILADO;
 			} catch (CompiladorException e) {
 				System.out.println("Se produjeron errores al compilar:");
 				System.out.println(e.getMensajeError());
@@ -269,7 +284,7 @@ public class Ventana extends JFrame {
 				}
 				leer.close();
 			} catch (Exception e) {
-				System.out.println("Fichero no encontrado.");
+				texto3.setText("Fichero no encontrado.");
 			}
 			// llamada a nuestro metodo con el archivo aux
 
@@ -277,11 +292,57 @@ public class Ventana extends JFrame {
 	}
 
 	class OyentePaso implements ActionListener {
+
 		public void actionPerformed(ActionEvent evento) {
-			// 95495465465
+			if(estado != Estados.INI){
+				try {
+					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
+					String result;
+					if(estado != Estados.PASO){
+						String[] args = new String [2];
+						args[0] = compi.getSalida() + ".mv";
+						args[1] = "-b";
+						result = mv.crearTransfer(args);
+						estado = Estados.PASO;
+					}else{
+						result = mv.ejecutarPaso();
+					}
+					texto4.setText(result);
+				} catch (MVException e) {
+					System.out.println("[MV] Error en linea " + e.getNumLinea() + ": " + e.getError());
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else{
+				texto3.setText("No se ha compilado ningún fichero.");
+			}
 		}
 	}
 
+
+	class OyenteEjecutar implements ActionListener {
+		public void actionPerformed(ActionEvent evento) {
+			if(estado != Estados.INI){	
+				try {
+					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
+					String result;
+					String[] args = new String [1];
+					args[0] = compi.getSalida() + ".mv";
+					result = mv.crearTransfer(args);
+					texto4.setText(result);
+					estado = Estados.COMPILADO;
+				} catch (MVException e) {
+					System.out.println("[MV] Error en linea " + e.getNumLinea() + ": " + e.getError());
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else{
+				texto3.setText("No se ha compilado ningún fichero.");
+			}
+		}
+	}
+
+	
 	class ExtensionFileFilter extends FileFilter {
 		String description;
 

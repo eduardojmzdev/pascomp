@@ -4,9 +4,7 @@ package mVirtual.instrucciones.entradasalida;
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 
-import mVirtual.comunicacion.Controlador;
-import mVirtual.comunicacion.transfers.FactoriaTransfers;
-import mVirtual.comunicacion.transfers.Transfer;
+import mVirtual.comunicacion.Transfer;
 
 import mVirtual.excepciones.MVException;
 /**
@@ -26,10 +24,11 @@ public class InstruccionWrite implements Instruccion {
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
 	public void Ejecutar() throws MVException {
-		Transfer t =FactoriaTransfers.obtenerInstancia().generarTransfer();
+		/*Transfer t =FactoriaTransfers.obtenerInstancia().generarTransfer();
 		t.setComunicacionInterna(true);
 		t.setTexto(MaquinaVirtual.obtenerInstancia().getPila().pop()+"",0);
-		Controlador.obtenerInstancia().actualizarVistas(t);
+		Controlador.obtenerInstancia().actualizarVistas(t);*/
+		System.out.println("Salida usuario:  " + MaquinaVirtual.obtenerInstancia().getPila().pop());
 	}
 
 	/* (non-Javadoc)

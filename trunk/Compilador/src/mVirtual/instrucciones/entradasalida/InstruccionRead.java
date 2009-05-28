@@ -1,12 +1,12 @@
 package mVirtual.instrucciones.entradasalida;
 
 
+import java.util.Scanner;
+
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 
-import mVirtual.comunicacion.Controlador;
-import mVirtual.comunicacion.transfers.FactoriaTransfers;
-import mVirtual.comunicacion.transfers.Transfer;
+import mVirtual.comunicacion.Transfer;
 
 import mVirtual.excepciones.MVException;
 /**
@@ -27,10 +27,19 @@ public class InstruccionRead implements Instruccion {
 	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
 	 */
 	public void Ejecutar() throws MVException {
-		Transfer t =FactoriaTransfers.obtenerInstancia().generarTransfer();
+		/*Transfer t =FactoriaTransfers.obtenerInstancia().generarTransfer();
 		t.setComunicacionInterna(true);
 		Controlador.obtenerInstancia().actualizarVistas(t);
-		MaquinaVirtual.obtenerInstancia().getPila().push(t.getTexto().get(0));
+		MaquinaVirtual.obtenerInstancia().getPila().push(t.getTexto().get(0));*/
+		System.out.println("Esperando escritura de usuario por consola:\n");
+		Scanner lector = new Scanner(System.in);
+		String cadenaLeida="";
+		try {
+			cadenaLeida=lector.next();
+		} catch (Exception e) {
+
+		}
+		MaquinaVirtual.obtenerInstancia().getPila().push(cadenaLeida);
 	}
 
 	/* (non-Javadoc)
