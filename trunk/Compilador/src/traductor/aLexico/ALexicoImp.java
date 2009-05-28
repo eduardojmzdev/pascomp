@@ -7,7 +7,7 @@ import java.io.IOException;
 import traductor.excepciones.CompiladorException;
 import traductor.excepciones.LexicException;
 
-
+//Implementacion del analizador lexico, reconoce palabras reservadas
 
 public class ALexicoImp extends ALexico {
 	
