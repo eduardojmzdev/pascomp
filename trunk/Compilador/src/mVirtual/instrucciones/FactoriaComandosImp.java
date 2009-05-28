@@ -4,7 +4,9 @@ import mVirtual.instrucciones.aritmeticas.InstruccionDivisionReal;
 import mVirtual.instrucciones.aritmeticas.InstruccionModulo;
 import mVirtual.instrucciones.aritmeticas.InstruccionMultiplicacion;
 import mVirtual.instrucciones.aritmeticas.InstruccionResta;
+import mVirtual.instrucciones.aritmeticas.InstruccionRestaUnario;
 import mVirtual.instrucciones.aritmeticas.InstruccionSuma;
+import mVirtual.instrucciones.aritmeticas.InstruccionSumaUnario;
 import mVirtual.instrucciones.bool.InstruccionAnd;
 import mVirtual.instrucciones.bool.InstruccionNot;
 import mVirtual.instrucciones.bool.InstruccionOr;
@@ -73,8 +75,12 @@ public class FactoriaComandosImp extends FactoriaComandos {
 			return new InstruccionRead();
 		if (comando.equals("resta"))
 			return new InstruccionResta();
+		if (comando.equals("restaUnario"))
+			return new InstruccionRestaUnario();
 		if (comando.equals("suma"))
 			return new InstruccionSuma();
+		if (comando.equals("sumaUnario"))
+			return new InstruccionSumaUnario();
 		if (comando.equals("write"))
 			return new InstruccionWrite();
 		if (comando.equals("ir-a"))
