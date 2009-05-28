@@ -1455,30 +1455,13 @@ public class ASintacticoImp extends ASintactico {
 							emitirCodigo(codigo);
 							//fin mod
 						}
-					}
-				}
-				else if(comparaTokens(token.getCategoria(),EnumToken.CA)){
-					//es un array, el nombre del array esta en asignada
-					token=ALexico.getInstance().obtenerToken();
-					if(compruebaTipos(reconoceExpresion(),t.dameTipo("integer",nivel))){
-						if(compruebaTokens(token.getCategoria(),EnumToken.CC)){
-							//emitir codigo
-							token=ALexico.getInstance().obtenerToken();																		
-							if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){
-					
-										//emitir codigo					
-																																										
-							}							
+						else if(compruebaTiposNoExcep(t.dameTipo("integer",nivel),t.dameTipo(asignada,nivel))
+								||compruebaTiposNoExcep(t.dameTipo("boolean",nivel),t.dameTipo(asignada,nivel))){
+							//El tipo recibido es un array o un puntero. Read funciona con enteros o booleanos
+							throw new SintacticException("Esperado tipo Integer o Boolean",ALexico.getInstance().getLinea() );
 						}
 					}
 				}
-				else if(comparaTokens(token.getCategoria(),EnumToken.TPUNTERO)){			
-					//el nombre del puntero está en asignada
-					if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){													
-						token=ALexico.getInstance().obtenerToken();						
-							//emitir codigo																																																											
-					}
-				}																															
 			}
 																								
 		if (!hayErrorLexico(token)&& (compruebaTokens(token.getCategoria(),EnumToken.PC))){
