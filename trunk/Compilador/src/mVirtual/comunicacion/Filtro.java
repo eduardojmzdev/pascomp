@@ -15,7 +15,7 @@ public class Filtro {
 	    
 	    String extension = Utils.getExtension(s);
 	    if (extension != null) {
-		if (extension.equals(Utils.da)) {
+		if (extension.equals(Utils.mv)) {
 		        return true;
 		} else {
 		    return false;
