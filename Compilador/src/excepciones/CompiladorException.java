@@ -4,7 +4,7 @@ package excepciones;
 import java.util.HashMap;
 
 /**
- * Clase base de las excepciones del compilador
+ * Clase basica de las excepciones del compilador
  *
  */
 public class CompiladorException extends Exception{
@@ -20,7 +20,7 @@ public class CompiladorException extends Exception{
     }
     
     /**
-     * Permite obtener el mensaje de error de la excepcion
+     * Obtiene el mensaje de error de la excepcion
      * @return el codigo de error
      */
     public String getMensajeError(){

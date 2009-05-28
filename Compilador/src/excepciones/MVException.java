@@ -3,7 +3,7 @@ package excepciones;
 
 
 /**
- * Representa a un error en la maquina virtual 
+ * Representa un error en la maquina virtual 
  *
  */
 public class MVException extends BasicException{

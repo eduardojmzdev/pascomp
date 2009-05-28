@@ -3,7 +3,7 @@ package excepciones;
 import excepciones.CompiladorException;
 
 /**
- * Representa a un error en el Analisis Sintactico
+ * Representa un error en el Analisis Sintactico
  *
   *@see aSintactico.AnalizadorSintactico
  */

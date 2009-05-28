@@ -3,7 +3,7 @@ package excepciones;
 import excepciones.CompiladorException;
 
 /**
- * Representa a un error Lexico
+ * Representa un error Lexico
  * 
  *
  */
@@ -17,8 +17,8 @@ public final class LexicException extends CompiladorException {
 		private int numLinea;
 	/**
 	 * constructor
-	 * @param cod codigo de error
-	 * @param numLinea numero de linea donde ocurrio el error
+	 * @param cod codigo del error generado
+	 * @param numLinea representa el numero de la line en al que se generó el error
 	 */
 
 	
