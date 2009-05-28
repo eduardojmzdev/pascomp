@@ -30,8 +30,10 @@ public class InstruccionIgual implements Instruccion {
 			int aInt=0, bInt=0;
 			
 			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
+			bString = bString.toUpperCase();
 			if(bString.equals("null")){
 				throw new MVException(31);
+				
 			
 			//comparacion entre booleanos
 			}else if (bString.equals("TRUE")){
@@ -54,7 +56,7 @@ public class InstruccionIgual implements Instruccion {
 			}
 			
 			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
-			
+			aString = aString.toUpperCase();
 			if(aString.equals("null")){
 				throw new MVException(31);
 				
