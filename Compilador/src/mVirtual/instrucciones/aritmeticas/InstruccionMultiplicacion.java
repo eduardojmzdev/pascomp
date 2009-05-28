@@ -28,22 +28,22 @@ public class InstruccionMultiplicacion implements Instruccion {
 				int a, b;
 				String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 				if(bString.equals("null"))
-					throw new MVException(31);
+					throw new MVException(4);
 				
 				b = Integer.parseInt(bString);
 				String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 				if(aString.equals("null"))
-					throw new MVException(31);
+					throw new MVException(4);
 				
 				a = Integer.parseInt(aString);
 				int c = a * b;
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String(String.valueOf(c)));
 			
 			}catch (EmptyStackException e) {
-				throw new MVException(30);
+				throw new MVException(3);
 			
 			} catch (NumberFormatException e) {
-				throw new MVException(21);
+				throw new MVException(0);
 			
 			}
 

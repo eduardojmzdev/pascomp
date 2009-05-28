@@ -30,7 +30,7 @@ public class InstruccionCopiaCima implements Instruccion {
 			MaquinaVirtual.obtenerInstancia().getPila().push(temp);
 		
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		}
 

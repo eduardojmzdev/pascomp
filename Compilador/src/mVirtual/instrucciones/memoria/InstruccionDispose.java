@@ -33,17 +33,17 @@ public class InstruccionDispose implements Instruccion {
 		try{
 			String cima = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			if(cima.equals("null"))
-				throw new MVException(31);
+				throw new MVException(4);
 			int pos = Integer.parseInt(cima);
 			
 			for(int i=pos; i<pos + Integer.parseInt(datos); i++){
 				MaquinaVirtual.obtenerInstancia().getMemoriaDatos().remove(i);	
 			}
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 
 		}
 	}

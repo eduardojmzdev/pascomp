@@ -37,7 +37,7 @@ public class InstruccionNew implements Instruccion {
 			MaquinaVirtual.obtenerInstancia().getPila().push((ocupacion)+"");
 		
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 
 		}
 	}

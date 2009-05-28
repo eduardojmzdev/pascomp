@@ -34,10 +34,10 @@ public class InstruccionDesapilaDireccion implements Instruccion {
 			MaquinaVirtual.obtenerInstancia().getMemoriaDatos().put(Integer.parseInt(datos), MaquinaVirtual.obtenerInstancia().getPila().pop());
 		
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 		}
 
 	}

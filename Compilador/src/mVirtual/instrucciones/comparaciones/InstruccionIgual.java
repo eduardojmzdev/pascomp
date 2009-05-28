@@ -32,7 +32,7 @@ public class InstruccionIgual implements Instruccion {
 			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			bString = bString.toUpperCase();
 			if(bString.equals("null")){
-				throw new MVException(31);
+				throw new MVException(4);
 				
 			
 			//comparacion entre booleanos
@@ -50,7 +50,7 @@ public class InstruccionIgual implements Instruccion {
 				try{
 					bInt = Integer.parseInt(bString);	
 				} catch (NumberFormatException e) {
-					throw new MVException(32);
+					throw new MVException(5);
 
 				}
 			}
@@ -58,7 +58,7 @@ public class InstruccionIgual implements Instruccion {
 			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			aString = aString.toUpperCase();
 			if(aString.equals("null")){
-				throw new MVException(31);
+				throw new MVException(4);
 				
 			//comparacion entre booleanos
 			}else if(opBooleanos){
@@ -67,7 +67,7 @@ public class InstruccionIgual implements Instruccion {
 				}else if (aString.equals("FALSE")){
 					aBool  = false;
 				}else{
-					throw new MVException(29);
+					throw new MVException(2);
 				}
 			}else{//comparacion entre enteros
 				aInt = Integer.parseInt(aString);	
@@ -84,10 +84,10 @@ public class InstruccionIgual implements Instruccion {
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String("FALSE"));
 
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 
 		}	}
 
