@@ -2,7 +2,15 @@ package traductor.aLexico;
 
 import java.io.FileReader;
 
-//clase que genera las instancias relacionadas con los tokens 
+/**
+ * clase que genera las instancias relacionadas con los tokens
+ * @author usuario_local
+ *
+ */
+/**
+ * @author usuario_local
+ *
+ */
 public abstract class ALexico {
 	
 
@@ -15,6 +23,11 @@ public abstract class ALexico {
 		return instancia;
 	}
 
+	/**
+	 * Metodo que busca obtener los distintos tokens mediante cambios de estado
+	 * @return
+	 * @throws Exception
+	 */
 	public abstract Token obtenerToken() throws Exception;
 	
 	public abstract void setFichero(FileReader f);

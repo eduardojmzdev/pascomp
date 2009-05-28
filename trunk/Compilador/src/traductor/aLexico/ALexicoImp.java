@@ -7,8 +7,13 @@ import java.io.IOException;
 import excepciones.CompiladorException;
 import excepciones.LexicException;
 
-//Implementacion del analizador lexico, reconoce palabras reservadas
+//
 
+/**
+ * Implementacion del analizador lexico, reconoce palabras reservadas
+ * @author usuario_local
+ *
+ */
 public class ALexicoImp extends ALexico {
 	
 
@@ -27,6 +32,9 @@ public class ALexicoImp extends ALexico {
 	private MaquinaEstados estado;
 
 
+	/**
+	 * Constructoras del analizador
+	 */
 	public ALexicoImp(){
 		buffer = ' ';
 		lineaActual = 1;
@@ -58,6 +66,9 @@ public class ALexicoImp extends ALexico {
 	}
 	
 	
+	/**
+	 *  Metodo que convierte en minusculas cada letra mayuscula
+	 */
 	private void pasaAMinusculas(){
 		if (buffer >='A' && buffer <='Z') buffer=Character.toLowerCase(buffer);
 	}
@@ -68,6 +79,12 @@ public class ALexicoImp extends ALexico {
 		pasaAMinusculas();
 	}
 	
+	/**
+	 * lee las palabras de una linea del programa, las introduce en el buffer
+	 * @param s
+	 * @return
+	 * @throws IOException
+	 */
 	private String leePalabra(String s) throws IOException{
 		pasaAMinusculas();
 		while ((buffer>='a' && buffer<='z')||(buffer>='0' && buffer<='9')){
@@ -90,6 +107,10 @@ public class ALexicoImp extends ALexico {
 	}
 	
 	
+	/**
+	 * Evalua los String de entrada para completar la informacion del token 
+	 * @param s
+	 */
 	private void evaluaPalabra(String s){
 		if (s.equals("program")) rellenaInfoToken(EnumToken.PROGRAM,s,null,MaquinaEstados.EINICIAL);
 		else if (s.equals("begin")) rellenaInfoToken(EnumToken.INICIO,s,null,MaquinaEstados.EINICIAL);
@@ -121,6 +142,13 @@ public class ALexicoImp extends ALexico {
 	}
 
 
+	/**
+	 * Completa las caracteristicas del objeto token
+	 * @param tok
+	 * @param s
+	 * @param valor
+	 * @param m
+	 */
 	private void rellenaInfoToken(EnumToken tok,String s,Object valor,MaquinaEstados m){
 		token.setCategoria(tok);
 		token.setLexema(s);		
