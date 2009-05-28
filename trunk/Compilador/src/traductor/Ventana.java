@@ -288,9 +288,9 @@ public class Ventana extends JFrame {
 
 		public void actionPerformed(ActionEvent evento) {
 			if(estado != Estados.INI){
+				String result = "";
 				try {
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
-					String result;
 					if(estado != Estados.PASO){
 						String[] args = new String [2];
 						args[0] = compi.getSalida() + ".mv";
@@ -302,9 +302,12 @@ public class Ventana extends JFrame {
 					}
 					texto4.setText(result);
 				} catch (MVException e) {
-					System.out.println("[MV] Error en linea " + e.getNumLinea() + ": " + e.getError());
+					texto3.setText("[MV] Error en linea " + e.getNumLinea() 
+							+ ":\n\t" + e.getError());
 				}catch (Exception e) {
-					e.printStackTrace();
+					texto3.setText("Se produjeron errores " +
+							"desconocidos al compilar:\n");
+					texto3.setText(e.getStackTrace().toString());
 				}
 			}else{
 				texto3.setText("No se ha compilado ningún fichero.");
@@ -316,18 +319,21 @@ public class Ventana extends JFrame {
 	class OyenteEjecutar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			if(estado != Estados.INI){	
+				String result="";
 				try {
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
-					String result;
 					String[] args = new String [1];
 					args[0] = compi.getSalida() + ".mv";
 					result = mv.crearTransfer(args);
-					texto4.setText(result);
 					estado = Estados.COMPILADO;
+					texto4.setText(result);
 				} catch (MVException e) {
-					System.out.println("[MV] Error en linea " + e.getNumLinea() + ": " + e.getError());
+					texto3.setText("[MV] Error en linea " + e.getNumLinea() 
+							+ ":\n\t" + e.getError());
 				}catch (Exception e) {
-					e.printStackTrace();
+					texto3.setText("Se produjeron errores " +
+							"desconocidos al compilar:\n");
+					texto3.setText(e.getStackTrace().toString());
 				}
 			}else{
 				texto3.setText("No se ha compilado ningún fichero.");
