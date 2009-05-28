@@ -919,16 +919,16 @@ public class ASintacticoImp extends ASintactico {
 		TablaSimbolos t=TablaSimbolos.getInstance();
 		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.ID))) {
 			String asignada=token.getLexema();
-			token=ALexico.getInstance().obtenerToken();
-			if(comparaTokens(token.getCategoria(),EnumToken.ASIG)){
+			token=ALexico.getInstance().obtenerToken();							 				
+			  if(comparaTokens(token.getCategoria(),EnumToken.ASIG)){
 				//es una variable normal, se queda como en la primera version,
 			
-				if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){							
+				if ((t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){							
 					PropTipos p=t.obtenerInfo(asignada,nivel).getProp();
 					if (p.getNombreTipo()==TTipo.PUNTERO){
 						p=new PropTipos(TTipo.VACIO,0);
 					}
-					if(compruebaTipos (p,reconoceAsignacion())){
+					if(IDDeclarado(asignada)&&compruebaTipos (p,reconoceAsignacion())){
 						String codigoEmitido="apila("+(t.obtenerInfo(asignada,nivel).dameDir()-1)+");.";
 						emitirCodigo(codigoEmitido);
 						codigoEmitido="apila("+(1+(t.dameNivel(asignada,nivel)))+");.";
@@ -1026,6 +1026,9 @@ public class ASintacticoImp extends ASintactico {
 			else if (comparaTokens(token.getCategoria(),EnumToken.PA)){
 				//llamada a un procedimiento con parentesis
 				int i =0;
+				if(!t.existeProcedimiento(asignada,nivel)){
+					throw new SintacticException("Procedimiento '"+asignada+"' no declarado ", ALexico.getInstance().getLinea());
+				}
 				int nParam=((PropTiposPro)t.dameTipo(asignada,nivel)).getParametros().size();
 				tamaño=0;
 				token=ALexico.getInstance().obtenerToken();
@@ -1236,12 +1239,15 @@ public class ASintacticoImp extends ASintactico {
 						reconocePuntoYComa();
 					}
 				}
-				else if (comparaTokens(token.getCategoria(),EnumToken.PYCOMA)){
+				else if (IDDeclarado(asignada)&&comparaTokens(token.getCategoria(),EnumToken.PYCOMA)){
 					reconocePuntoYComa();
 					apilaRet(contadorInstrucciones+6);
 					String codigo="ir-a("+TablaSimbolos.getInstance().obtenerInfo(asignada,nivel).dameDir()+");.";
 					emitirCodigo(codigo);
 				}
+				else
+					throw new SintacticException("Instrucción no valida", ALexico.getInstance().getLinea());	 
+					
 		}
 		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.ESCRIBIR))) {
 			reconoceEscritura();
