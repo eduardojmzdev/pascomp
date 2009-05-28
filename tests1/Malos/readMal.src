@@ -1,7 +1,0 @@
-program prueba;
-var
-	a: boolean;
-begin
-	read(a);
-
-end.
