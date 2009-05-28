@@ -32,7 +32,7 @@ public class InstruccionNew implements Instruccion {
 			int tope=Integer.parseInt(datos);
 			int ocupacion=MaquinaVirtual.obtenerInstancia().getMemoriaDatos().size();
 			for (int i=ocupacion;i<ocupacion+tope;i++){
-				MaquinaVirtual.obtenerInstancia().getMemoriaDatos().put(i,"");
+				MaquinaVirtual.obtenerInstancia().getMemoriaDatos().put(i,"null");
 			}
 			MaquinaVirtual.obtenerInstancia().getPila().push((ocupacion)+"");
 		
