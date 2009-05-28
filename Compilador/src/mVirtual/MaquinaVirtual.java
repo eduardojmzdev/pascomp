@@ -10,7 +10,7 @@ public abstract class MaquinaVirtual {
 	
 	public static MaquinaVirtual obtenerInstancia(){
 		if (instancia==null)
-			instancia=new MaquinaVirtualImp();
+			instancia=new MaquinaVirtualImpl();//MaquinaVirtualImp();
 		return instancia;
 	}
 	/**
@@ -23,14 +23,14 @@ public abstract class MaquinaVirtual {
 	 * Ejecuta el listado de instrucciones que se encuentran en la memoria de instrucciones.
 	 * @throws MVException 
 	 */
-	public abstract void ejecutar() throws MVException;
+	public abstract String ejecutar() throws MVException;
 
 	/**
 	 * Ejecuta un paso de la máquina virtual
 	 * @throws MVException 
 	 * 
 	 */
-	public abstract boolean ejecutarPaso() throws MVException;
+	public abstract String ejecutarPaso() throws MVException;
 
 	/**
 	 * Crea una nueva memoria de datos y pila, y pone el contador de programa a cero.

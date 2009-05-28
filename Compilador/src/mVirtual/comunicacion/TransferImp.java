@@ -1,6 +1,7 @@
-package mVirtual.comunicacion.transfers;
+package mVirtual.comunicacion;
 
 import java.util.Vector;
+
 
 /**
  * Clase implementadora del transfer usado en el sistema
