@@ -2,20 +2,20 @@ package mVirtual.instrucciones;
 
 
 /**
- * Clase abstracta que modeliza una factoria de comandos
+ * Clase abstracta que genera comandos
  * 
  *
  */
 public abstract class FactoriaComandos {
 	
 	/**
-	 * La factoria
+	 * Factoria
 	 */
 	private static FactoriaComandos instancia;
 	
 	/**
 	 * Modelizador de objectos singleton
-	 * @return La unica instancia de clase
+	 * @return La instancia de clase
 	 */
 	public static FactoriaComandos obtenerInstancia(){
 		if (instancia==null){
@@ -27,9 +27,9 @@ public abstract class FactoriaComandos {
 	}
 	
 	/**
-	 * Genera una instruccion del codigo máquina acorde a la peticion recibida
-	 * @param comando El comando a generar
-	 * @return El comando generado
+	 * Genera una instruccion del codigo máquina 
+	 * @param comando Comando a generar
+	 * @return Comando generado
 	 */
 	public Instruccion generarComando(String comando){
 		return null;
