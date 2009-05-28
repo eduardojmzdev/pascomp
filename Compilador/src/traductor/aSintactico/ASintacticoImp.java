@@ -1454,12 +1454,9 @@ public class ASintacticoImp extends ASintactico {
 							String codigo = "apilaDireccion(" + (1 + (t.dameNivel(asignada, nivel))) + ");.";
 							emitirCodigo(codigo);
 							//fin mod
-						}
-						else if(compruebaTiposNoExcep(t.dameTipo("integer",nivel),t.dameTipo(asignada,nivel))
-								||compruebaTiposNoExcep(t.dameTipo("boolean",nivel),t.dameTipo(asignada,nivel))){
-							//El tipo recibido es un array o un puntero. Read funciona con enteros o booleanos
-							throw new SintacticException("Esperado tipo Integer o Boolean",ALexico.getInstance().getLinea() );
-						}
+						}					
+						else 
+							throw new SintacticException("Esperado tipo Integer o Boolean",ALexico.getInstance().getLinea() );						
 					}
 				}
 			}
