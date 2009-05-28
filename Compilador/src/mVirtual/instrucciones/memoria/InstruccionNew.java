@@ -7,7 +7,7 @@ import excepciones.MVException;
 
 /**
  * 
- * Esta clase implementa la ejecución en la pila de la instrucción apiladir de la máquina virtual
+ * Esta clase implementa la ejecución en la pila de la instrucción New de la máquina virtual
  *
  */
 public class InstruccionNew implements Instruccion {
