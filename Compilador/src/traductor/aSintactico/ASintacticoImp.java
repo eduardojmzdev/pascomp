@@ -1255,7 +1255,11 @@ public class ASintacticoImp extends ASintactico {
 			emitirCodigo(codigoEmitido);
 		}					
 		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.LEER))) {
-			reconoceLectura();						
+			reconoceLectura();	
+			String codigoEmitido="read;.";
+			emitirCodigo(codigoEmitido);
+			codigoEmitido="desapilaIndice;.";
+			emitirCodigo(codigoEmitido);
 		}
 		else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.SI))) {
 			token=ALexico.getInstance().obtenerToken();
@@ -1445,9 +1449,11 @@ public class ASintacticoImp extends ASintactico {
 					//es una variable normal, se queda como en la primera version,				
 					if (IDDeclarado(asignada)&& (t.obtenerInfo(asignada,nivel).dameElemento()==TElemento.VAR)){														
 						if (compruebaTiposNoExcep(t.dameTipo("integer",nivel),t.dameTipo(asignada,nivel))
-								||compruebaTiposNoExcep(t.dameTipo("boolean",nivel),t.dameTipo(asignada,nivel))){ 
-								//emitir codigo	
-							
+								||compruebaTiposNoExcep(t.dameTipo("boolean",nivel),t.dameTipo(asignada,nivel))){
+							//modificaciones para el read
+							String codigo = "apilaDireccion(" + (1 + (t.dameNivel(asignada, nivel))) + ");.";
+							emitirCodigo(codigo);
+							//fin mod
 						}
 					}
 				}
