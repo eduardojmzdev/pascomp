@@ -1685,7 +1685,21 @@ public class ASintacticoImp extends ASintactico {
 	private PropTipos reconoceExpresionNeg() throws Exception{
 		PropTipos tp;
 		TablaSimbolos tabla=TablaSimbolos.getInstance();
-		if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.NOT))){
+	    if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.RESTA))){
+			token=ALexico.getInstance().obtenerToken();
+			tp=reconoceExpresionProd();			
+			String codigoEmitido="restaUnario;.";
+			emitirCodigo(codigoEmitido);
+			return tp;
+		}
+	    else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.SUMA))){
+	    	token=ALexico.getInstance().obtenerToken();
+			tp=reconoceExpresionProd();			
+			String codigoEmitido="sumaUnario;.";
+			emitirCodigo(codigoEmitido);
+			return tp;
+		}
+	    else if (!hayErrorLexico(token)&& (comparaTokens(token.getCategoria(),EnumToken.NOT))){
 			token=ALexico.getInstance().obtenerToken();
 			tp=reconoceExpresion();
 			if (compruebaTipos(tp,tabla.dameTipo("boolean",nivel))){
