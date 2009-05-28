@@ -1,0 +1,13 @@
+program aaaa;
+type
+	punt = ^integer;
+var 
+	b: punt;
+	x: integer;
+
+begin
+
+	new(b);
+	x:= b^;
+
+end.

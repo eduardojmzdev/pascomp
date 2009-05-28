@@ -1,0 +1,13 @@
+program aaaa;
+type
+    	arr = array[3..0] of integer;
+var 
+	x: integer;
+	a: arr;
+
+
+begin
+	x:=1;
+	a[0]:=1;
+
+end.

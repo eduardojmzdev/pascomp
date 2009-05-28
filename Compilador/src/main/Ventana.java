@@ -282,7 +282,7 @@ public class Ventana extends JFrame {
 				System.out.println("Se produjeron errores desconocidos al compilar:");
 				e.printStackTrace();
 				texto3.setText("Se produjeron errores desconocidos al compilar:\n");
-				texto3.setText(e.getStackTrace().toString());
+				texto3.setText(e.getMessage());
 			}
 			texto2.setText("");
 			try {
@@ -333,7 +333,7 @@ public class Ventana extends JFrame {
 					texto3.setText("[MV] Error en linea " + e.getNumLinea() + ":\n\t" + e.getError());
 				} catch (Exception e) {
 					texto3.setText("Se produjeron errores " + "desconocidos al compilar:\n");
-					texto3.setText(e.getStackTrace().toString());
+					texto3.setText(e.getMessage());
 				}
 			} else {
 				texto3.setText("No se ha compilado ningún fichero.");
@@ -361,7 +361,7 @@ public class Ventana extends JFrame {
 					texto3.setText("[MV] Error en linea " + e.getNumLinea() + ":\n\t" + e.getError());
 				} catch (Exception e) {
 					texto3.setText("Se produjeron errores " + "desconocidos al compilar:\n");
-					texto3.setText(e.getStackTrace().toString());
+					texto3.setText(e.getMessage());
 				}
 			} else {
 				texto3.setText("No se ha compilado ningún fichero.");

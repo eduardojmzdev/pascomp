@@ -1,0 +1,26 @@
+program proc;
+var x: integer;
+
+
+procedure a(var y:integer);
+var
+	w:integer;
+begin
+	w:=1;
+	y:=y+w;
+end;
+
+procedure b(z:integer);
+begin
+	z:=z+1;
+end;
+
+begin
+	x:=1;
+	write(x);
+	a(x);
+	write(x);
+	b(x);
+	write(x);
+
+end.

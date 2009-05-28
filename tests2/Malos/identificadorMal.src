@@ -1,0 +1,4 @@
+program aaaa;
+begin
+	x:=0;
+end;
