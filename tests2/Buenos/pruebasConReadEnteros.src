@@ -1,0 +1,10 @@
+program pruebasConReadEnteros;
+var
+x:integer;
+begin
+read(x);
+if (x=4) then
+	write(1);
+else
+	write(-1);
+end.
