@@ -9,13 +9,13 @@ import excepciones.MVException;
 
 /**
  * 
- * Esta clase implementa la ejecución en la pila de la instrucción desapiladir de la máquina virtual
+ * Esta clase implementa la ejecución en la pila de la instrucción DesapilaDireccion de la máquina virtual
  *
  */
 public class InstruccionDesapilaDireccion implements Instruccion {
 
 	/**
-	 * Los datos con los que debe trabajar la instruccion
+	 * Datos que se deben procesar
 	 */
 	private String datos;
 	

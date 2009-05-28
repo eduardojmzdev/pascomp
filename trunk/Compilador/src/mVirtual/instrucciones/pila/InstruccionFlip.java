@@ -8,7 +8,7 @@ import mVirtual.instrucciones.Instruccion;
 import excepciones.MVException;
 /**
  * 
- * Esta clase implementa la ejecución en la pila de la instrucción desapila  de la máquina virtual
+ * Esta clase implementa la ejecución en la pila de la instrucción Flip  de la máquina virtual
  *
  */
 public class InstruccionFlip implements Instruccion {

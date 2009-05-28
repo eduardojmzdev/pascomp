@@ -9,13 +9,13 @@ import excepciones.MVException;
 
 /**
  * 
- * Esta clase implementa la ejecución en la pila de la instrucción apiladir de la máquina virtual
+ * Esta clase implementa la ejecución en la pila de la instrucción ApilaIndice de la máquina virtual
  *
  */
 public class InstruccionApilaIndice implements Instruccion {
 
 	/**
-	 * Los datos con los cuales debe trabajar
+	 * Datos que se deben procesar
 	 */
 	private String datos;
 	
