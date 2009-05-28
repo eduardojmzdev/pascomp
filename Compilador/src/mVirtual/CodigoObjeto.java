@@ -9,14 +9,13 @@ import mVirtual.instrucciones.FactoriaComandos;
 import mVirtual.instrucciones.Instruccion;
 
 /** 
- * Clase que implementa el código objeto compuesto una secuencia 
- * de instrucciones
+ * Implementa el codigo objeto generado por una secuencia de instrucciones
  * 
  */
 public class CodigoObjeto {
 
 	//ATRIBUTOS:
-	/** Va a contener las instrucciones */
+	/** Contiene las instrucciones */
 	Vector<Instruccion> codigo;	
 
 	//MÉTODOS:
@@ -25,7 +24,7 @@ public class CodigoObjeto {
 		codigo = new Vector<Instruccion>();
 	}
 
-	/** Constructora de la clase, que crea un nuevo Codigo Objeto con uno
+	/** Constructora de la clase: crea un nuevo Codigo Objeto a partir de uno
 	 * ya existente
 	 * @param cO código objeto existente.
 	 */

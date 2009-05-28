@@ -14,19 +14,19 @@ import main.Utils;
 
 public class MaquinaVirtualImpl extends MaquinaVirtual{
 	/**
-	 * Pila de la máquina virtual.
+	 * Pila de la maquina virtual.
 	 */
 	private Stack<String> pila;	
 	/**
-	 * Tabla Hash que contiene la memoria de datos.
+	 * Tabla Hash: contiene la memoria de datos.
 	 */
 	private Hashtable<Integer,String> memoriaDatos;	
 	/**
-	 * Contador de Programa. Número de instrucción que se está ejecutando.
+	 * Contador de Programa: número de instrucción que se está ejecutando.
 	 */
 	private int contadorPrograma;	
 	/**
-	 * Conjunto de instrucciones que ejecutará la máquina virtual.
+	 * Conjunto de instrucciones que ejecuta la máquina virtual.
 	 */
 	private CodigoObjeto memoriaInstrucciones;	
 	
@@ -56,7 +56,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 
 
 	/**
-	 * Carga el fichero de la máquina virtual comprobando si se ha cargado correctamente
+	 * Carga el fichero de la máquina virtual, comprueba a su vez si se ha cargado correctamente
 	 * @throws Exception Lanzador de las posibles excepciones
 	 */
 	private void cargarFichero(String nombreFich) throws Exception {
@@ -82,7 +82,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	}
 
 	/**
-	 * Procesa una cadena y la trata adecuadamente
+	 * Procesa una cadena y la trata mediante el protocolo adecuado
 	 * @param cadena a tratar
 	 */
 	private void procesaCadena(String cadena) {
@@ -108,7 +108,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 
 
 	/**
-	 * Ejecuta el listado de instrucciones que se encuentran en la memoria de instrucciones.
+	 * Ejecuta la lista de instrucciones contenidas en la memoria de instrucciones.
 	 */
 
 	@Override
@@ -149,7 +149,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	}
 
 	/**
-	 * Crea una nueva memoria de datos y pila, y pone el contador de programa a cero.
+	 * Crea una nueva memoria de datos y pila, además inicializa el contador de programa a cero.
 	 */
 	public void resetear(){
 		pila = new Stack<String>();
@@ -171,15 +171,15 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 		return pila;
 	}
 	/**
-	 * Devuelve el contador de programa de la MV
-	 * @return contador del programa de la MV
+	 * Devuelve el PC de la Maquina Virtual
+	 * @return PC de la Maquina Virtual
 	 */
 	public int getContadorPrograma() {
 		return contadorPrograma;
 	}
 	/**
-	 * Devuelve la memoria de instrucciones de la MV
-	 * @return memoria de instrucciones de la MV
+	 * Devuelve la memoria de instrucciones de la Maquina Virtual
+	 * @return memoria de instrucciones de la Maquina Virtual
 	 */
 	public CodigoObjeto getMemoriaInstrucciones() {
 		return memoriaInstrucciones;
