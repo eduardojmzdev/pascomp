@@ -33,6 +33,9 @@ public class Ventana extends JFrame {
 	enum Estados {INI, COMPILADO, PASO}
 	Estados estado = Estados.INI;
 
+	/**
+	 * 
+	 */
 	public Ventana() {
 
 		menu = new JMenuBar();
@@ -175,6 +178,12 @@ public class Ventana extends JFrame {
 
 	// ==================== oyentes ==============================
 
+	/**
+	 * @author PLG
+	 * 
+	 * Esta clase es utilizada para abrir los archivos que compila nuestra aplicacion
+	 *
+	 */
 	class OyenteAbrir implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			texto2.setText("");
@@ -231,6 +240,11 @@ public class Ventana extends JFrame {
 	 * catch(IOException ioe){ System.out.println(ioe); //Muestra por consola
 	 * los errores } } }
 	 */
+	/**
+	 * @author PLG
+	 * Esta clase se utiliza para mostrar en una ventana emergente los nombres de los componentes del grupo
+	 *
+	 */
 	class OyenteIntegrantes implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			// JOptionPane inf = new JOptionPane();
@@ -242,12 +256,22 @@ public class Ventana extends JFrame {
 		}
 	}
 
+	/**
+	 * @author PLG
+	 * Esta clase se utiliza para implementar el oyente de boton Salir
+	 *
+	 */
 	class OyenteSalir implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			System.exit(0);
 		}
 	}
 
+	/**
+	 * @author PLG
+	 * Esta clase se utiliza para implementar el oyente de boton de ejecucion Normal
+	 *
+	 */
 	class OyenteNormal implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			texto3.setText("");
@@ -289,6 +313,11 @@ public class Ventana extends JFrame {
 		}
 	}
 
+	/**
+	 * @author PLG
+ 	 * Esta clase se utiliza para implementar el oyente de boton de ejecucion Paso a Paso
+	 *
+	 */
 	class OyentePaso implements ActionListener {
 
 		public void actionPerformed(ActionEvent evento) {
@@ -323,6 +352,10 @@ public class Ventana extends JFrame {
 	}
 
 
+	/**
+	 * @author PLG
+	 * Esta clase implementa el oyente del boton Ejecutar
+	 */
 	class OyenteEjecutar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
 			texto3.setText("");
@@ -351,12 +384,17 @@ public class Ventana extends JFrame {
 	}
 
 	
+	/**
+	 * @author PLG
+	 * Esta clase limita el tipo de ficheros que se pueden abrir con el interfaz
+	 *
+	 */
 	class ExtensionFileFilter extends FileFilter {
 		String description;
 
 		String extensions[];
 
-		public ExtensionFileFilter(String description, String extension) {
+				public ExtensionFileFilter(String description, String extension) {
 			this(description, new String[] { extension });
 		}
 
