@@ -32,9 +32,9 @@ public class InstruccionNot implements Instruccion {
 			else if (aString.equals("FALSE"))
 				a = false;
 			else if(aString.equals("null"))
-				throw new MVException(31);
+				throw new MVException(4);
 			else
-				throw new MVException(29);
+				throw new MVException(2);
 
 			if (a) {
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String("TRUE"));
@@ -43,7 +43,7 @@ public class InstruccionNot implements Instruccion {
 			}
 		
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		} 
 

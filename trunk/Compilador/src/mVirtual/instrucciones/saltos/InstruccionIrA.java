@@ -13,7 +13,7 @@ public class InstruccionIrA implements Instruccion {
 		try {
 			MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(datos)-1);
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 		}
 	}
 

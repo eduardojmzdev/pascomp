@@ -34,9 +34,9 @@ public class InstruccionAnd implements Instruccion {
 			else if (bString.equals("FALSE"))
 				b = false;
 			else if(bString.equals("null"))
-				throw new MVException(31);
+				throw new MVException(4);
 			else
-				throw new MVException(29);
+				throw new MVException(2);
 
 			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			if (aString.equals("TRUE"))
@@ -44,9 +44,9 @@ public class InstruccionAnd implements Instruccion {
 			else if (aString.equals("FALSE"))
 				a = false;
 			else if(aString.equals("null"))
-				throw new MVException(31);
+				throw new MVException(4);
 			else
-				throw new MVException(29);
+				throw new MVException(2);
 
 			boolean c = a && b;
 			if (c) {
@@ -57,7 +57,7 @@ public class InstruccionAnd implements Instruccion {
 			}
 		
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		}
 	}

@@ -17,10 +17,10 @@ public class InstruccionIrF implements Instruccion {
 				MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(datos)-1);
 
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 		}
 	}
 

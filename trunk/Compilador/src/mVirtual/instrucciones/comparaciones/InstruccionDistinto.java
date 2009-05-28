@@ -31,7 +31,7 @@ import excepciones.MVException;
 			
 			String bString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			if(bString.equals("null")){
-				throw new MVException(31);
+				throw new MVException(4);
 			
 			//comparacion entre booleanos
 			}else if (bString.equals("TRUE")){
@@ -48,7 +48,7 @@ import excepciones.MVException;
 				try{
 					bInt = Integer.parseInt(bString);	
 				} catch (NumberFormatException e) {
-					throw new MVException(32);
+					throw new MVException(5);
 
 				}
 			}
@@ -56,7 +56,7 @@ import excepciones.MVException;
 			String aString = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			
 			if(aString.equals("null")){
-				throw new MVException(31);
+				throw new MVException(4);
 				
 			//comparacion entre booleanos
 			}else if(opBooleanos){
@@ -65,7 +65,7 @@ import excepciones.MVException;
 				}else if (aString.equals("FALSE")){
 					aBool  = false;
 				}else{
-					throw new MVException(29);
+					throw new MVException(2);
 				}
 			}else{//comparacion entre enteros
 				aInt = Integer.parseInt(aString);	
@@ -82,10 +82,10 @@ import excepciones.MVException;
 				MaquinaVirtual.obtenerInstancia().getPila().push(new String("FALSE"));
 
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 
 		}
 

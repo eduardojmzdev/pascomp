@@ -32,7 +32,7 @@ public class InstruccionApilaDireccion implements Instruccion {
 			MaquinaVirtual.obtenerInstancia().getPila().push(MaquinaVirtual.obtenerInstancia().getMemoriaDatos().get(Integer.parseInt(datos)));
 		
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 		}
 	}
 

@@ -15,13 +15,13 @@ public class InstruccionIrIndice implements Instruccion {
 		try {
 			String cima = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			if(cima.equals("null"))
-				throw new MVException(31);
+				throw new MVException(4);
 			MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(cima)-1);
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 		}	
 	}
 

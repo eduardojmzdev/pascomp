@@ -34,14 +34,14 @@ public class InstruccionDesapilaIndice implements Instruccion {
 			String cima=MaquinaVirtual.obtenerInstancia().getPila().pop();
 			String subCima=MaquinaVirtual.obtenerInstancia().getPila().pop();
 			if(subCima.equals("null"))
-				throw new MVException(31);
+				throw new MVException(4);
 			MaquinaVirtual.obtenerInstancia().getMemoriaDatos().put(Integer.parseInt(subCima),cima);
 		
 		}catch (EmptyStackException e) {
-			throw new MVException(30);
+			throw new MVException(3);
 
 		} catch (NumberFormatException e) {
-			throw new MVException(21);
+			throw new MVException(0);
 		}	
 	}
 
