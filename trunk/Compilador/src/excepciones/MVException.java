@@ -1,4 +1,4 @@
-package mVirtual.excepciones;
+package excepciones;
 
 
 

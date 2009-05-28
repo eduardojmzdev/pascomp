@@ -4,8 +4,8 @@ package traductor.aLexico;
 import java.io.FileReader;
 import java.io.IOException;
 
-import traductor.excepciones.CompiladorException;
-import traductor.excepciones.LexicException;
+import excepciones.CompiladorException;
+import excepciones.LexicException;
 
 //Implementacion del analizador lexico, reconoce palabras reservadas
 

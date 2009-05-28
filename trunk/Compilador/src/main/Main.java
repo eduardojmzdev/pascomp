@@ -1,7 +1,7 @@
 package main;
 
 import traductor.Ventana;
-import traductor.excepciones.CompiladorException;
+import excepciones.CompiladorException;
 
 /**
  * COMPILADOR PLG 08/09

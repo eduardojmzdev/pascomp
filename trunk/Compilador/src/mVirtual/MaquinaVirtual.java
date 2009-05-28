@@ -3,7 +3,7 @@ package mVirtual;
 import java.util.Hashtable;
 import java.util.Stack;
 
-import mVirtual.excepciones.MVException;
+import excepciones.MVException;
 
 public abstract class MaquinaVirtual {
 	private static MaquinaVirtual instancia;

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 
-import mVirtual.excepciones.MVException;
+import excepciones.MVException;
 /**
  * 
  * Esta clase implementa la ejecución en la pila de la instrucción read de la máquina virtual

@@ -5,10 +5,10 @@ import javax.swing.filechooser.FileFilter;
 
 import mVirtual.MaquinaVirtualImpl;
 import mVirtual.MaquinaVirtual;
-import mVirtual.excepciones.MVException;
+import excepciones.MVException;
 import main.Traductor;
 
-import traductor.excepciones.CompiladorException;
+import excepciones.CompiladorException;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import traductor.excepciones.SintacticException;
+import excepciones.SintacticException;
 import traductor.tablaSimbolos.Modo;
 import traductor.tablaSimbolos.Parametro;
 import traductor.tablaSimbolos.PropTipos;
