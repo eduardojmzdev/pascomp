@@ -1,5 +1,5 @@
 package traductor.aLexico;
-
+//Estados de nuestro automata
 public enum MaquinaEstados {
 	EINICIAL,
 	ENUMCERO,

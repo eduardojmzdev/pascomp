@@ -2,7 +2,7 @@ package traductor.aLexico;
 
 import java.io.FileReader;
 
-
+//clase que genera las instancias relacionadas con los tokens 
 public abstract class ALexico {
 	
 
