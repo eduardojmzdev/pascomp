@@ -1,6 +1,5 @@
 package main;
 
-import traductor.Ventana;
 import excepciones.CompiladorException;
 
 /**
@@ -11,6 +10,15 @@ import excepciones.CompiladorException;
  * @version 1.0
  */
 public class Main {
+
+	/**
+	 * Metodo de ejecucion de la aplicacion
+	 * 
+	 * @param args
+	 *            Argumentos de entrada. 0 argumentos arranca el interfaz
+	 *            grafico, 1 argumento la maquina virtual y 2 argumentos el
+	 *            traductor.
+	 */
 	public static void main(String[] args) {
 		if (args.length > 2) {
 			System.out.println("Con un argumento se ejecuta la máquina virtual. Ej. <ficheroEntrada>");
