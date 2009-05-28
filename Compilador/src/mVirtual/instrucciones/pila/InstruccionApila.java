@@ -12,7 +12,7 @@ import excepciones.MVException;
 public class InstruccionApila implements Instruccion {
 
 	/**
-	 *Los datos que debe apilar 
+	 *Los datos a apilar 
 	 */
 	private String datos;
 	
