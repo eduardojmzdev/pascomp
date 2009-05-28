@@ -191,9 +191,10 @@ public class Ventana extends JFrame {
 					texto1.setText("");
 					fichero = new FileReader(archivoAux);
 					BufferedReader leer = new BufferedReader(fichero);
+					int cont=1;
 					while ((Text = leer.readLine()) != null) {
-						texto1.append(Text + "\n"); // append Concatena la linea
-													// leida
+						texto1.append(cont+".  "+Text + "\n"); // append Concatena la linea
+						cont++;							// leida
 					}
 					leer.close();
 	
@@ -246,15 +247,6 @@ public class Ventana extends JFrame {
 
 	class OyenteNormal implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
-			try {
-				if (archivoAux != null) {
-					FileWriter Guardx = new FileWriter(archivoAux);
-					Guardx.write(texto1.getText());
-					Guardx.close(); // Cierra el fichero
-				}
-			} catch (IOException ioe) {
-				System.out.println(ioe); // Muestra por consola los errores
-			}
 			compi = new Traductor();
 			compi.reset();
 			compi.setEntrada(archivoAux.getPath());
@@ -278,9 +270,10 @@ public class Ventana extends JFrame {
 				FileReader Fichero = new FileReader(compi.getSalida() + ".mv");
 				BufferedReader leer = new BufferedReader(Fichero);
 				String temp;
+				int cont=1;
 				while ((temp = leer.readLine()) != null) {
-					texto2.append(temp + "\n"); // append Concatena la linea
-												// leida
+					texto2.append(cont+".  "+temp + "\n"); // append Concatena la linea
+					cont++;							// leida
 				}
 				leer.close();
 			} catch (Exception e) {
