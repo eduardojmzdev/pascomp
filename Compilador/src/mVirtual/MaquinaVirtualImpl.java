@@ -8,12 +8,9 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
-import traductor.Utils;
-
-import mVirtual.comunicacion.Transfer;
-import mVirtual.comunicacion.TransferImp;
 import mVirtual.excepciones.MVException;
 import mVirtual.instrucciones.Instruccion;
+import traductor.Utils;
 
 public class MaquinaVirtualImpl extends MaquinaVirtual{
 	/**
@@ -33,14 +30,12 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	 */
 	private CodigoObjeto memoriaInstrucciones;	
 	
-	private Transfer trans;
+	
 
+	public String ejecutaIni(String[] args) throws Exception {
 
-	public String crearTransfer(String[] args) throws Exception {
-
-		trans = new TransferImp();
 		String arg = "";
-		String ruta = "";
+		String nombreFich = "";
 		boolean traza = false;
 		System.out.println("Bienvenido al entorno de Ejecución.");
 		for (int i = 0; i < args.length; i++) {
@@ -48,16 +43,12 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 			if (arg.equalsIgnoreCase("-b"))
 				traza = true;
 			else
-				ruta = args[i];
+				nombreFich = args[i];
 		}
-		trans.setModoTraza(traza);
-		trans.setTexto(ruta, 0);
-		trans.setRuta(true);
-		trans.setSoloInstruccion(true);
-		cargarFichero();
+		cargarFichero(nombreFich);
 		resetear();	
 
-		if (!trans.getTraza())
+		if (!traza)
 			return ejecutar();
 		else
 			return ejecutarPaso();
@@ -68,10 +59,10 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	 * Carga el fichero de la máquina virtual comprobando si se ha cargado correctamente
 	 * @throws Exception Lanzador de las posibles excepciones
 	 */
-	private void cargarFichero() throws Exception {
+	private void cargarFichero(String nombreFich) throws Exception {
 		try {
-			if (Utils.compruebaExtensionSalida(trans.getTexto().get(0))){
-				Scanner scan = new Scanner(new File(trans.getTexto().get(0)));
+			if (Utils.compruebaExtensionSalida(nombreFich)){
+				Scanner scan = new Scanner(new File(nombreFich));
 				System.out.println("Comienza la lectura del codigo");
 				memoriaInstrucciones= new CodigoObjeto();
 				String cadena;

@@ -14,7 +14,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
 
@@ -178,6 +177,9 @@ public class Ventana extends JFrame {
 
 	class OyenteAbrir implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
+			texto2.setText("");
+			texto3.setText("");
+			texto4.setText("");
 			String Text = "";
 			FileReader fichero = null;
 			try {
@@ -199,6 +201,7 @@ public class Ventana extends JFrame {
 					leer.close();
 	
 				}
+				
 			} catch (IOException ioe) {
 				System.out.println(ioe);
 			} finally {
@@ -247,6 +250,8 @@ public class Ventana extends JFrame {
 
 	class OyenteNormal implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
+			texto3.setText("");
+			texto4.setText("");
 			compi = new Traductor();
 			compi.reset();
 			compi.setEntrada(archivoAux.getPath());
@@ -287,6 +292,8 @@ public class Ventana extends JFrame {
 	class OyentePaso implements ActionListener {
 
 		public void actionPerformed(ActionEvent evento) {
+			texto3.setText("");
+			texto4.setText("");
 			if(estado != Estados.INI){
 				String result = "";
 				try {
@@ -295,7 +302,7 @@ public class Ventana extends JFrame {
 						String[] args = new String [2];
 						args[0] = compi.getSalida() + ".mv";
 						args[1] = "-b";
-						result = mv.crearTransfer(args);
+						result = mv.ejecutaIni(args);
 						estado = Estados.PASO;
 					}else{
 						result = mv.ejecutarPaso();
@@ -318,13 +325,15 @@ public class Ventana extends JFrame {
 
 	class OyenteEjecutar implements ActionListener {
 		public void actionPerformed(ActionEvent evento) {
+			texto3.setText("");
+			texto4.setText("");
 			if(estado != Estados.INI){	
 				String result="";
 				try {
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
 					String[] args = new String [1];
 					args[0] = compi.getSalida() + ".mv";
-					result = mv.crearTransfer(args);
+					result = mv.ejecutaIni(args);
 					estado = Estados.COMPILADO;
 					texto4.setText(result);
 				} catch (MVException e) {
