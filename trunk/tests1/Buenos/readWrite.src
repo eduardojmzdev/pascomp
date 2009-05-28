@@ -8,5 +8,5 @@ begin
 	b:=true;
 	write(false);
 	write(b);
-	write("algo");
+	write(5);
 end.
