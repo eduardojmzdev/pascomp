@@ -1,6 +1,6 @@
 package traductor.aSintactico;
 import traductor.tablaSimbolos.tipos.PropTipos;
-import traductor.tablaSimbolos.tipos.TInfo;
+
 public class ParejaTipos {
 
 	private PropTipos e1;

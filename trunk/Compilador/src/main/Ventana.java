@@ -31,7 +31,7 @@ public class Ventana extends JFrame {
 	JPanel panel;
 	JTextArea texto1, texto2, texto3, texto4;
 	File archivoAux;
-	Traductor compi;
+	Traductor traductor;
 
 	enum Estados {
 		INI, COMPILADO, PASO
@@ -266,12 +266,12 @@ public class Ventana extends JFrame {
 		public void actionPerformed(ActionEvent evento) {
 			texto3.setText("");
 			texto4.setText("");
-			compi = new Traductor();
-			compi.reset();
-			compi.setEntrada(archivoAux.getPath());
-			compi.setSalida(archivoAux.getPath().substring(0, archivoAux.getPath().length() - 4));
+			traductor = new Traductor();
+			Traductor.reset();
+			traductor.setEntrada(archivoAux.getPath());
+			traductor.setSalida(archivoAux.getPath().substring(0, archivoAux.getPath().length() - 4));
 			try {
-				compi.ejecutar();
+				traductor.ejecutar();
 				estado = Estados.COMPILADO;
 			} catch (CompiladorException e) {
 				System.out.println("Se produjeron errores al compilar:");
@@ -286,7 +286,7 @@ public class Ventana extends JFrame {
 			}
 			texto2.setText("");
 			try {
-				FileReader Fichero = new FileReader(compi.getSalida() + ".mv");
+				FileReader Fichero = new FileReader(traductor.getSalida() + ".mv");
 				BufferedReader leer = new BufferedReader(Fichero);
 				String temp;
 				int cont = 1;
@@ -321,7 +321,7 @@ public class Ventana extends JFrame {
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
 					if (estado != Estados.PASO) {
 						String[] args = new String[2];
-						args[0] = compi.getSalida() + ".mv";
+						args[0] = traductor.getSalida() + ".mv";
 						args[1] = "-b";
 						result = mv.ejecutaIni(args);
 						estado = Estados.PASO;
@@ -353,7 +353,7 @@ public class Ventana extends JFrame {
 				try {
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
 					String[] args = new String[1];
-					args[0] = compi.getSalida() + ".mv";
+					args[0] = traductor.getSalida() + ".mv";
 					result = mv.ejecutaIni(args);
 					estado = Estados.COMPILADO;
 					texto4.setText(result);
