@@ -1,0 +1,10 @@
+program aaaa;
+type
+    tipo=integer;
+var 
+	x: tipoNoDeclarado;
+
+
+begin
+	x:=1;
+end.
