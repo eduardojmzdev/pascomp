@@ -1,98 +1,60 @@
 package mVirtual;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Vector;
 
 import mVirtual.instrucciones.FactoriaComandos;
 import mVirtual.instrucciones.Instruccion;
 
 /** 
- * Implementa el codigo objeto generado por una secuencia de instrucciones
+ * Clase que contiene el codigo objeto (secuencia de instrucciones)
  * 
  */
 public class CodigoObjeto {
 
 	//ATRIBUTOS:
-	/** Contiene las instrucciones */
+	/** instrucciones */
 	Vector<Instruccion> codigo;	
 
 	//MÉTODOS:
-	/** Constructora */
+	/** Constructor por defecto*/
 	public CodigoObjeto(){
 		codigo = new Vector<Instruccion>();
 	}
 
-	/** Constructora de la clase: crea un nuevo Codigo Objeto a partir de uno
-	 * ya existente
-	 * @param cO código objeto existente.
+	/** Constructor que crea un nuevo objeto a partir de otro
+	 * de la misma clase
+	 * @param co código objeto existente.
 	 */
-	public CodigoObjeto(CodigoObjeto cO){
+	public CodigoObjeto(CodigoObjeto co){
 		codigo = new Vector<Instruccion>();
-		codigo.addAll(cO.getCodigo());
+		codigo.addAll(co.getCodigo());
 	}
 
 	/** Getter
-	 * @return Devuelve el atributo codigo
+	 * @return codigo
 	 */
 	public Vector<Instruccion> getCodigo(){
 		return codigo;
 	}
 	
-	/** Crea una instruccion
-	 * @param nombre String con el nombre de la instruccion.
-	 * @param valor String con el valor que toma la instruccion.
+	/** Crea una nueva instruccion y la añade al vector de instrucciones
+	 * @param nombre String: nombre de la instruccion.
+	 * @param param String: parametro.
 	 */
-	public void añadirInstruccion(String nombre, String valor){
+	public void añadeInstruccion(String nombre, String param){
 		Instruccion i = FactoriaComandos.obtenerInstancia().generarComando(nombre);
-		i.setDatos(valor);
+		i.setDatos(param);
 		codigo.add(i);
 	}
 		
-	/** Añade instruccion sin datos (valor) definidos
-	 * @param nombre String con el nombre de la instruccion.
+	/** Crea una nueva instruccion sin parámetro y la añade 
+	 * al vector de instrucciones
+	 * @param nombre String: nombre de la instruccion.
 	 */
-	public void añadirInstruccion(String nombre){
+	public void añadeInstruccion(String nombre){
 		Instruccion i = FactoriaComandos.obtenerInstancia().generarComando(nombre);
 		codigo.add(i);
 	}
 	
-	/** Escribe en el fichero el vector de instrucciones
-	 * @param nombreFichero String que contiene el nombre del fichero donde se van a 
-	 * 			almacenar las instrucciones.
-	 */
-	public void volcarEnFichero(String nombreFichero){
-		//Abrimos el fichero y su correspondiente FileWriter
-		File fich = new File(nombreFichero);
-		try{
-			FileWriter out = new FileWriter(fich);
-			
-			//Recorremos elemento a elemento nuestro vector y lo vamos poniendo
-			//en el fichero de salida.
-			Instruccion elem;
-			for(int i = 0; i<codigo.size(); i++){
-				elem = codigo.elementAt(i);
-				out.write(elem.toString()+" \r\n");
-			}
-			out.close();
-		}
-		catch(IOException e){
-			//Tratar excepción
-			
-		}
-	}
-	/**
-	 * Recorre el vector de instrucciones, para la posterior escritura en el fichero de salida
-	 */
-	public String toString(){
-		String s="";
-		
-		Instruccion elem;
-		for(int i = 0; i<codigo.size(); i++){
-			elem = codigo.elementAt(i);
-			s+=(elem.toString()+" \r\n");
-		}
-		return s;
-	}
+
 }

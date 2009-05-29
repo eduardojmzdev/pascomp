@@ -7,73 +7,57 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
+import java.util.Vector;
 
 import excepciones.MVException;
 import mVirtual.instrucciones.Instruccion;
 import main.Utils;
 
 public class MaquinaVirtualImpl extends MaquinaVirtual{
-	/**
-	 * Pila de la maquina virtual.
-	 */
-	private Stack<String> pila;	
-	/**
-	 * Tabla Hash: contiene la memoria de datos.
-	 */
-	private Hashtable<Integer,String> memoriaDatos;	
-	/**
-	 * Contador de Programa: número de instrucción que se está ejecutando.
-	 */
-	private int contadorPrograma;	
-	/**
-	 * Conjunto de instrucciones que ejecuta la máquina virtual.
-	 */
-	private CodigoObjeto memoriaInstrucciones;	
 	
+	private Stack<String> pila;	
+	private Hashtable<Integer,String> memoriaDatos;	
+	private int contadorPrograma;	
+	private CodigoObjeto memoriaInstrucciones;	
 	
 
 	public String ejecutaIni(String[] args) throws Exception {
 
-		String arg = "";
 		String nombreFich = "";
-		boolean traza = false;
-		System.out.println("Bienvenido al entorno de Ejecución.");
+		boolean pasos = false;
 		for (int i = 0; i < args.length; i++) {
-			arg = args[i];
+			String arg = args[i];
 			if (arg.equalsIgnoreCase("-b"))
-				traza = true;
+				pasos = true;
 			else
 				nombreFich = args[i];
 		}
 		cargarFichero(nombreFich);
 		resetear();	
 
-		if (!traza)
-			return ejecutar();
+		if (!pasos)
+			return ejecutaTodas();
 		else
-			return ejecutarPaso();
+			return ejecutaPaso();
 	}
 
 
 	/**
-	 * Carga el fichero de la máquina virtual, comprueba a su vez si se ha cargado correctamente
-	 * @throws Exception Lanzador de las posibles excepciones
+	 * Carga el fichero de entrada
+	 * @throws Exception Si no se ha cargado correctamente el fichero
 	 */
 	private void cargarFichero(String nombreFich) throws Exception {
 		try {
 			if (Utils.compruebaExtensionSalida(nombreFich)){
 				Scanner scan = new Scanner(new File(nombreFich));
-				System.out.println("Comienza la lectura del codigo");
 				memoriaInstrucciones= new CodigoObjeto();
-				String cadena;
 				while (scan.hasNext()){
-					cadena=scan.nextLine();
-					procesaCadena(cadena);
+					String linea = scan.nextLine();
+					procesaLinea(linea);
 				}
-				System.out.println("Programa cargado en maquina virtual.");
 				scan.close();}
 			else{
-				throw new Exception();
+				throw new Exception("Extension no valida");
 			}
 		} catch (FileNotFoundException e) {
 			throw new Exception("No se encontro el fichero de codigo");
@@ -82,41 +66,43 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	}
 
 	/**
-	 * Procesa una cadena y la trata mediante el protocolo adecuado
-	 * @param cadena a tratar
+	 * Procesa una linea y la trata mediante el protocolo adecuado
+	 * @param linea a tratar
 	 */
-	private void procesaCadena(String cadena) {
-		if (cadena.contains("(")){ //instruccion con argumentos
-			String subCadena="";
+	private void procesaLinea(String linea) {
+		if (linea.contains("(")){ //instruccion con parametro
 			String comando="";
-			int indice=0;
-			while(cadena.charAt(indice)!='('){
-				comando+=cadena.charAt(indice);
-				indice++;
+			int i=0;
+			while(linea.charAt(i)!='('){
+				comando+=linea.charAt(i);
+				i++;
 			}
-			indice++;
-			while(cadena.charAt(indice)!=')'){
-				subCadena+=cadena.charAt(indice);
-				indice++;
+			i++;
+			
+			String param="";
+			while(linea.charAt(i)!=')'){
+				param+=linea.charAt(i);
+				i++;
 			}
-			memoriaInstrucciones.añadirInstruccion(comando,subCadena);
-		}else{ //instruccion sin argumentos
-			memoriaInstrucciones.añadirInstruccion(cadena);	
+			memoriaInstrucciones.añadeInstruccion(comando,param);
+		}else{ //instruccion sin parametro
+			memoriaInstrucciones.añadeInstruccion(linea);	
 		}
 
 	}
 
 
 	/**
-	 * Ejecuta la lista de instrucciones contenidas en la memoria de instrucciones.
+	 * Ejecuta toda la secuencia de instrucciones 
+	 * @throws MVException si alguna instruccion lanza una excepcion
+	 * @return String: estado de la memoria y de la pila
 	 */
-
 	@Override
-	public String ejecutar() throws MVException {
+	public String ejecutaTodas() throws MVException {
 		try {
-			while(contadorPrograma < memoriaInstrucciones.getCodigo().size())
-			{
-				Instruccion instr = memoriaInstrucciones.getCodigo().get(contadorPrograma);
+			Vector<Instruccion> codigo = memoriaInstrucciones.getCodigo();
+			while(contadorPrograma < codigo.size()){
+				Instruccion instr = codigo.get(contadorPrograma);
 				instr.Ejecutar();
 				contadorPrograma++;	
 			}	
@@ -128,16 +114,23 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 		}
 	}
 
+	/**
+	 * Ejecuta la siguiente instruccion 
+	 * @throws MVException si la instruccion lanza una excepcion
+	 * @return String: estado de la memoria y de la pila, o 
+	 * "PROGRAMA TERMINADO." si ha terminado la ejecución
+	 */
 	@Override
-	public String ejecutarPaso() throws MVException{
+	public String ejecutaPaso() throws MVException{
 		try {
-			if (contadorPrograma < memoriaInstrucciones.getCodigo().size()){
-				Instruccion aux = memoriaInstrucciones.getCodigo().get(contadorPrograma);
-				aux.Ejecutar();
+			Vector<Instruccion> codigo = memoriaInstrucciones.getCodigo();
+			if (contadorPrograma < codigo.size()){
+				Instruccion instr = codigo.get(contadorPrograma);
+				instr.Ejecutar();
 				contadorPrograma++;
 				return contadorPrograma + ".  " 
-					+memoriaInstrucciones.getCodigo().get(contadorPrograma-1) 
-					+ "\n\n"+printMemoria() + "\n" + printPila();			
+					+ codigo.get(contadorPrograma-1) 
+					+ "\n\n" + printMemoria() + "\n" + printPila();			
 			}else
 				return "PROGRAMA TERMINADO.";
 		
@@ -149,7 +142,8 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	}
 
 	/**
-	 * Crea una nueva memoria de datos y pila, además inicializa el contador de programa a cero.
+	 * Crea una nueva memoria de datos y pila, además inicializa 
+	 * el contador de programa a cero.
 	 */
 	public void resetear(){
 		pila = new Stack<String>();
@@ -165,14 +159,16 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	}
 
 	/**
-	 * Devuelve la pila actual de la MV
+	 * Getter
+	 * @return Stack<String>: pila
 	 */
 	public Stack<String> getPila() {
 		return pila;
 	}
+	
 	/**
-	 * Devuelve el PC de la Maquina Virtual
-	 * @return PC de la Maquina Virtual
+	 * Getter
+	 * @return int: contador de programa 
 	 */
 	public int getContadorPrograma() {
 		return contadorPrograma;
@@ -185,19 +181,35 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 		return memoriaInstrucciones;
 	}
 	
+	/**
+	 * Setter
+	 * @param CodigoObjeto: memoriaInstrucciones
+	 */
 	public void setMemoriaInstrucciones(CodigoObjeto memoriaInstrucciones) {
 		this.memoriaInstrucciones = memoriaInstrucciones;
 	}
 
+	/**
+	 * Setter
+	 * @param int: contadorPrograma
+	 */
 	public void setContadorPrograma(int contadorPrograma) {
 		this.contadorPrograma = contadorPrograma;
 	}
 
+	/**
+	 * Getter
+	 * @return CodigoObjeto: memoria de instrucciones
+	 */
 	@Override
 	public Hashtable<Integer, String> getMemoriaDatos() {
 		return this.memoriaDatos;
 	}
 
+	/**
+	 * 
+	 * @return String: estado de la memoria
+	 */
 	public String printMemoria(){
 		Set<Integer> keys = memoriaDatos.keySet();
 		Iterator<Integer> keysIt = keys.iterator();
@@ -207,11 +219,16 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 		
 		while (keysIt.hasNext()){
 			pos = keysIt.next();
-			salida += "Posición: "+ pos + "  contiene: " + memoriaDatos.get(pos) + "\n";
+			salida += "Posición: "+ pos + "  contiene: " 
+				+ memoriaDatos.get(pos) + "\n";
 		}
 		return salida;	
 	}
 
+	/**
+	 * 
+	 * @return String: estado de la pila
+	 */
 	public String printPila(){
 		Iterator<String> pilaIt= pila.iterator();
 		String salida = "";	
