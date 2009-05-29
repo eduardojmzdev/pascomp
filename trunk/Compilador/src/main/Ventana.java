@@ -159,7 +159,7 @@ public class Ventana extends JFrame {
 		constraints.gridheight = 1;
 		panel.add(boton1, constraints);
 
-		boton2 = new JButton("Paso a Paso?");
+		boton2 = new JButton("Paso a Paso");
 		boton2.addActionListener(new OyentePaso());
 		constraints.gridx = 2;
 		constraints.gridy = 9;
