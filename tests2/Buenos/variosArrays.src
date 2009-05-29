@@ -1,0 +1,36 @@
+program variosArrays;
+
+var 
+	x:integer;
+	y:integer;	
+	a: array[0..3] of integer;
+	b: array[0..3] of integer;
+	z:integer;	
+begin
+	x:=1;
+	y:=2;
+	z:=3;
+	a[0]:=10;
+	a[1]:=11;
+	a[2]:=12;
+	a[3]:=13;
+	
+	b[0]:=20;
+	b[1]:=21;
+	b[2]:=22;
+	b[3]:=23;
+	
+	write(a[0]);
+	write(a[1]);
+	write(a[2]);
+	write(a[3]);
+
+	write(b[0]);
+	write(b[1]);
+	write(b[2]);
+	write(b[3]);
+	
+	write(x);
+	write(y);
+	write(z);
+end.
