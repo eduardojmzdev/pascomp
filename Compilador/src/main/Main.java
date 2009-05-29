@@ -1,5 +1,6 @@
 package main;
 
+import traductor.Traductor;
 import excepciones.CompiladorException;
 
 /**
