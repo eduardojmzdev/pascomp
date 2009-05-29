@@ -9,7 +9,10 @@ public class PropTiposArray extends PropTipos {
 	private PropTipos ref; //tipo al que hacemos referencia (tipo base del array)
 	
 	public PropTiposArray(int tam, PropTipos ref) {
-		super(TTipo.ARRAY, 1);//habria que poner el tamaño bien
+	    	//el temaño de memoria para reservar en el array es
+	    	//tamaño elemenots* numero de elementos
+	    	//como son arrays de enteros y booleanos siempre va a ser tamaño 1
+		super(TTipo.ARRAY, tam * ref.getTam());
 		this.tam=tam;
 		this.ref=ref;
 			
