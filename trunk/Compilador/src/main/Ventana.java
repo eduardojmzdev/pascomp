@@ -102,7 +102,7 @@ public class Ventana extends JFrame {
 
 		texto1 = new JTextArea("");
 		texto1.setEditable(false);
-		JScrollPane pScroll1 = new JScrollPane(texto1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane pScroll1 = new JScrollPane(texto1, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		constraints.gridx = 0;
 		constraints.gridy = 1;
 		constraints.gridwidth = 3;
@@ -114,7 +114,7 @@ public class Ventana extends JFrame {
 
 		texto2 = new JTextArea("");
 		texto2.setEditable(false);
-		JScrollPane pScroll2 = new JScrollPane(texto2, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane pScroll2 = new JScrollPane(texto2, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		constraints.gridx = 0;
 		constraints.gridy = 5;
 		constraints.gridwidth = 1;
@@ -126,7 +126,7 @@ public class Ventana extends JFrame {
 
 		texto3 = new JTextArea("");
 		texto3.setEditable(false);
-		JScrollPane pScroll3 = new JScrollPane(texto3, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane pScroll3 = new JScrollPane(texto3, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		constraints.gridx = 1;
 		constraints.gridy = 5;
 		constraints.gridwidth = 1;
@@ -138,7 +138,7 @@ public class Ventana extends JFrame {
 
 		texto4 = new JTextArea("");
 		texto4.setEditable(false);
-		JScrollPane pScroll4 = new JScrollPane(texto4, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane pScroll4 = new JScrollPane(texto4, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		constraints.gridx = 2;
 		constraints.gridy = 5;
 		constraints.gridwidth = 1;
@@ -389,7 +389,7 @@ public class Ventana extends JFrame {
 			} else {
 				this.description = description;
 			}
-			this.extensions = (String[]) extensions.clone();
+			this.extensions = extensions.clone();
 			toLower(this.extensions);
 		}
 
@@ -399,10 +399,12 @@ public class Ventana extends JFrame {
 			}
 		}
 
+		@Override
 		public String getDescription() {
 			return description;
 		}
 
+		@Override
 		public boolean accept(File file) {
 			if (file.isDirectory()) {
 				return true;

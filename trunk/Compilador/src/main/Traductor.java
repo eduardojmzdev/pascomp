@@ -10,7 +10,6 @@ import traductor.tablaSimbolos.TablaSimbolos;
 
 import traductor.aLexico.ALexico;
 import traductor.aSintactico.ASintactico;
-import traductor.aSintactico.ASintacticoImp;
 
 /**
  * Clase principal del Traductor
@@ -82,8 +81,8 @@ public class Traductor {
 			} catch (FileNotFoundException e) {
 				throw new CompiladorException("No se ha encontrado el fichero fuente: " + System.getProperty("user.dir") + "\\" +  ficheroEntrada);
 			} 
-			ASintacticoImp.getInstance().setCodigo(new PrintWriter(ficheroSalida + "." + Utils.extensionSalida));
-			ASintacticoImp.getInstance().analizar(fuente);
+			ASintactico.getInstance().setCodigo(new PrintWriter(ficheroSalida + "." + Utils.extensionSalida));
+			ASintactico.getInstance().analizar(fuente);
 			
 			fuente.close();
 		} else {
