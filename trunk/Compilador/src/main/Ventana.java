@@ -3,8 +3,8 @@ package main;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
-import mVirtual.MaquinaVirtualImpl;
-import mVirtual.MaquinaVirtual;
+import maquinaVirtual.MaquinaVirtual;
+import maquinaVirtual.MaquinaVirtualImpl;
 import excepciones.MVException;
 
 import excepciones.CompiladorException;
