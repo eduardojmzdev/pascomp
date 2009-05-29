@@ -27,7 +27,8 @@ public final class LexicException extends CompiladorException {
 		this.numLinea = numLinea;
     }    
     
-    public String getMensajeError(){
+    @Override
+	public String getMensajeError(){
     	return "Error Lexico en línea " + numLinea + ": " + super.getMensajeError();
     	
     }

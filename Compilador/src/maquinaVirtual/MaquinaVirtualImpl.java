@@ -150,6 +150,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	 * Crea una nueva memoria de datos y pila, además inicializa 
 	 * el contador de programa a cero.
 	 */
+	@Override
 	public void resetear(){
 		pila = new Stack<String>();
 		memoriaDatos = new Hashtable<Integer,String>();
@@ -167,6 +168,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	 * Getter
 	 * @return Stack<String>: pila
 	 */
+	@Override
 	public Stack<String> getPila() {
 		return pila;
 	}
@@ -175,6 +177,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	 * Getter
 	 * @return int: contador de programa 
 	 */
+	@Override
 	public int getContadorPrograma() {
 		return contadorPrograma;
 	}
@@ -182,6 +185,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	 * Devuelve la memoria de instrucciones de la Maquina Virtual
 	 * @return memoria de instrucciones de la Maquina Virtual
 	 */
+	@Override
 	public MemIntrucciones getMemoriaInstrucciones() {
 		return memoriaInstrucciones;
 	}
@@ -190,6 +194,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	 * Setter
 	 * @param CodigoObjeto: memoriaInstrucciones
 	 */
+	@Override
 	public void setMemoriaInstrucciones(MemIntrucciones memoriaInstrucciones) {
 		this.memoriaInstrucciones = memoriaInstrucciones;
 	}
@@ -198,6 +203,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	 * Setter
 	 * @param int: contadorPrograma
 	 */
+	@Override
 	public void setContadorPrograma(int contadorPrograma) {
 		this.contadorPrograma = contadorPrograma;
 	}

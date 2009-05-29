@@ -14,6 +14,7 @@ public class TMemoriaImp extends TMemoria{
 		aL=new ArrayList<Object>();
 		
 	}
+	@Override
 	public Object damePosicion (int pos){
 		if ((pos>0)&&(pos<aL.size()))
 		return aL.get(pos);
@@ -21,10 +22,12 @@ public class TMemoriaImp extends TMemoria{
 	return null;
 	}
 	
+	@Override
 	public void almacenaElemento(int pos, Object elemento){		
 		aL.add(pos,elemento);
 	}
 	
+	@Override
 	public int dameTam(){
 		return aL.size();
 		

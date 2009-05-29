@@ -38,6 +38,7 @@ public class ALexicoImp extends ALexico {
 		token = new Token();
 	}
 
+	@Override
 	public int getLinea() {
 		return lineaActual;
 	}
@@ -46,6 +47,7 @@ public class ALexicoImp extends ALexico {
 		return ficheroFuente;
 	}
 
+	@Override
 	public void setFichero(FileReader f) {
 		buffer = ' ';
 		lineaActual = 1;
@@ -172,6 +174,7 @@ public class ALexicoImp extends ALexico {
 	/*
 	 * Procesa el siguiente token
 	 */
+	@Override
 	public Token obtenerToken() throws CompiladorException {
 		String lexema = "";
 		try {

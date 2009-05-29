@@ -22,7 +22,8 @@ public final class SintacticException extends CompiladorException{
 		this.numLinea = numLinea;
     }       
     
-    public String getMensajeError(){
+    @Override
+	public String getMensajeError(){
     	return "Error Sintáctico en línea " + numLinea + ": " + super.getMensajeError();
     	
     }

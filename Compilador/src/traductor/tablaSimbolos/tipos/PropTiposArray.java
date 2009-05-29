@@ -17,9 +17,11 @@ public class PropTiposArray extends PropTipos {
 			
 	}
 	
+	@Override
 	public int getTam() {
 		return tam;
 	}
+	@Override
 	public void setTam(int t){
 		
 		tam=t;

@@ -42,6 +42,7 @@ public class Mult implements Instruccion {
 	/**
 	 * @return String: representa la instruccion
 	 */
+	@Override
 	public String toString() {
 		return this.getClass().getSimpleName();
 	}

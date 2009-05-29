@@ -15,6 +15,7 @@ public class GeneradorInstrImp extends GeneradorInstr {
 	 * @param nombre String: nombre de la instruccion a generar
 	 * @return Instruccion
 	 */
+	@Override
 	public Instruccion generaInstr(String nombre){
 		if (nombre.equals("and"))
 			return new And();
