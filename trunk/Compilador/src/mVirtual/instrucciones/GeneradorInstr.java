@@ -29,6 +29,7 @@ public abstract class GeneradorInstr {
 		return null;
 	}
 	
+	
 	/**
 	 * libera la instancia de la clase
 	 */

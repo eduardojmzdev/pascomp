@@ -1,36 +1,37 @@
 package mVirtual.instrucciones;
 
-import mVirtual.instrucciones.aritmeticas.InstruccionDivisionReal;
-import mVirtual.instrucciones.aritmeticas.InstruccionModulo;
-import mVirtual.instrucciones.aritmeticas.InstruccionMultiplicacion;
-import mVirtual.instrucciones.aritmeticas.InstruccionResta;
-import mVirtual.instrucciones.aritmeticas.InstruccionRestaUnario;
-import mVirtual.instrucciones.aritmeticas.InstruccionSuma;
-import mVirtual.instrucciones.aritmeticas.InstruccionSumaUnario;
-import mVirtual.instrucciones.bool.InstruccionAnd;
-import mVirtual.instrucciones.bool.InstruccionNot;
-import mVirtual.instrucciones.bool.InstruccionOr;
-import mVirtual.instrucciones.comparaciones.InstruccionIgual;
-import mVirtual.instrucciones.comparaciones.InstruccionMayor;
-import mVirtual.instrucciones.comparaciones.InstruccionMayorIgual;
-import mVirtual.instrucciones.comparaciones.InstruccionMenor;
-import mVirtual.instrucciones.comparaciones.InstruccionMenorIgual;
-import mVirtual.instrucciones.entradasalida.InstruccionRead;
-import mVirtual.instrucciones.entradasalida.InstruccionWrite;
-import mVirtual.instrucciones.memoria.InstruccionCargaCP;
-import mVirtual.instrucciones.memoria.InstruccionDispose;
-import mVirtual.instrucciones.memoria.InstruccionNew;
-import mVirtual.instrucciones.pila.InstruccionApila;
-import mVirtual.instrucciones.pila.InstruccionApilaDireccion;
-import mVirtual.instrucciones.pila.InstruccionApilaIndice;
-import mVirtual.instrucciones.pila.InstruccionBurbuja;
-import mVirtual.instrucciones.pila.InstruccionCopiaCima;
-import mVirtual.instrucciones.pila.InstruccionDesapilaDireccion;
-import mVirtual.instrucciones.pila.InstruccionDesapilaIndice;
-import mVirtual.instrucciones.pila.InstruccionFlip;
-import mVirtual.instrucciones.saltos.InstruccionIrA;
-import mVirtual.instrucciones.saltos.InstruccionIrF;
-import mVirtual.instrucciones.saltos.InstruccionIrIndice;
+import mVirtual.instrucciones.aritmeticas.Division;
+import mVirtual.instrucciones.aritmeticas.Modulo;
+import mVirtual.instrucciones.aritmeticas.Mult;
+import mVirtual.instrucciones.aritmeticas.Resta;
+import mVirtual.instrucciones.aritmeticas.RestaUnario;
+import mVirtual.instrucciones.aritmeticas.Suma;
+import mVirtual.instrucciones.aritmeticas.SumaUnario;
+import mVirtual.instrucciones.booleanas.And;
+import mVirtual.instrucciones.booleanas.Not;
+import mVirtual.instrucciones.booleanas.Or;
+import mVirtual.instrucciones.comparaciones.Igual;
+import mVirtual.instrucciones.comparaciones.Distinto;
+import mVirtual.instrucciones.comparaciones.Mayor;
+import mVirtual.instrucciones.comparaciones.MayorIgual;
+import mVirtual.instrucciones.comparaciones.Menor;
+import mVirtual.instrucciones.comparaciones.MenorIgual;
+import mVirtual.instrucciones.entradasalida.Read;
+import mVirtual.instrucciones.entradasalida.Write;
+import mVirtual.instrucciones.memoria.CargaCP;
+import mVirtual.instrucciones.memoria.Dispose;
+import mVirtual.instrucciones.memoria.New;
+import mVirtual.instrucciones.pila.Apila;
+import mVirtual.instrucciones.pila.ApilaDir;
+import mVirtual.instrucciones.pila.ApilaIndice;
+import mVirtual.instrucciones.pila.Burbuja;
+import mVirtual.instrucciones.pila.CopiaCima;
+import mVirtual.instrucciones.pila.DesapilaDir;
+import mVirtual.instrucciones.pila.DesapilaIndice;
+import mVirtual.instrucciones.pila.Flip;
+import mVirtual.instrucciones.saltos.IrA;
+import mVirtual.instrucciones.saltos.IrF;
+import mVirtual.instrucciones.saltos.IrIndice;
 
 public class GeneradorInstrImp extends GeneradorInstr {
 	
@@ -41,69 +42,69 @@ public class GeneradorInstrImp extends GeneradorInstr {
 	 */
 	public Instruccion generaInstr(String nombre){
 		if (nombre.equals("and"))
-			return new InstruccionAnd();
+			return new And();
 		if (nombre.equals("apila"))
-			return new InstruccionApila();
+			return new Apila();
 		if (nombre.equals("apilaDireccion"))
-			return new InstruccionApilaDireccion();
+			return new ApilaDir();
 		if (nombre.equals("desapilaDireccion"))
-			return new InstruccionDesapilaDireccion();
+			return new DesapilaDir();
 		if (nombre.equals("distinto"))
-			return new InstruccionOr();
+			return new Distinto();
 		if (nombre.equals("division"))
-			return new InstruccionDivisionReal();
+			return new Division();
 		if (nombre.equals("igual"))
-			return new InstruccionIgual();
+			return new Igual();
 		if (nombre.equals("mayor"))
-			return new InstruccionMayor();
+			return new Mayor();
 		if (nombre.equals("mayorIgual"))
-			return new InstruccionMayorIgual();
+			return new MayorIgual();
 		if (nombre.equals("menor"))
-			return new InstruccionMenor();
+			return new Menor();
 		if (nombre.equals("menorIgual"))
-			return new InstruccionMenorIgual();
+			return new MenorIgual();
 		if (nombre.equals("moduloEntero"))
-			return new InstruccionModulo();
+			return new Modulo();
 		if (nombre.equals("producto"))
-			return new InstruccionMultiplicacion();
+			return new Mult();
 		if (nombre.equals("negacion"))
-			return new InstruccionNot();
+			return new Not();
 		if (nombre.equals("or"))
-			return new InstruccionOr();
+			return new Or();
 		if (nombre.equals("read"))
-			return new InstruccionRead();
+			return new Read();
 		if (nombre.equals("resta"))
-			return new InstruccionResta();
+			return new Resta();
 		if (nombre.equals("restaUnario"))
-			return new InstruccionRestaUnario();
+			return new RestaUnario();
 		if (nombre.equals("suma"))
-			return new InstruccionSuma();
+			return new Suma();
 		if (nombre.equals("sumaUnario"))
-			return new InstruccionSumaUnario();
+			return new SumaUnario();
 		if (nombre.equals("write"))
-			return new InstruccionWrite();
+			return new Write();
 		if (nombre.equals("ir-a"))
-			return new InstruccionIrA();
+			return new IrA();
 		if (nombre.equals("ir-f"))
-			return new InstruccionIrF();
+			return new IrF();
 		if (nombre.equals("apilaIndice"))
-			return new InstruccionApilaIndice();
+			return new ApilaIndice();
 		if (nombre.equals("desapilaIndice"))
-			return new InstruccionDesapilaIndice();
+			return new DesapilaIndice();
 		if (nombre.equals("new"))
-			return new InstruccionNew();
+			return new New();
 		if (nombre.equals("del"))
-			return new InstruccionDispose();
+			return new Dispose();
 		if (nombre.equals("copia"))
-			return new InstruccionCopiaCima();
+			return new CopiaCima();
 		if (nombre.equals("cargaCP"))
-			return new InstruccionCargaCP();
+			return new CargaCP();
 		if (nombre.equals("irIndice"))
-			return new InstruccionIrIndice();
+			return new IrIndice();
 		if (nombre.equals("flip"))
-			return new InstruccionFlip();
+			return new Flip();
 		if (nombre.equals("burbuja"))
-			return new InstruccionBurbuja();
+			return new Burbuja();
 		return null;
 	};
 }
