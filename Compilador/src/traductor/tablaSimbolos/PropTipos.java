@@ -1,10 +1,13 @@
 package traductor.tablaSimbolos;
 
+/**
+ * Clase para implementar los tipos de datos
+ *
+ */
 public class PropTipos {
 	protected TTipo nombreTipo;
 	protected int tam;
 	
-
 	public TTipo getNombreTipo() {
 		return nombreTipo;
 	}

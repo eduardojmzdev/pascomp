@@ -2,6 +2,10 @@ package traductor.memoria;
 
 import java.util.ArrayList;
 
+/**
+ * Implementacion de la memoria
+ *
+ */
 public class TMemoriaImp extends TMemoria{
 
 	private ArrayList<Object> aL;
