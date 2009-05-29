@@ -1,5 +1,7 @@
 package traductor.tablaSimbolos;
 
+import traductor.tablaSimbolos.tipos.PropTipos;
+
 public class Parametro {
 
 	private Modo modo;

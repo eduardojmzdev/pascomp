@@ -1,6 +1,12 @@
 package traductor.tablaSimbolos;
 import java.util.*;
 
+import traductor.tablaSimbolos.tipos.PropTipos;
+import traductor.tablaSimbolos.tipos.PropTiposBool;
+import traductor.tablaSimbolos.tipos.PropTiposInt;
+import traductor.tablaSimbolos.tipos.PropTiposPro;
+import traductor.tablaSimbolos.tipos.TInfo;
+
 import excepciones.CompiladorException;
 
 /**

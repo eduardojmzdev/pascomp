@@ -1,4 +1,6 @@
-package traductor.tablaSimbolos;
+package traductor.tablaSimbolos.tipos;
+
+import traductor.tablaSimbolos.TElemento;
 
 /**
  * Informacion de los tipos
