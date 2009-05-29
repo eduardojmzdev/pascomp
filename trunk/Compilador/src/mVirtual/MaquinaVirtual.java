@@ -14,48 +14,63 @@ public abstract class MaquinaVirtual {
 		return instancia;
 	}
 	/**
-	 * Getter memoria datos
-	 * @return Hashtable con la memoria de datos (resultados).
+	 * Getter
+	 * @return Hashtable :memoria de datos.
 	 */
 	public abstract Hashtable<Integer, String> getMemoriaDatos();
 
 	/**
-	 * Ejecuta el listado de instrucciones
+	 * Ejecuta la secuencia de instrucciones
 	 * @throws MVException 
 	 */
-	public abstract String ejecutar() throws MVException;
+	public abstract String ejecutaTodas() throws MVException;
 
 	/**
-	 * Ejecuta un paso de la maquina virtual
+	 * Ejecuta la siguiente instruccion
 	 * @throws MVException 
 	 * 
 	 */
-	public abstract String ejecutarPaso() throws MVException;
+	public abstract String ejecutaPaso() throws MVException;
 
 	/**
-	 * Crea una nueva memoria de datos y pila, actualizando el contador de programa a 0
+	 * Crea una nueva memoria de datos y pila, 
+	 * actualizando el contador de programa a 0
 	 */
 	public abstract void resetear();
 
 	/**
-	 * Devuelve la pila latente a la maquina virtual
+	 * Getter
+	 * @return Stack<String> : pila.
 	 */
 	public abstract Stack<String> getPila();
 
 	/**
-	 * Devuelve el contador de programa de la maquina virtual
-	 * @return contador del programa de la maquina virtual
+	 * Gettet
+	 * @return int: contador de programa 
 	 */
 	public abstract int getContadorPrograma();
 
 	/**
-	 * Devuelve la memoria de instrucciones de la maquina virtual
-	 * @return memoria de instrucciones de la maquina virtual
+	 * Getter
+	 * @return CodigoObjeto: memoria de instrucciones
 	 */
 	public abstract CodigoObjeto getMemoriaInstrucciones();
+	
+	/**
+	 * Setter
+	 * @param int: contadorPrograma
+	 */
 	public abstract void setContadorPrograma(int contadorPrograma);
+	
+	/**
+	 * Setter
+	 * @param CodigoObjeto: memoriaInstrucciones
+	 */
 	public abstract void setMemoriaInstrucciones(CodigoObjeto memoriaInstrucciones);
 
+	/**
+	 * libera la instancia de la Maquina virtual
+	 */
 	public static void reset(){
 		instancia = null;
 	}

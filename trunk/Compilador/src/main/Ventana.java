@@ -326,7 +326,7 @@ public class Ventana extends JFrame {
 						result = mv.ejecutaIni(args);
 						estado = Estados.PASO;
 					} else {
-						result = mv.ejecutarPaso();
+						result = mv.ejecutaPaso();
 					}
 					texto4.setText(result);
 				} catch (MVException e) {
