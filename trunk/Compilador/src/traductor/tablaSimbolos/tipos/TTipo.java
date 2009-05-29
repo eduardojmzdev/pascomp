@@ -1,4 +1,4 @@
-package traductor.tablaSimbolos;
+package traductor.tablaSimbolos.tipos;
 
 /**
  * Tipo enumerado para definir los diferentes tipos de datos existentes

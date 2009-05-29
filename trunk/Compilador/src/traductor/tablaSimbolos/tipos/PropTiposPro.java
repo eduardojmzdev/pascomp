@@ -1,6 +1,8 @@
-package traductor.tablaSimbolos;
+package traductor.tablaSimbolos.tipos;
 
 import java.util.ArrayList;
+
+import traductor.tablaSimbolos.Parametro;
 
 
 public class PropTiposPro extends PropTipos{

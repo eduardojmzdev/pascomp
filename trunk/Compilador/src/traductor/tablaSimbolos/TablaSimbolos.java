@@ -1,5 +1,9 @@
 package traductor.tablaSimbolos;
 
+import traductor.tablaSimbolos.tipos.PropTipos;
+import traductor.tablaSimbolos.tipos.PropTiposPro;
+import traductor.tablaSimbolos.tipos.TInfo;
+
 
 
 /**
