@@ -561,7 +561,8 @@ public class ASintacticoImp extends ASintactico {
 		    if (!existeIDNivel((String) aL.get(i))) {
 			TablaSimbolos tabla = TablaSimbolos.getInstance();
 			if (tabla.existeTipo(token.getLexema(), nivel)) {
-			    PropTipos p = tabla.dameTipo(token.getLexema(), nivel);
+			    String nombreTipo = token.getLexema();
+			    PropTipos p = tabla.dameTipo(nombreTipo, nivel);
 			    tabla.añadeVariable((String) aL.get(i), direccion, p, nivel);
 			    if (compruebaTiposNoExcep(p, tabla.dameTipo("boolean", nivel))) {
 				// Array prototipado en booleanos
@@ -588,6 +589,8 @@ public class ASintacticoImp extends ASintactico {
 				codigoEmitido = "desapilaIndice;.";
 				emitirCodigo(codigoEmitido);
 			    } else {
+				tabla.existeTipo(nombreTipo, nivel);
+				compruebaTiposNoExcep(p, tabla.dameTipo("integer", nivel));
 				String codigoEmitido = "apilaDireccion(" + (1 + nivel) + ");.";
 				emitirCodigo(codigoEmitido);
 				codigoEmitido = "apila(" + (direccion - 1) + ");.";
@@ -600,6 +603,9 @@ public class ASintacticoImp extends ASintactico {
 				emitirCodigo(codigoEmitido);
 			    }
 			    direccion++;
+			}
+			else{
+			    throw new SintacticException("Tipo '"+ token.getLexema() + "' no declarado.",ALexico.getInstance().getLinea() );
 			}
 		    }
 		}
@@ -839,8 +845,8 @@ public class ASintacticoImp extends ASintactico {
 		
 		// Comprobamos si la posicion del array esta dentro del rango
 		int tam = t.dameTipo(asignada, nivel).getTam();
-		if (token.getCategoria() == EnumToken.RESTA){
-		    throw new SintacticException("Array fuera de rango", ALexico.getInstance().getLinea());
+		if (!(token.getCategoria() != EnumToken.ID) && !(token.getCategoria() == EnumToken.DISTINTO) ){
+		    throw new SintacticException("No se permiten expresiones en arrays", ALexico.getInstance().getLinea());
 		}
 		try{
 		    int posicionArray = Integer.parseInt(token.getLexema());
