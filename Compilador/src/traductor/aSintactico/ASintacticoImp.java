@@ -1439,6 +1439,7 @@ public class ASintacticoImp extends ASintactico {
 		return tp2;
 	}
 
+	@SuppressWarnings("unused")
 	private PropTipos reconoceRestoExpresion(PropTipos t) throws Exception {
 		TablaSimbolos tabla = TablaSimbolos.getInstance();
 		PropTipos tp = null;
@@ -1517,6 +1518,8 @@ public class ASintacticoImp extends ASintactico {
 		return tp2;
 	}
 
+
+	@SuppressWarnings("unused")
 	private PropTipos reconoceRestoExpresionSum(PropTipos t) throws Exception {
 		PropTipos tp = null;
 		PropTipos tp2 = null;
@@ -1568,6 +1571,7 @@ public class ASintacticoImp extends ASintactico {
 		return tp2;
 	}
 
+	@SuppressWarnings("unused")
 	private PropTipos reconoceRestoExpresionProducto(PropTipos t) throws Exception {
 		PropTipos tp = null;
 		PropTipos tp2 = null;

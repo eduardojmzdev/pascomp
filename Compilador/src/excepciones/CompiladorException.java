@@ -1,7 +1,6 @@
 
 package excepciones;
 
-import java.util.HashMap;
 
 /**
  * Clase basica de las excepciones del compilador
