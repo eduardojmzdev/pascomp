@@ -5,49 +5,36 @@ import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 import excepciones.MVException;
 
-/**
- * 
- * Esta clase implementa la ejecución en la pila de la instrucción ApilaDireccion de la máquina virtual
- *
- */
 public class InstruccionApilaDireccion implements Instruccion {
 
+	private String param;
+	
 	/**
-	 * Datos que se deben procesar
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
 	 */
-	private String datos;
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return this.getClass().getSimpleName()+"("+datos+")";
-	}
-	
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
-	 */
-	public void Ejecutar() throws MVException {
+	public void ejecutar() throws MVException {
 		try{
-			MaquinaVirtual.obtenerInstancia().getPila().push(MaquinaVirtual.obtenerInstancia().getMemoriaDatos().get(Integer.parseInt(datos)));
+			MaquinaVirtual.obtenerInstancia().getPila().push(MaquinaVirtual.obtenerInstancia().getMemoriaDatos().get(Integer.parseInt(param)));
 		
 		} catch (NumberFormatException e) {
 			throw new MVException(0);
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#getDatos()
+	/**
+	 * @return String: representa la instruccion
 	 */
-	public String getDatos() {
-		return datos;
+	public String toString() {
+		return this.getClass().getSimpleName()+"("+param+")";
+	}
+	/**
+	 * Setter
+	 * @param String: param
+	 */
+	public void setParam(String param) {
+		this.param = param;
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#setDatos(java.lang.String)
-	 */
-	public void setDatos(String datos) {
-		this.datos=datos;		
-	}
 
 }

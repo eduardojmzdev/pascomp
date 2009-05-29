@@ -9,9 +9,11 @@ import excepciones.MVException;
 
 public class InstruccionIrIndice implements Instruccion {
 
-	private String datos;
-
-	public void Ejecutar() throws MVException {
+	/**
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
+	 */
+	public void ejecutar() throws MVException {
 		try {
 			String cima = MaquinaVirtual.obtenerInstancia().getPila().pop();
 			if(cima.equals("null"))
@@ -25,17 +27,15 @@ public class InstruccionIrIndice implements Instruccion {
 		}	
 	}
 
-	public String getDatos() {
-		return datos;
-	}
-
-	public void setDatos(String datos) {
-	this.datos=datos;
-
-	}
-	
+	/**
+	 * @return String: representa la instruccion
+	 */
 	public String toString() {
 		return this.getClass().getSimpleName();
 	}
+	/**
+	 * vacio
+	 */
+	public void setParam(String param) {}
 
 }

@@ -4,29 +4,15 @@ package mVirtual.instrucciones.pila;
 import mVirtual.instrucciones.Instruccion;
 import excepciones.MVException;
 
-/**
- * 
- * Esta clase implementa la ejecución en la pila de la instrucción Burbuja de la máquina virtual
- *
- */
 public class InstruccionBurbuja implements Instruccion {
 
+	private String param;
+	
 	/**
-	 * Datos que se deben procesar
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
 	 */
-	private String datos;
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return this.getClass().getSimpleName()+"("+datos+")";
-	}
-	
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
-	 */
-	public void Ejecutar() throws MVException {
+	public void ejecutar() throws MVException {
 		//try{
 		//	MaquinaVirtual.obtenerInstancia().getPila().pop();
 		//}catch (Exception e){
@@ -34,18 +20,18 @@ public class InstruccionBurbuja implements Instruccion {
 		//} 
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#getDatos()
+	/**
+	 * @return String: representa la instruccion
 	 */
-	public String getDatos() {
-		return datos;
+	public String toString() {
+		return this.getClass().getSimpleName()+"("+param+")";
 	}
-
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#setDatos(java.lang.String)
+	/**
+	 * Setter
+	 * @param String: param
 	 */
-	public void setDatos(String datos) {
-		this.datos=datos;		
+	public void setParam(String param) {
+		this.param = param;
 	}
 
 }
