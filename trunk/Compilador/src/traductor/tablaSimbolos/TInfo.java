@@ -1,11 +1,13 @@
 package traductor.tablaSimbolos;
 
+/**
+ * Informacion de los tipos
+ *
+ */
 public class TInfo {
-
-
 	private TElemento clase; 
 	private int direccion;
-	private int nivel;//para cuando usemos procedimientos
+	private int nivel;			//indica el nivel en los procedimientos
 	private PropTipos prop;
 
 	public PropTipos getProp() {

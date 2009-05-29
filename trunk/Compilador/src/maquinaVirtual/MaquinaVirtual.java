@@ -2,7 +2,6 @@ package maquinaVirtual;
 
 import java.util.Hashtable;
 import java.util.Stack;
-
 import excepciones.MVException;
 
 public abstract class MaquinaVirtual {

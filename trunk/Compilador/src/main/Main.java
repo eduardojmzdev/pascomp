@@ -20,8 +20,7 @@ public class Main {
 	 *            traductor.
 	 */
 	public static void main(String[] args) {
-		if (args.length > 2) {
-			System.out.println("Con un argumento se ejecuta la máquina virtual. Ej. <ficheroEntrada>");
+		if (args.length > 2 || args.length == 1) {
 			System.out.println("Con dos argumentos se ejecuta el traductor. Ej. <ficheroEntrada> <ficheroSalida>");
 			System.out.println("\nPara usar el modo gráfico no introducir argumentos");
 		} else if (args.length == 0) {
@@ -31,9 +30,6 @@ public class Main {
 			ventana.setTitle("PLG");
 			ventana.setSize(700, 500);
 			ventana.setVisible(true);
-		} else if (args.length == 1) {
-			// Se ejecuta la máquina virtual
-
 		} else if (args.length == 2) {
 			// Se ejecuta el traductor
 

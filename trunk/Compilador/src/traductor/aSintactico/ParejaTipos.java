@@ -2,13 +2,11 @@ package traductor.aSintactico;
 import traductor.tablaSimbolos.PropTipos;
 import traductor.tablaSimbolos.TInfo;
 public class ParejaTipos {
-	
-	private PropTipos e1; 
+
+	private PropTipos e1;
 	private PropTipos e2;
 	private int visitas;
-	
-	
-	
+
 	public ParejaTipos(PropTipos e1, PropTipos e2) {
 		super();
 		this.e1 = e1;

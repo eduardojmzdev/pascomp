@@ -2,6 +2,12 @@ package traductor.tablaSimbolos;
 
 
 
+/**
+ * Clase de la Tabla de Simbolos
+ * 
+ * Implementa el patron Singleton
+ *
+ */
 public abstract class TablaSimbolos {
 	
 	private static TablaSimbolos instancia;
