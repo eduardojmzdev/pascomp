@@ -1,8 +1,0 @@
-program prueba;
-var
-	a: integer;
-begin
-	a := 2;
-	write(a+1);
-
-end.

@@ -1,6 +1,0 @@
-program prueba;
-var
-	a: boolean;
-begin
-	a := b;
-end.
