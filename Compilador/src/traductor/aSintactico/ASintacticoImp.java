@@ -836,6 +836,22 @@ public class ASintacticoImp extends ASintactico {
 	    } else if (comparaTokens(token.getCategoria(), EnumToken.CA)) {
 		// es un array, el nombre del array esta en asignada
 		token = ALexico.getInstance().obtenerToken();
+		
+		// Comprobamos si la posicion del array esta dentro del rango
+		int tam = t.dameTipo(asignada, nivel).getTam();
+		if (token.getCategoria() == EnumToken.RESTA){
+		    throw new SintacticException("Array fuera de rango", ALexico.getInstance().getLinea());
+		}
+		try{
+		    int posicionArray = Integer.parseInt(token.getLexema());
+		    if (posicionArray > tam - 1 || posicionArray < 0){
+			throw new SintacticException("Array fuera de rango", ALexico.getInstance().getLinea());
+		    }
+		}
+		catch(NumberFormatException nfe){
+//		    throw new SintacticException("Posición de array inválida.", ALexico.getInstance().getLinea());
+		}
+
 		if (compruebaTipos(reconoceExpresion(), t.dameTipo("integer", nivel))) {
 		    if (compruebaTokens(token.getCategoria(), EnumToken.CC)) {
 			// Obtener direccion del array
