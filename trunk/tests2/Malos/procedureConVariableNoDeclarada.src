@@ -1,0 +1,14 @@
+program procedureConVariableNoDeclarada;
+var x: integer;
+
+
+
+procedure ab(a:integer);
+begin
+	variableNoDeclarada:=a;
+end;
+
+
+begin
+	ab(1);
+end.
