@@ -3,6 +3,8 @@ package main;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
+import traductor.Traductor;
+
 import maquinaVirtual.MaquinaVirtual;
 import maquinaVirtual.MaquinaVirtualImpl;
 import excepciones.MVException;

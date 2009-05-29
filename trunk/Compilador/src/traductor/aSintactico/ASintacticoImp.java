@@ -400,7 +400,11 @@ public class ASintacticoImp extends ASintactico {
 		return 0;
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * No hemos acabado de implementar las constantes pero dejamos el codigo
+	 * @throws Exception
+	 */
+	@SuppressWarnings({"unchecked", "unused"})
 	private void reconoceConstantes() throws Exception {
 		if (!hayErrorLexico(token) && (compruebaTokens(token.getCategoria(), EnumToken.ID))) {
 			String nombre = token.getLexema();
