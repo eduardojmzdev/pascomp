@@ -7,29 +7,13 @@ import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 import excepciones.MVException;
 
-/**
- * 
- * Esta clase implementa la ejecución en la pila de la instrucción DesapilaIndice de la máquina virtual
- *
- */
 public class InstruccionDesapilaIndice implements Instruccion {
 
 	/**
-	 * Datos que se deben procesar
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
 	 */
-	private String datos;
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return this.getClass().getSimpleName();
-	}
-	
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
-	 */
-	public void Ejecutar() throws MVException {
+	public void ejecutar() throws MVException {
 		try{
 			String cima=MaquinaVirtual.obtenerInstancia().getPila().pop();
 			String subCima=MaquinaVirtual.obtenerInstancia().getPila().pop();
@@ -45,18 +29,16 @@ public class InstruccionDesapilaIndice implements Instruccion {
 		}	
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#getDatos()
+	/**
+	 * @return String: representa la instruccion
 	 */
-	public String getDatos() {
-		return datos;
+	public String toString() {
+		return this.getClass().getSimpleName();
 	}
+	/**
+	 * vacio
+	 */
+	public void setParam(String param) {}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#setDatos(java.lang.String)
-	 */
-	public void setDatos(String datos) {
-		this.datos=datos;		
-	}
 
 }

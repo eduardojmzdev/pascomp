@@ -5,31 +5,17 @@ import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 import excepciones.MVException;
 
-/**
- * 
- * Esta clase implementa la ejecución en la pila de la instrucción New de la máquina virtual
- *
- */
 public class InstruccionNew implements Instruccion {
 
+	private String param;
+	
 	/**
-	 * Los datos con los cuales debe trabajar
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
 	 */
-	private String datos;
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return this.getClass().getSimpleName()+"("+datos+")";
-	}
-	
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
-	 */
-	public void Ejecutar() throws MVException {
+	public void ejecutar() throws MVException {
 		try{
-			int tope=Integer.parseInt(datos);
+			int tope=Integer.parseInt(param);
 			int ocupacion=MaquinaVirtual.obtenerInstancia().getMemoriaDatos().size();
 			for (int i=ocupacion;i<ocupacion+tope;i++){
 				MaquinaVirtual.obtenerInstancia().getMemoriaDatos().put(i,"null");
@@ -42,18 +28,20 @@ public class InstruccionNew implements Instruccion {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#getDatos()
+	/**
+	 * @return String: representa la instruccion
 	 */
-	public String getDatos() {
-		return datos;
+	public String toString() {
+		return this.getClass().getSimpleName()+"("+param+")";
+	}
+	
+	/**
+	 * Setter
+	 * @param String: param
+	 */
+	public void setParam(String param) {
+		this.param = param;
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#setDatos(java.lang.String)
-	 */
-	public void setDatos(String datos) {
-		this.datos=datos;		
-	}
 
 }

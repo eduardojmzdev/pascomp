@@ -4,45 +4,33 @@ package mVirtual.instrucciones.pila;
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 import excepciones.MVException;
-/**
- * 
- * Esta clase implementa la ejecución en la pila de la instrucción apila de la máquina virtual
- *
- */
+
 public class InstruccionApila implements Instruccion {
 
+	private String param;
+	
 	/**
-	 *Los datos a apilar 
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
 	 */
-	private String datos;
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return this.getClass().getSimpleName()+"("+datos+")";
-	}
-	
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
-	 */
-	public void Ejecutar() throws MVException {
-		MaquinaVirtual.obtenerInstancia().getPila().push(datos);
+	public void ejecutar() throws MVException {
+		MaquinaVirtual.obtenerInstancia().getPila().push(param);
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#getDatos()
+	/**
+	 * @return String: representa la instruccion
 	 */
-	public String getDatos() {
-		return datos;
+	public String toString() {
+		return this.getClass().getSimpleName()+"("+param+")";
+	}
+	/**
+	 * Setter
+	 * @param String: param
+	 */
+	public void setParam(String param) {
+		this.param = param;
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#setDatos(java.lang.String)
-	 */
-	public void setDatos(String datos) {
-		this.datos=datos;
-	}
 
 }

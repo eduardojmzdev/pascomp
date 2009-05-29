@@ -8,9 +8,14 @@ import excepciones.MVException;
 public abstract class MaquinaVirtual {
 	private static MaquinaVirtual instancia;
 	
+	/**
+	 * Crea una instancia de MaquinaVirtualImpl o devuelve 
+	 * una ya existente
+	 * @return MaquinaVirtual: instancia
+	 */
 	public static MaquinaVirtual obtenerInstancia(){
 		if (instancia==null)
-			instancia=new MaquinaVirtualImpl();//MaquinaVirtualImp();
+			instancia=new MaquinaVirtualImpl();
 		return instancia;
 	}
 	/**
@@ -45,7 +50,7 @@ public abstract class MaquinaVirtual {
 	public abstract Stack<String> getPila();
 
 	/**
-	 * Gettet
+	 * Getter
 	 * @return int: contador de programa 
 	 */
 	public abstract int getContadorPrograma();
@@ -69,7 +74,7 @@ public abstract class MaquinaVirtual {
 	public abstract void setMemoriaInstrucciones(CodigoObjeto memoriaInstrucciones);
 
 	/**
-	 * libera la instancia de la Maquina virtual
+	 * libera la instancia de la clase
 	 */
 	public static void reset(){
 		instancia = null;

@@ -20,7 +20,12 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 	private int contadorPrograma;	
 	private CodigoObjeto memoriaInstrucciones;	
 	
-
+	/**
+	 * Comienza la ejecución según los argumentos recibidos
+	 * @param args: nombre de archivo [y opción paso a paso]
+	 * @return String: estado de la memoria y la pila
+	 * @throws Exception 
+	 */
 	public String ejecutaIni(String[] args) throws Exception {
 
 		String nombreFich = "";
@@ -103,7 +108,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 			Vector<Instruccion> codigo = memoriaInstrucciones.getCodigo();
 			while(contadorPrograma < codigo.size()){
 				Instruccion instr = codigo.get(contadorPrograma);
-				instr.Ejecutar();
+				instr.ejecutar();
 				contadorPrograma++;	
 			}	
 			return printMemoria() + "\n" + printPila();
@@ -126,7 +131,7 @@ public class MaquinaVirtualImpl extends MaquinaVirtual{
 			Vector<Instruccion> codigo = memoriaInstrucciones.getCodigo();
 			if (contadorPrograma < codigo.size()){
 				Instruccion instr = codigo.get(contadorPrograma);
-				instr.Ejecutar();
+				instr.ejecutar();
 				contadorPrograma++;
 				return contadorPrograma + ".  " 
 					+ codigo.get(contadorPrograma-1) 

@@ -2,7 +2,7 @@ package mVirtual;
 
 import java.util.Vector;
 
-import mVirtual.instrucciones.FactoriaComandos;
+import mVirtual.instrucciones.GeneradorInstr;
 import mVirtual.instrucciones.Instruccion;
 
 /** 
@@ -42,8 +42,8 @@ public class CodigoObjeto {
 	 * @param param String: parametro.
 	 */
 	public void añadeInstruccion(String nombre, String param){
-		Instruccion i = FactoriaComandos.obtenerInstancia().generarComando(nombre);
-		i.setDatos(param);
+		Instruccion i = GeneradorInstr.obtenerInstancia().generaInstr(nombre);
+		i.setParam(param);
 		codigo.add(i);
 	}
 		
@@ -52,7 +52,7 @@ public class CodigoObjeto {
 	 * @param nombre String: nombre de la instruccion.
 	 */
 	public void añadeInstruccion(String nombre){
-		Instruccion i = FactoriaComandos.obtenerInstancia().generarComando(nombre);
+		Instruccion i = GeneradorInstr.obtenerInstancia().generaInstr(nombre);
 		codigo.add(i);
 	}
 	

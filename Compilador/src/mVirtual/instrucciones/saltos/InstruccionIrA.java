@@ -7,27 +7,32 @@ import excepciones.MVException;
 
 public class InstruccionIrA implements Instruccion {
 
-	private String datos;
+	private String param;
 
-	public void Ejecutar()throws MVException {
+	/**
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
+	 */
+	public void ejecutar()throws MVException {
 		try {
-			MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(datos)-1);
+			MaquinaVirtual.obtenerInstancia().setContadorPrograma(Integer.parseInt(param)-1);
 		} catch (NumberFormatException e) {
 			throw new MVException(0);
 		}
 	}
 
-	public String getDatos() {
-		return datos;
-	}
-
-	public void setDatos(String datos) {
-	this.datos=datos;
-
-	}
-	
+	/**
+	 * @return String: representa la instruccion
+	 */
 	public String toString() {
-		return this.getClass().getSimpleName()+"("+datos+")";
+		return this.getClass().getSimpleName()+"("+param+")";
+	}
+	/**
+	 * Setter
+	 * @param String: param
+	 */
+	public void setParam(String param) {
+		this.param = param;
 	}
 
 }

@@ -2,34 +2,23 @@ package mVirtual.instrucciones;
 
 import excepciones.MVException;
 
-/**
- * Requisitos del comportamiento de todas las instrucciones del codigo objeto 
- * 
- *
- */
+
 public interface Instruccion {
 
 	/**
-	 * Realiza las acciones del comando requerido
-	 * 
-	 * @throws MVException Posibles errores
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
 	 */
-	public void Ejecutar() throws MVException;
+	public void ejecutar() throws MVException;
 	
 	/**
-	 * Sobrecarga del metodo toString de Object
-	 * 
-	 * @return Representacion del objeto
+	 * @return String: representa la instruccion
 	 */
 	public String toString();
+
 	/**
-	 * Obtiene los datos necesarios para ejecutar una instruccion
-	 * @return Datos
+	 * Setter
+	 * @param String: param
 	 */
-	public String getDatos();
-	/**
-	 * Introduce los datos necesarios para ejecutar una instruccion
-	 * @param datos Datos necesarios
-	 */
-	public void setDatos(String datos);
+	public void setParam(String param);
 }

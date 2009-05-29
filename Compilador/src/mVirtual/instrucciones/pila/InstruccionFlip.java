@@ -6,24 +6,14 @@ import java.util.EmptyStackException;
 import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 import excepciones.MVException;
-/**
- * 
- * Esta clase implementa la ejecución en la pila de la instrucción Flip  de la máquina virtual
- *
- */
+
 public class InstruccionFlip implements Instruccion {
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
 	 */
-	public String toString() {
-		return this.getClass().getSimpleName();
-	}
-	
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
-	 */
-	public void Ejecutar() throws MVException {
+	public void ejecutar() throws MVException {
 		try{
 			String temp=MaquinaVirtual.obtenerInstancia().getPila().pop();
 			String temp2=MaquinaVirtual.obtenerInstancia().getPila().pop();
@@ -36,17 +26,16 @@ public class InstruccionFlip implements Instruccion {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#getDatos()
+	/**
+	 * @return String: representa la instruccion
 	 */
-	public String getDatos() {
-		// TODO Auto-generated method stub
-		return null;
+	public String toString() {
+		return this.getClass().getSimpleName();
 	}
+	/**
+	 * vacio
+	 */
+	public void setParam(String param) {}
 
-	public void setDatos(String datos) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

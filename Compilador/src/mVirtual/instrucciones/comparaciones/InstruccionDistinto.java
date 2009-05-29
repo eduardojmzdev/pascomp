@@ -7,23 +7,13 @@ import mVirtual.MaquinaVirtual;
 import mVirtual.instrucciones.Instruccion;
 import excepciones.MVException;
 
-/**
- * 
- * Esta clase implementa la ejecución en la pila de la instrucción distinto de la máquina virtual
- *
- */public class InstruccionDistinto implements Instruccion {
+public class InstruccionDistinto implements Instruccion {
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Ejecuta la instruccion
+	 * @throws MVException. Si hay un error en la ejecucion
 	 */
-	public String toString() {
-		return this.getClass().getSimpleName();
-	}
-	
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#Ejecutar(java.util.Stack, java.util.Hashtable)
-	 */
-	public void Ejecutar() throws MVException {
+	public void ejecutar() throws MVException {
 		try {
 			boolean opBooleanos =false;
 			boolean aBool = false, bBool=false;
@@ -91,20 +81,14 @@ import excepciones.MVException;
 
 	}
 
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#getDatos()
+	/**
+	 * @return String: representa la instruccion
 	 */
-	public String getDatos() {
-		// TODO Auto-generated method stub
-		return null;
+	public String toString() {
+		return this.getClass().getSimpleName();
 	}
-
-	/* (non-Javadoc)
-	 * @see maquinaVirtual.repertorio.Instruccion#setDatos(java.lang.String)
+	/**
+	 * vacio
 	 */
-	public void setDatos(String datos) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void setParam(String param) {}
 }
