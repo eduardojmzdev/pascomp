@@ -3,7 +3,7 @@ Práctica PLG 08/09 Grupo 8
 0. Estructura de directorios
 
 ./Memoria/index.html -> Memoria de la práctica ordenada en ODA's.
-./Codigo/            -> Proyecto en eclipse del compilador. 
+./Proyecto/          -> Proyecto en eclipse del compilador. 
 ./ejecutable/        -> Directorio con el fichero ejecutable y los tests
 
 1. Requerimientos: 
@@ -19,7 +19,7 @@ Práctica PLG 08/09 Grupo 8
   léxico y sintactico, también para los tests. 
 
   Teniendo una máquina virtual de java 1.6 o superior en ruta, desde la linea de comandos:
-  java -jar compilador-g08.jar se ejecutará la aplicación en modo gráfico.
+  java -jar SegundaEntregaGrupo8.jar se ejecutará la aplicación en modo gráfico.
 
   IMPORTANTE
   ----------
