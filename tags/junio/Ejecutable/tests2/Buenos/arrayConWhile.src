@@ -1,0 +1,22 @@
+program arrayConWhile;
+
+var 
+	x:integer;
+	a: array[0..3] of integer;
+	z:integer;	
+begin
+	x:=1;
+	y:=2;
+	z:=3;
+	a[0]:=10;
+	a[1]:=11;
+	a[2]:=12;
+	a[3]:=13;
+	
+	WHILE (x < 4) DO
+	BEGIN
+		write(x);
+		write(a[x]);
+		x:=x+1;
+	END;
+end.

@@ -1,0 +1,15 @@
+program aaaa;
+type
+	punt = ^integer;
+var 
+	b: punt;
+
+begin
+
+	new(b);
+	b^:=5;
+	new(b);
+	new(b);
+	dispose(b);
+
+end.

@@ -1,0 +1,10 @@
+program prueba;
+var
+	a,b: integer;
+	c,d: boolean;
+begin
+	a := 0;
+	b := a;
+	c := true;
+	d := c;
+end.

@@ -1,0 +1,10 @@
+program pruebasConReadBooleanos;
+var
+x:boolean;
+begin
+read(x);
+if (x=true) then
+	write(1);
+else
+	write(3);
+end.

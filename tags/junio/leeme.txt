@@ -1,0 +1,51 @@
+Práctica PLG 08/09 Grupo 8
+
+0. Estructura de directorios
+
+./Memoria/index.html -> Memoria de la práctica ordenada en ODA's.
+./Codigo/            -> Proyecto en eclipse del compilador. 
+./ejecutable/        -> Directorio con el fichero ejecutable y los tests
+
+1. Requerimientos: 
+    Para ejecutar: jre 1.6 o superior
+    Para compilar: jdk 1.6 o superior
+    Para importar el proyecto es necesario utilizar Eclipse.
+    Recomendado usar Firefox para ver las páginas web de los ODA's.
+
+2. ¿Cómo ejecutar el compilador?
+
+  Dentro del directorio “ejecutable” se encuentra el archivo plg0809-grupo8-junio.jar 
+  que contiene todas las clases necesarias para la ejecución del analizador 
+  léxico y sintactico, también para los tests. 
+
+  Teniendo una máquina virtual de java 1.6 o superior en ruta, desde la linea de comandos:
+  java -jar compilador-g08.jar se ejecutará la aplicación en modo gráfico.
+  
+  Hay dos directorios de tests:
+  tests1: Correspondientes a los tests de la implementación del primer cuatrimestre.
+  tests2: Correspondientes a los tests de la implementación del segundo cuatrimestre.
+
+  Las extensiones .src son de los ficheros fuente y los .mv el código-p que ejecuta la máquina virtual.
+
+  Cada directorio de tests contiene dos directorios: "buenos" y "malos". Los buenos son ejemplos correctos que compilan y ejecutan y los malos son tests con errores de sintaxis cuyos fallos mostrará el compilador.
+
+  
+3. ¿Cómo importar el proyecto en eclipse?
+ - Ejecutar eclipse bajo un jre 1.6 o superior
+ - File -> Import -> Existing project into workspace
+ - Ir al directorio donde está la carpeta "Proyecto" y seleccionarla.
+
+
+4. ¿Cómo ejecutar la aplicación en eclipse?
+
+  El método main recibe como argumento la ruta donde está el fichero para compilar, por lo que hay que configurar en las propiedades de ejecución el argumento de entrada. Para configurarlo seleccionar:
+  Run -> Run Configuration -> Pestaña Arguments 
+  En Program Arguments introducimos la ruta del fichero que queremos compilar, por ejemplo "./tests/Buenos/opsEnteros.src" (sin comillas).
+   
+  En el directorio tests dentro del directorio del proyecto están todos los tests.
+  
+
+5. ¿Cómo abrir la documentación?
+
+  Abrir con un navegador el fichero index.html dentro de la carpeta memoria.
+

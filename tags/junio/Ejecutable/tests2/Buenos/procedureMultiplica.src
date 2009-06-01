@@ -1,0 +1,20 @@
+program procMultiplica;
+var x: integer;
+y: integer;
+z: integer;
+
+
+procedure multiplica(var resultado:integer; mul1:integer; mul2:integer);
+begin
+	resultado:=mul1*mul2;
+end;
+
+
+begin
+	x:=3;
+	y:=5;
+	z:=0;
+	
+	multiplica(z, x, y);
+	write(z);
+end.

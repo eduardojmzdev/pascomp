@@ -1,0 +1,33 @@
+program dosArraysConIfyWhile;
+
+var 
+	x:integer;
+	a: array[0..3] of integer;
+	b: array[0..3] of integer;
+begin
+	x:=0;
+
+	a[0]:=10;
+	a[1]:=11;
+	a[2]:=12;
+	a[3]:=13;
+
+	b[0]:=20;
+	b[1]:=21;
+	b[2]:=22;
+	b[3]:=23;
+	
+	WHILE (x < 4) DO
+	BEGIN
+		write(x);
+		IF (x < 2) THEN
+		BEGIN
+			write(a[x]);
+		END;
+		ELSE
+		BEGIN
+			write(b[x]);
+		END;
+		x:=x+1;
+	END;
+end.

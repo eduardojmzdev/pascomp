@@ -1,0 +1,14 @@
+     inicio
+     lee
+     desapila_dir 0
+     apila_dir 0
+     escribe
+     apila true
+     desapila_dir 1
+     apila false
+     escribe
+     apila_dir 1
+     escribe
+     apila algo
+     escribe
+     stop

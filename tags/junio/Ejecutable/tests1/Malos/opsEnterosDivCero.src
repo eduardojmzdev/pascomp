@@ -1,0 +1,7 @@
+program prueba;
+var
+	a: integer;
+	b: integer;
+begin
+	a := 5 / 0;
+end.
