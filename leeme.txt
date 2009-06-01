@@ -20,6 +20,11 @@ Práctica PLG 08/09 Grupo 8
 
   Teniendo una máquina virtual de java 1.6 o superior en ruta, desde la linea de comandos:
   java -jar compilador-g08.jar se ejecutará la aplicación en modo gráfico.
+
+  IMPORTANTE
+  ----------
+
+  Ejecutar la aplicación desde la línea de comandos puesto que para las instrucciones read y write se realizan a través de la consola. Si se ejecuta el jar haciendo doble click desde windows lo más probable es que la consola no aparezca y no se vea la entrada/salida de read y write.
   
   Hay dos directorios de tests:
   tests1: Correspondientes a los tests de la implementación del primer cuatrimestre.
