@@ -1,6 +1,9 @@
 package maquinaVirtual.instrucciones.entradasalida;
 
 
+import java.util.EmptyStackException;
+
+import main.Ventana;
 import maquinaVirtual.MaquinaVirtual;
 import maquinaVirtual.instrucciones.Instruccion;
 
@@ -13,7 +16,12 @@ public class Write implements Instruccion {
 	 * @throws MVException. Si hay un error en la ejecucion
 	 */
 	public void ejecutar() throws MVException {
-		System.out.println("Salida usuario:  " + MaquinaVirtual.obtenerInstancia().getPila().pop());
+		try{
+			Ventana.sal += "\nSalida de usuario:   " + MaquinaVirtual.obtenerInstancia().getPila().pop();
+		}catch (EmptyStackException e) {
+			throw new MVException(3);
+
+		}
 	}
 
 	/**
