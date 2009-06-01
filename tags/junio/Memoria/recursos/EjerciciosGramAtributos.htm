@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Ejercicios Gramatica de Atributos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+
+<body>
+<h1>Ejercicios Gram&aacute;tica de Atributos </h1>
+
+<h2><em>Tema1-3_V2. Definici&oacute;n del lenguaje fuente tabla de s&iacute;mbolos </em></h2>
+<p><strong><em>Transparencia 28 </em></strong></p>
+<p>En este ejercicio se completa la gram&aacute;tica incontextual propuesta en la transparencia 18 introduciendo en ella palabras reservadas para mejorar su lectura ( Program , Begin …) y los operadores para enteros div y mod . </p>
+<p>Para esta gram&aacute;tica incontextual nueva construimos la gram&aacute;tica de atributos en la que se expresa c&oacute;mo se construye la tabla de s&iacute;mbolos. </p>
+<p class="meterse"><em>Prog </em><em></em>&#8594; <strong><em>Program </em></strong><em>DeclVariables </em><em><strong>Begin </strong>Is <strong>End </strong></em></p>
+<p class="meterse"><em>DeclVariables </em><em></em>&#8594; <strong>var </strong>Decs <em></em></p>
+<p class="meterse"><em>Decs </em><em></em>&#8594; <em>Dec </em><em></em>| <em>Decs </em><em></em>; <em>Dec </em><em></em></p>
+<p class="meterse"><em>Dec </em><em></em>&#8594; id Tipo </p>
+<p>Tipo &#8594; <strong>bool </strong><strong> | int | real </strong></p>
+<p class="meterse"><em>Is </em>&#8594; <em>I </em>| <em>Is </em>; <em>I </em></p>
+<p class="meterse"><em>I </em>&#8594; id := <em>Exp </em></p>
+<p class="meterse"><em>Exp </em>&#8594; <em>Exp OpAd Term </em></p>
+<p class="meterse"><em>Exp </em>&#8594; <em>Term </em></p>
+<p class="meterse"><em>Term </em>&#8594; <em>Term OpMul Fact </em></p>
+<p class="meterse"><em>Term </em>&#8594; <em>Fact </em></p>
+<p class="meterse"><em>Fact </em>&#8594; opUnario Fact | numero | id | ( <em>Exp </em>)| <strong> true </strong> | <strong>false </strong></p>
+<p class="meterse"><em>OpAd </em><em></em>&#8594; + | - | <strong>or </strong></p>
+<p class="meterse"><em>OpMul </em><em></em>&#8594; * | <strong>div|mod </strong><strong>| and </strong></p>
+<p class="meterse"><em>OpUnario </em><em></em>&#8594; - | <strong>not </strong><strong></strong></p>
+<p>A la vista de esta gram&aacute;tica incontextual se puede deducir lo siguiente: </p>
+<p  class="meterse">- “-“ y “ not ” son los operadores m&aacute;s prioritarios y no asocian </p>
+<p class="meterse">- Les siguen *, div , mod y and que asocian a izquierdas </p>
+<p class="meterse">- En el nivel de prioridad m&aacute;s bajo est&aacute;n +, -, or que tambi&eacute;n asocian a izquierdas. </p>
+<p>Atributos de <strong>DeclVariables </strong><strong> (secuencia de declaraciones): </strong></p>
+
+<p class="meterse"><strong>tablaSh </strong><strong>: </strong>tabla de s&iacute;mbolos inicial </p>
+<p class="meterse"><strong>tablaS </strong><strong>: </strong>tabla de s&iacute;mbolos sintetizada </p>
+<p class="meterse"><strong>dirh </strong><strong>: </strong>direcci&oacute;n base de memoria libre </p>
+<p class="meterse"><strong>dir </strong><strong>: </strong>direcci&oacute;n de memoria libre sintetizada </p>
+<p>Atributos de <strong>Is </strong><strong> (secuencia de instrucciones) </strong></p>
+
+<p class="meterse"><strong>tablaSh </strong><strong>: </strong>tabla de s&iacute;mbolos heredada </p>
+<p>Atributos de <strong>Dec </strong><strong> (declara un identificador) </strong></p>
+
+<p class="meterse"><strong>lex </strong><strong>: lexema del identificador </strong></p>
+<p class="meterse"><strong>tipo </strong><strong>: lexema del tipo de la variable declarada </strong></p>
+
+<p>Atributos de <strong>id (s&iacute;mbolo terminal) </strong></p>
+
+<p class="meterse"><strong>lex </strong><strong>: lexema del identificador </strong></p>
+<p class="meterse"><strong>( suministrado por el m&oacute;dulo de an&aacute;lisis l&eacute;xico) </strong></p>
+<p>Atributos de <strong>Tipo (s&iacute;mbolo terminal) </strong></p>
+<p class="meterse"><strong>tipo </strong><strong>: identificador de tipo </strong></p>
+<p><strong></strong></p>
+<p><strong></strong></p>
+<p class="titulo"><strong>Gram&aacute;tica de atributos: </strong></p>
+
+<p>Prog &#8594; <strong>Program </strong>DeclVariables <strong>Begin </strong>Is <strong>End </strong></p>
+
+<p class="meterse">Is.tablaSh = DeclVariables.tablaS </p>
+
+<p>DeclVariables &#8594; <strong>var </strong>Decs </p>
+<p class="titulo">DeclVariables.tablaS = Decs.tablaS </p>
+<p>Decs0 &#8594; Decs1 ; Dec </p>
+<p class="meterse">Decs0.tablaS = a&ntilde;adeID (Decs1.tablaS, Dec.lex, Dec.tipo , Decs1.dir) </p>
+<p class="meterse">Decs0.dir = Decs1.dir + Dec.tam </p>
+<p>Decs &#8594; Dec </p>
+<p class="meterse">Decs.tablaSh = CreaTS () </p>
+<p class="meterse">Decs.dirh = DIRECCI&Oacute;N_BASE </p>
+<p class="meterse">Decs.tablaS = a&ntilde;adeID ( Decs.tablaSh , Dec.lex, Dec.tipo , Decs.dirh ) </p>
+<p class="meterse">Decs.dir = Decs.dirh + Dec.tam </p>
+<p>Dec &#8594; id Tipo </p>
+<p class="meterse">Dec.lex = id.lex </p>
+<p class="meterse">Dec.tipo = Tipo.tipo </p>
+<p class="meterse">Dec.tam = Tipo.tam </p>
+<p>Tipo &#8594; <strong>bool </strong><strong></strong></p>
+
+<p class="meterse">Tipo.tipo = bool </p>
+<p class="meterse">Tipo.tam = TAM_BOOL </p>
+
+<p>Tipo &#8594; <strong>int </strong><strong></strong></p>
+<p class="meterse">Tipo.tipo = int </p>
+<p class="meterse">Tipo.tam = TAM_INT </p>
+
+<p>Tipo &#8594; <strong>real </strong></p>
+
+<p class="meterse">Tipo.tipo = real </p>
+<p class="meterse">Tipo.tam = TAM_REAL </p>
+<p>Is 0 &#8594; Is1 ; I </p>
+<p class="meterse">Is1.tablaSh = Is0.tablaSh </p>
+<p class="meterse">I.tablaSh = Is0.tablaSh </p>
+<p>Is &#8594; I | </p>
+<p class="meterse">I.tablaSh = Is.tablaSh </p>
+<p>I &#8594; id := Exp </p>
+<p class="meterse">Exp.tablaSh = I.tablaSh </p>
+<p>Exp0 &#8594; Exp1 OpAd Term </p>
+<p class="meterse">Exp1.tablaSh = Exp0.tablaSh </p>
+<p class="meterse">Term.tablaSh = Exp0.tablaSh </p>
+<p>Exp &#8594; Term </p>
+<p class="meterse">Term.tablaSh = Exp.tablaSh </p>
+<p>Term0 &#8594; Term1 OpMul Fact </p>
+<p class="meterse">Term1.tablaSh =Term0.tablaSh </p>
+<p class="meterse">Fact.tablaSh = Term0.tablaSh </p>
+<p>Term &#8594; Fact </p>
+<p class="meterse">Fact.tablaSh = Term.tablaSh </p>
+<p>Fact0 &#8594; opUnario Fact1 | numero | id | ( Exp )| <strong> true </strong> | <strong>false </strong></p>
+<p class="meterse">Fact1.tablaSh = Fact0.tablaSh </p>
+<p class="meterse">Exp.tablaSh = Fact0.tablaSh </p>
+<p>Estas producciones no necesitan heredar </p>
+<p>OpAd &#8594; + | - | <strong>or </strong><strong></strong></p>
+<p>OpMul &#8594; * | <strong>div|mod </strong><strong>| and </strong></p>
+<p>OpUnario &#8594; - | <strong>not </strong></p>
+</body>
+</html>

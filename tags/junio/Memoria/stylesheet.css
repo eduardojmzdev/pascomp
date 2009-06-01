@@ -1,0 +1,170 @@
+body
+{
+	background-color: #f2f0dD
+}
+h1 {
+	font-style: "century gothic", "Times New Roman"; 
+	font-family: comic; 
+	font-size: 2.5em; 
+	color: #00004D
+}
+h2 { 
+	font-family: "century gothic", "Times New Roman"; ; 
+	font-size: 1.5em; 
+	color: #00004D;
+	text-indent:1em;
+	text-align:center;
+	padding-top:1em;
+	padding-bottom:0.5em;
+}
+h3 {
+	font-family: "century gothic", "Times New Roman"; ; 
+	font-size: 1.2em; 
+	color: #000066
+}
+
+li {
+	color: #02027D
+}
+p {
+	font-family: "century gothic", "Times New Roman"; ;
+	font-size: 0.8em; 
+	color: #02027D;
+	text-align: justify;	
+}
+
+/* Específicas */
+
+a.menu
+{
+	font-family: "century gothic", "Times New Roman"; ; 
+	font-size: 0.8em; 
+	color: #000066
+}
+
+a.lateral 
+{
+	text-decoration: none; 
+	color: #000066	
+	text-align: center;
+}
+div.cajaInterna 
+{
+	border: 1.2pt solid #000000;
+	background-color: #c1bCbF; 
+	margin: -1.4em 0em 1em 0em;
+	padding: 0em 1em 1em 1em;
+}
+
+div.cicloDeVida
+{
+	background-color: #f1cC9F; 
+	border: 0.5pt solid #000000;
+	margin: 1em 0em 1em 0em;
+}
+
+div#grupo 
+{
+	position:absolute;
+	width:13%;
+  margin:3;
+  height:100%;
+	left: 1%;
+	text-align: center;
+}
+
+div#enlaces 
+{
+	position:fixed;
+  width:13%;
+  margin:3;
+  height:100%;
+	padding-top:7em;
+	left: 1%;
+	text-align: center;
+	
+}
+div#enlaces ul 
+{
+  	margin:0;
+  	padding:0;
+  	list-style:none;
+}
+div#enlaces ul li a 
+{ 
+  	margin-top:0.5em;
+  	padding:0.5em;
+  	display:block;
+  	background-color: #c1bCbF;
+  	border: 2pt outset #00004D;
+}
+div#enlaces ul li a:hover
+{
+	color: #000000;
+  	background-color: #509090;
+  	border: 2pt outset #89B5FF;
+}
+div#enlaces ul li a:active
+{
+	border-style: inset;
+}
+div#enlaces a, div.enlaces p
+{ 
+	
+	color: #000066;
+}
+
+
+div#cabecera
+{
+	position:absolute;
+ 	left: 17%;
+  width: 80%;
+  top:0;
+	text-align: center;
+  height:5em;
+  margin:0;
+  z-index:1000;
+}
+
+
+div#contenido
+{
+	position:absolute;
+  top: 3em;
+  left: 17%;
+  width: 80%;
+}
+
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse:collapse;
+  border: 2pt  #8ba303;
+  border-top: 2pt solid #191007;
+  border-bottom:2pt solid #191007;
+  border-left: 2pt solid #191007;
+  border-right: 2pt solid #191007;
+  text-align: center;
+  background-color: #c1bCbF;
+  color: #02027D;
+ }
+
+th { 
+  background-color: #9ca29e;
+  color: #02027D;
+  padding:0.5em;
+  border-top: 2pt solid #190707;
+  border-bottom: 2pt solid #190707;
+  border-left: 1pt solid #190707;
+  border-right: 1pt solid #191007;
+ }
+
+td{
+  padding:0.5em;
+  border-left: 1pt solid #190707;
+  border-right: 1pt solid #190707;
+  border-bottom: 1pt solid #190707;
+  text-align: center;
+}
