@@ -26,8 +26,8 @@ public class Ventana extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	JMenuBar menu;
-	JMenu archivo, compilar, informacion;
-	JMenuItem abrir, salir, normal, paso, integrantes;
+	JMenu archivo, compilar, ejecutar, informacion;
+	JMenuItem abrir, salir, compilarmenu, normal, paso, integrantes;
 	JLabel etiqueta1, etiqueta2, etiqueta3, etiqueta4;
 	JButton boton1, boton2, boton3;
 	JPanel panel;
@@ -58,13 +58,18 @@ public class Ventana extends JFrame {
 		archivo.add(salir);
 		menu.add(archivo);
 		compilar = new JMenu("Compilar");
+		compilarmenu = new JMenuItem("Normal");
+		compilarmenu.addActionListener(new OyenteNormal());
+		ejecutar = new JMenu("Ejecutar");
 		normal = new JMenuItem("Normal");
-		normal.addActionListener(new OyenteNormal());
+		normal.addActionListener(new OyenteEjecutar());
 		paso = new JMenuItem("Paso a Paso");
 		paso.addActionListener(new OyentePaso());
-		compilar.add(normal);
-		compilar.add(paso);
+		compilar.add(compilarmenu);
+		ejecutar.add(normal);
+		ejecutar.add(paso);
 		menu.add(compilar);
+		menu.add(ejecutar);
 		informacion = new JMenu("Infomación");
 		integrantes = new JMenuItem("Integrantes del grupo");
 		integrantes.addActionListener(new OyenteIntegrantes());
@@ -89,7 +94,7 @@ public class Ventana extends JFrame {
 		constraints.gridheight = 1;
 		panel.add(etiqueta2, constraints);
 
-		etiqueta3 = new JLabel("Errores de compilación");
+		etiqueta3 = new JLabel("Errores y Salida de Consola");
 		constraints.gridx = 1;
 		constraints.gridy = 4;
 		constraints.gridwidth = 1;
