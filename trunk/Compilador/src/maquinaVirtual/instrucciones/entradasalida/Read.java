@@ -1,8 +1,9 @@
 package maquinaVirtual.instrucciones.entradasalida;
 
 
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
+import main.Ventana;
 import maquinaVirtual.MaquinaVirtual;
 import maquinaVirtual.instrucciones.Instruccion;
 
@@ -15,14 +16,9 @@ public class Read implements Instruccion {
 	 * @throws MVException. Si hay un error en la ejecucion
 	 */
 	public void ejecutar() throws MVException {
-		System.out.println("Esperando escritura de usuario por consola:\n");
-		Scanner lector = new Scanner(System.in);
-		String cadenaLeida="";
-		try {
-			cadenaLeida=lector.next();
-		} catch (Exception e) {
 
-		}
+		String cadenaLeida =JOptionPane.showInputDialog("Escritura de usuario:");
+		Ventana.sal += "\nEntrada de usuario:   " + cadenaLeida;
 		MaquinaVirtual.obtenerInstancia().getPila().push(cadenaLeida);
 	}
 

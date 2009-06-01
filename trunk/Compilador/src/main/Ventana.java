@@ -32,6 +32,7 @@ public class Ventana extends JFrame {
 	JButton boton1, boton2, boton3;
 	JPanel panel;
 	JTextArea texto1, texto2, texto3, texto4;
+	public static String sal = "";
 	File archivoAux;
 	Traductor traductor;
 
@@ -195,7 +196,9 @@ public class Ventana extends JFrame {
 			texto2.setText("");
 			texto3.setText("");
 			texto4.setText("");
+			sal = "";
 			String Text = "";
+
 			FileReader fichero = null;
 			try {
 				JFileChooser abrir = new JFileChooser(System.getProperty("user.dir"));
@@ -268,6 +271,7 @@ public class Ventana extends JFrame {
 		public void actionPerformed(ActionEvent evento) {
 			texto3.setText("");
 			texto4.setText("");
+			sal="";
 			traductor = new Traductor();
 			Traductor.reset();
 			traductor.setEntrada(archivoAux.getPath());
@@ -315,13 +319,13 @@ public class Ventana extends JFrame {
 	class OyentePaso implements ActionListener {
 
 		public void actionPerformed(ActionEvent evento) {
-			texto3.setText("");
 			texto4.setText("");
 			if (estado != Estados.INI) {
 				String result = "";
 				try {
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
 					if (estado != Estados.PASO) {
+						sal="";
 						String[] args = new String[2];
 						args[0] = traductor.getSalida() + ".mv";
 						args[1] = "-b";
@@ -331,6 +335,7 @@ public class Ventana extends JFrame {
 						result = mv.ejecutaPaso();
 					}
 					texto4.setText(result);
+					texto3.setText(sal);
 				} catch (MVException e) {
 					texto3.setText("[MV] Error en linea " + e.getNumLinea() + ":\n\t" + e.getError());
 				} catch (Exception e) {
@@ -353,12 +358,14 @@ public class Ventana extends JFrame {
 			if (estado != Estados.INI) {
 				String result = "";
 				try {
+					sal="";
 					MaquinaVirtualImpl mv = (MaquinaVirtualImpl) MaquinaVirtual.obtenerInstancia();
 					String[] args = new String[1];
 					args[0] = traductor.getSalida() + ".mv";
 					result = mv.ejecutaIni(args);
 					estado = Estados.COMPILADO;
 					texto4.setText(result);
+					texto3.setText(sal);
 				} catch (MVException e) {
 					texto3.setText("[MV] Error en linea " + e.getNumLinea() + ":\n\t" + e.getError());
 				} catch (Exception e) {
