@@ -1,0 +1,1 @@
+Your choice of license determines how others are allowed to use your code. Documentation and other content may be distributed under a separate license.
